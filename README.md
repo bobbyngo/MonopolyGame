@@ -1,2 +1,2 @@
-# Software-Designing-Project
-SYSC 3110 Project
+# Monopoly Game
+SYSC 3110 | Software Designing Project
