@@ -9,3 +9,4 @@
 # .idea files (.xml and .iml)
 .idea/*.xml
 .idea/*.iml
+.idea/.gitignore
