@@ -85,7 +85,6 @@ public class Player implements RoleAPI {
         }
 
         @Override
-
         public void addMoney(int amount) {
             playerBalance += amount;
         }
