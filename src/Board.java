@@ -26,7 +26,7 @@ public class Board {
         aBoard[15] = new Business("Lazy Lagoon", 15, "green", 80);
         aBoard[16] = new Business("Leaky Lake", 16, "green", 60);
         aBoard[17] = new Business("Lonely Lodge", 17, "green", 50);
-        aBoard[16] = new BankProperty("Insurance Tax", 18, 140);
+        aBoard[18] = new BankProperty("Insurance Tax", 18, 140);
         aBoard[19] = new Square("Free Parking Lot", 19);
 
         aBoard[20] = new Business("Loot Lake", 20, "black", 200);
