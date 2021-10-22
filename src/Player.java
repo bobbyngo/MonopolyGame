@@ -1,4 +1,9 @@
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
+import java.util.HashMap;
+import java.util.Map;
+>>>>>>> 5d95c63fa70fcab25d7d79e9f8231a3f56477f6b
 
 public class Player implements RoleAPI {
     /**
@@ -13,6 +18,7 @@ public class Player implements RoleAPI {
         private String name;
         private int playerBalance;
         private boolean inJail;
+        private int turnsInJail;
         private Square currLocation;
         private ArrayList<PrivateProperty> propertyList;
 
@@ -21,6 +27,11 @@ public class Player implements RoleAPI {
 
         public Player(String name, Square currLocation){
             this.name = name;
+<<<<<<< HEAD
+=======
+            this.turnsInJail = 0;
+            this.playerWallet = new HashMap<>();
+>>>>>>> 5d95c63fa70fcab25d7d79e9f8231a3f56477f6b
             this.inJail = false;
             this.currLocation = currLocation;
             this.propertyList = new ArrayList<>();
@@ -71,10 +82,11 @@ public class Player implements RoleAPI {
         }
 
         public boolean isInJail(){
-            return false;
+            return this.inJail;
         }
 
         @Override
+<<<<<<< HEAD
         public void addMoney(int amount) {
             playerBalance += amount;
         }
@@ -86,7 +98,35 @@ public class Player implements RoleAPI {
             }else {
                 System.out.println("Your balance is not enough");
             }
+=======
+        public void addMoney(int moneyValue, int amount) {
+            if (this.playerWallet.containsKey(moneyValue)) {
+                int previousAmount = playerWallet.get(moneyValue);
+                playerWallet.put(moneyValue, previousAmount + amount);
+            }
         }
+
+        @Override
+        public void removeMoney(int moneyValue, int amount) {
+            if (this.playerWallet.containsKey(moneyValue)) {
+                int previousAmount = playerWallet.get(moneyValue);
+                if (previousAmount < amount) {
+                    System.err.println(this.name + " has insufficient funds.");
+                    return;
+                }
+                playerWallet.put(moneyValue, previousAmount - amount);
+            }
+        }
+
+    @Override
+    public String walletToString(){
+        String s = this.name + " has:- \n";
+        for (Map.Entry<Integer, Integer> entry : this.playerWallet.entrySet()){
+            s.concat(entry.getValue() + "x $" + entry.getKey() + "\n");
+>>>>>>> 5d95c63fa70fcab25d7d79e9f8231a3f56477f6b
+        }
+        return s;
+    }
 
         public boolean isBankrupt() {
             return false;
@@ -112,4 +152,31 @@ public class Player implements RoleAPI {
             this.inJail = inJail;
         }
 
+<<<<<<< HEAD
+=======
+        public void setCurrLocation(Square currLocation) {
+            this.currLocation = currLocation;
+        }
+
+        public boolean getInJail(){ return this.inJail; }
+
+        public void setJail(boolean jailStatus){ this.inJail = jailStatus; }
+
+    /**
+     * Method handler to check if a player is to remain in jail for this turn (returns false); or if a player should be allowed to move this turn (returns true)
+     * @return
+     */
+    public boolean handleInJail(){
+            if (inJail && turnsInJail < 2) { //if the player has spent 1, or is on their second turn in jail, then skip their current turn
+                turnsInJail++;
+                return false;
+            }
+            else if(inJail && turnsInJail == 2){ //if the player is on their third turn in jail, then they may move
+                this.inJail = false;
+                turnsInJail = 0;
+            }
+            return true;
+        }
+
+>>>>>>> 5d95c63fa70fcab25d7d79e9f8231a3f56477f6b
 }

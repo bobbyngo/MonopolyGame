@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class Bank implements RoleAPI {
     /**
@@ -28,7 +29,21 @@ public class Bank implements RoleAPI {
         }
     }
 
+<<<<<<< HEAD
     public int getBankBalance() {
         return bankBalance;
+=======
+    @Override
+    public String walletToString(){
+        String s = "The bank has:- \n";
+        for (Map.Entry<Integer, Integer> entry : this.bankWallet.entrySet()){
+            s.concat(entry.getValue() + "x $" + entry.getKey() + "\n");
+        }
+        return s;
+    }
+
+    public HashMap<Integer, Integer> getBankWallet() {
+        return bankWallet;
+>>>>>>> 5d95c63fa70fcab25d7d79e9f8231a3f56477f6b
     }
 }
