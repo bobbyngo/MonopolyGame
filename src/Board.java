@@ -54,4 +54,8 @@ public class Board {
         aBoard[37] = new Business("Snobby Shores", 37, "pink", 120);
 
     }
+
+    public Square getSQUARE(int index){
+        return aBoard[index];
+    }
 }
