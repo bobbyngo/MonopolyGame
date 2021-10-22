@@ -8,10 +8,12 @@ public class Bank implements RoleAPI {
      */
 
     private int bankBalance;
+    private HashMap<Integer, Integer>bankWallet;
 
     public Bank () {
         //Initialize the bank's money
         bankBalance = 999999999;
+        bankWallet = new HashMap<>();
     }
 
     @Override
@@ -29,10 +31,11 @@ public class Bank implements RoleAPI {
         }
     }
 
-<<<<<<< HEAD
+
     public int getBankBalance() {
         return bankBalance;
-=======
+    }
+
     @Override
     public String walletToString(){
         String s = "The bank has:- \n";
@@ -44,6 +47,5 @@ public class Bank implements RoleAPI {
 
     public HashMap<Integer, Integer> getBankWallet() {
         return bankWallet;
->>>>>>> 5d95c63fa70fcab25d7d79e9f8231a3f56477f6b
     }
 }

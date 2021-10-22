@@ -1,8 +1,3 @@
-
-enum Corner {
-    GO, PRISON, FREE_PARKING_LOT, GO_TO_JAIL;
-}
-
 public class Board {
     /**
      * Author: Ngo Huu Gia Bao

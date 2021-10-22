@@ -1,9 +1,8 @@
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
+
 import java.util.HashMap;
 import java.util.Map;
->>>>>>> 5d95c63fa70fcab25d7d79e9f8231a3f56477f6b
+
 
 public class Player implements RoleAPI {
     /**
@@ -20,6 +19,7 @@ public class Player implements RoleAPI {
         private boolean inJail;
         private int turnsInJail;
         private Square currLocation;
+        private HashMap<Integer, Integer>playerWallet;
         private ArrayList<PrivateProperty> propertyList;
 
         //For buying property: Check if the class is Rail by: .instanceof(Rail)
@@ -27,11 +27,10 @@ public class Player implements RoleAPI {
 
         public Player(String name, Square currLocation){
             this.name = name;
-<<<<<<< HEAD
-=======
+
             this.turnsInJail = 0;
             this.playerWallet = new HashMap<>();
->>>>>>> 5d95c63fa70fcab25d7d79e9f8231a3f56477f6b
+
             this.inJail = false;
             this.currLocation = currLocation;
             this.propertyList = new ArrayList<>();
@@ -86,7 +85,7 @@ public class Player implements RoleAPI {
         }
 
         @Override
-<<<<<<< HEAD
+
         public void addMoney(int amount) {
             playerBalance += amount;
         }
@@ -95,35 +94,16 @@ public class Player implements RoleAPI {
         public void removeMoney(int amount) {
             if (playerBalance > amount) {
                 playerBalance -= amount;
-            }else {
+            } else {
                 System.out.println("Your balance is not enough");
             }
-=======
-        public void addMoney(int moneyValue, int amount) {
-            if (this.playerWallet.containsKey(moneyValue)) {
-                int previousAmount = playerWallet.get(moneyValue);
-                playerWallet.put(moneyValue, previousAmount + amount);
-            }
         }
-
-        @Override
-        public void removeMoney(int moneyValue, int amount) {
-            if (this.playerWallet.containsKey(moneyValue)) {
-                int previousAmount = playerWallet.get(moneyValue);
-                if (previousAmount < amount) {
-                    System.err.println(this.name + " has insufficient funds.");
-                    return;
-                }
-                playerWallet.put(moneyValue, previousAmount - amount);
-            }
-        }
-
     @Override
     public String walletToString(){
         String s = this.name + " has:- \n";
         for (Map.Entry<Integer, Integer> entry : this.playerWallet.entrySet()){
             s.concat(entry.getValue() + "x $" + entry.getKey() + "\n");
->>>>>>> 5d95c63fa70fcab25d7d79e9f8231a3f56477f6b
+
         }
         return s;
     }
@@ -152,8 +132,7 @@ public class Player implements RoleAPI {
             this.inJail = inJail;
         }
 
-<<<<<<< HEAD
-=======
+
         public void setCurrLocation(Square currLocation) {
             this.currLocation = currLocation;
         }
@@ -178,5 +157,4 @@ public class Player implements RoleAPI {
             return true;
         }
 
->>>>>>> 5d95c63fa70fcab25d7d79e9f8231a3f56477f6b
 }
