@@ -1,6 +1,11 @@
 import java.util.Random;
 
 public class Dice {
+    /**
+     * Author: Ngo Huu Gia Bao
+     * 101163137
+     */
+
     private final int SIZE = 2;
     int[] dice;
     Random rand;

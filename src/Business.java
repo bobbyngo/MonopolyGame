@@ -1,4 +1,4 @@
-public class Business extends PrivateProperty {
+public class Business extends PrivateProperty implements PropertyAPI{
 
     private String color;
     private int numHouse;
@@ -41,5 +41,10 @@ public class Business extends PrivateProperty {
         numHouse = 0;
         numHotel = 0;
         return sellPrice;
+    }
+
+    @Override
+    public void collectMoney(int amount) {
+
     }
 }

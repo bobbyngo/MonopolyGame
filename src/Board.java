@@ -1,6 +1,15 @@
+
+enum Corner {
+    GO, PRISON, FREE_PARKING_LOT, GO_TO_JAIL;
+}
+
 public class Board {
+    /**
+     * Author: Ngo Huu Gia Bao
+     * 101163137
+     */
+
     private static final int  LENGTH = 38;
-    private Square square;
     private Square aBoard[];
 
     public Board() {
@@ -50,5 +59,4 @@ public class Board {
         aBoard[37] = new Business("Snobby Shores", 37, "pink", 120);
 
     }
-
 }

@@ -23,5 +23,4 @@ public class PrivateProperty extends Square{
     public boolean getIsOwned(){
         return isOwned;
     }
-
 }

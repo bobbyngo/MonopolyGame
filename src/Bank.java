@@ -1,38 +1,34 @@
 import java.util.HashMap;
 
 public class Bank implements RoleAPI {
-    private HashMap<Integer, Integer> bankWallet;
+    /**
+     * Author: Ngo Huu Gia Bao
+     * 101163137
+     */
+
+    private int bankBalance;
 
     public Bank () {
-        bankWallet = new HashMap<>();
         //Initialize the bank's money
-        bankWallet.put(1, 1000000000);
-        bankWallet.put(5, 1000000000);
-        bankWallet.put(10, 1000000000);
-        bankWallet.put(50, 1000000000);
-        bankWallet.put(100, 1000000000);
-        bankWallet.put(500, 1000000000);
+        bankBalance = 999999999;
     }
 
     @Override
-    public void addMoney(int moneyValue, int amount) {
-        if (bankWallet.containsKey(moneyValue)) {
-            int oldAmount = bankWallet.get(moneyValue);
-            //Update the wallet
-            bankWallet.put(moneyValue, oldAmount + amount);
-        }
+    public void addMoney(int amount) {
+        bankBalance += amount;
     }
 
     @Override
-    public void removeMoney(int value, int amount) {
-        if (bankWallet.containsKey(value)) {
-            int oldAmount = bankWallet.get(value);
-            //Update the wallet
-            bankWallet.put(value, oldAmount - amount);
+    public void removeMoney(int amount) {
+        if (bankBalance > amount) {
+            bankBalance -= amount;
+        }else {
+            //This will never happen
+            System.out.println("Bank balance is not enough");
         }
     }
 
-    public HashMap<Integer, Integer> getBankWallet() {
-        return bankWallet;
+    public int getBankBalance() {
+        return bankBalance;
     }
 }
