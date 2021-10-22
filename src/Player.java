@@ -97,6 +97,12 @@ public class Player implements RoleAPI {
                 System.out.println("Your balance is not enough");
             }
         }
+
+    /**
+     * Method to return the number of bills in a persons wallet
+     * @author Gabriel Benni Kelley Evensen 101119814
+     * @return String
+     */
     @Override
     public String walletToString(){
         String s = this.name + " has:- \n";
@@ -142,6 +148,7 @@ public class Player implements RoleAPI {
 
     /**
      * Method handler to check if a player is to remain in jail for this turn (returns false); or if a player should be allowed to move this turn (returns true)
+     * @author Gabriel Benni Kelley Evensen
      * @return
      */
     public boolean handleInJail(){

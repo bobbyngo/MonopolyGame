@@ -36,6 +36,11 @@ public class Bank implements RoleAPI {
         return bankBalance;
     }
 
+    /**
+     * Method to return the number of bills in a persons wallet
+     * @author Gabriel Benni Kelley Evensen 101119814
+     * @return String
+     */
     @Override
     public String walletToString(){
         String s = "The bank has:- \n";
