@@ -4,4 +4,6 @@ public class MonopolyController {
     public MonopolyController() {
         board = new Board();
     }
+
+
 }

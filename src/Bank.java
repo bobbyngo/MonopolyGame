@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class Bank implements RoleAPI {
     private HashMap<Integer, Integer> bankWallet;
@@ -30,6 +31,15 @@ public class Bank implements RoleAPI {
             //Update the wallet
             bankWallet.put(value, oldAmount - amount);
         }
+    }
+
+    @Override
+    public String walletToString(){
+        String s = "The bank has:- \n";
+        for (Map.Entry<Integer, Integer> entry : this.bankWallet.entrySet()){
+            s.concat(entry.getValue() + "x $" + entry.getKey() + "\n");
+        }
+        return s;
     }
 
     public HashMap<Integer, Integer> getBankWallet() {
