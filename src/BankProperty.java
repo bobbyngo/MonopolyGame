@@ -1,4 +1,4 @@
-public class BankProperty extends Square{
+public class BankProperty extends Square implements PropertyAPI{
     private Bank bank;
     private int taxValue;
 
@@ -7,12 +7,13 @@ public class BankProperty extends Square{
         this.bank = new Bank();
         this.taxValue = taxValue;
     }
-
-    public void collectTax(int moneyValue,int amount){
+    @Override
+    public void collectMoney(int moneyValue,int amount){
         bank.addMoney(moneyValue, amount);
     }
 
     public int getTaxValue() {
         return taxValue;
     }
+
 }

@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class Bank {
+public class Bank implements RoleAPI {
     private HashMap<Integer, Integer> bankWallet;
 
     public Bank () {
@@ -14,6 +14,7 @@ public class Bank {
         bankWallet.put(500, 1000000000);
     }
 
+    @Override
     public void addMoney(int moneyValue, int amount) {
         if (bankWallet.containsKey(moneyValue)) {
             int oldAmount = bankWallet.get(moneyValue);
@@ -22,6 +23,7 @@ public class Bank {
         }
     }
 
+    @Override
     public void removeMoney(int value, int amount) {
         if (bankWallet.containsKey(value)) {
             int oldAmount = bankWallet.get(value);
