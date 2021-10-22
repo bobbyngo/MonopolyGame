@@ -1,7 +1,12 @@
-public class Business extends Property{
-
+public class Business extends PrivateProperty {
+    private String color;
     public Business(String name, int index, String color, int price){
-        super(name, index, color, price);
+        super(name, index, price);
+        this.color = color;
         removeOwner();
+    }
+
+    public String getColor() {
+        return color;
     }
 }
