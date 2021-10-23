@@ -24,9 +24,8 @@ public class Monopoly {
             playerList.add(new Player(playerName, board.getSQUARE(0)));
         }
 
+        // The game ends when one player goes bankrupt, the winner is determined by their total asset value
         while(!winnerDetermined){
-
-            int bankruptCount = 0;
             for(Player p: playerList){
                 boolean endTurn = false;
 
@@ -47,15 +46,28 @@ public class Monopoly {
                     // player should have an option to end turn
                 }
 
+                // If the current player bankrupts, immediately break out of the for loop
                 if(p.isBankrupt()){
-                    bankruptCount ++;
+                    winnerDetermined = true;
+                    break;
                 }
             }
+        }
 
-            if(bankruptCount == numPlayer - 1){
-                winnerDetermined = true;
+        // Patrick
+        // Determine the winning, who ever has the greatest asset value + wallet amount wins
+        int winnerAmount = 0;
+        String winner = "";
+        for(Player p: playerList){
+            if(!p.isBankrupt()){
+                if (winnerAmount < p.getPlayerTotalAsset()){
+                    winnerAmount = p.getPlayerTotalAsset();
+                    winner = p.getName();
+                }
             }
         }
+
+        System.out.println("The winner of the game is: " + winner);
 
     }
 }

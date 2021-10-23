@@ -168,4 +168,46 @@ public class Player implements RoleAPI {
         }
         return false;
     }
+
+    /**
+     * getPlayerTotalAsset is used to determine the total amount of asset they own plus the balance is their wallet, this method is used to determine the winner
+     * when the game ends
+     *
+     * @return int Total asset value + wallet balance
+     * @author Yuguo Liu 101142730
+     */
+    public int getPlayerTotalAsset(){
+        int TotalAsset = 0;
+        for(PrivateProperty p: propertyList){
+            if(p instanceof Business){
+                TotalAsset += ((Business) p).getTotalAssetValue();
+            }
+            if(p instanceof Rail){
+                TotalAsset += p.getPrice();
+            }
+        }
+        TotalAsset += playerBalance;
+
+        return TotalAsset;
+    }
+
+    /**
+     * sellAllProperty is used to when a player is on the verge of bankruptcy and needs to sell all the SQUAREs that the player currently owns
+     * the return amount of half of the total asset's value and deposited into the player's balance
+     *
+     * @author Yuguo Liu 101142730
+     */
+    public void sellAllProperty(){
+        int ReturnAmount = 0;
+        for(PrivateProperty p: propertyList){
+            if(p instanceof Business){
+                ReturnAmount += ((Business) p).sell();
+            }
+            if(p instanceof Rail){
+                ReturnAmount += ((Rail) p).sell();
+            }
+        }
+
+        playerBalance += ReturnAmount;
+    }
 }

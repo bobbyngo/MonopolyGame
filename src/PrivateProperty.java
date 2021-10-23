@@ -1,3 +1,8 @@
+/**
+ * Author: Patrick Liu
+ * 101142730
+ */
+
 public class PrivateProperty extends Square{
     private int price;
     private boolean isOwned;

@@ -1,3 +1,8 @@
+/**
+ * Author: Patrick Liu
+ * 101142730
+ */
+
 public class Rail extends PrivateProperty implements PropertyAPI{
 
     public Rail(String name, int index, int price){

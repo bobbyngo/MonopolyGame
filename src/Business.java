@@ -1,3 +1,8 @@
+/**
+ * Author: Patrick Liu
+ * 101142730
+ */
+
 public class Business extends PrivateProperty implements PropertyAPI{
 
     private String color;
@@ -32,6 +37,11 @@ public class Business extends PrivateProperty implements PropertyAPI{
     // Plz use getNumHouse() to check if the player has 4 houses already build on this SQUARE
     public void buildHotel(){
         numHotel ++;
+    }
+
+    // Return the total value of the asset (SQUARE + all houses and hotel)
+    public int getTotalAssetValue(){
+        return (int)(this.getPrice() + numHouse * (100 + this.getPrice() * 0.1) + numHotel * (100 + this.getPrice() * 0.6));
     }
 
     // Only used when a player is out of money and is on the verge of Bankruptcy, the sell price is half of the total assets' value
