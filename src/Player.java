@@ -19,13 +19,13 @@ public class Player implements RoleAPI {
     private boolean inJail;
     private int turnsInJail;
     private Square currLocation;
-    private HashMap<Integer, Integer>playerWallet;
+    private HashMap<Integer, Integer> playerWallet;
     private ArrayList<PrivateProperty> propertyList;
 
     //For buying property: Check if the class is Rail by: .instanceof(Rail)
     // If yes, we do not need to check the full set of color to buy rail
 
-    public Player(String name, Square currLocation){
+    public Player(String name, Square currLocation) {
         this.name = name;
 
         this.turnsInJail = 0;
@@ -51,15 +51,15 @@ public class Player implements RoleAPI {
             this.removeMoney(property.getPrice());
             this.addPropertyList(property);
             property.addOwner();
-        }else {
+        } else {
             System.out.println("This property is owned");
         }
     }
 
     public void sellPrivateProperty(PrivateProperty property) {
-        if(this.propertyList.size() > 0 && this.propertyList.contains(property)) {
+        if (this.propertyList.size() > 0 && this.propertyList.contains(property)) {
             this.removePropertyList(property);
-        }else {
+        } else {
             System.out.println("You do not have this property");
         }
     }
@@ -67,7 +67,7 @@ public class Player implements RoleAPI {
     private void addPropertyList(PrivateProperty property) {
         if (!propertyList.contains(property)) {
             this.propertyList.add(property);
-        }else {
+        } else {
             System.out.println("You have this property already");
         }
     }
@@ -76,11 +76,11 @@ public class Player implements RoleAPI {
         this.propertyList.remove(property);
     }
 
-    public boolean isOwningColorGroup(){
+    public boolean isOwningColorGroup() {
         return false;
     }
 
-    public boolean isInJail(){
+    public boolean isInJail() {
         return this.inJail;
     }
 
@@ -100,13 +100,14 @@ public class Player implements RoleAPI {
 
     /**
      * Method to return the number of bills in a persons wallet
-     * @author Gabriel Benni Kelley Evensen 101119814
+     *
      * @return String
+     * @author Gabriel Benni Kelley Evensen 101119814
      */
     @Override
-    public String walletToString(){
+    public String walletToString() {
         String s = this.name + " has:- \n";
-        for (Map.Entry<Integer, Integer> entry : this.playerWallet.entrySet()){
+        for (Map.Entry<Integer, Integer> entry : this.playerWallet.entrySet()) {
             s.concat(entry.getValue() + "x $" + entry.getKey() + "\n");
 
         }
@@ -142,25 +143,29 @@ public class Player implements RoleAPI {
         this.currLocation = currLocation;
     }
 
-    public boolean getInJail(){ return this.inJail; }
-
-    public void setJail(boolean jailStatus){ this.inJail = jailStatus; }
-
-    /**
-     * Method handler to check if a player is to remain in jail for this turn (returns false); or if a player should be allowed to move this turn (returns true)
-     * @author Gabriel Benni Kelley Evensen
-     * @return
-     */
-    public boolean handleInJail(){
-        if (inJail && turnsInJail < 2) { //if the player has spent 1, or is on their second turn in jail, then skip their current turn
-            turnsInJail++;
-            return false;
-        }
-        else if(inJail && turnsInJail == 2){ //if the player is on their third turn in jail, then they may move
-            this.inJail = false;
-            turnsInJail = 0;
-        }
-        return true;
+    public boolean getInJail() {
+        return this.inJail;
     }
 
+    public void setJail(boolean jailStatus) {
+        this.inJail = jailStatus;
+    }
+
+    /**
+     * Method handler to check if a player is to remain in jail for this turn (returns true); or if a player should be allowed to move this turn (returns false)
+     *
+     * @return boolean representation of the players jail status
+     * @author Gabriel Benni Kelley Evensen 101119814
+     */
+    public boolean handleInJail() {
+        if (inJail && turnsInJail < 2) { //if the player has spent 1, or is on their second turn in jail (not counting the turn they were sent to jail), then skip their current turn
+            turnsInJail++;
+            this.currLocation.setIndex(9);
+            return true;
+        } else if (inJail && turnsInJail == 2) { //if the player is on their third turn in jail, then they may move
+            this.inJail = false;
+            this.turnsInJail = 0;
+        }
+        return false;
+    }
 }

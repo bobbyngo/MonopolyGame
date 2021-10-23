@@ -28,9 +28,10 @@ public class Monopoly {
 
             int bankruptCount = 0;
             for(Player p: playerList){
-
-
                 boolean endTurn = false;
+
+                if (p.getInJail()) endTurn = p.handleInJail(); //Gabriel Benni: if the player is in jail, then run handleInJail()
+
 
                 while(!endTurn && !p.isBankrupt()){
                     //throw dice
@@ -39,6 +40,10 @@ public class Monopoly {
                     // land on a square, check if they have enough money to buy
                     // if they have land, check if they are allowed to build houses/hotel
                     // check if they landed in "go to jail"
+                    if (p.getCurrLocation().getIndex() == 28){ //Gabriel Benni: check if the player is on the jail square
+                        p.setJail(true);
+                        endTurn = p.handleInJail();
+                    }
                     // player should have an option to end turn
                 }
 
