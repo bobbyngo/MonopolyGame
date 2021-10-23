@@ -5,6 +5,12 @@ public class Rail extends PrivateProperty implements PropertyAPI{
         removeOwner();
     }
 
+    public int sell(){
+        int sellPrice = (this.getPrice()/2);
+        removeOwner();
+        return sellPrice;
+    }
+
     @Override
     public void collectMoney(int amount) {
 
