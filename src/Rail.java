@@ -5,11 +5,24 @@
 
 public class Rail extends PrivateProperty implements PropertyAPI{
 
+    /**
+     * Constructor for Rail class
+     * @param name name of the Rail
+     * @param index index of the Rail
+     * @param price price of the Rail
+     */
     public Rail(String name, int index, int price){
         super(name, index, price);
         removeOwner();
     }
 
+    /**
+     * sell returns the amount the bank will pay the player when they are bankrupt and has to sell this Rail, it will also remove the owner
+     * this Business is ready to be bought by another player again
+     * @return int
+     *
+     * Note: This method is not used in the current version of the game and should NOT be called
+     */
     public int sell(){
         int sellPrice = (this.getPrice()/2);
         removeOwner();
