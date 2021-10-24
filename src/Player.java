@@ -10,10 +10,6 @@ public class Player implements RoleAPI {
      * 101163137
      */
 
-    //For buying property: Check if the class is Rail by: .instanceof(Rail)
-    // If yes, we do not need to check the full set of color to buy rail
-    // I agree, if .instanceof(Rail) works as intended then we do not need to use color code "white" for rail
-
     private String name;
     private int playerBalance;
     private boolean inJail;
@@ -22,9 +18,11 @@ public class Player implements RoleAPI {
     private HashMap<Integer, Integer> playerWallet;
     private ArrayList<PrivateProperty> propertyList;
 
-    //For buying property: Check if the class is Rail by: .instanceof(Rail)
-    // If yes, we do not need to check the full set of color to buy rail
-
+    /**
+     * Constructor for Player class
+     * @param name
+     * @param currLocation
+     */
     public Player(String name, Square currLocation) {
         this.name = name;
 
@@ -37,15 +35,31 @@ public class Player implements RoleAPI {
         this.playerBalance = 1230;
     }
 
+    //                      ZAK BRO, I'M SORRY I DO NOT SURE IF THIS WORK
+
+    /**
+     * This method will take the roll's value and call the setCurrLocation of the player in the board
+     * @param numRolled
+     */
     public void moveTo(int numRolled) {
         int newIndex = (currLocation.getIndex() + numRolled) % 38;
         this.setCurrLocation(newIndex);
     }
 
+    /**
+     * This method will set the new location of the player in the board
+     * @param newIndex
+     */
     private void setCurrLocation(int newIndex) {
         this.currLocation.setIndex(newIndex);
     }
+///////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * This method will let the player buy PrivateProperty. If the Player can buy the property,
+     * it will call the addProperty method and set the owner of that Property
+     * @param property
+     */
     public void buyPrivateProperty(PrivateProperty property) {
         if (!property.getIsOwned()) {
             this.removeMoney(property.getPrice());
@@ -56,14 +70,10 @@ public class Player implements RoleAPI {
         }
     }
 
-    public void sellPrivateProperty(PrivateProperty property) {
-        if (this.propertyList.size() > 0 && this.propertyList.contains(property)) {
-            this.removePropertyList(property);
-        } else {
-            System.out.println("You do not have this property");
-        }
-    }
-
+    /**
+     * This method will add the Property to the Player's propertyList
+     * @param property
+     */
     private void addPropertyList(PrivateProperty property) {
         if (!propertyList.contains(property)) {
             this.propertyList.add(property);
@@ -72,23 +82,33 @@ public class Player implements RoleAPI {
         }
     }
 
-    private void removePropertyList(PrivateProperty property) {
-        this.propertyList.remove(property);
-    }
 
+    /**
+     * This method will call the isOwningASet of color in the ColorGroup Class
+     * @return boolean
+     */
     public boolean isOwningColorGroup() {
-        return false;
+        ColorGroup colorGroup = new ColorGroup();
+        return colorGroup.isOwningASet(this.propertyList);
     }
 
     public boolean isInJail() {
         return this.inJail;
     }
 
+    /**
+     * This method will add the money from the Player balance
+     * @param amount
+     */
     @Override
     public void addMoney(int amount) {
         playerBalance += amount;
     }
 
+    /**
+     * This method will remove the money from the Player balance
+     * @param amount
+     */
     @Override
     public void removeMoney(int amount) {
         if (playerBalance > amount) {
@@ -100,7 +120,6 @@ public class Player implements RoleAPI {
 
     /**
      * Method to return the number of bills in a persons wallet
-     *
      * @return String
      * @author Gabriel Benni Kelley Evensen 101119814
      */
@@ -114,22 +133,45 @@ public class Player implements RoleAPI {
         return s;
     }
 
+    /**
+     * This method will check whether the playerBalance is < 0
+     * @return boolean
+     */
     public boolean isBankrupt() {
+        if (playerBalance < 0) {
+            return true;
+        }
         return false;
     }
 
+    /**
+     * Getter for name
+     * @return String
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Getter for playerBalance
+     * @return int
+     */
     public int getPlayerBalance() {
         return playerBalance;
     }
 
+    /**
+     * Getter for currLocation
+     * @return Square
+     */
     public Square getCurrLocation() {
         return currLocation;
     }
 
+    /**
+     * Getter for propertyList
+     * @return ArrayList
+     */
     public ArrayList<PrivateProperty> getPropertyList() {
         return propertyList;
     }

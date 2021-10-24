@@ -10,17 +10,28 @@ public class Bank implements RoleAPI {
     private int bankBalance;
     private HashMap<Integer, Integer>bankWallet;
 
+    /**
+     * Bank Class constructor
+     */
     public Bank () {
         //Initialize the bank's money
         bankBalance = 999999999;
         bankWallet = new HashMap<>();
     }
 
+    /**
+     * The addMoney method is used to add more money to the bank's ballance
+     * @param amount
+     */
     @Override
     public void addMoney(int amount) {
         bankBalance += amount;
     }
 
+    /**
+     * The removeMoney method is used to remove money to the bank's ballance
+     * @param amount
+     */
     @Override
     public void removeMoney(int amount) {
         if (bankBalance > amount) {
@@ -31,7 +42,10 @@ public class Bank implements RoleAPI {
         }
     }
 
-
+    /**
+     * Getter for bankBalance attribute
+     * @return bankBalance, int
+     */
     public int getBankBalance() {
         return bankBalance;
     }
@@ -50,6 +64,10 @@ public class Bank implements RoleAPI {
         return s;
     }
 
+    /**
+     * Getter for bankWallet
+     * @return HashMap
+     */
     public HashMap<Integer, Integer> getBankWallet() {
         return bankWallet;
     }

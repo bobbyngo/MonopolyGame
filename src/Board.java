@@ -7,6 +7,9 @@ public class Board {
     private static final int  LENGTH = 38;
     private Square aBoard[];
 
+    /**
+     * Constructor for Board Class
+     */
     public Board() {
         aBoard = new Square[LENGTH];
 
@@ -55,6 +58,11 @@ public class Board {
 
     }
 
+    /**
+     * Get index in the aBoard array
+     * @param index
+     * @return Square
+     */
     public Square getSQUARE(int index){
         return aBoard[index];
     }
