@@ -251,5 +251,6 @@ public class Player implements RoleAPI {
         }
 
         playerBalance += ReturnAmount;
+        propertyList.clear();
     }
 }
