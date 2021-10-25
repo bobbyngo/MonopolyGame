@@ -129,6 +129,8 @@ public class MonopolyView {
                     break;
 
                 case 4:
+                    // If PrivateProperty, check that Player owns the property
+
                     Square location = currentPlayer.getCurrLocation();
                     if(location instanceof BankProperty){
                         state = 5;
@@ -179,6 +181,16 @@ public class MonopolyView {
 
                 case 8:
                     // Check that Player can afford purchase
+                    int netWorth = currentPlayer.getPlayerTotalAsset();
+                    PrivateProperty sq = (PrivateProperty)currentPlayer.getCurrLocation();
+
+                    if (netWorth >= sq.getPrice()) {
+                        // can afford price
+                        state = 9;
+                    } else {
+                        // cannot afford price
+                        state = 11;
+                    }
                     break;
 
                 case 9:

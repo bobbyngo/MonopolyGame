@@ -270,6 +270,12 @@ public class MonopolyController {
         return isOwned;
     }
 
+    /**
+     * Checks that currentPlayer is on
+     * FreeParking, Go, or Jail
+     * @return  boolean, currentPlayer is on FreeParking/Go/Jail
+     * @author  Zakaria Ismail, 101143497
+     */
     public boolean currentPlayerIsOnBlank() {
         Square currLocation = currentPlayer.getCurrLocation();
         for (Square sq : new Square[]{board.getFreeParking(), board.getGo(), board.getJail()}) {
