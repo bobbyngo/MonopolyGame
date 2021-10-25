@@ -62,10 +62,15 @@ public class MonopolyView {
                         int turnsLeft = 3 - currentPlayer.getTurnsInJail();
                         System.out.println(String.format("%s is in jail. They have %d turns of jail-time left!",
                                 currentPlayer.getName(), turnsLeft));
+
+                        if (hasServedTime) {
+                            state = 1;
+                        }
                     } else {
                         // allow Player to roll dice
                         state = 1;
                     }
+                    break;
                 case 1:
                     // Player rolls dice
                     int[] roll = controller.rollDie();
@@ -78,12 +83,14 @@ public class MonopolyView {
                     } else {
                         state = 3;
                     }
+                    break;
 
                 case 2:
                     // Player goes to jail
                     System.out.println(String.format("%s has been sent to Jail.", currentPlayer.getName()));
                     controller.sendCurrentPlayerToJail();
                     state = 0;
+                    break;
 
                 case 3:
                     // Move player forward k steps
@@ -119,42 +126,52 @@ public class MonopolyView {
                         // Player landed on unowned property
                         state = 8;
                     }
+                    break;
 
                 case 4:
                     // If PrivateProperty, check that Player owns the property
+                    break;
 
                 case 5:
                     // Check that Player can afford rent/tax
+                    break;
 
                 case 6:
                     // Prompt Player to:
                     //  - pay rent/tax,
                     //  - sell properties,
                     //  - display status
+                    break;
 
                 case 7:
                     // Player pays rent/tax to PlayerY/Bank
+                    break;
 
                 case 8:
                     // Check that Player can afford purchase
+                    break;
 
                 case 9:
                     // Prompt Player to:
                     //  - purchase and end turn
                     //  - end turn
                     //  - display status
+                    break;
 
                 case 10:
                     // Player purchases property
+                    break;
 
                 case 11:
                     // Prompt Player to:
                     //  - End turn
                     //  - Sell properties
                     //  - Display status
+                    break;
 
                 case 12:
                     // Check that Player rolled double
+                    break;
 
             }
         }

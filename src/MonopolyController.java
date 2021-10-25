@@ -26,7 +26,7 @@ public class MonopolyController {
         this.board = new Board();
         this.bank = new Bank();
         this.die = new Dice();
-        this.currentPlayer = this.players.get(0);
+        this.currentPlayer = null;
 
         for(Player p: this.players){
             p.setCurrLocation(board.getSQUARE(0));
@@ -158,11 +158,14 @@ public class MonopolyController {
     public Player getNextPlayer() {
         consecutiveDoubles = 0; // reset doubles counter
         if (currentPlayer == null) {
+            currentPlayer = players.get(0);
             return players.get(0);
-        }
+        } else {
 
-        int next_index = (players.indexOf(currentPlayer) + 1) % players.size();
-        return players.get(next_index);
+            int next_index = (players.indexOf(currentPlayer) + 1) % players.size();
+            currentPlayer = players.get(next_index);
+        }
+        return currentPlayer;
     }
 
     public int[] rollDie() {
