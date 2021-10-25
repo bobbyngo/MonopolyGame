@@ -97,8 +97,8 @@ public class Business extends PrivateProperty implements PropertyAPI{
      */
     @Override
     public void collectMoney() {
-        int rentPrice =  (int)((this.getPrice() + numHouse * (100 + this.getPrice() * 0.1) + numHotel * (100 + this.getPrice() * 0.6))*0.1);
-        this.getPlayersCurrentlyOn().get(0).removeMoney(rentPrice);
-        this.getOwner().addMoney(rentPrice);
+        int rentPrice =  (int)((this.getPrice() + numHouse * (100 + this.getPrice() * 0.1) + numHotel * (100 + this.getPrice() * 0.6))*0.1);    //Gets the rent price which is 10% of property price (including hotels and houses)
+        this.getPlayersCurrentlyOn().get(0).removeMoney(rentPrice);                                                                             //Removes the rent price from the player who most recently stepped on property (index 0 is most recent b/c FIFO)
+        this.getOwner().addMoney(rentPrice);                                                                                                    //Gives rent price to owner of property
     }
 }

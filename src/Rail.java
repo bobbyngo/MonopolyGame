@@ -52,8 +52,8 @@ public class Rail extends PrivateProperty implements PropertyAPI{
      */
     @Override
     public void collectMoney() {
-        int rentPrice =  (int)(this.getPrice() * 0.1);
-        this.getPlayersCurrentlyOn().get(0).removeMoney(rentPrice);
-        this.getOwner().addMoney(rentPrice);
+        int rentPrice =  (int)(this.getPrice() * 0.1);                  //Gets rent price as 10% of rail property value
+        this.getPlayersCurrentlyOn().get(0).removeMoney(rentPrice);     //Removes the rent price from the player who most recently stepped on property (index 0 is most recent b/c FIFO)
+        this.getOwner().addMoney(rentPrice);                            //Gives rent price to owner of property
     }
 }
