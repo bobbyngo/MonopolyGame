@@ -16,6 +16,10 @@ public class Rail extends PrivateProperty implements PropertyAPI{
         removeOwner();
     }
 
+    /**
+     * getOwnedRailNum() gets the number of Rail SQUARE that this particular player owns
+     * @return int
+     */
     public int getOwnedRailNum(){
         int numRail = 0;
         for(PrivateProperty p: this.getOwner().getPropertyList()){
