@@ -5,8 +5,10 @@ public interface PropertyAPI {
      */
 
     /**
+     * @author Gabriel Benni Kelley Evensen 101119814
      *
-     * @param amount
+     * Method to collect and pay rent for the three different payable property types; bank property, private property (play-ownable), and rails (play-ownable)
      */
-    public void collectMoney(int amount);
+    public void collectMoney();
+
 }

@@ -20,13 +20,15 @@ public class BankProperty extends Square implements PropertyAPI{
     }
 
     /**
-     * collectMoney method is used when player steps on the BankProperty
-     * it will call the addMoney method to add the amount that user need to pay to the bankBalance
-     * @param amount
+     * @author Gabriel Benni Kelley Evensen 101119814
+     *
+     * Method to collect money from a player who lands on a square that is owned by the bank, and charge the player rent, giving the rent to the bank
+     * rent is 10% of the total bank property price
      */
     @Override
-    public void collectMoney(int amount){
-        bank.addMoney(amount);
+    public void collectMoney(){
+        this.getPlayersCurrentlyOn().get(0).removeMoney(taxValue);  //Removes the rent from the player who landed on the square
+        this.bank.addMoney(taxValue);                               //Adds the rent money to the bank
     }
 
     /**
