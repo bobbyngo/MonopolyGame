@@ -89,8 +89,16 @@ public class Business extends PrivateProperty implements PropertyAPI{
         return sellPrice;
     }
 
+    /**
+     * @author Gabriel Benni Kelley Evensen 101119814
+     *
+     * Method to collect money from a player who lands on a square that is not theirs, and pays that rent to the player who owns the square
+     * rent is 10% of the total property price (including houses & hotels)
+     */
     @Override
-    public void collectMoney(int amount) {
-
+    public void collectMoney() {
+        int rentPrice =  (int)((this.getPrice() + numHouse * (100 + this.getPrice() * 0.1) + numHotel * (100 + this.getPrice() * 0.6))*0.1);
+        this.getPlayersCurrentlyOn().get(0).removeMoney(rentPrice);
+        this.getOwner().addMoney(rentPrice);
     }
 }
