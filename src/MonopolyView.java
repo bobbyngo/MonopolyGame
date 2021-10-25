@@ -129,7 +129,14 @@ public class MonopolyView {
                     break;
 
                 case 4:
-                    // If PrivateProperty, check that Player owns the property
+                    Square location = currentPlayer.getCurrLocation();
+                    if(location instanceof BankProperty){
+                        state = 5;
+                    }else if(location instanceof PrivateProperty){
+                        if(currentPlayer.equals(((PrivateProperty) location).getOwner())) {
+                            state = 11;
+                        }
+                    }
                     break;
 
                 case 5:
