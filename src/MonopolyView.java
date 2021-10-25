@@ -12,8 +12,6 @@ import java.util.Scanner;
 
 public class MonopolyView {
     private MonopolyController controller;
-    private ArrayList<Player> players;
-
 
     /**
      * MonopolyView constructor.
@@ -21,7 +19,7 @@ public class MonopolyView {
      * Gets the number of players and their respective names in an ArrayList<Player> and passes that to new instance of MonoPolyController
      */
     public MonopolyView(){
-        this.players = new ArrayList<>();
+        ArrayList<Player> players= new ArrayList<>();
 
         Scanner myObj = new Scanner(System.in);
         System.out.println("Enter number of players: ");
@@ -31,7 +29,7 @@ public class MonopolyView {
             System.out.println("Enter player" + i +"'s name: ");
             String playerName = myObj.nextLine();
 
-            controller.addPlayer(new Player(playerName, null));      //Note: The players currLocation is set to null
+            players.add(new Player(playerName, null));      //Note: The players currLocation is set to null
         }
 
         this.controller = new MonopolyController(players);              //Passing ArrayList<Player> to new MonopolyController
@@ -47,7 +45,7 @@ public class MonopolyView {
         boolean winnerDetermined = false;
 
         while (!winnerDetermined){
-            for(Player p: players){
+            for(Player p: controller.getPlayers()){
                 Scanner  myObj = new Scanner(System.in);
                 boolean endTurn = false;
                 boolean rollAgain;

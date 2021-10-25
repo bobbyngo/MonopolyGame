@@ -26,16 +26,6 @@ public class MonopolyController {
     }
 
     /**
-     * addPlayer add a player object to the ArrayList
-     *
-     * @author Patrick Liu
-     * @param player
-     */
-    public void addPlayer(Player player){
-        players.add(player);
-    }
-
-    /**
      * Method to sell the current rail property and returns half the worth of the property to the seller.
      * Method overloading used as both Rail and Business are polymorphs when selling (b/c business may have houses/hotels)
      *
