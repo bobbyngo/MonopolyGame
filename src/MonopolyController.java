@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.concurrent.PriorityBlockingQueue;
 
 /**
  * @author Gabriel Benni Kelley Evensen 101119814
@@ -6,11 +7,14 @@ import java.util.ArrayList;
  * The controller for the game of monopoly; handles the players, board, banks, DIE, and the current player
  */
 public class MonopolyController {
+    private final int GO_REWARD = 200;
+
     private ArrayList<Player> players;
     private Board board;
     private Bank bank;
     private Dice die;
     private Player currentPlayer;
+    private int consecutiveDoubles;
 
     /**
      * MonopolyController constructor
@@ -147,11 +151,12 @@ public class MonopolyController {
 
     /**
      * @author Zakaria Ismail 101143497
-     * Gets the next Player in turn queue
+     * Gets the next Player in turn circular queue
      * @return  Player, currentPlayer
      *
      */
     public Player getNextPlayer() {
+        consecutiveDoubles = 0; // reset doubles counter
         if (currentPlayer == null) {
             return players.get(0);
         }
@@ -159,6 +164,131 @@ public class MonopolyController {
         int next_index = (players.indexOf(currentPlayer) + 1) % players.size();
         return players.get(next_index);
     }
+
+    public int[] rollDie() {
+        die.roll();
+        if (die.isDouble()) {
+            consecutiveDoubles++;
+        }
+        return die.getDice();
+    }
+
+    /**
+     * Determines if currentPlayer is speeding
+     * @return  boolean, currentPlayer is speeding
+     * @author  Zakaria Ismail, 101143497
+     */
+    public boolean isSpeeding() {
+        return consecutiveDoubles == 3;
+    }
+
+    /**
+     * Sets currentPlayer as being in Jail
+     * @author  Zakaria Ismail, 101143497
+     */
+    public void sendCurrentPlayerToJail() {
+        currentPlayer.getInJail();
+    }
+
+    /**
+     * Moves currentPlayer forward the number
+     * rolled by dice. Returns true if passed
+     * go.
+     * @return  boolean, currentPlayer passed go
+     * @author  Zakaria Ismail, 101143497
+     */
+    public boolean moveCurrentPlayer() {
+        int start_index, end_index;
+        start_index = currentPlayer.getCurrLocation().getIndex();
+        //currentPlayer.moveTo(die.getTotal());
+        end_index = (start_index + die.getTotal()) % board.getLENGTH();
+        currentPlayer.setCurrLocation(board.getSQUARE(end_index));
+        //end_index = currentPlayer.getCurrLocation().getIndex();
+
+        if (end_index < start_index) {
+            bank.removeMoney(GO_REWARD);
+            currentPlayer.addMoney(GO_REWARD);
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * Checks if currentPlayer is on
+     * 'Go To Jail' square
+     * @return  boolean, currentPlayer is in jail
+     * @author  Zakaria Ismail, 101143497
+     */
+    public boolean currentPlayerIsOnGoToJail() {
+        //return currentPlayer.getCurrLocation().getName().equals("Go To Jail");
+        return currentPlayer.getCurrLocation() == board.getGoToJail();
+    }
+
+    /**
+     * Get Go reward.
+     * @return  int, GO reward
+     * @author  Zakaria Ismail, 101143497
+     */
+    public int getGO_REWARD() {
+        return GO_REWARD;
+    }
+
+    /**
+     * Checks if currentPlayer is on
+     * 'Free Parking' square
+     * @return  boolean, currentPlayer is in Free Parking
+     * @author  Zakaria Ismail, 101143497
+     */
+    public boolean currentPlayerIsOnParking() {
+        return currentPlayer.getCurrLocation() == board.getFreeParking();
+    }
+
+    /**
+     * Checks if currentPlayer is on
+     * owned property.
+     * @return  boolean, current location is owned
+     * @author  Zakaria Ismail, 101143497
+     */
+    public boolean currentPlayerIsOnOwnedProperty() {
+        boolean isOwned;
+
+        Square currLocation = currentPlayer.getCurrLocation();
+        if (currLocation instanceof PrivateProperty) {
+            // Private Property
+            isOwned = ((PrivateProperty) currLocation).isOwned();
+        } else if (currLocation instanceof BankProperty) {
+            // Bank property
+            isOwned = true;
+        } else {
+            // "Blanks": Go, (visiting) jail, Free parking
+            isOwned = false;
+        }
+        return isOwned;
+    }
+
+    public boolean currentPlayerIsOnBlank() {
+        Square currLocation = currentPlayer.getCurrLocation();
+        for (Square sq : new Square[]{board.getFreeParking(), board.getGo(), board.getJail()}) {
+            if (currLocation == sq) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Checks if currentPlayer is on
+     * unowned property.
+     * @return  boolean, current location is unowned
+     */
+    /*
+    public boolean currentPlayerIsOnUnownedProperty() {
+
+    }
+
+     */
 }
 
 

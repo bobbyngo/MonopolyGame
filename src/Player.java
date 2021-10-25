@@ -41,19 +41,23 @@ public class Player implements RoleAPI {
      * This method will take the roll's value and call the setCurrLocation of the player in the board
      * @param numRolled
      */
+    /*
     public void moveTo(int numRolled) {
         int newIndex = (currLocation.getIndex() + numRolled) % 38;
         this.setCurrLocation(newIndex);
     }
+     */
 
     /**
      * This method will set the new location of the player in the board
      * @param newIndex
      */
+    /*
     private void setCurrLocation(int newIndex) {
         this.currLocation.setIndex(newIndex);
     }
-///////////////////////////////////////////////////////////////////////////////////////
+     */
+
 
     /**
      * This method will let the player buy PrivateProperty. If the Player can buy the property,
@@ -61,10 +65,10 @@ public class Player implements RoleAPI {
      * @param property
      */
     public void buyPrivateProperty(PrivateProperty property) {
-        if (!property.getIsOwned()) {
+        if (!property.isOwned()) {
             this.removeMoney(property.getPrice());
             this.addPropertyList(property);
-            property.addOwner(this);
+            property.setOwner(this);
             System.out.println("You have bought the property");
         } else {
             System.out.println("This property is owned");
@@ -253,5 +257,25 @@ public class Player implements RoleAPI {
 
         playerBalance += ReturnAmount;
         propertyList.clear();
+    }
+
+    public int getTurnsInJail() {
+        return turnsInJail;
+    }
+
+    /**
+     * Increments jail time counter
+     * until 3 rounds has been reached.
+     * Returns true if jail sentence is over.
+     * @return  boolean, is jail sentence over
+     */
+    public boolean serveJailTime() {
+        turnsInJail++;
+        if (turnsInJail >= 3) {
+            turnsInJail = 0;
+            inJail = false;
+            return true;
+        }
+        return false;
     }
 }

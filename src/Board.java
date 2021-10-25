@@ -1,11 +1,37 @@
 public class Board {
+
+
     /**
      * Author: Ngo Huu Gia Bao
      * 101163137
      */
 
-    private static final int  LENGTH = 38;
+    private final int  LENGTH = 38;
     private Square aBoard[];
+    private Square goToJail;
+    private Square jail;
+    private Square go;
+    private Square freeParking;
+
+    public Square getGoToJail() {
+        return goToJail;
+    }
+
+    public Square getFreeParking() {
+        return freeParking;
+    }
+
+    public int getLENGTH() {
+        return LENGTH;
+    }
+
+    public Square getGo() {
+        return go;
+    }
+
+    public Square getJail() {
+        return jail;
+    }
 
     /**
      * Constructor for Board Class
@@ -13,8 +39,15 @@ public class Board {
     public Board() {
         aBoard = new Square[LENGTH];
 
+        // Special squares
+        goToJail = new Square("Go To Jail", 28);
+        freeParking = new Square("Free Parking Lot", 19);
+        jail = new Square("Prison", 9);
+        go = new Square("GO", 0);
+
+
         //Initialize a board
-        aBoard[0] = new Square("GO", 0);
+        aBoard[0] = go;
         aBoard[1] = new Business("Anarchy Acres", 1,"red", 50);
         aBoard[2] = new Business("Dusty Depot", 2, "red", 100);
         aBoard[3] = new Rail("South Rail", 3, 150);
@@ -23,7 +56,7 @@ public class Board {
         aBoard[6] = new Business("Flush Factory", 6, "blue", 60);
         aBoard[7] = new Business("Frosty Flights", 7, "blue", 110);
         aBoard[8] = new Business("Greasy Grove", 8, "blue", 200);
-        aBoard[9] = new Square("Prison", 9);
+        aBoard[9] = jail;
 
         aBoard[10] = new Business("Happy Hamlet", 10, "orange", 80);
         aBoard[11] = new Rail("West Rail", 11,  150);
@@ -34,7 +67,7 @@ public class Board {
         aBoard[16] = new Business("Leaky Lake", 16, "green", 60);
         aBoard[17] = new Business("Lonely Lodge", 17, "green", 50);
         aBoard[18] = new BankProperty("Insurance Tax", 18, 140);
-        aBoard[19] = new Square("Free Parking Lot", 19);
+        aBoard[19] = freeParking;
 
         aBoard[20] = new Business("Loot Lake", 20, "black", 200);
         aBoard[21] = new Business("Lucky Landing", 21, "black", 300);
@@ -44,7 +77,7 @@ public class Board {
         aBoard[25] = new Rail("North Rail", 25,  150);
         aBoard[26] = new Business("Paradise Palms", 26, "yellow", 380);
         aBoard[27] = new Business("Salty Springs", 27, "yellow", 400);
-        aBoard[28] = new Square("Go To Jail", 28);
+        aBoard[28] = goToJail;
 
         aBoard[29] = new BankProperty("Health Tax", 29, 250);
         aBoard[30] = new Business("Moisty Mire", 30, "purple", 110);

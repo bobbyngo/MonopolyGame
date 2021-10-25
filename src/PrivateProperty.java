@@ -24,7 +24,7 @@ public class PrivateProperty extends Square{
     /**
      * addOwner is used to add owner and set the Private Property status to owned
      */
-    public void addOwner(Player player){
+    public void setOwner(Player player){
         owner = player;
         isOwned = true;
     }
@@ -57,7 +57,7 @@ public class PrivateProperty extends Square{
      * getIsOwned is used to determine whether a property has an owner or not
      * @return boolean
      */
-    public boolean getIsOwned(){
+    public boolean isOwned(){
         return isOwned;
     }
 

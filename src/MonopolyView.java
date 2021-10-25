@@ -37,31 +37,88 @@ public class MonopolyView {
 
 
     /**
-     * Method to start the game
-     *
-     * Feel free to change anything @Zak
+     * Text UI game loop for
+     * MonopolyView
+     * @return  void
+     * @author  Zakaria Ismail, 101143497
      */
     public void play(){
         boolean loserExists = false;
         int state = 0;
-        Player currentPlayer;
+        Player currentPlayer = null;
 
         while (!loserExists) {
             switch (state) {
                 case 0:
                     // Select next player for their turn
                     currentPlayer = controller.getNextPlayer();
+                    System.out.println(String.format("---It is %s's turn!---", currentPlayer.getName()));
 
                     // Check if Player is in jail and has been in jail for < 3 turns
-                    //if (currentPlayer.isInJail())
+                    //if (currentPlayer.isInJail() && currentPlayer.getTurnsInJail() < 3) {
+                    if (currentPlayer.isInJail()) {
+                        // Skip Player's turn
+                        boolean hasServedTime = currentPlayer.serveJailTime();
+                        int turnsLeft = 3 - currentPlayer.getTurnsInJail();
+                        System.out.println(String.format("%s is in jail. They have %d turns of jail-time left!",
+                                currentPlayer.getName(), turnsLeft));
+                    } else {
+                        // allow Player to roll dice
+                        state = 1;
+                    }
                 case 1:
                     // Player rolls dice
+                    int[] roll = controller.rollDie();
+                    // FIXME: init issue
+                    System.out.println(String.format("%s has rolled a %d and %d", currentPlayer.getName(), roll[0], roll[1]));
+                    if (controller.isSpeeding()) {
+                        // is 3rd consecutive double
+                        System.out.println("%s has been caught SPEEDING!");
+                        state = 2;
+                    } else {
+                        state = 3;
+                    }
 
                 case 2:
                     // Player goes to jail
+                    System.out.println(String.format("%s has been sent to Jail.", currentPlayer.getName()));
+                    controller.sendCurrentPlayerToJail();
+                    state = 0;
 
                 case 3:
                     // Move player forward k steps
+                    //  - collect Go money if passed
+                    String start, end;
+                    int total = controller.getDie().getTotal();
+                    boolean passed_go;
+
+                    start = currentPlayer.getCurrLocation().getName();
+                    passed_go = controller.moveCurrentPlayer();
+                    end = currentPlayer.getCurrLocation().getName();
+                    System.out.println(String.format("%s has moved forward %d steps from %s to %s",
+                            currentPlayer.getName(), total, start, end));
+
+                    if (passed_go) {
+                        // Player passed GO
+                        System.out.println(String.format("%s has received %d$ for passing GO",
+                                currentPlayer.getName(), controller.getGO_REWARD()));
+                    }
+
+                    if (controller.currentPlayerIsOnGoToJail()) {
+                        // Player landed on GoToJail
+                        state = 2;
+
+                    } else if (controller.currentPlayerIsOnBlank()) {
+                        // Player landed on Free Parking or GO or (Visiting) Jail
+                        state = 11;
+                    } else if (controller.currentPlayerIsOnOwnedProperty()) {
+                        // Player landed on owned property
+                        state = 4;
+                    } else {
+                        // FIXME: logic has a chance of being erroneous
+                        // Player landed on unowned property
+                        state = 8;
+                    }
 
                 case 4:
                     // If PrivateProperty, check that Player owns the property
