@@ -23,6 +23,10 @@ public class MonopolyController {
         this.bank = new Bank();
         this.die = new Dice();
         this.currentPlayer = this.players.get(0);
+
+        for(Player p: this.players){
+            p.setCurrLocation(board.getSQUARE(0));
+        }
     }
 
     /**
