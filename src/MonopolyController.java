@@ -12,6 +12,11 @@ public class MonopolyController {
     private Dice die;
     private Player currentPlayer;
 
+    /**
+     * MonopolyController constructor
+     *
+     * @param players, an ArrayList of Player's that are in the game
+     */
     public MonopolyController(ArrayList<Player> players) {
         this.players = new ArrayList<>(players);
         this.board = new Board();
@@ -75,6 +80,67 @@ public class MonopolyController {
         // If yes, we do not need to check the full set of color to buy rail
         // I agree, if .instanceof(Rail) works as intended then we do not need to use color code "white" for rail
     }
+
+    /**
+     * Accessor method for the players
+     * @return the ArrayList<Player>
+     */
+    public ArrayList<Player> getPlayers(){ return this.players; }
+
+    /**
+     * Mutator method for
+     * @param players; the ArrayList<Player> to be assigned
+     */
+    public void setPlayers(ArrayList<Player> players) { this.players = players; }
+
+    /**
+     * Accessor method for the board
+     * @return the board
+     */
+    public Board getBoard(){ return this.board; }
+
+    /**
+     * Mutator method for
+     * @param board; the board to be assigned
+     */
+    public void setBoard(Board board){ this.board = board; }
+
+    /**
+     * Accessor method for the bank
+     * @return the bank
+     */
+    public Bank getBank(){ return this.bank; }
+
+    /**
+     * Mutator method for
+     * @param bank; the bank to be assigned
+     */
+    public void setBank(Bank bank){ this.bank = bank; }
+
+    /**
+     * Accessor method for Die
+     * @return the set of die
+     */
+    public Dice getDie(){ return this.die; }
+
+    /**
+     * Mutator method for
+     * @param die; the set of die to be assigned
+     */
+    public void setDie(Dice die) { this.die = die; }
+
+    /**
+     * Accessor method for currentPlayer
+     * @return the current player
+     */
+    public Player getCurrentPlayer(){ return this.currentPlayer; }
+
+    /**
+     * Mutator method for currentPlayer
+     * @param currentPlayer; the next currentPlayer
+     */
+    public void setCurrentPlayer(Player currentPlayer){ this.currentPlayer = currentPlayer; }
+
 }
 
 
