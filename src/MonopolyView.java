@@ -131,10 +131,41 @@ public class MonopolyView {
                 case 4:
                     // If PrivateProperty, check that Player owns the property
 
+                    Square location = currentPlayer.getCurrLocation();
+                    if(location instanceof BankProperty){
+                        state = 5;
+                    }else if(location instanceof PrivateProperty){
+                        if(currentPlayer.equals(((PrivateProperty) location).getOwner())) {
+                            state = 11;
+                        }
+                    }
                     break;
 
                 case 5:
                     // Check that Player can afford rent/tax
+                    location = currentPlayer.getCurrLocation();
+                    if(location instanceof BankProperty){
+                        if(currentPlayer.getPlayerTotalAsset() >= ((BankProperty) location).getTaxValue()){
+                            state = 6;
+                        }else{
+                            loserExists = true;
+                        }
+                    }
+                    else if(location instanceof Business){
+                        if(currentPlayer.getPlayerTotalAsset() >= ((Business) location).getTotalAssetValue()*0.1){
+                            state = 6;
+                        }else{
+                            loserExists = true;
+                        }
+                    }
+                    else if(location instanceof Rail){
+                        if(currentPlayer.getPlayerTotalAsset() >= ((Rail) location).getPrice() * 0.1 * ((Rail) location).getOwnedRailNum()){
+                            state = 6;
+                        }else{
+                            loserExists = true;
+                        }
+                    }
+
                     break;
 
                 case 6:
