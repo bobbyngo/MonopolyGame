@@ -31,7 +31,7 @@ public class MonopolyView {
             System.out.println("Enter player" + i +"'s name: ");
             String playerName = myObj.nextLine();
 
-            players.add(new Player(playerName, null));      //Note: The players currLocation is set to null
+            controller.addPlayer(new Player(playerName, null));      //Note: The players currLocation is set to null
         }
 
         this.controller = new MonopolyController(players);              //Passing ArrayList<Player> to new MonopolyController
