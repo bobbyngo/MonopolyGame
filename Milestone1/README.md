@@ -18,7 +18,7 @@ PrivateProperty.java,
 PropertyAPI.java,
 Rail.java,
 RoleAPI.java,
-Square.java,
+Square.java
 
 Usage:
 To play the game, run the MonopolyView.java file and follow the textual instruction.
@@ -42,4 +42,4 @@ Authors and acknowledgment:
 Ngo Huu Gia Bao                       101163137,
 Gabriel Benni Kelley Evensen          101119814,
 Zakaria Ismail                        101143497,
-Yuguo Liu                             101142730,
+Yuguo Liu                             101142730
