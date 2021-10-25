@@ -12,8 +12,6 @@ import java.util.Scanner;
 
 public class MonopolyView {
     private MonopolyController controller;
-    //private ArrayList<Player> players;
-
 
     /**
      * MonopolyView constructor.
