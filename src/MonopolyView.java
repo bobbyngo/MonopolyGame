@@ -150,14 +150,14 @@ public class MonopolyView {
                         }
                     }
                     else if(location instanceof Business){
-                        if(currentPlayer.getPlayerTotalAsset() >= ((Business) location).getTotalAssetValue()*0.1){
+                        if(currentPlayer.getPlayerTotalAsset() >= ((Business) location).getRentAmount()){
                             state = 6;
                         }else{
                             loserExists = true;
                         }
                     }
                     else if(location instanceof Rail){
-                        if(currentPlayer.getPlayerTotalAsset() >= ((Rail) location).getPrice() * 0.1 * ((Rail) location).getOwnedRailNum()){
+                        if(currentPlayer.getPlayerTotalAsset() >= ((Rail) location).getRentAmount()){
                             state = 6;
                         }else{
                             loserExists = true;

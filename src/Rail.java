@@ -45,15 +45,24 @@ public class Rail extends PrivateProperty implements PropertyAPI{
     }
 
     /**
+     * get the rent amount of this property
+     *
+     * @return int
+     */
+    public int getRentAmount(){
+        return (int)(this.getPrice() * 0.1 * this.getOwnedRailNum());
+    }
+
+    /**
      * @author Gabriel Benni Kelley Evensen 101119814
+     * @author Yuguo Liu 101142730
      *
      * Method to collect money from a player who lands on a square that is not theirs, and pays that rent to the player who owns the square
      * rent is 10% of the total property price
      */
     @Override
     public void collectMoney() {
-        int rentPrice =  (int)(this.getPrice() * 0.1 * this.getOwnedRailNum());   //Gets rent price as 10% of rail property value, if the owner owns other Rail type properties, the tax is multiplied by that amount
-        this.getPlayersCurrentlyOn().get(0).removeMoney(rentPrice);     //Removes the rent price from the player who most recently stepped on property (index 0 is most recent b/c FIFO)
-        this.getOwner().addMoney(rentPrice);                            //Gives rent price to owner of property
+        this.getPlayersCurrentlyOn().get(0).removeMoney(this.getRentAmount());     //Removes the rent price from the player who most recently stepped on property (index 0 is most recent b/c FIFO)
+        this.getOwner().addMoney(this.getRentAmount());                            //Gives rent price to owner of property
     }
 }
