@@ -24,7 +24,7 @@ public class MonopolyView {
         Scanner myObj = new Scanner(System.in);
         System.out.print("Enter number of players: ");
         int numPlayer = myObj.nextInt();
-
+        myObj.nextLine();
         for(int i = 0; i < numPlayer; i++){
             System.out.print("Enter player" + i +"'s name: ");
             String playerName = myObj.nextLine();
