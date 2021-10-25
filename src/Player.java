@@ -65,6 +65,7 @@ public class Player implements RoleAPI {
             this.removeMoney(property.getPrice());
             this.addPropertyList(property);
             property.addOwner(this);
+            System.out.println("You have bought the property");
         } else {
             System.out.println("This property is owned");
         }

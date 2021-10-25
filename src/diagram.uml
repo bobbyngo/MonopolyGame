@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="1062.0">MonopolyController</node>
+    <node x="214.25" y="449.0">PropertyAPI</node>
+    <node x="755.0" y="147.0">Player</node>
+    <node x="1098.0" y="378.0">Bank</node>
+    <node x="466.49999999999994" y="341.0">PrivateProperty</node>
+    <node x="547.0" y="1062.0">Board</node>
+    <node x="0.0" y="748.0">BankProperty</node>
+    <node x="251.0" y="769.0">Rail</node>
+    <node x="338.0" y="1062.0">Dice</node>
+    <node x="168.125" y="0.0">Square</node>
+    <node x="992.0" y="0.0">RoleAPI</node>
+    <node x="462.0" y="660.0">Business</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Bank" target="RoleAPI">
+      <point x="0.0" y="-123.5" />
+      <point x="1257.5" y="122.0" />
+      <point x="1134.5" y="122.0" />
+      <point x="47.5" y="48.5" />
+    </edge>
+    <edge source="BankProperty" target="Square">
+      <point x="-57.75" y="-90.5" />
+      <point x="57.75" y="316.0" />
+      <point x="245.375" y="316.0" />
+      <point x="-77.25" y="145.5" />
+    </edge>
+    <edge source="Player" target="RoleAPI">
+      <point x="0.0" y="-354.5" />
+      <point x="916.5" y="122.0" />
+      <point x="1039.5" y="122.0" />
+      <point x="-47.5" y="48.5" />
+    </edge>
+    <edge source="BankProperty" target="PropertyAPI">
+      <point x="57.75" y="-90.5" />
+      <point x="173.25" y="640.0" />
+      <point x="242.41666666666663" y="640.0" />
+      <point x="-56.33333333333334" y="26.5" />
+    </edge>
+    <edge source="Rail" target="PropertyAPI">
+      <point x="-47.75" y="-69.5" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="PrivateProperty" target="Square">
+      <point x="0.0" y="-134.5" />
+      <point x="587.5" y="316.0" />
+      <point x="399.875" y="316.0" />
+      <point x="77.25" y="145.5" />
+    </edge>
+    <edge source="Business" target="PrivateProperty">
+      <point x="62.0" y="-178.5" />
+      <point x="60.5" y="134.5" />
+    </edge>
+    <edge source="Rail" target="PrivateProperty">
+      <point x="47.75" y="-69.5" />
+      <point x="394.25" y="640.0" />
+      <point x="527.0" y="640.0" />
+      <point x="-60.5" y="134.5" />
+    </edge>
+    <edge source="Business" target="PropertyAPI">
+      <point x="-62.0" y="-178.5" />
+      <point x="524.0" y="630.0" />
+      <point x="355.08333333333337" y="630.0" />
+      <point x="56.33333333333337" y="26.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6672885776196471" x="1019.2804901199634" y="591.8145244013966" />
+  <SelectedNodes>
+    <node>Square</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

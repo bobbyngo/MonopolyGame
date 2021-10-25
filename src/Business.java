@@ -56,6 +56,14 @@ public class Business extends PrivateProperty implements PropertyAPI{
         numHouse ++;
     }
 
+    /**
+     * @author Gabriel Benni Kelley Evensen 101119814
+     * Method to remove houses from Business square (when replacing for hotels only)
+     */
+    public void removeHouses(){
+        numHouse = 0;
+    }
+
     // Plz use getNumHouse() to check if the player has 4 houses already build on this SQUARE
     /**
      * buyHotel adds a hotel to this Business SQUARE
