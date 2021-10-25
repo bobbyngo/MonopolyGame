@@ -16,6 +16,17 @@ public class Rail extends PrivateProperty implements PropertyAPI{
         removeOwner();
     }
 
+    public int getOwnedRailNum(){
+        int numRail = 0;
+        for(PrivateProperty p: this.getOwner().getPropertyList()){
+            if(p instanceof Rail){
+                numRail ++;
+            }
+        }
+
+        return numRail;
+    }
+
     /**
      * sell returns the amount the bank will pay the player when they are bankrupt and has to sell this Rail, it will also remove the owner
      * this Business is ready to be bought by another player again

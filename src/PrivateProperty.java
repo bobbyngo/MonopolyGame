@@ -5,6 +5,7 @@
 
 public class PrivateProperty extends Square{
     private int price;
+    private Player owner;
     private boolean isOwned;
 
     /**
@@ -17,21 +18,31 @@ public class PrivateProperty extends Square{
         super(name, index);
         isOwned = false;
         this.price = price;
+        owner = null;
     }
 
     /**
-     * addOwner is used to set the Private Property status to owned
+     * addOwner is used to add owner and set the Private Property status to owned
      */
-    public void addOwner(){
+    public void addOwner(Player player){
+        owner = player;
         isOwned = true;
     }
 
     /**
-     * removeOwner is used to set the Private Property status to available for purchase
-     * Note: this method is not used in the current version of the game and should NOT be called
+     * removeOwner is used to remove owner and set the Private Property's status back to available for purchase
      */
     public void removeOwner(){
+        owner = null;
         isOwned = false;
+    }
+
+    /**
+     * getOwner is used to get then owner of the Private Property
+     * @return Player
+     */
+    public Player getOwner() {
+        return owner;
     }
 
     /**
