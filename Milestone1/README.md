@@ -28,7 +28,7 @@ Monopoly is a multiplayer economics-themed board game. In the game, players roll
 
 # Usage:
 ```
-To play the game, run the main method inside the MonopolyView.java file and follow the textual instruction.
+Run the main method inside the MonopolyView.java file and follow the textual instruction.
 ```
 
 # Contributors:
