@@ -6,7 +6,7 @@ SYSC 3110 | Software Designing Project (SDK 17 working)
 <div align-item="center"><img src="Images/Board.png" height="100%" width="100%"></div>
 
 # Description:
-The Monopoly Game is implemented following the <strong>MVC</strong> pattern and written in <strong>Java<strong>
+The Monopoly Game is implemented following the <strong>MVC</strong> pattern and written in <strong>Java</strong>
 <br>
 Monopoly is a multiplayer economics-themed board game. In the game, players roll two dice to move around the game board, buying and selling properties, and developing them with houses and hotels. Players collect rent from their opponents, with the goal being to drive them into bankruptcy. Players receive a stipend every time they pass "Go", and can end up in jail, from which they cannot move until 3 turns have passed.
 
