@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * @author Patrick Liu 101142730
- * @author Zakaria Ismail XXXXXXXX
+ * @author Zakaria Ismail 101143497
  * @author Ngo Huu Gia Bao 101163137
  * @author Gabriel Benni Kelley Evensen 101119814
  *
@@ -224,15 +224,19 @@ public class MonopolyView {
                     state = 12;
                     break;
 
-                case 11:
+                case 11: //Player prompts
                     // Prompt Player to:
                     //  - End turn
                     //  - Sell properties
                     //  - Display status
                     break;
 
-                case 12:
-                    // Check that Player rolled double
+                case 12: //Check if Player rolled double
+                    if (this.controller.checkDouble()){
+                        state = (this.controller.isSpeeding()) ? 2 : 1;
+                    }else{
+                        state = 0;
+                    }
                     break;
 
             }

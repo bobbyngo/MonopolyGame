@@ -89,6 +89,10 @@ public class MonopolyController {
         // I agree, if .instanceof(Rail) works as intended then we do not need to use color code "white" for rail
     }
 
+    public boolean checkDouble(){
+        return this.die.isDouble();
+    }
+
     /**
      * Accessor method for the players
      * @return the ArrayList<Player>
