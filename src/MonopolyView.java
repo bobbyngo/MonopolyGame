@@ -263,7 +263,7 @@ public class MonopolyView {
         for (PrivateProperty pp : player.getPropertyList()){
             int sellPrice = 0;
             if (pp instanceof Rail)             sellPrice = (pp.getPrice()/2);
-            else if (pp instanceof Business)    sellPrice = ((Business) pp).getTotalAssetValue();
+            else if (pp instanceof Business)    sellPrice = (((Business) pp).getTotalAssetValue())/2;
             System.out.println("Index: " + pp.getIndex() + " - Name: '" + pp.getName() + "' - Sells for $" + sellPrice);
         }
         System.out.println("Please provide the index of the property you wish to sell: ");
@@ -281,7 +281,7 @@ public class MonopolyView {
         for (PrivateProperty pp : player.getPropertyList()){
             int sellPrice = 0;
             if (pp instanceof Rail)             sellPrice = (pp.getPrice()/2);
-            else if (pp instanceof Business)    sellPrice = ((Business) pp).getTotalAssetValue();
+            else if (pp instanceof Business)    sellPrice = (((Business) pp).getTotalAssetValue())/2;
             System.out.println("Index: " + pp.getIndex() + " - Name: '" + pp.getName() + "' - Sells for $" + sellPrice);
         }
 
