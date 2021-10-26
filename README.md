@@ -33,6 +33,7 @@ Roadmap:
 Milestone 2:
 Be able to run the game in a graphical user interface,
 Milestone 3:
+Add additional features such as having the ability to buy houses and hotel on private properties square
 Have the ability to add “AI” players into the game,
 Milestone 4:
 Be able to save/load game progresses,
