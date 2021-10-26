@@ -68,6 +68,7 @@ public class MonopolyView {
                                 currentPlayer.getName(), turnsLeft));
 
                         if (hasServedTime) {
+                            System.out.println("%s has served their jail time and has returned to the game.");
                             state = 1;
                         }
                     } else {
@@ -141,6 +142,8 @@ public class MonopolyView {
                     }else if(location instanceof PrivateProperty){
                         if(currentPlayer.equals(((PrivateProperty) location).getOwner())) {
                             state = 11;
+                        } else {
+                            state = 5;
                         }
                     }
                     break;
@@ -177,6 +180,12 @@ public class MonopolyView {
                     //  - pay rent/tax,
                     //  - sell properties,
                     //  - display status
+                    if (currentPlayer.getCurrLocation() instanceof BankProperty) {
+                        promptDecision(currentPlayer, PromptType.PAY_TAX);
+                    } else {
+                        promptDecision(currentPlayer, PromptType.PAY_RENT);
+                    }
+                    state = 7;
                     break;
 
                 case 7:
@@ -186,8 +195,11 @@ public class MonopolyView {
                         ((Business) location).collectMoney(currentPlayer);
                     }else if(location instanceof Rail){
                         ((Rail) location).collectMoney(currentPlayer);
+                    }else if(location instanceof BankProperty){
+                        ((BankProperty) location).collectMoney(currentPlayer);
+                        controller.getBank().addMoney(((BankProperty) location).getTaxValue());
                     }
-
+                    state = 12;
                     break;
 
                 case 8:
@@ -209,7 +221,12 @@ public class MonopolyView {
                     //  - purchase and end turn
                     //  - end turn
                     //  - display status
-                    //promptDecision(currentPlayer, PromptType.PURCHASE);
+                    int result = promptDecision(currentPlayer, PromptType.PURCHASE);
+                    if (result == 1) {
+                        state = 10;
+                    } else {
+                        state = 12;
+                    }
                     break;
 
                 case 10:
@@ -228,12 +245,14 @@ public class MonopolyView {
                     //  - End turn
                     //  - Sell properties
                     //  - Display status
+                    promptDecision(currentPlayer, PromptType.NO_CHOICE);
+                    state = 12;
                     break;
 
                 case 12: //Check if Player rolled double
-                    if (this.controller.getDie().isDouble()){
-                        state = (this.controller.isSpeeding()) ? 2 : 1;
-                    }else{
+                    if (controller.getDie().isDouble()) {
+                        state = 1;
+                    } else {
                         state = 0;
                     }
                     break;
@@ -250,14 +269,120 @@ public class MonopolyView {
         System.exit(-1);
     }
 
-    /*
-    private void promptDecision(Player currentPlayer, PromptType promptType) {
-        HashMap<String, >
+    /**
+     * Prompts the user to purchase property,
+     * pay tax, pay rent, sell properties,
+     * and display status.
+     * Returns 0 if end turn was selected,
+     * 1 if action + end turn.
+     * @param currentPlayer     Player, current player
+     * @param promptType        PromptType, enum for prompt type
+     * @return                  boolean, Action was selected
+     */
+    private int promptDecision(Player currentPlayer, PromptType promptType) {
+        Integer i = 1;
+        boolean turn_ended = false;
+        String type = null;
+        Square sq = currentPlayer.getCurrLocation();
+        int price = -1;
+        HashMap<Integer, String> options = new HashMap<>();
+        int exitval = -1;
+
+
         if (promptType == PromptType.PURCHASE) {
+            options.put(i, String.format("\t%d. Purchase and end turn", i));
+            type = "price";
+            price = ((PrivateProperty) sq).getPrice();
+            i++;
+            options.put(i, String.format("\t%d. End turn", i));
+            i++;
+        } else if (promptType == PromptType.NO_CHOICE) {
+            options.put(i, String.format("\t%d. End turn", i));
+            i++;
+        } else if (promptType == PromptType.PAY_RENT) {
+            options.put(i, String.format("\t%d. Pay rent and end turn", i));
+            type = "rent";
+            price = (sq instanceof Business) ? ((Business)sq).getRentAmount() : ((Rail)sq).getRentAmount();
+            i++;
+        } else if (promptType == PromptType.PAY_TAX) {
+            options.put(i, String.format("\t%d. Pay tax and end turn", i));
+            price = ((BankProperty)sq).getTaxValue();
+            type = "tax";
+            i++;
+        }
+        //options.put(i, String.format("\t%d. End turn", i));
+        //i++;
+        options.put(i, String.format("\t%d. Sell properties", i));
+        i++;
+        options.put(i, String.format("\t%d. Display properties", i));
+
+        Scanner in = new Scanner(System.in);
+        int choice;
+        while (!turn_ended) {
+
+            String info;
+            info = String.format("%s, you have %d$ cash, your total assets are %d$",
+                    currentPlayer.getName(), currentPlayer.getPlayerBalance(), currentPlayer.getPlayerTotalAsset());
+            if (promptType != PromptType.NO_CHOICE) {
+               info = info.concat(String.format(info + ", and the %s of %s is %d$", type, sq.getName(), price));
+            }
+            System.out.println(info);
+            for (String option : options.values()) {
+                System.out.println(option);
+            }
+
+            System.out.print("Enter choice: ");
+            choice = in.nextInt();
+            in.nextLine();
+
+            if (choice > 4) {
+                System.out.println("Select a valid option!");
+                continue;
+            }
+
+            if (promptType == PromptType.PURCHASE) {
+                switch (choice) {
+                    case 1:
+                        turn_ended = true;
+                        exitval = 1;
+                        break;
+                    case 2:
+                        turn_ended = true;
+                        exitval = 0;
+                        break;
+                    case 3:
+                        promptSale(currentPlayer);
+                        break;
+                    case 4:
+                        displayStatus(currentPlayer);
+                        break;
+                }
+            } else {
+
+                switch (choice) {
+                    case 1:
+                        turn_ended = true;
+                        exitval = 1;
+                        break;
+                    case 2:
+                         promptSale(currentPlayer);
+                        break;
+                    case 3:
+                        displayStatus(currentPlayer);
+                        break;
+                }
+            }
 
         }
+
+        return exitval;
+
+
+
+
+
     }
-     */
+
 
     /**
      * Method which prompts and confirms sale of selected property
@@ -266,16 +391,23 @@ public class MonopolyView {
     private void promptSale(Player player){
         Scanner myObj = new Scanner(System.in);
         System.out.println("You own the following properties:-");
+        int i = 0;
         for (PrivateProperty pp : player.getPropertyList()){
             int sellPrice = 0;
             if (pp instanceof Rail)             sellPrice = (pp.getPrice()/2);
             else if (pp instanceof Business)    sellPrice = (((Business) pp).getTotalAssetValue())/2;
-            System.out.println("Index: " + pp.getIndex() + " - Name: '" + pp.getName() + "' - Sells for $" + sellPrice);
+            System.out.println("Index: " + i + " - Name: '" + pp.getName() + "' - Sells for $" + sellPrice);
+            i++;
         }
-        System.out.println("Please provide the index of the property you wish to sell: ");
+        System.out.println("Please provide the index of the property you wish to sell (-1 for no selling): ");
         int propertyIndex = myObj.nextInt();
-        if (player.getPropertyList().get(propertyIndex) instanceof Rail) this.controller.sellProperty((Rail) player.getPropertyList().get(propertyIndex));
-        else if (player.getPropertyList().get(propertyIndex) instanceof Business) this.controller.sellProperty((Business) player.getPropertyList().get(propertyIndex));
+        myObj.nextLine();
+        if (propertyIndex != -1) {
+            if (player.getPropertyList().get(propertyIndex) instanceof Rail)
+                this.controller.sellProperty((Rail) player.getPropertyList().get(propertyIndex));
+            else if (player.getPropertyList().get(propertyIndex) instanceof Business)
+                this.controller.sellProperty((Business) player.getPropertyList().get(propertyIndex));
+        }
     }
 
     private void displayStatus(Player player){
@@ -293,8 +425,14 @@ public class MonopolyView {
 
     }
 
+
+
+
     public static void main(String[] args) {
+
         MonopolyView v = new MonopolyView();
         v.play();
     }
+
+
 }

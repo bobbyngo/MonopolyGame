@@ -181,10 +181,6 @@ public class Player implements RoleAPI {
         return propertyList;
     }
 
-    public void setInJail(boolean inJail) {
-        this.inJail = inJail;
-    }
-
 
     public void setCurrLocation(Square currLocation) {
         this.currLocation = currLocation;
@@ -194,9 +190,6 @@ public class Player implements RoleAPI {
         return this.inJail;
     }
 
-    public void setJail(boolean jailStatus) {
-        this.inJail = jailStatus;
-    }
 
     /**
      * Method handler to check if a player is to remain in jail for this turn (returns true); or if a player should be allowed to move this turn (returns false)
@@ -238,26 +231,6 @@ public class Player implements RoleAPI {
         return TotalAsset;
     }
 
-    /**
-     * sellAllProperty is used to when a player is on the verge of bankruptcy and needs to sell all the SQUAREs that the player currently owns
-     * the return amount of half of the total asset's value and deposited into the player's balance
-     *
-     * @author Yuguo Liu 101142730
-     */
-    public void sellAllProperty(){
-        int ReturnAmount = 0;
-        for(PrivateProperty p: propertyList){
-            if(p instanceof Business){
-                ReturnAmount += ((Business) p).sell();
-            }
-            if(p instanceof Rail){
-                ReturnAmount += ((Rail) p).sell();
-            }
-        }
-
-        playerBalance += ReturnAmount;
-        propertyList.clear();
-    }
 
     public int getTurnsInJail() {
         return turnsInJail;
