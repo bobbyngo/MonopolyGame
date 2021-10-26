@@ -36,7 +36,6 @@ public class Rail extends PrivateProperty implements PropertyAPI{
      * this Business is ready to be bought by another player again
      * @return int
      *
-     * Note: This method is not used in the current version of the game and should NOT be called
      */
     public int sell(){
         int sellPrice = (this.getPrice()/2);

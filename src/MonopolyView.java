@@ -4,10 +4,9 @@ import java.util.Scanner;
 
 /**
  * @author Patrick Liu 101142730
- * @author Zakaria Ismail XXXXXXXX
- * @author Ngo Huu Gia Bao 101163137
+ * @author Zakaria Ismail 101143497
+ * @author Ngo Huu Gia Bao 101163137 handles case 10, winner
  * @author Gabriel Benni Kelley Evensen 101119814
- *
  * Most functional code written by Patrick
  */
 
@@ -194,6 +193,9 @@ public class MonopolyView {
                         ((Business) location).collectMoney(currentPlayer);
                     }else if(location instanceof Rail){
                         ((Rail) location).collectMoney(currentPlayer);
+                    }else if(location instanceof BankProperty){
+                        ((BankProperty) location).collectMoney(currentPlayer);
+                        controller.getBank().addMoney(((BankProperty) location).getTaxValue());
                     }
 
                     break;
@@ -236,7 +238,7 @@ public class MonopolyView {
                     state = 12;
                     break;
 
-                case 11:
+                case 11: //Player prompts
                     // Prompt Player to:
                     //  - End turn
                     //  - Sell properties
@@ -245,12 +247,24 @@ public class MonopolyView {
                     state = 12;
                     break;
 
-                case 12:
-                    // Check that Player rolled double
+                case 12: //Check if Player rolled double
+                    if (this.controller.getDie().isDouble()){
+                        state = (this.controller.isSpeeding()) ? 2 : 1;
+                    }else{
+                        state = 0;
+                    }
                     break;
 
             }
         }
+
+        // The game is over, there is a bankrupt player
+        Player winner = controller.determineWinner();
+        System.out.println("The winner is: \n");
+        displayStatus(winner);
+
+        // Quit the program
+        System.exit(-1);
     }
 
     /**
@@ -377,7 +391,7 @@ public class MonopolyView {
         for (PrivateProperty pp : player.getPropertyList()){
             int sellPrice = 0;
             if (pp instanceof Rail)             sellPrice = (pp.getPrice()/2);
-            else if (pp instanceof Business)    sellPrice = ((Business) pp).getTotalAssetValue();
+            else if (pp instanceof Business)    sellPrice = (((Business) pp).getTotalAssetValue())/2;
             System.out.println("Index: " + pp.getIndex() + " - Name: '" + pp.getName() + "' - Sells for $" + sellPrice);
         }
         System.out.println("Please provide the index of the property you wish to sell: ");
@@ -390,12 +404,12 @@ public class MonopolyView {
         System.out.println("Name:- " + player.getName() + "\n"
                 + "Balance:- " + player.getPlayerBalance() + "\n"
                 + "Total assets:- " + player.getPlayerTotalAsset() + "\n"
-                + "Properties you own:- \n \n"
+                + "Properties " + player.getName() + "owns:- \n \n"
         );
         for (PrivateProperty pp : player.getPropertyList()){
             int sellPrice = 0;
             if (pp instanceof Rail)             sellPrice = (pp.getPrice()/2);
-            else if (pp instanceof Business)    sellPrice = ((Business) pp).getTotalAssetValue();
+            else if (pp instanceof Business)    sellPrice = (((Business) pp).getTotalAssetValue())/2;
             System.out.println("Index: " + pp.getIndex() + " - Name: '" + pp.getName() + "' - Sells for $" + sellPrice);
         }
 
