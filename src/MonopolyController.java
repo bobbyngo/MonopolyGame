@@ -280,6 +280,24 @@ public class MonopolyController {
         return false;
     }
 
+    /**
+     * determineWinner gets the player who has the greatest amount of total asset, only used when the game ends
+     *
+     * @return Player
+     * @author Yuguo Liu 101142730
+     */
+    public Player determineWinner() {
+        int winnerIndex = 0;
+        int winningAmount = 0;
+        for(Player p: players){
+            if(!p.isBankrupt() && winningAmount < p.getPlayerTotalAsset()){
+                winningAmount = p.getPlayerTotalAsset();
+                winnerIndex = players.indexOf(p);
+            }
+        }
+
+        return players.get(winnerIndex);
+    }
 
     /**
      * Checks if currentPlayer is on
