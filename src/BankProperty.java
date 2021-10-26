@@ -25,8 +25,8 @@ public class BankProperty extends Square implements PropertyAPI{
      * Method removes the money from the player who lands on this BankProperty
      */
     @Override
-    public void collectMoney(){
-        this.getPlayersCurrentlyOn().get(0).removeMoney(taxValue);  //Removes the rent from the player who landed on the square
+    public void collectMoney(Player player){
+        player.removeMoney(taxValue);  //Removes the rent from the player who landed on the square
     }
 
     /**

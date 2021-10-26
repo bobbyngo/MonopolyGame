@@ -182,6 +182,13 @@ public class MonopolyView {
 
                 case 7:
                     // Player pays rent/tax to PlayerY/Bank
+                    location = currentPlayer.getCurrLocation();
+                    if(location instanceof Business){
+                        ((Business) location).collectMoney(currentPlayer);
+                    }else if(location instanceof Rail){
+                        ((Rail) location).collectMoney(currentPlayer);
+                    }
+
                     break;
 
                 case 8:
@@ -208,6 +215,13 @@ public class MonopolyView {
 
                 case 10:
                     // Player purchases property
+                    currentPlayer = controller.getCurrentPlayer();
+                    // Check if the current location of the player is a Private Property
+                    if (currentPlayer.getCurrLocation() instanceof PrivateProperty) {
+                        // Down casting Square to Private Property to the method in the controller
+                        controller.purchaseProperty((PrivateProperty) currentPlayer.getCurrLocation());
+                    }
+                    state = 12;
                     break;
 
                 case 11:
@@ -225,6 +239,7 @@ public class MonopolyView {
         }
     }
 
+    /*
     private void promptDecision(Player currentPlayer, PromptType promptType) {
         Integer i = 1;
         HashMap<Integer, String> options = new HashMap<>();
@@ -242,6 +257,7 @@ public class MonopolyView {
 
 
     }
+     */
 
     /**
      * Method which prompts and confirms sale of selected property
