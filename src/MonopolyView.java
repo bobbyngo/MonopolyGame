@@ -210,7 +210,7 @@ public class MonopolyView {
                     //  - purchase and end turn
                     //  - end turn
                     //  - display status
-                    promptDecision(currentPlayer, PromptType.PURCHASE);
+                    //promptDecision(currentPlayer, PromptType.PURCHASE);
                     break;
 
                 case 10:
@@ -237,6 +237,11 @@ public class MonopolyView {
 
             }
         }
+
+        // The game is over, there is bankrupt player
+        Player winner = controller.determineWinner();
+        System.out.println("The winner is: \n");
+        displayStatus(winner);
     }
 
     /*
@@ -271,7 +276,7 @@ public class MonopolyView {
         System.out.println("Name:- " + player.getName() + "\n"
                 + "Balance:- " + player.getPlayerBalance() + "\n"
                 + "Total assets:- " + player.getPlayerTotalAsset() + "\n"
-                + "Properties you own:- \n \n"
+                + "Properties " + player.getName() + "owns:- \n \n"
         );
         for (PrivateProperty pp : player.getPropertyList()){
             int sellPrice = 0;
@@ -281,8 +286,6 @@ public class MonopolyView {
         }
 
     }
-
-
 
 
     public static void main(String[] args) {
