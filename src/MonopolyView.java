@@ -239,12 +239,14 @@ public class MonopolyView {
         }
     }
 
+    /*
     private void promptDecision(Player currentPlayer, PromptType promptType) {
         HashMap<String, >
         if (promptType == PromptType.PURCHASE) {
 
         }
     }
+     */
 
     /**
      * Method which prompts and confirms sale of selected property
