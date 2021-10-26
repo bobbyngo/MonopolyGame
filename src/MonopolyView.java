@@ -208,6 +208,12 @@ public class MonopolyView {
 
                 case 10:
                     // Player purchases property
+                    currentPlayer = controller.getCurrentPlayer();
+                    // Check if the current location of the player is a Private Property
+                    if (currentPlayer.getCurrLocation() instanceof PrivateProperty) {
+                        // Down casting Square to Private Property to the method in the controller
+                        controller.purchaseProperty((PrivateProperty) currentPlayer.getCurrLocation());
+                    }
                     break;
 
                 case 11:
