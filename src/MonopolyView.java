@@ -214,6 +214,7 @@ public class MonopolyView {
                         // Down casting Square to Private Property to the method in the controller
                         controller.purchaseProperty((PrivateProperty) currentPlayer.getCurrLocation());
                     }
+                    state = 12;
                     break;
 
                 case 11:
