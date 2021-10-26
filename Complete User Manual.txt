@@ -10,6 +10,7 @@ The player will roll 2 dice to determine how many squares he/she will be advanci
 During the player’s turn, the following 2 choices will be always be offered:
 (1) Sell the Properties they have already bought
 (2) Display their status which includes: player’s name, play’s current balance, player’s total asset value, properties that they own
+(3) End turn
 
 The following choices will be offered to the players if they land on the following Square type:
 Private property square that is unowned by another player (Business or Rail):
