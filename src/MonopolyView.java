@@ -231,7 +231,7 @@ public class MonopolyView {
                     break;
 
                 case 12: //Check if Player rolled double
-                    if (this.controller.checkDouble()){
+                    if (this.controller.getDie().isDouble()){
                         state = (this.controller.isSpeeding()) ? 2 : 1;
                     }else{
                         state = 0;
