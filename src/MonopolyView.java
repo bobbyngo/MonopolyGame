@@ -226,10 +226,21 @@ public class MonopolyView {
     }
 
     private void promptDecision(Player currentPlayer, PromptType promptType) {
-        HashMap<String, >
+        Integer i = 1;
+        HashMap<Integer, String> options = new HashMap<>();
         if (promptType == PromptType.PURCHASE) {
+            options.put(i, String.format("\t%d. Purchase and end turn", i));
+            i++;
+        } else if (promptType == PromptType.NO_CHOICE) {
 
+        } else if (promptType == PromptType.PAY_RENT) {
+            options.put(i, "\t%d. Pay rent and end turn");
+
+        } else if (promptType == PromptType.PAY_TAX) {
+            options.put(i, "\t%d. Pay tax and end turn");
         }
+
+
     }
 
     /**
