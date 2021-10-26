@@ -4,10 +4,9 @@ import java.util.Scanner;
 
 /**
  * @author Patrick Liu 101142730
- * @author Zakaria Ismail XXXXXXXX
- * @author Ngo Huu Gia Bao 101163137
+ * @author Zakaria Ismail 101143497
+ * @author Ngo Huu Gia Bao 101163137 handles case 10, winner
  * @author Gabriel Benni Kelley Evensen 101119814
- *
  * Most functional code written by Patrick
  */
 
@@ -224,19 +223,31 @@ public class MonopolyView {
                     state = 12;
                     break;
 
-                case 11:
+                case 11: //Player prompts
                     // Prompt Player to:
                     //  - End turn
                     //  - Sell properties
                     //  - Display status
                     break;
 
-                case 12:
-                    // Check that Player rolled double
+                case 12: //Check if Player rolled double
+                    if (this.controller.getDie().isDouble()){
+                        state = (this.controller.isSpeeding()) ? 2 : 1;
+                    }else{
+                        state = 0;
+                    }
                     break;
 
             }
         }
+
+        // The game is over, there is a bankrupt player
+        Player winner = controller.determineWinner();
+        System.out.println("The winner is: \n");
+        displayStatus(winner);
+
+        // Quit the program
+        System.exit(-1);
     }
 
     /*
@@ -271,7 +282,7 @@ public class MonopolyView {
         System.out.println("Name:- " + player.getName() + "\n"
                 + "Balance:- " + player.getPlayerBalance() + "\n"
                 + "Total assets:- " + player.getPlayerTotalAsset() + "\n"
-                + "Properties you own:- \n \n"
+                + "Properties " + player.getName() + "owns:- \n \n"
         );
         for (PrivateProperty pp : player.getPropertyList()){
             int sellPrice = 0;
@@ -282,14 +293,8 @@ public class MonopolyView {
 
     }
 
-
-
-
     public static void main(String[] args) {
-
         MonopolyView v = new MonopolyView();
         v.play();
     }
-
-
 }
