@@ -40,7 +40,8 @@ Be able to save/load game progresses,
 Have an international version of the game in which players can have customized property names, values and currencies.
 
 Known Issues:
-When the prompt asks the player to enter an integer, entering a letter an any other symbols will cause the program to crash. Try Catch statements will be implemented later.
+When the prompt asks the player to enter an integer, entering an out of bound integer, a letter or any other symbols will cause the program to crash. Try Catch statements will be implemented later.
+If a player does not own any properties, entering invalid property index will cause the program to crash
 
 Authors and acknowledgment:
 Ngo Huu Gia Bao                       101163137,
