@@ -186,6 +186,9 @@ public class MonopolyView {
                         ((Business) location).collectMoney(currentPlayer);
                     }else if(location instanceof Rail){
                         ((Rail) location).collectMoney(currentPlayer);
+                    }else if(location instanceof BankProperty){
+                        ((BankProperty) location).collectMoney(currentPlayer);
+                        controller.getBank().addMoney(((BankProperty) location).getTaxValue());
                     }
 
                     break;
