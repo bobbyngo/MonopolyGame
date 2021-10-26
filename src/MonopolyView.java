@@ -5,7 +5,11 @@ import java.util.Scanner;
 /**
  * @author Patrick Liu 101142730
  * @author Zakaria Ismail 101143497
+<<<<<<< Updated upstream
  * @author Ngo Huu Gia Bao 101163137
+=======
+ * @author Ngo Huu Gia Bao 101163137 handles case 10, winner
+>>>>>>> Stashed changes
  * @author Gabriel Benni Kelley Evensen 101119814
  *
  * Most functional code written by Patrick
@@ -242,7 +246,7 @@ public class MonopolyView {
             }
         }
 
-        // The game is over, there is bankrupt player
+        // The game is over, there is a bankrupt player
         Player winner = controller.determineWinner();
         System.out.println("The winner is: \n");
         displayStatus(winner);
@@ -293,7 +297,7 @@ public class MonopolyView {
         }
 
     }
-    
+
     public static void main(String[] args) {
         MonopolyView v = new MonopolyView();
         v.play();
