@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -12,6 +13,10 @@ import java.util.Scanner;
 
 public class MonopolyView {
     private MonopolyController controller;
+
+    private enum PromptType {
+        PURCHASE, PAY_RENT, NO_CHOICE, PAY_TAX
+    }
 
     /**
      * MonopolyView constructor.
@@ -198,6 +203,7 @@ public class MonopolyView {
                     //  - purchase and end turn
                     //  - end turn
                     //  - display status
+                    promptDecision(currentPlayer, PromptType.PURCHASE);
                     break;
 
                 case 10:
@@ -216,6 +222,13 @@ public class MonopolyView {
                     break;
 
             }
+        }
+    }
+
+    private void promptDecision(Player currentPlayer, PromptType promptType) {
+        HashMap<String, >
+        if (promptType == PromptType.PURCHASE) {
+
         }
     }
 
@@ -252,6 +265,8 @@ public class MonopolyView {
         }
 
     }
+
+
 
 
     public static void main(String[] args) {
