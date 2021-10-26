@@ -210,7 +210,7 @@ public class MonopolyView {
                     //  - purchase and end turn
                     //  - end turn
                     //  - display status
-                    promptDecision(currentPlayer, PromptType.PURCHASE);
+                    //promptDecision(currentPlayer, PromptType.PURCHASE);
                     break;
 
                 case 10:
@@ -241,6 +241,14 @@ public class MonopolyView {
 
             }
         }
+
+        // The game is over, there is bankrupt player
+        Player winner = controller.determineWinner();
+        System.out.println("The winner is: \n");
+        displayStatus(winner);
+
+        // Quit the program
+        System.exit(-1);
     }
 
     /*
@@ -262,7 +270,7 @@ public class MonopolyView {
         for (PrivateProperty pp : player.getPropertyList()){
             int sellPrice = 0;
             if (pp instanceof Rail)             sellPrice = (pp.getPrice()/2);
-            else if (pp instanceof Business)    sellPrice = ((Business) pp).getTotalAssetValue();
+            else if (pp instanceof Business)    sellPrice = (((Business) pp).getTotalAssetValue())/2;
             System.out.println("Index: " + pp.getIndex() + " - Name: '" + pp.getName() + "' - Sells for $" + sellPrice);
         }
         System.out.println("Please provide the index of the property you wish to sell: ");
@@ -275,25 +283,19 @@ public class MonopolyView {
         System.out.println("Name:- " + player.getName() + "\n"
                 + "Balance:- " + player.getPlayerBalance() + "\n"
                 + "Total assets:- " + player.getPlayerTotalAsset() + "\n"
-                + "Properties you own:- \n \n"
+                + "Properties " + player.getName() + "owns:- \n \n"
         );
         for (PrivateProperty pp : player.getPropertyList()){
             int sellPrice = 0;
             if (pp instanceof Rail)             sellPrice = (pp.getPrice()/2);
-            else if (pp instanceof Business)    sellPrice = ((Business) pp).getTotalAssetValue();
+            else if (pp instanceof Business)    sellPrice = (((Business) pp).getTotalAssetValue())/2;
             System.out.println("Index: " + pp.getIndex() + " - Name: '" + pp.getName() + "' - Sells for $" + sellPrice);
         }
 
     }
-
-
-
-
+    
     public static void main(String[] args) {
-
         MonopolyView v = new MonopolyView();
         v.play();
     }
-
-
 }
