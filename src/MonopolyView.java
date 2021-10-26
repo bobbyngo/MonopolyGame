@@ -5,13 +5,8 @@ import java.util.Scanner;
 /**
  * @author Patrick Liu 101142730
  * @author Zakaria Ismail 101143497
-<<<<<<< Updated upstream
- * @author Ngo Huu Gia Bao 101163137
-=======
  * @author Ngo Huu Gia Bao 101163137 handles case 10, winner
->>>>>>> Stashed changes
  * @author Gabriel Benni Kelley Evensen 101119814
- *
  * Most functional code written by Patrick
  */
 
