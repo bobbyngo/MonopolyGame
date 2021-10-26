@@ -9,6 +9,6 @@ public interface PropertyAPI {
      *
      * Method to collect and pay rent for the three different payable property types; bank property, private property (play-ownable), and rails (play-ownable)
      */
-    public void collectMoney();
+    public void collectMoney(Player player);
 
 }

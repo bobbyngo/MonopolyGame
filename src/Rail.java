@@ -54,15 +54,28 @@ public class Rail extends PrivateProperty implements PropertyAPI{
     }
 
     /**
+     * @author Yuguo Liu 101142730
+     *
+     * Method to collect money from a player who lands on a square that is not theirs, and pays that rent to the player who owns the square
+     * rent is 10% of the total property price (including houses & hotels)
+     */
+    public void collectMoney(Player player){
+        player.removeMoney(this.getRentAmount());
+        this.getOwner().addMoney(this.getRentAmount());
+    }
+
+    /**
      * @author Gabriel Benni Kelley Evensen 101119814
      * @author Yuguo Liu 101142730
      *
      * Method to collect money from a player who lands on a square that is not theirs, and pays that rent to the player who owns the square
      * rent is 10% of the total property price
      */
+    /*
     @Override
     public void collectMoney() {
         this.getPlayersCurrentlyOn().get(0).removeMoney(this.getRentAmount());     //Removes the rent price from the player who most recently stepped on property (index 0 is most recent b/c FIFO)
         this.getOwner().addMoney(this.getRentAmount());                            //Gives rent price to owner of property
     }
+     */
 }

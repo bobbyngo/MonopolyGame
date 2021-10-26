@@ -177,6 +177,13 @@ public class MonopolyView {
 
                 case 7:
                     // Player pays rent/tax to PlayerY/Bank
+                    location = currentPlayer.getCurrLocation();
+                    if(location instanceof Business){
+                        ((Business) location).collectMoney(currentPlayer);
+                    }else if(location instanceof Rail){
+                        ((Rail) location).collectMoney(currentPlayer);
+                    }
+
                     break;
 
                 case 8:
