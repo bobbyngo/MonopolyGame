@@ -242,6 +242,9 @@ public class MonopolyView {
         Player winner = controller.determineWinner();
         System.out.println("The winner is: \n");
         displayStatus(winner);
+
+        // Quit the program
+        System.exit(-1);
     }
 
     /*
@@ -286,13 +289,9 @@ public class MonopolyView {
         }
 
     }
-
-
+    
     public static void main(String[] args) {
-
         MonopolyView v = new MonopolyView();
         v.play();
     }
-
-
 }
