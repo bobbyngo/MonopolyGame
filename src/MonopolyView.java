@@ -142,6 +142,8 @@ public class MonopolyView {
                     }else if(location instanceof PrivateProperty){
                         if(currentPlayer.equals(((PrivateProperty) location).getOwner())) {
                             state = 11;
+                        } else {
+                            state = 5;
                         }
                     }
                     break;
@@ -197,7 +199,7 @@ public class MonopolyView {
                         ((BankProperty) location).collectMoney(currentPlayer);
                         controller.getBank().addMoney(((BankProperty) location).getTaxValue());
                     }
-
+                    state = 12;
                     break;
 
                 case 8:
@@ -248,9 +250,9 @@ public class MonopolyView {
                     break;
 
                 case 12: //Check if Player rolled double
-                    if (this.controller.getDie().isDouble()){
-                        state = (this.controller.isSpeeding()) ? 2 : 1;
-                    }else{
+                    if (controller.getDie().isDouble()) {
+                        state = 1;
+                    } else {
                         state = 0;
                     }
                     break;
@@ -292,10 +294,10 @@ public class MonopolyView {
             type = "price";
             price = ((PrivateProperty) sq).getPrice();
             i++;
-            options.put(i, "\t%d. End turn");
+            options.put(i, String.format("\t%d. End turn", i));
             i++;
         } else if (promptType == PromptType.NO_CHOICE) {
-            options.put(i, "\t%d. End turn");
+            options.put(i, String.format("\t%d. End turn", i));
             i++;
         } else if (promptType == PromptType.PAY_RENT) {
             options.put(i, String.format("\t%d. Pay rent and end turn", i));
@@ -324,11 +326,12 @@ public class MonopolyView {
             if (promptType != PromptType.NO_CHOICE) {
                info = info.concat(String.format(info + ", and the %s of %s is %d$", type, sq.getName(), price));
             }
-
+            System.out.println(info);
             for (String option : options.values()) {
                 System.out.println(option);
             }
 
+            System.out.print("Enter choice: ");
             choice = in.nextInt();
             in.nextLine();
 
@@ -388,16 +391,23 @@ public class MonopolyView {
     private void promptSale(Player player){
         Scanner myObj = new Scanner(System.in);
         System.out.println("You own the following properties:-");
+        int i = 0;
         for (PrivateProperty pp : player.getPropertyList()){
             int sellPrice = 0;
             if (pp instanceof Rail)             sellPrice = (pp.getPrice()/2);
             else if (pp instanceof Business)    sellPrice = (((Business) pp).getTotalAssetValue())/2;
-            System.out.println("Index: " + pp.getIndex() + " - Name: '" + pp.getName() + "' - Sells for $" + sellPrice);
+            System.out.println("Index: " + i + " - Name: '" + pp.getName() + "' - Sells for $" + sellPrice);
+            i++;
         }
-        System.out.println("Please provide the index of the property you wish to sell: ");
+        System.out.println("Please provide the index of the property you wish to sell (-1 for no selling): ");
         int propertyIndex = myObj.nextInt();
-        if (player.getPropertyList().get(propertyIndex) instanceof Rail) this.controller.sellProperty((Rail) player.getPropertyList().get(propertyIndex));
-        else if (player.getPropertyList().get(propertyIndex) instanceof Business) this.controller.sellProperty((Business) player.getPropertyList().get(propertyIndex));
+        myObj.nextLine();
+        if (propertyIndex != -1) {
+            if (player.getPropertyList().get(propertyIndex) instanceof Rail)
+                this.controller.sellProperty((Rail) player.getPropertyList().get(propertyIndex));
+            else if (player.getPropertyList().get(propertyIndex) instanceof Business)
+                this.controller.sellProperty((Business) player.getPropertyList().get(propertyIndex));
+        }
     }
 
     private void displayStatus(Player player){
