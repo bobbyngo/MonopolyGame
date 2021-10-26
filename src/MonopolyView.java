@@ -64,11 +64,11 @@ public class MonopolyView {
                         // Skip Player's turn
                         boolean hasServedTime = currentPlayer.serveJailTime();
                         int turnsLeft = 3 - currentPlayer.getTurnsInJail();
-                        System.out.println(String.format("%s is in jail. They have %d turns of jail-time left!",
-                                currentPlayer.getName(), turnsLeft));
+                        System.out.println(String.format(String.format("%s is in jail. They have %d turns of jail-time left!",
+                                currentPlayer.getName(), turnsLeft)));
 
                         if (hasServedTime) {
-                            System.out.println("%s has served their jail time and has returned to the game.");
+                            System.out.println(String.format("%s has served their jail time and has returned to the game.", currentPlayer.getName()));
                             state = 1;
                         }
                     } else {
@@ -83,7 +83,7 @@ public class MonopolyView {
                     System.out.println(String.format("%s has rolled a %d and %d", currentPlayer.getName(), roll[0], roll[1]));
                     if (controller.isSpeeding()) {
                         // is 3rd consecutive double
-                        System.out.println("%s has been caught SPEEDING!");
+                        System.out.println(String.format("%s has been caught SPEEDING!", currentPlayer.getName()));
                         state = 2;
                     } else {
                         state = 3;
@@ -343,8 +343,12 @@ public class MonopolyView {
             if (promptType == PromptType.PURCHASE) {
                 switch (choice) {
                     case 1:
-                        turn_ended = true;
-                        exitval = 1;
+                        if (currentPlayer.getPlayerTotalAsset() >= ((PrivateProperty)currentPlayer.getCurrLocation()).getPrice() ) {
+                            turn_ended = true;
+                            exitval = 1;
+                        } else {
+                            System.out.println("YOU DONT HAVE ENOUGH CASH!");
+                        }
                         break;
                     case 2:
                         turn_ended = true;
@@ -361,8 +365,35 @@ public class MonopolyView {
 
                 switch (choice) {
                     case 1:
-                        turn_ended = true;
-                        exitval = 1;
+                        if (sq instanceof BankProperty) {
+                            if (currentPlayer.getPlayerTotalAsset() >= ((BankProperty)currentPlayer.getCurrLocation()).getTaxValue() ) {
+                                turn_ended = true;
+                                exitval = 1;
+                            } else {
+                                System.out.println("YOU DONT HAVE ENOUGH CASH!");
+                            }
+
+                        } else {
+                            if (sq instanceof Business) {
+                                if (currentPlayer.getPlayerTotalAsset() >= ((Business)currentPlayer.getCurrLocation()).getRentAmount() ) {
+                                    turn_ended = true;
+                                    exitval = 1;
+                                } else {
+                                    System.out.println("YOU DONT HAVE ENOUGH CASH!");
+                                }
+                            } else if (sq instanceof Rail) {
+                                // Rails
+                                if (currentPlayer.getPlayerTotalAsset() >= ((Rail)currentPlayer.getCurrLocation()).getRentAmount() ) {
+                                    turn_ended = true;
+                                    exitval = 1;
+                                } else {
+                                    System.out.println("YOU DONT HAVE ENOUGH CASH!");
+                                }
+                            } else if (sq instanceof Square) {
+
+                            }
+                        }
+
                         break;
                     case 2:
                          promptSale(currentPlayer);
