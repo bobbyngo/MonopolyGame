@@ -12,13 +12,14 @@ import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class MonopolyGUIView {
+public class MonopolyGUIView extends JFrame{
     private final JFrame frame;
     private final JPanel mainPanel;
     private final GridBagLayout gb;
     private final GridBagConstraints c;
     private final ArrayList<JPanel> squares;
     private final ArrayList<JLabel> playerLabels;
+    private final ArrayList<BufferedImage> squareImage;
 
     public MonopolyGUIView(){
         frame = new JFrame("Monopoly Game");
@@ -27,6 +28,11 @@ public class MonopolyGUIView {
         c = new GridBagConstraints();
         squares = new ArrayList<>();
         playerLabels = new ArrayList<>();
+        squareImage = new ArrayList<>();
+    }
+
+    public void addImage(){
+
     }
 
     public void SquaresLayout(){
