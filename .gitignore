@@ -3,6 +3,7 @@
 # Ignore .DS_Store (for MacOS)
 .DS_Store
 
+<<<<<<< HEAD
 # DS Store for MacOS
 .DS_Store
 
@@ -10,3 +11,9 @@
 .idea/*.xml
 .idea/*.iml
 .idea/.gitignore
+=======
+# Ignore .idea files
+.idea/*.iml
+.idea/*.xml
+
+>>>>>>> development
