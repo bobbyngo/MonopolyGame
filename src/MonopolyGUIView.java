@@ -3,40 +3,32 @@
  * Student Number: 101142730
  */
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MonopolyGUIView extends JFrame{
+    private Board board;
     private final JFrame frame;
     private final JPanel mainPanel;
     private final GridBagLayout gb;
     private final GridBagConstraints c;
     private final ArrayList<JPanel> squares;
     private final ArrayList<JLabel> playerLabels;
-    private final ArrayList<BufferedImage> squareImage;
 
     public MonopolyGUIView(){
         frame = new JFrame("Monopoly Game");
+        board = new Board();
         gb = new GridBagLayout();
         mainPanel = new JPanel(gb);
         c = new GridBagConstraints();
         squares = new ArrayList<>();
         playerLabels = new ArrayList<>();
-        squareImage = new ArrayList<>();
-    }
-
-    public void addImage(){
-
     }
 
     public void SquaresLayout(){
-        Board board = new Board();
 
         for(int i = 0; i < 38; i++){
             JPanel squarePanel = new JPanel(new BorderLayout());
