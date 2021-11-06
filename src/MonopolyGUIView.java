@@ -208,9 +208,9 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JOptionPane.showMessageDialog(null,
-                            "Properties:- \n" + "\t" + controller.getCurrentPlayer().propertiesToString() + "\n" +
-                            "Liquid value:- $" + controller.getCurrentPlayer().getPlayerBalance() + "\n" +
-                            "Total value (property prices included):- $" + controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName() + "'s stats", JOptionPane.INFORMATION_MESSAGE);
+                            "<html><u>Properties</u>:- \n" + "\t" + controller.getCurrentPlayer().propertiesToString() + "\n" +
+                            "<html><u>Liquid value</u>:- $" + controller.getCurrentPlayer().getPlayerBalance() + "\n" +
+                            "<html><u>Total value (property prices included)</u>:- $" + controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName() + "'s stats", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         showStats.addActionListener(e->System.out.println("hello"));
