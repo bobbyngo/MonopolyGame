@@ -165,10 +165,9 @@ public class MonopolyGUIView extends JFrame{
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JOptionPane.showMessageDialog(null,
-                        "<html><u>Kindly find your stats below;</u>\n " +
                             "Properties:- \n" + "\t" + controller.getCurrentPlayer().propertiesToString() + "\n" +
                             "Liquid value:- $" + controller.getCurrentPlayer().getPlayerBalance() + "\n" +
-                            "Total value (property prices included):- $" + controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName() + "'s stats</b>", JOptionPane.INFORMATION_MESSAGE);
+                            "Total value (property prices included):- $" + controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName() + "'s stats", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         showStats.addActionListener(e->System.out.println("hello"));
