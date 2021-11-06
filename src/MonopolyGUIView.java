@@ -25,12 +25,12 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private final JLabel textLabel;
     private final ArrayList<JLabel> playerLabels;
 
-    private final JButton showStatsBtn;
+    private final JButton showStats;
     private final JButton rollBtn;
-    private final JButton buyBtn;
+    private final JButton buy;
     private final JButton sell;
-    private final JButton endTurnBtn;
-    private final JButton payTaxBtn;
+    private final JButton endTurn;
+    private final JButton payTax;
 
     //For Roll Dice
     int[] roll;
@@ -51,19 +51,11 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         textLabel = new JLabel();
         playerLabels = new ArrayList<>();
 
-        this.showStatsBtn = new JButton();
-        this.showStatsBtn.addActionListener(this);
-
-        this.buyBtn = new JButton();
-        this.buyBtn.addActionListener(this);
-
+        showStats = new JButton();
+        buy = new JButton();
         sell = new JButton();
-
-        this.endTurnBtn = new JButton();
-        this.endTurnBtn.addActionListener(this);
-
-        this.payTaxBtn = new JButton();
-        this.endTurnBtn.addActionListener(this);
+        endTurn = new JButton();
+        payTax = new JButton();
 
         // Dice Initialization
         this.rollBtn = new JButton();
@@ -154,32 +146,17 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
     }
 
-    private void handleShowStatsBtn() {
-        //TODO
+    private void handleShowStatsBtn(ActionEvent e) throws IOException {
+                JOptionPane.showMessageDialog(null,
+                        "<html><u>Character info</u>\n" +
+                                    "\tCurrent location:- [id: " + controller.getCurrentPlayer().getCurrLocation().getIndex() + "] "+ controller.getCurrentPlayer().getCurrLocation().getName() +"\n" +
+                                    "\tCurrent turn:- "+ controller.getCurrentPlayer().getTurn() +"\n\n" +
+                                "<html><u>Asset info</u>\n" +
+                                    "\tProperties:- \n" + "\t" + controller.getCurrentPlayer().propertiesToString() + "\n" +
+                                    "\tLiquid value:- $" + controller.getCurrentPlayer().getPlayerBalance() + "\n" +
+                                    "\tTotal value (property prices included):- $" + controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName() + "'s stats", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void handleBuyPropertyBtn() {
-        //TODO
-    }
-
-    private void handlePayTaxBtn() {
-        //TODO
-    }
-
-    private void handleEndTurnBtn() {
-        //TODO
-    }
-
-    private void updatePlayerLocation() {
-        //TODO
-    }
-
-    /**
-     * Method handles roll dice button. It will delete the 2 labels next to the
-     * Roll Dice button and update the 2 new die face images corresponding to the
-     * value that player rolls the dice
-     * @throws IOException
-     */
     private void handleRollDiceBtn() throws IOException {
         // Calling the rollDie function
         roll = controller.rollDie();
@@ -235,29 +212,12 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         c.gridy = 2;
         c.gridwidth = 4;
         c.gridheight = 2;
-
-        gb.setConstraints(showStatsBtn, c);
-        showStatsBtn.setText("Show Stats");
-        showStatsBtn.setForeground(Color.RED);
-        showStatsBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                JOptionPane.showMessageDialog(null,
-                            "<html><u>Properties</u>:- \n" + "\t" + controller.getCurrentPlayer().propertiesToString() + "\n" +
-                            "<html><u>Liquid value</u>:- $" + controller.getCurrentPlayer().getPlayerBalance() + "\n" +
-                            "<html><u>Total value (property prices included)</u>:- $" + controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName() + "'s stats", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-
-        mainPanel.add(showStatsBtn);
-
-        gb.setConstraints(showStatsBtn, c);
-        showStatsBtn.setText("Show Stats");
-        showStatsBtn.setForeground(Color.RED);
-        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        showStatsBtn.addActionListener(e->System.out.println("hello"));
-        mainPanel.add(showStatsBtn);
-
+        gb.setConstraints(showStats, c);
+        showStats.setText("Show Stats");
+        showStats.setForeground(Color.RED);
+        //functionality
+        showStats.addActionListener(e->actionPerformed(e));
+        mainPanel.add(showStats);
 
         // Roll Button
         c.gridx = 3;
@@ -275,12 +235,12 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         // Buy Button
         c.gridx = 3;
         c.gridy = 3;
-        gb.setConstraints(buyBtn, c);
-        buyBtn.setText("Buy Property");
-        buyBtn.setForeground(Color.RED);
+        gb.setConstraints(buy, c);
+        buy.setText("Buy Property");
+        buy.setForeground(Color.RED);
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        buyBtn.addActionListener(e->System.out.println("hello"));
-        mainPanel.add(buyBtn);
+        buy.addActionListener(e->actionPerformed(e));
+        mainPanel.add(buy);
 
         // Sell Button
         c.gridy = 4;
@@ -288,26 +248,26 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         sell.setText("Sell Property");
         sell.setForeground(Color.RED);
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        sell.addActionListener(e->System.out.println("hello"));
+        sell.addActionListener(e->actionPerformed(e));
         mainPanel.add(sell);
 
         // payTax Button
         c.gridy = 5;
-        gb.setConstraints(payTaxBtn, c);
-        payTaxBtn.setText("Pay Tax");
-        payTaxBtn.setForeground(Color.RED);
+        gb.setConstraints(payTax, c);
+        payTax.setText("Pay Tax");
+        payTax.setForeground(Color.RED);
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        payTaxBtn.addActionListener(e->System.out.println("hello"));
-        mainPanel.add(payTaxBtn);
+        payTax.addActionListener(e->actionPerformed(e));
+        mainPanel.add(payTax);
 
         // endTurn Button
         c.gridy = 6;
-        gb.setConstraints(endTurnBtn, c);
-        endTurnBtn.setText("End Turn");
-        endTurnBtn.setForeground(Color.RED);
+        gb.setConstraints(endTurn, c);
+        endTurn.setText("End Turn");
+        endTurn.setForeground(Color.RED);
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        endTurnBtn.addActionListener(e->System.out.println("hello"));
-        mainPanel.add(endTurnBtn);
+        endTurn.addActionListener(e->actionPerformed(e));
+        mainPanel.add(endTurn);
     }
 
     public void displayGUI(){
@@ -328,9 +288,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
                         == JOptionPane.OK_OPTION) {
                     self.setVisible(false);
                     self.dispose();
-
-                    // Quit the program
-                    System.exit(-1);
                 }
             }
         });
@@ -346,28 +303,15 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == showStatsBtn) {
-            handleShowStatsBtn();
-        }
-
-        else if (e.getSource() == rollBtn) {
-            try {
-                handleRollDiceBtn();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+        try {
+            if (e.getSource() == rollBtn) {
+                    handleRollDiceBtn();
             }
-        }
-
-        else if (e.getSource() == buyBtn) {
-            handleBuyPropertyBtn();
-        }
-
-        else if (e.getSource() == payTaxBtn) {
-            handlePayTaxBtn();
-        }
-        else if (e.getSource() == endTurnBtn) {
-            handleEndTurnBtn();
+            else if (e.getSource() == showStats){
+                handleShowStatsBtn(e);
+            }
+        } catch (IOException err){
+            err.printStackTrace();
         }
     }
 }
