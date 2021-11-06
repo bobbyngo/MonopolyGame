@@ -277,8 +277,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         gb.setConstraints(buyBtn, c);
         buyBtn.setText("Buy Property");
         buyBtn.setForeground(Color.RED);
-        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        buyBtn.addActionListener(e->System.out.println("hello"));
         mainPanel.add(buyBtn);
 
         // Sell Button
@@ -286,8 +284,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         gb.setConstraints(sell, c);
         sell.setText("Sell Property");
         sell.setForeground(Color.RED);
-        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        sell.addActionListener(e->System.out.println("hello"));
         mainPanel.add(sell);
 
         // payTax Button
@@ -295,8 +291,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         gb.setConstraints(payTaxBtn, c);
         payTaxBtn.setText("Pay Tax");
         payTaxBtn.setForeground(Color.RED);
-        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        payTaxBtn.addActionListener(e->System.out.println("hello"));
         mainPanel.add(payTaxBtn);
 
         // endTurn Button
@@ -304,8 +298,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         gb.setConstraints(endTurnBtn, c);
         endTurnBtn.setText("End Turn");
         endTurnBtn.setForeground(Color.RED);
-        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        endTurnBtn.addActionListener(e->System.out.println("hello"));
         mainPanel.add(endTurnBtn);
     }
 
