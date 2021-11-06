@@ -11,7 +11,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-public class MonopolyGUIView extends JFrame{
+public class MonopolyGUIView extends JFrame implements ActionListener{
     private Board board;
     private final JPanel mainPanel;
     private final GridBagLayout gb;
@@ -31,6 +31,7 @@ public class MonopolyGUIView extends JFrame{
     //For dice roll
     int[] roll;
     private JPanel dicePanel;
+    private JLabel diceLabel;
 
 
     private MonopolyController controller;
@@ -46,11 +47,17 @@ public class MonopolyGUIView extends JFrame{
         playerLabels = new ArrayList<>();
 
         showStats = new JButton();
-        rollBtn = new JButton();
         buy = new JButton();
         sell = new JButton();
         endTurn = new JButton();
         payTax = new JButton();
+
+        // Dice Initialization
+        this.rollBtn = new JButton();
+        // Add rollBtn ActionListener to this class
+        this.rollBtn.addActionListener(this);
+        this.diceLabel = new JLabel();
+        this.dicePanel = new JPanel();
 
         ArrayList<Player> players = new ArrayList<>();
         //For running the code, players array list cannot be empty
@@ -135,15 +142,21 @@ public class MonopolyGUIView extends JFrame{
     }
 
     private void addRollBtn() {
-        rollBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                roll = controller.rollDie();
-                System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
-
-
-            }
-        });
+//        rollBtn.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                // Calling the rollDie function
+//                roll = controller.rollDie();
+//
+//                // Remove the old dice label next to the roll dice btn
+//                mainPanel.remove(diceLabel);
+//                JLabel newLabel = new JLabel("Btn is pressed");
+//
+//                mainPanel.add(newLabel);
+//                //this.add(mainPanel);
+//                System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
+//            }
+//        });
     }
 
     private void addButtonToBoard(){
@@ -172,13 +185,20 @@ public class MonopolyGUIView extends JFrame{
         mainPanel.add(showStats);
 
         // Roll Button
-        c.gridx = 4;
+        c.gridx = 3;
         gb.setConstraints(rollBtn, c);
         rollBtn.setText("Roll Dice");
         rollBtn.setForeground(Color.RED);
         mainPanel.add(rollBtn);
 
+        // Dice Label
+        c. gridx = 5;
+        diceLabel.setText("Click Roll Dice to see the magic");
+        gb.setConstraints(diceLabel, c);
+        mainPanel.add(diceLabel);
+
         // Buy Button
+        c.gridx = 3;
         c.gridy = 3;
         gb.setConstraints(buy, c);
         buy.setText("Buy Property");
@@ -246,6 +266,13 @@ public class MonopolyGUIView extends JFrame{
     }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getActionCommand());
+        if (e.getActionCommand().equals("Roll Dice")) {
+            System.out.println("Zak is carrying");
+        }
+    }
 }
 
 
