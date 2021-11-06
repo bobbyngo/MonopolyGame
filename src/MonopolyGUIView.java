@@ -154,12 +154,22 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
     }
 
-    private void handleShowStatsBtn() {
-        //TODO
+    private void handleShowStatsBtn(ActionEvent e) {
+        int id = this.controller.getCurrentPlayer().getCurrLocation().getIndex();
+        JOptionPane.showMessageDialog((Component) null,
+            "<html><u>Character info</u>\n" +
+                        "\tCurrent location:- [id: " + id + "] " + this.controller.getCurrentPlayer().getCurrLocation().getName() +
+                        "\n\tCurrent turn:- " + this.controller.getCurrentPlayer().getTurn() +
+                    "\n\n<html><u>Asset info</u>\n\tProperties:- \n\t" +
+                    this.controller.getCurrentPlayer().propertiesToString() +
+                    "\n\tLiquid value:- $" + this.controller.getCurrentPlayer().getPlayerBalance() +
+                    "\n\tTotal value (property prices included):- $" +
+                    this.controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " +
+                        this.controller.getCurrentPlayer().getName() + "'s stats", 1);
     }
 
-    private void handleBuyPropertyBtn() {
-        //TODO
+        private void handleBuyPropertyBtn() {
+        //TODOvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvb
     }
 
     private void handlePayTaxBtn() {
@@ -242,20 +252,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         gb.setConstraints(showStatsBtn, c);
         showStatsBtn.setText("Show Stats");
         showStatsBtn.setForeground(Color.RED);
-        showStatsBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JOptionPane.showMessageDialog(null,
-                            "<html><u>Properties</u>:- \n" + "\t" + controller.getCurrentPlayer().propertiesToString() + "\n" +
-                            "<html><u>Liquid value</u>:- $" + controller.getCurrentPlayer().getPlayerBalance() + "\n" +
-                            "<html><u>Total value (property prices included)</u>:- $" + controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName() + "'s stats", JOptionPane.INFORMATION_MESSAGE);
-
-                textLabel.setText(String.format("<html><u>Properties</u>:- \n" + "\t" + controller.getCurrentPlayer().propertiesToString() + "\n" +
-                        "<html><u>Liquid value</u>:- $" + controller.getCurrentPlayer().getPlayerBalance() + "\n" +
-                        "<html><u>Total value (property prices included)</u>:- $" +
-                        controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName()+ "'s stats"));
-            }
-        });
         mainPanel.add(showStatsBtn);
 
         // Roll Button
@@ -339,7 +335,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == showStatsBtn) {
-            handleShowStatsBtn();
+            handleShowStatsBtn(e);
         }
 
         else if (e.getSource() == rollBtn) {
