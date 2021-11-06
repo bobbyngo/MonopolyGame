@@ -146,6 +146,17 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
     }
 
+    private void handleShowStatsBtn(ActionEvent e) throws IOException {
+                JOptionPane.showMessageDialog(null,
+                        "<html><u>Character info</u>\n" +
+                                    "\tCurrent location:- [id: " + controller.getCurrentPlayer().getCurrLocation().getIndex() + "] "+ controller.getCurrentPlayer().getCurrLocation().getName() +"\n" +
+                                    "\tCurrent turn:- "+ controller.getCurrentPlayer().getTurn() +"\n\n" +
+                                "<html><u>Asset info</u>\n" +
+                                    "\tProperties:- \n" + "\t" + controller.getCurrentPlayer().propertiesToString() + "\n" +
+                                    "\tLiquid value:- $" + controller.getCurrentPlayer().getPlayerBalance() + "\n" +
+                                    "\tTotal value (property prices included):- $" + controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName() + "'s stats", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     private void handleRollDiceBtn() throws IOException {
         // Calling the rollDie function
         roll = controller.rollDie();
@@ -204,16 +215,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         gb.setConstraints(showStats, c);
         showStats.setText("Show Stats");
         showStats.setForeground(Color.RED);
-        showStats.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JOptionPane.showMessageDialog(null,
-                            "<html><u>Properties</u>:- \n" + "\t" + controller.getCurrentPlayer().propertiesToString() + "\n" +
-                            "<html><u>Liquid value</u>:- $" + controller.getCurrentPlayer().getPlayerBalance() + "\n" +
-                            "<html><u>Total value (property prices included)</u>:- $" + controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName() + "'s stats", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-        showStats.addActionListener(e->System.out.println("hello"));
+        //functionality
+        showStats.addActionListener(e->actionPerformed(e));
         mainPanel.add(showStats);
 
         // Roll Button
@@ -236,7 +239,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         buy.setText("Buy Property");
         buy.setForeground(Color.RED);
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        buy.addActionListener(e->System.out.println("hello"));
+        buy.addActionListener(e->actionPerformed(e));
         mainPanel.add(buy);
 
         // Sell Button
@@ -245,7 +248,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         sell.setText("Sell Property");
         sell.setForeground(Color.RED);
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        sell.addActionListener(e->System.out.println("hello"));
+        sell.addActionListener(e->actionPerformed(e));
         mainPanel.add(sell);
 
         // payTax Button
@@ -254,7 +257,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         payTax.setText("Pay Tax");
         payTax.setForeground(Color.RED);
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        payTax.addActionListener(e->System.out.println("hello"));
+        payTax.addActionListener(e->actionPerformed(e));
         mainPanel.add(payTax);
 
         // endTurn Button
@@ -263,7 +266,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         endTurn.setText("End Turn");
         endTurn.setForeground(Color.RED);
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        endTurn.addActionListener(e->System.out.println("hello"));
+        endTurn.addActionListener(e->actionPerformed(e));
         mainPanel.add(endTurn);
     }
 
@@ -300,13 +303,15 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == rollBtn) {
-            try {
-                handleRollDiceBtn();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+        try {
+            if (e.getSource() == rollBtn) {
+                    handleRollDiceBtn();
             }
+            else if (e.getSource() == showStats){
+                handleShowStatsBtn(e);
+            }
+        } catch (IOException err){
+            err.printStackTrace();
         }
     }
 }
