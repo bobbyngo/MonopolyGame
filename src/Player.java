@@ -252,7 +252,11 @@ public class Player implements RoleAPI {
         return false;
     }
 
-
-    public void removeProperty(PrivateProperty property) {
+    public String propertiesToString(){
+        String s = "";
+        for (PrivateProperty pp : this.propertyList){
+            s.concat("Name:- " + pp.getName() + " / Price:- $" + pp.getPrice() + "\n");
+        }
+        return s;
     }
 }
