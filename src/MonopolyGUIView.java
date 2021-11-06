@@ -360,7 +360,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         else if (e.getSource() == endTurnBtn) {
             handleEndTurnBtn();
         }
-
     }
 }
 
