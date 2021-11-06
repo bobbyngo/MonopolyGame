@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class MonopolyGUIView extends JFrame{
     private Board board;
+    private MonopolyController controller;
     private final JPanel mainPanel;
     private final GridBagLayout gb;
     private final GridBagConstraints c;
@@ -18,12 +19,15 @@ public class MonopolyGUIView extends JFrame{
     private final ArrayList<JLabel> playerLabels;
 
     public MonopolyGUIView(){
-        board = new Board();
-        gb = new GridBagLayout();
-        mainPanel = new JPanel(gb);
-        c = new GridBagConstraints();
-        squares = new ArrayList<>();
-        playerLabels = new ArrayList<>();
+        ArrayList<Player> players = new ArrayList<>();
+
+        this.board = new Board();
+        this.controller = new MonopolyController(players);
+        this.gb = new GridBagLayout();
+        this.mainPanel = new JPanel(gb);
+        this.c = new GridBagConstraints();
+        this.squares = new ArrayList<>();
+        this.playerLabels = new ArrayList<>();
     }
 
     public void SquaresLayout(){
