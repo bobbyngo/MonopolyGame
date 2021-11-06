@@ -294,7 +294,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getActionCommand().equals("Roll Dice")) {
+        if (e.getSource() == rollBtn) {
             try {
                 handleRollDiceBtn();
             } catch (IOException ex) {
