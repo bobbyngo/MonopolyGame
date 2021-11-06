@@ -142,21 +142,16 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     }
 
     private void addRollBtn() {
-//        rollBtn.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                // Calling the rollDie function
-//                roll = controller.rollDie();
-//
-//                // Remove the old dice label next to the roll dice btn
-//                mainPanel.remove(diceLabel);
-//                JLabel newLabel = new JLabel("Btn is pressed");
-//
-//                mainPanel.add(newLabel);
-//                //this.add(mainPanel);
-//                System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
-//            }
-//        });
+        // Calling the rollDie function
+        roll = controller.rollDie();
+
+        // Remove the old dice label next to the roll dice btn
+        mainPanel.remove(diceLabel);
+        JLabel newLabel = new JLabel("Btn is pressed");
+
+        mainPanel.add(newLabel);
+        //this.add(mainPanel);
+        System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
     }
 
     private void addButtonToBoard(){
