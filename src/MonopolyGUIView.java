@@ -11,12 +11,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class MonopolyGUIView extends JFrame implements ActionListener{
+public class MonopolyGUIView extends JFrame{
     private Board board;
+    private MonopolyController controller;
+
     private final JPanel mainPanel;
     private final GridBagLayout gb;
     private final GridBagConstraints c;
@@ -32,14 +33,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private final JButton endTurn;
     private final JButton payTax;
 
-    //For Roll Dice
+    //For dice roll
     int[] roll;
-    private JLabel diceLabel1;
-    private JLabel diceLabel2;
-    private ImageIcon dieFace;
-
-
-    private MonopolyController controller;
 
     public MonopolyGUIView(){
         board = new Board();
@@ -52,17 +47,11 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         playerLabels = new ArrayList<>();
 
         showStats = new JButton();
+        rollBtn = new JButton();
         buy = new JButton();
         sell = new JButton();
         endTurn = new JButton();
         payTax = new JButton();
-
-        // Dice Initialization
-        this.rollBtn = new JButton();
-        // Add rollBtn ActionListener to this class
-        this.rollBtn.addActionListener(this);
-        this.diceLabel1 = new JLabel();
-        this.diceLabel2 = new JLabel();
 
         ArrayList<Player> players = new ArrayList<>();
         //For running the code, players array list cannot be empty
@@ -146,43 +135,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
     }
 
-    private void handleRollDiceBtn() throws IOException {
-        // Calling the rollDie function
-        roll = controller.rollDie();
-
-        // Update the new label when the button is clicked
-        // Remove 2 labels if available
-        mainPanel.remove(diceLabel1);
-        mainPanel.remove(diceLabel2);
-
-        // Stinky code but it works I will refactor later
-        JLabel dieLabel = null;
-        for (int i = 0; i < controller.getDie().getSIZE(); i ++) {
-            InputStream in = getClass().getResourceAsStream(String.format("DiceImg/%d.png", roll[i]));
-            BufferedImage image = ImageIO.read(in);
-            Image resizeImage = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-            dieLabel = new JLabel(new ImageIcon(resizeImage));
-
-            c. gridx = 5 + i;
-            c.gridy = 2;
-            if (i == 0) {
-                diceLabel1 = dieLabel;
-                gb.setConstraints(diceLabel1, c);
-                mainPanel.add(diceLabel1);
-            } else {
-                diceLabel2 = dieLabel;
-                gb.setConstraints(diceLabel2, c);
-                mainPanel.add(diceLabel2);
-            }
-        }
-
-        mainPanel.validate();
-        mainPanel.repaint();
-
-        // For debugging
-        System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
-    }
-
     private void addButtonToBoard(){
 
         // Text Panel
@@ -192,9 +144,14 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         textPanel.setBorder(BorderFactory.createEmptyBorder());
         textLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         textLabel.setForeground(Color.RED);
+
+        textLabel.setMinimumSize(new Dimension(200, 200));
+        textLabel.setPreferredSize(new Dimension(200, 200));
+        textLabel.setMaximumSize(new Dimension(200, 200));
+
         //Example
         textLabel.setText("<Html> In my great grandmother's time<br>All one needed was a broom<br>To get to see places<br>And give the geese a chase in the sky.<html>");
-        textPanel.add(textLabel);
+        textPanel.add(textLabel, BorderLayout.PAGE_START);
         mainPanel.add(textPanel);
 
         // Show Stats button
@@ -209,20 +166,13 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         mainPanel.add(showStats);
 
         // Roll Button
-        c.gridx = 3;
+        c.gridx = 4;
         gb.setConstraints(rollBtn, c);
         rollBtn.setText("Roll Dice");
         rollBtn.setForeground(Color.RED);
         mainPanel.add(rollBtn);
 
-        // Dice Label
-        c. gridx = 5;
-        diceLabel1.setText("Click Roll Dice to see the magic");
-        gb.setConstraints(diceLabel1, c);
-        mainPanel.add(diceLabel1);
-
         // Buy Button
-        c.gridx = 3;
         c.gridy = 3;
         gb.setConstraints(buy, c);
         buy.setText("Buy Property");
@@ -238,7 +188,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         sell.setForeground(Color.RED);
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
         sell.addActionListener(e->System.out.println("hello"));
-        sell.addActionListener(this);
         mainPanel.add(sell);
 
         // payTax Button
@@ -263,8 +212,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     public void displayGUI(){
         this.SquaresLayout();
         this.addSquareToBoard();
-
         this.addButtonToBoard();
+
 
         this.add(mainPanel);
         this.pack();
@@ -291,23 +240,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     }
 
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == rollBtn) {
-            try {
-                handleRollDiceBtn();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        if (e.getSource() == sell) {
-            System.out.println("Sell btn pressed!");
-            SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(this, controller);
-            sppd.setVisible(true);
-        }
-    }
 }
 
 
