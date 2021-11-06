@@ -197,7 +197,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             Image resizeImage = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
             dieLabel = new JLabel(new ImageIcon(resizeImage));
 
-            c.gridx = 5 + i;
+            c. gridx = 5 + i;
             c.gridy = 2;
             if (i == 0) {
                 diceLabel1 = dieLabel;
@@ -226,11 +226,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         textPanel.setBorder(BorderFactory.createEmptyBorder());
         textLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         textLabel.setForeground(Color.RED);
-
-        textLabel.setMinimumSize(new Dimension(200,200));
-        textLabel.setPreferredSize(new Dimension(200,200));
-        textLabel.setMaximumSize(new Dimension(200,200));
-
+        //Example
+        textLabel.setText("<Html> In my great grandmother's time<br>All one needed was a broom<br>To get to see places<br>And give the geese a chase in the sky.<html>");
         textPanel.add(textLabel);
         mainPanel.add(textPanel);
 
@@ -244,19 +241,23 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         showStatsBtn.setForeground(Color.RED);
         showStatsBtn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 JOptionPane.showMessageDialog(null,
                             "<html><u>Properties</u>:- \n" + "\t" + controller.getCurrentPlayer().propertiesToString() + "\n" +
                             "<html><u>Liquid value</u>:- $" + controller.getCurrentPlayer().getPlayerBalance() + "\n" +
                             "<html><u>Total value (property prices included)</u>:- $" + controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName() + "'s stats", JOptionPane.INFORMATION_MESSAGE);
-
-                textLabel.setText(String.format("<html><u>Properties</u>:- \n" + "\t" + controller.getCurrentPlayer().propertiesToString() + "\n" +
-                        "<html><u>Liquid value</u>:- $" + controller.getCurrentPlayer().getPlayerBalance() + "\n" +
-                        "<html><u>Total value (property prices included)</u>:- $" +
-                        controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName()+ "'s stats"));
             }
         });
+
         mainPanel.add(showStatsBtn);
+
+        gb.setConstraints(showStatsBtn, c);
+        showStatsBtn.setText("Show Stats");
+        showStatsBtn.setForeground(Color.RED);
+        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
+        showStatsBtn.addActionListener(e->System.out.println("hello"));
+        mainPanel.add(showStatsBtn);
+
 
         // Roll Button
         c.gridx = 3;
