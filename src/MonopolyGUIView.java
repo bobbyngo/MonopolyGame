@@ -151,7 +151,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         roll = controller.rollDie();
 
         // Update the new label when the button is clicked
-        // Remove 2 label if available
+        // Remove 2 labels if available
         mainPanel.remove(diceLabel1);
         mainPanel.remove(diceLabel2);
 
