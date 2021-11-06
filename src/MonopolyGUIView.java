@@ -28,7 +28,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private final JButton showStatsBtn;
     private final JButton rollBtn;
     private final JButton buyBtn;
-    private final JButton sell;
+    private final JButton sellBtn;
     private final JButton endTurnBtn;
     private final JButton payTaxBtn;
 
@@ -57,7 +57,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         this.buyBtn = new JButton();
         this.buyBtn.addActionListener(this);
 
-        sell = new JButton();
+        sellBtn = new JButton();
 
         this.endTurnBtn = new JButton();
         this.endTurnBtn.addActionListener(this);
@@ -277,13 +277,13 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
         // Sell Button
         c.gridy = 4;
-        gb.setConstraints(sell, c);
-        sell.setText("Sell Property");
-        sell.setForeground(Color.RED);
+        gb.setConstraints(sellBtn, c);
+        sellBtn.setText("Sell Property");
+        sellBtn.setForeground(Color.RED);
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        sell.addActionListener(e->System.out.println("hello"));
-        sell.addActionListener(this);
-        mainPanel.add(sell);
+        sellBtn.addActionListener(e->System.out.println("hello"));
+        sellBtn.addActionListener(this);
+        mainPanel.add(sellBtn);
 
         // payTax Button
         c.gridy = 5;
@@ -349,7 +349,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             }
         }
 
-        else if (e.getSource() == sell) {
+        else if (e.getSource() == sellBtn) {
             System.out.println("Sell btn pressed!");
             SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(this, controller);
             sppd.setVisible(true);
