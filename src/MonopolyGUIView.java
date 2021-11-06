@@ -3,16 +3,21 @@
  * Student Number: 101142730
  */
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MonopolyGUIView extends JFrame{
     private Board board;
+    private MonopolyController controller;
+
     private final JPanel mainPanel;
     private final GridBagLayout gb;
     private final GridBagConstraints c;
@@ -30,10 +35,6 @@ public class MonopolyGUIView extends JFrame{
 
     //For dice roll
     int[] roll;
-    private JPanel dicePanel;
-
-
-    private MonopolyController controller;
 
     public MonopolyGUIView(){
         board = new Board();
@@ -134,18 +135,6 @@ public class MonopolyGUIView extends JFrame{
         }
     }
 
-    private void addRollBtn() {
-        rollBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                roll = controller.rollDie();
-                System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
-
-
-            }
-        });
-    }
-
     private void addButtonToBoard(){
 
         // Text Panel
@@ -155,9 +144,14 @@ public class MonopolyGUIView extends JFrame{
         textPanel.setBorder(BorderFactory.createEmptyBorder());
         textLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         textLabel.setForeground(Color.RED);
+
+        textLabel.setMinimumSize(new Dimension(200, 200));
+        textLabel.setPreferredSize(new Dimension(200, 200));
+        textLabel.setMaximumSize(new Dimension(200, 200));
+
         //Example
         textLabel.setText("<Html> In my great grandmother's time<br>All one needed was a broom<br>To get to see places<br>And give the geese a chase in the sky.<html>");
-        textPanel.add(textLabel);
+        textPanel.add(textLabel, BorderLayout.PAGE_START);
         mainPanel.add(textPanel);
 
         // Show Stats button
@@ -218,8 +212,8 @@ public class MonopolyGUIView extends JFrame{
     public void displayGUI(){
         this.SquaresLayout();
         this.addSquareToBoard();
-        this.addRollBtn();
         this.addButtonToBoard();
+
 
         this.add(mainPanel);
         this.pack();
