@@ -168,8 +168,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
                         this.controller.getCurrentPlayer().getName() + "'s stats", 1);
     }
 
-        private void handleBuyPropertyBtn() {
-        //TODOvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvbvb
+    private void handleBuyPropertyBtn() {
+        //TODO
     }
 
     private void handlePayTaxBtn() {
