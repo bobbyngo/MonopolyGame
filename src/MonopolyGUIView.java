@@ -22,7 +22,7 @@ public class MonopolyGUIView extends JFrame{
     private final JButton buy;
     private final JButton sell;
     private final JButton endTurn;
-
+    private final JButton payTax;
 
     public MonopolyGUIView(){
         board = new Board();
@@ -37,6 +37,7 @@ public class MonopolyGUIView extends JFrame{
         buy = new JButton();
         sell = new JButton();
         endTurn = new JButton();
+        payTax = new JButton();
     }
 
     private void SquaresLayout(){
@@ -136,6 +137,24 @@ public class MonopolyGUIView extends JFrame{
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
         roll.addActionListener(e->System.out.println("hello"));
         mainPanel.add(roll);
+
+        // Buy Button
+        c.gridy = 3;
+        gb.setConstraints(buy, c);
+        buy.setText("Buy Property");
+        buy.setForeground(Color.RED);
+        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
+        buy.addActionListener(e->System.out.println("hello"));
+        mainPanel.add(buy);
+
+        // Sell Button
+        c.gridy = 4;
+        gb.setConstraints(sell, c);
+        sell.setText("Sell Property");
+        sell.setForeground(Color.RED);
+        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
+        sell.addActionListener(e->System.out.println("hello"));
+        mainPanel.add(sell);
     }
 
     public void displayGUI(){
