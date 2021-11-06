@@ -15,6 +15,8 @@ public class MonopolyGUIView extends JFrame{
     private final GridBagLayout gb;
     private final GridBagConstraints c;
     private final ArrayList<JPanel> squares;
+    private final JPanel textPanel;
+    private final JLabel textLabel;
     private final ArrayList<JLabel> playerLabels;
 
     private final JButton showStats;
@@ -30,6 +32,8 @@ public class MonopolyGUIView extends JFrame{
         mainPanel = new JPanel(gb);
         c = new GridBagConstraints();
         squares = new ArrayList<>();
+        textPanel = new JPanel();
+        textLabel = new JLabel();
         playerLabels = new ArrayList<>();
 
         showStats = new JButton();
@@ -117,8 +121,20 @@ public class MonopolyGUIView extends JFrame{
     }
 
     private void addButtonToBoard(){
-        // Show Stats button
+
+        // Text Panel
         c.gridx = 2;
+        c.gridy = 4;
+        gb.setConstraints(textPanel, c);
+        textPanel.setBorder(BorderFactory.createEmptyBorder());
+        textLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        textLabel.setForeground(Color.RED);
+        //Example
+        textLabel.setText("<Html> In my great grandmother's time<br>All one needed was a broom<br>To get to see places<br>And give the geese a chase in the sky.<html>");
+        textPanel.add(textLabel);
+        mainPanel.add(textPanel);
+
+        // Show Stats button
         c.gridy = 2;
         c.gridwidth = 4;
         c.gridheight = 2;
@@ -155,6 +171,24 @@ public class MonopolyGUIView extends JFrame{
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
         sell.addActionListener(e->System.out.println("hello"));
         mainPanel.add(sell);
+
+        // payTax Button
+        c.gridy = 5;
+        gb.setConstraints(payTax, c);
+        payTax.setText("Pay Tax");
+        payTax.setForeground(Color.RED);
+        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
+        payTax.addActionListener(e->System.out.println("hello"));
+        mainPanel.add(payTax);
+
+        // endTurn Button
+        c.gridy = 6;
+        gb.setConstraints(endTurn, c);
+        endTurn.setText("End Turn");
+        endTurn.setForeground(Color.RED);
+        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
+        endTurn.addActionListener(e->System.out.println("hello"));
+        mainPanel.add(endTurn);
     }
 
     public void displayGUI(){
