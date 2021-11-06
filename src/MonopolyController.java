@@ -22,6 +22,7 @@ public class MonopolyController {
      * @param players, an ArrayList of Player's that are in the game
      */
     public MonopolyController(ArrayList<Player> players) {
+
         this.players = new ArrayList<>(players);
         this.board = new Board();
         this.bank = new Bank();

@@ -11,36 +11,26 @@ import java.util.ArrayList;
 
 public class MonopolyGUIView extends JFrame{
     private Board board;
+    private MonopolyController controller;
     private final JPanel mainPanel;
     private final GridBagLayout gb;
     private final GridBagConstraints c;
     private final ArrayList<JPanel> squares;
     private final ArrayList<JLabel> playerLabels;
 
-    private final JButton showStats;
-    private final JButton roll;
-    private final JButton buy;
-    private final JButton sell;
-    private final JButton endTurn;
-    private final JButton payTax;
-
     public MonopolyGUIView(){
-        board = new Board();
-        gb = new GridBagLayout();
-        mainPanel = new JPanel(gb);
-        c = new GridBagConstraints();
-        squares = new ArrayList<>();
-        playerLabels = new ArrayList<>();
+        ArrayList<Player> players = new ArrayList<>();
 
-        showStats = new JButton();
-        roll = new JButton();
-        buy = new JButton();
-        sell = new JButton();
-        endTurn = new JButton();
-        payTax = new JButton();
+        this.board = new Board();
+        this.controller = new MonopolyController(players);
+        this.gb = new GridBagLayout();
+        this.mainPanel = new JPanel(gb);
+        this.c = new GridBagConstraints();
+        this.squares = new ArrayList<>();
+        this.playerLabels = new ArrayList<>();
     }
 
-    private void SquaresLayout(){
+    public void SquaresLayout(){
 
         for(int i = 0; i < 38; i++){
             JPanel squarePanel = new JPanel(new BorderLayout());
@@ -82,7 +72,7 @@ public class MonopolyGUIView extends JFrame{
         }
     }
 
-    private void addSquareToBoard(){
+    public void addSquareToBoard(){
         for(int i = 0; i < 10; i++){
             c.gridx = i;
             c.gridy = 0;
@@ -116,51 +106,9 @@ public class MonopolyGUIView extends JFrame{
         }
     }
 
-    private void addButtonToBoard(){
-        // Show Stats button
-        c.gridx = 2;
-        c.gridy = 2;
-        c.gridwidth = 4;
-        c.gridheight = 2;
-        gb.setConstraints(showStats, c);
-        showStats.setText("Show Stats");
-        showStats.setForeground(Color.RED);
-        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        showStats.addActionListener(e->System.out.println("hello"));
-        mainPanel.add(showStats);
-
-        // Roll Button
-        c.gridx = 4;
-        gb.setConstraints(roll, c);
-        roll.setText("Roll Dice");
-        roll.setForeground(Color.RED);
-        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        roll.addActionListener(e->System.out.println("hello"));
-        mainPanel.add(roll);
-
-        // Buy Button
-        c.gridy = 3;
-        gb.setConstraints(buy, c);
-        buy.setText("Buy Property");
-        buy.setForeground(Color.RED);
-        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        buy.addActionListener(e->System.out.println("hello"));
-        mainPanel.add(buy);
-
-        // Sell Button
-        c.gridy = 4;
-        gb.setConstraints(sell, c);
-        sell.setText("Sell Property");
-        sell.setForeground(Color.RED);
-        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        sell.addActionListener(e->System.out.println("hello"));
-        mainPanel.add(sell);
-    }
-
     public void displayGUI(){
         SquaresLayout();
         addSquareToBoard();
-        addButtonToBoard();
 
         add(mainPanel);
         pack();
