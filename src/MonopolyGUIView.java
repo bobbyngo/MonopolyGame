@@ -235,29 +235,29 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         c.gridy = 2;
         c.gridwidth = 4;
         c.gridheight = 2;
-<<<<<<< Updated upstream
-        gb.setConstraints(showStats, c);
-        showStats.setText("Show Stats");
-        showStats.setForeground(Color.RED);
-        showStats.addActionListener(new ActionListener() {
+
+        gb.setConstraints(showStatsBtn, c);
+        showStatsBtn.setText("Show Stats");
+        showStatsBtn.setForeground(Color.RED);
+        showStatsBtn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 JOptionPane.showMessageDialog(null,
                             "<html><u>Properties</u>:- \n" + "\t" + controller.getCurrentPlayer().propertiesToString() + "\n" +
                             "<html><u>Liquid value</u>:- $" + controller.getCurrentPlayer().getPlayerBalance() + "\n" +
                             "<html><u>Total value (property prices included)</u>:- $" + controller.getCurrentPlayer().getPlayerTotalAsset(), "Player " + controller.getCurrentPlayer().getName() + "'s stats", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        showStats.addActionListener(e->System.out.println("hello"));
-        mainPanel.add(showStats);
-=======
+
+        mainPanel.add(showStatsBtn);
+
         gb.setConstraints(showStatsBtn, c);
         showStatsBtn.setText("Show Stats");
         showStatsBtn.setForeground(Color.RED);
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
         showStatsBtn.addActionListener(e->System.out.println("hello"));
         mainPanel.add(showStatsBtn);
->>>>>>> Stashed changes
+
 
         // Roll Button
         c.gridx = 3;
