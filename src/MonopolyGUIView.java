@@ -304,7 +304,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
         if (e.getSource() == sell) {
             System.out.println("Sell btn pressed!");
-
+            SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(this, controller);
+            sppd.setVisible(true);
         }
     }
 }

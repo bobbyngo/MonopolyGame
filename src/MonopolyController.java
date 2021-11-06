@@ -300,6 +300,14 @@ public class MonopolyController {
         return players.get(winnerIndex);
     }
 
+    public void sellProperty(int index) {
+        PrivateProperty property = currentPlayer.getPropertyList().get(index);
+        currentPlayer.addMoney(property.getPrice());    // will prob need fix?
+        bank.addMoney(property.getPrice());
+        currentPlayer.removeProperty(property);
+
+    }
+
     /**
      * Checks if currentPlayer is on
      * unowned property.

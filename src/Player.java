@@ -251,4 +251,8 @@ public class Player implements RoleAPI {
         }
         return false;
     }
+
+
+    public void removeProperty(PrivateProperty property) {
+    }
 }
