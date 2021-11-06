@@ -14,6 +14,7 @@ public class Player implements RoleAPI {
     private int playerBalance;
     private boolean inJail;
     private int turnsInJail;
+    private int turnsPlayed;
     private Square currLocation;
     private HashMap<Integer, Integer> playerWallet;
     private ArrayList<PrivateProperty> propertyList;
@@ -27,6 +28,7 @@ public class Player implements RoleAPI {
         this.name = name;
 
         this.turnsInJail = 0;
+        this.turnsPlayed = 0;
         this.playerWallet = new HashMap<>();
 
         this.inJail = false;
@@ -250,6 +252,22 @@ public class Player implements RoleAPI {
             return true;
         }
         return false;
+    }
+
+    public String propertiesToString(){
+        String s = "";
+        for (PrivateProperty pp : this.propertyList){
+            s.concat("Name:- " + pp.getName() + " / Price:- $" + pp.getPrice() + "\n");
+        }
+        return s;
+    }
+
+    public void makeTurn(){
+        this.turnsPlayed++;
+    }
+
+    public int getTurn() {
+    return this.turnsPlayed;
     }
 
 
