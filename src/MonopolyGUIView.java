@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class MonopolyGUIView extends JFrame{
     private Board board;
-    private final JFrame frame;
     private final JPanel mainPanel;
     private final GridBagLayout gb;
     private final GridBagConstraints c;
@@ -19,7 +18,6 @@ public class MonopolyGUIView extends JFrame{
     private final ArrayList<JLabel> playerLabels;
 
     public MonopolyGUIView(){
-        frame = new JFrame("Monopoly Game");
         board = new Board();
         gb = new GridBagLayout();
         mainPanel = new JPanel(gb);
@@ -108,22 +106,23 @@ public class MonopolyGUIView extends JFrame{
         SquaresLayout();
         addSquareToBoard();
 
-        frame.add(mainPanel);
-        frame.pack();
+        add(mainPanel);
+        pack();
 
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.addWindowListener(new WindowAdapter() {
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        MonopolyGUIView self = this;
+        addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
-                if (JOptionPane.showConfirmDialog(frame, "Are you sure you want to quit?")
+                if (JOptionPane.showConfirmDialog(self, "Are you sure you want to quit?")
                         == JOptionPane.OK_OPTION) {
-                    frame.setVisible(false);
-                    frame.dispose();
+                    self.setVisible(false);
+                    self.dispose();
                 }
             }
         });
 
-        frame.setVisible(true);
+        self.setVisible(true);
     }
 
     public static void main(String[] args) {
