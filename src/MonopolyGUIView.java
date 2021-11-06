@@ -3,12 +3,16 @@
  * Student Number: 101142730
  */
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MonopolyGUIView extends JFrame implements ActionListener{
@@ -28,10 +32,11 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private final JButton endTurn;
     private final JButton payTax;
 
-    //For dice roll
+    //For Roll Dice
     int[] roll;
-    private JPanel dicePanel;
-    private JLabel diceLabel;
+    private JLabel diceLabel1;
+    private JLabel diceLabel2;
+    private ImageIcon dieFace;
 
 
     private MonopolyController controller;
@@ -56,8 +61,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         this.rollBtn = new JButton();
         // Add rollBtn ActionListener to this class
         this.rollBtn.addActionListener(this);
-        this.diceLabel = new JLabel();
-        this.dicePanel = new JPanel();
+        this.diceLabel1 = new JLabel();
+        this.diceLabel2 = new JLabel();
 
         ArrayList<Player> players = new ArrayList<>();
         //For running the code, players array list cannot be empty
@@ -141,16 +146,40 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
     }
 
-    private void addRollBtn() {
+    private void handleRollDiceBtn() throws IOException {
         // Calling the rollDie function
         roll = controller.rollDie();
 
-        // Remove the old dice label next to the roll dice btn
-        mainPanel.remove(diceLabel);
-        JLabel newLabel = new JLabel("Btn is pressed");
+        // Update the new label when the button is clicked
+        // Remove 2 labels if available
+        mainPanel.remove(diceLabel1);
+        mainPanel.remove(diceLabel2);
 
-        mainPanel.add(newLabel);
-        //this.add(mainPanel);
+        // Stinky code but it works I will refactor later
+        JLabel dieLabel = null;
+        for (int i = 0; i < controller.getDie().getSIZE(); i ++) {
+            InputStream in = getClass().getResourceAsStream(String.format("DiceImg/%d.png", roll[i]));
+            BufferedImage image = ImageIO.read(in);
+            Image resizeImage = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+            dieLabel = new JLabel(new ImageIcon(resizeImage));
+
+            c. gridx = 5 + i;
+            c.gridy = 2;
+            if (i == 0) {
+                diceLabel1 = dieLabel;
+                gb.setConstraints(diceLabel1, c);
+                mainPanel.add(diceLabel1);
+            } else {
+                diceLabel2 = dieLabel;
+                gb.setConstraints(diceLabel2, c);
+                mainPanel.add(diceLabel2);
+            }
+        }
+
+        mainPanel.validate();
+        mainPanel.repaint();
+
+        // For debugging
         System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
     }
 
@@ -188,9 +217,9 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
         // Dice Label
         c. gridx = 5;
-        diceLabel.setText("Click Roll Dice to see the magic");
-        gb.setConstraints(diceLabel, c);
-        mainPanel.add(diceLabel);
+        diceLabel1.setText("Click Roll Dice to see the magic");
+        gb.setConstraints(diceLabel1, c);
+        mainPanel.add(diceLabel1);
 
         // Buy Button
         c.gridx = 3;
@@ -234,7 +263,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     public void displayGUI(){
         this.SquaresLayout();
         this.addSquareToBoard();
-        this.addRollBtn();
+
         this.addButtonToBoard();
 
         this.add(mainPanel);
@@ -264,9 +293,13 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
-        if (e.getActionCommand().equals("Roll Dice")) {
-            System.out.println("Zak is carrying");
+
+        if (e.getSource() == rollBtn) {
+            try {
+                handleRollDiceBtn();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
 
         if (e.getSource() == sell) {
