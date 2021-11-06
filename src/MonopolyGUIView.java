@@ -209,6 +209,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         sell.setForeground(Color.RED);
         // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
         sell.addActionListener(e->System.out.println("hello"));
+        sell.addActionListener(this);
         mainPanel.add(sell);
 
         // payTax Button
@@ -266,6 +267,11 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         System.out.println(e.getActionCommand());
         if (e.getActionCommand().equals("Roll Dice")) {
             System.out.println("Zak is carrying");
+        }
+
+        if (e.getSource() == sell) {
+            System.out.println("Sell btn pressed!");
+
         }
     }
 }

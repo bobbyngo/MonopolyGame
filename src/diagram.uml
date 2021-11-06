@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="5106.5" y="-35.0">com</node>
+    <node x="2632.5" y="-455.0">MonopolyController</node>
+    <node x="4885.5" y="-35.0">netscape</node>
+    <node x="2374.0" y="-835.0">Bank</node>
+    <node x="4670.0" y="-35.0">DiceImg</node>
+    <node x="4329.0" y="-35.0">toolbarButtonGraphics</node>
+    <node x="4149.5" y="-35.0">sun</node>
+    <node x="3960.5" y="-35.0">apple</node>
+    <node x="3677.5" y="-35.0">groovyjarjarasm</node>
+    <node x="3487.5" y="-35.0">java</node>
+    <node x="3088.5" y="-2515.0">PrivateProperty</node>
+    <node x="2334.0" y="-35.0">MonopolyView</node>
+    <node x="3029.5" y="-835.0">Board</node>
+    <node x="2838.5" y="-2115.0">Rail</node>
+    <node x="3077.5" y="-1155.0">BankProperty</node>
+    <node x="3043.0" y="-35.0">javax</node>
+    <node x="2726.0" y="-35.0">groovyjarjarpicocli</node>
+    <node x="2997.5" y="-2295.0">Business</node>
+    <node x="3086.5" y="-2115.0">ColorGroup</node>
+    <node x="2114.0" y="-35.0">images</node>
+    <node x="3068.0" y="-1695.0">Player</node>
+    <node x="1930.0" y="-35.0">org</node>
+    <node x="2695.5" y="-835.0">Dice</node>
+    <node x="3084.5" y="-1335.0">Square</node>
+    <node x="2682.0" y="-2115.0">RoleAPI</node>
+    <node x="1703.0" y="-35.0">META-INF</node>
+    <node x="1531.5" y="-35.0">jdk</node>
+    <node x="2904.0" y="-2515.0">PropertyAPI</node>
+    <node x="1308.5" y="-35.0">MonopolyModel</node>
+    <node x="3238.5" y="-35.0">MonopolyGUIView</node>
+    <node x="1096.5" y="-35.0">groovy</node>
+    <node x="745.0" y="-35.0">groovyjarjarcommonscli</node>
+    <node x="215.0" y="-35.0">groovyjarjarantlr</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Player" target="ColorGroup" relationship="CREATE">
+      <point x="0.0" y="-15.0" />
+      <point x="-40.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="Bank" relationship="CREATE">
+      <point x="0.0" y="-15.0" />
+      <point x="2740.0" y="-560.0" />
+      <point x="2640.0" y="-560.0" />
+      <point x="2640.0" y="-740.0" />
+      <point x="2450.6666666666665" y="-740.0" />
+      <point x="30.666666666666515" y="15.0" />
+    </edge>
+    <edge source="Board" target="Rail" relationship="CREATE">
+      <point x="-27.0" y="-15.0" />
+      <point x="3053.0" y="-880.0" />
+      <point x="2960.0" y="-880.0" />
+      <point x="2960.0" y="-940.0" />
+      <point x="2900.0" y="-940.0" />
+      <point x="2900.0" y="-1540.0" />
+      <point x="2820.0" y="-1540.0" />
+      <point x="2820.0" y="-1900.0" />
+      <point x="2852.3333333333335" y="-1900.0" />
+      <point x="-27.666666666666515" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="PrivateProperty" relationship="DEPENDENCY">
+      <point x="71.66666666666652" y="-15.0" />
+      <point x="2811.6666666666665" y="-500.0" />
+      <point x="3460.0" y="-500.0" />
+      <point x="3460.0" y="-580.0" />
+      <point x="3500.0" y="-580.0" />
+      <point x="3500.0" y="-2440.0" />
+      <point x="3257.2" y="-2440.0" />
+      <point x="77.19999999999982" y="15.0" />
+    </edge>
+    <edge source="Square" target="Player" relationship="DEPENDENCY">
+      <point x="-20.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyView" target="Bank" relationship="DEPENDENCY">
+      <point x="57.333333333333485" y="-15.0" />
+      <point x="2477.3333333333335" y="-120.0" />
+      <point x="3580.0" y="-120.0" />
+      <point x="3580.0" y="-220.0" />
+      <point x="2880.0" y="-220.0" />
+      <point x="2880.0" y="-300.0" />
+      <point x="2080.0" y="-300.0" />
+      <point x="2080.0" y="-620.0" />
+      <point x="2389.3333333333335" y="-620.0" />
+      <point x="-30.666666666666515" y="15.0" />
+    </edge>
+    <edge source="Player" target="Square" relationship="DEPENDENCY">
+      <point x="40.0" y="15.0" />
+      <point x="20.0" y="-15.0" />
+    </edge>
+    <edge source="groovyjarjarcommonscli" target="groovyjarjarcommonscli" relationship="DEPENDENCY">
+      <point x="-155.0" y="-0.0" />
+      <point x="520.0" y="-20.0" />
+      <point x="520.0" y="240.0" />
+      <point x="900.0" y="240.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="Rail" target="PrivateProperty" relationship="GENERALIZATION">
+      <point x="-20.0" y="-15.0" />
+      <point x="2860.0" y="-2400.0" />
+      <point x="3020.0" y="-2400.0" />
+      <point x="3020.0" y="-2440.0" />
+      <point x="3098.8" y="-2440.0" />
+      <point x="-81.19999999999982" y="15.0" />
+    </edge>
+    <edge source="Board" target="BankProperty" relationship="CREATE">
+      <point x="-27.0" y="-15.0" />
+      <point x="3053.0" y="-880.0" />
+      <point x="2960.0" y="-880.0" />
+      <point x="2960.0" y="-940.0" />
+      <point x="3040.0" y="-940.0" />
+      <point x="3040.0" y="-1020.0" />
+      <point x="3118.3333333333335" y="-1020.0" />
+      <point x="-41.666666666666515" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="Player" relationship="TO_MANY">
+      <point x="-71.66666666666652" y="-15.0" />
+      <point x="2668.3333333333335" y="-500.0" />
+      <point x="2500.0" y="-500.0" />
+      <point x="2500.0" y="-560.0" />
+      <point x="2460.0" y="-560.0" />
+      <point x="2460.0" y="-720.0" />
+      <point x="2500.0" y="-720.0" />
+      <point x="2500.0" y="-1600.0" />
+      <point x="3080.0" y="-1600.0" />
+      <point x="-40.0" y="15.0" />
+    </edge>
+    <edge source="Square" target="Player" relationship="TO_MANY">
+      <point x="-43.666666666666515" y="-15.0" />
+      <point x="3096.3333333333335" y="-1380.0" />
+      <point x="3080.0" y="-1380.0" />
+      <point x="-40.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyGUIView" target="Board" relationship="TO_ONE">
+      <point x="0.0" y="-15.0" />
+      <point x="3340.0" y="-140.0" />
+      <point x="2840.0" y="-140.0" />
+      <point x="2840.0" y="-260.0" />
+      <point x="3060.0" y="-260.0" />
+      <point x="-20.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyView" target="MonopolyController" relationship="CREATE">
+      <point x="-57.333333333333485" y="-15.0" />
+      <point x="2362.6666666666665" y="-80.0" />
+      <point x="2180.0" y="-80.0" />
+      <point x="2180.0" y="-380.0" />
+      <point x="2688.3333333333335" y="-380.0" />
+      <point x="-51.666666666666515" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="Player" relationship="DEPENDENCY">
+      <point x="71.66666666666652" y="-15.0" />
+      <point x="2811.6666666666665" y="-500.0" />
+      <point x="3460.0" y="-500.0" />
+      <point x="3460.0" y="-580.0" />
+      <point x="3340.0" y="-580.0" />
+      <point x="3340.0" y="-1540.0" />
+      <point x="3120.0" y="-1540.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="Square" relationship="CREATE">
+      <point x="0.0" y="-15.0" />
+      <point x="2740.0" y="-560.0" />
+      <point x="2800.0" y="-560.0" />
+      <point x="2800.0" y="-1180.0" />
+      <point x="2960.0" y="-1180.0" />
+      <point x="2960.0" y="-1260.0" />
+      <point x="3099.6000000000004" y="-1260.0" />
+      <point x="-40.399999999999636" y="15.0" />
+    </edge>
+    <edge source="ColorGroup" target="Business" relationship="DEPENDENCY">
+      <point x="20.0" y="-15.0" />
+      <point x="3180.0" y="-2140.0" />
+      <point x="3260.0" y="-2140.0" />
+      <point x="3260.0" y="-2220.0" />
+      <point x="3101.6666666666665" y="-2220.0" />
+      <point x="41.666666666666515" y="15.0" />
+    </edge>
+    <edge source="Player" target="PrivateProperty" relationship="TO_MANY">
+      <point x="-40.0" y="-15.0" />
+      <point x="3080.0" y="-1780.0" />
+      <point x="3060.0" y="-1780.0" />
+      <point x="3060.0" y="-2140.0" />
+      <point x="3140.0" y="-2140.0" />
+      <point x="-40.0" y="15.0" />
+    </edge>
+    <edge source="groovyjarjarantlr" target="groovyjarjarantlr" relationship="DEPENDENCY">
+      <point x="-125.0" y="-7.5" />
+      <point x="20.0" y="-27.5" />
+      <point x="20.0" y="220.0" />
+      <point x="402.5" y="220.0" />
+      <point x="62.5" y="15.0" />
+    </edge>
+    <edge source="MonopolyGUIView" target="Square" relationship="DEPENDENCY">
+      <point x="67.66666666666666" y="-15.0" />
+      <point x="3407.6666666666665" y="-80.0" />
+      <point x="3660.0" y="-80.0" />
+      <point x="3660.0" y="-220.0" />
+      <point x="3700.0" y="-220.0" />
+      <point x="3700.0" y="-280.0" />
+      <point x="3300.0" y="-280.0" />
+      <point x="3300.0" y="-1180.0" />
+      <point x="3260.0" y="-1180.0" />
+      <point x="3260.0" y="-1260.0" />
+      <point x="3183.6666666666665" y="-1260.0" />
+      <point x="43.666666666666515" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="Business" relationship="DEPENDENCY">
+      <point x="71.66666666666652" y="-15.0" />
+      <point x="2811.6666666666665" y="-500.0" />
+      <point x="3460.0" y="-500.0" />
+      <point x="3460.0" y="-2160.0" />
+      <point x="3260.0" y="-2160.0" />
+      <point x="3260.0" y="-2220.0" />
+      <point x="3101.6666666666665" y="-2220.0" />
+      <point x="41.666666666666515" y="15.0" />
+    </edge>
+    <edge source="groovyjarjarpicocli" target="groovyjarjarpicocli" relationship="TO_ONE">
+      <point x="-134.0" y="7.5" />
+      <point x="2560.0" y="-12.5" />
+      <point x="2560.0" y="180.0" />
+      <point x="2793.0" y="180.0" />
+      <point x="-67.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyView" target="PrivateProperty" relationship="DEPENDENCY">
+      <point x="57.333333333333485" y="-15.0" />
+      <point x="2477.3333333333335" y="-120.0" />
+      <point x="3580.0" y="-120.0" />
+      <point x="3580.0" y="-2300.0" />
+      <point x="3500.0" y="-2300.0" />
+      <point x="3500.0" y="-2440.0" />
+      <point x="3257.2" y="-2440.0" />
+      <point x="77.19999999999982" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="Dice" relationship="TO_ONE">
+      <point x="-71.66666666666652" y="-15.0" />
+      <point x="2668.3333333333335" y="-500.0" />
+      <point x="2500.0" y="-500.0" />
+      <point x="2500.0" y="-700.0" />
+      <point x="2710.3333333333335" y="-700.0" />
+      <point x="-29.666666666666515" y="15.0" />
+    </edge>
+    <edge source="groovyjarjarcommonscli" target="groovyjarjarcommonscli" relationship="TO_MANY">
+      <point x="-155.0" y="10.0" />
+      <point x="540.0" y="-10.0" />
+      <point x="540.0" y="200.0" />
+      <point x="796.6666666666666" y="200.0" />
+      <point x="-103.33333333333334" y="15.0" />
+    </edge>
+    <edge source="MonopolyView" target="Business" relationship="DEPENDENCY">
+      <point x="57.333333333333485" y="-15.0" />
+      <point x="2477.3333333333335" y="-120.0" />
+      <point x="3580.0" y="-120.0" />
+      <point x="3580.0" y="-220.0" />
+      <point x="3620.0" y="-220.0" />
+      <point x="3620.0" y="-2160.0" />
+      <point x="3260.0" y="-2160.0" />
+      <point x="3260.0" y="-2220.0" />
+      <point x="3101.6666666666665" y="-2220.0" />
+      <point x="41.666666666666515" y="15.0" />
+    </edge>
+    <edge source="Board" target="Square" relationship="CREATE">
+      <point x="-27.0" y="-15.0" />
+      <point x="3053.0" y="-880.0" />
+      <point x="2960.0" y="-880.0" />
+      <point x="2960.0" y="-1260.0" />
+      <point x="3099.6000000000004" y="-1260.0" />
+      <point x="-40.399999999999636" y="15.0" />
+    </edge>
+    <edge source="Player" target="RoleAPI" relationship="REALIZATION">
+      <point x="-49.600000000000364" y="-15.0" />
+      <point x="3070.3999999999996" y="-1740.0" />
+      <point x="2860.0" y="-1740.0" />
+      <point x="2860.0" y="-1880.0" />
+      <point x="2740.0" y="-1880.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="Dice" relationship="CREATE">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="Player" target="PrivateProperty" relationship="DEPENDENCY">
+      <point x="20.800000000000182" y="-15.0" />
+      <point x="3140.8" y="-1760.0" />
+      <point x="3220.0" y="-1760.0" />
+      <point x="3220.0" y="-2000.0" />
+      <point x="3300.0" y="-2000.0" />
+      <point x="3300.0" y="-2300.0" />
+      <point x="3500.0" y="-2300.0" />
+      <point x="3500.0" y="-2440.0" />
+      <point x="3257.2" y="-2440.0" />
+      <point x="77.19999999999982" y="15.0" />
+    </edge>
+    <edge source="PrivateProperty" target="Player" relationship="DEPENDENCY">
+      <point x="-60.59999999999991" y="15.0" />
+      <point x="3119.4" y="-2340.0" />
+      <point x="2980.0" y="-2340.0" />
+      <point x="2980.0" y="-1840.0" />
+      <point x="3020.0" y="-1840.0" />
+      <point x="3020.0" y="-1760.0" />
+      <point x="3075.2" y="-1760.0" />
+      <point x="-44.80000000000018" y="-15.0" />
+    </edge>
+    <edge source="MonopolyView" target="Square" relationship="DEPENDENCY">
+      <point x="57.333333333333485" y="-15.0" />
+      <point x="2477.3333333333335" y="-120.0" />
+      <point x="3580.0" y="-120.0" />
+      <point x="3580.0" y="-220.0" />
+      <point x="3260.0" y="-220.0" />
+      <point x="3260.0" y="-1260.0" />
+      <point x="3183.6666666666665" y="-1260.0" />
+      <point x="43.666666666666515" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="Bank" relationship="TO_ONE">
+      <point x="-71.66666666666652" y="-15.0" />
+      <point x="2668.3333333333335" y="-500.0" />
+      <point x="2500.0" y="-500.0" />
+      <point x="2500.0" y="-560.0" />
+      <point x="2420.0" y="-560.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="Board" relationship="TO_ONE">
+      <point x="-71.66666666666652" y="-15.0" />
+      <point x="2668.3333333333335" y="-500.0" />
+      <point x="2500.0" y="-500.0" />
+      <point x="2500.0" y="-560.0" />
+      <point x="2560.0" y="-560.0" />
+      <point x="2560.0" y="-680.0" />
+      <point x="3060.0" y="-680.0" />
+      <point x="-20.0" y="15.0" />
+    </edge>
+    <edge source="BankProperty" target="Square" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="20.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyGUIView" target="BankProperty" relationship="DEPENDENCY">
+      <point x="67.66666666666666" y="-15.0" />
+      <point x="3407.6666666666665" y="-80.0" />
+      <point x="3660.0" y="-80.0" />
+      <point x="3660.0" y="-260.0" />
+      <point x="3200.0" y="-260.0" />
+      <point x="40.0" y="15.0" />
+    </edge>
+    <edge source="Business" target="PropertyAPI" relationship="REALIZATION">
+      <point x="40.0" y="-15.0" />
+      <point x="3100.0" y="-2420.0" />
+      <point x="3017.3333333333335" y="-2420.0" />
+      <point x="37.333333333333485" y="15.0" />
+    </edge>
+    <edge source="MonopolyGUIView" target="MonopolyController" relationship="CREATE">
+      <point x="-67.66666666666666" y="-15.0" />
+      <point x="3272.3333333333335" y="-100.0" />
+      <point x="2340.0" y="-100.0" />
+      <point x="2340.0" y="-200.0" />
+      <point x="2280.0" y="-200.0" />
+      <point x="2280.0" y="-280.0" />
+      <point x="2180.0" y="-280.0" />
+      <point x="2180.0" y="-380.0" />
+      <point x="2688.3333333333335" y="-380.0" />
+      <point x="-51.666666666666515" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="Rail" relationship="DEPENDENCY">
+      <point x="71.66666666666652" y="-15.0" />
+      <point x="2811.6666666666665" y="-500.0" />
+      <point x="3460.0" y="-500.0" />
+      <point x="3460.0" y="-580.0" />
+      <point x="3420.0" y="-580.0" />
+      <point x="3420.0" y="-2040.0" />
+      <point x="2907.6666666666665" y="-2040.0" />
+      <point x="27.666666666666515" y="15.0" />
+    </edge>
+    <edge source="Bank" target="RoleAPI" relationship="REALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="2420.0" y="-1880.0" />
+      <point x="2740.0" y="-1880.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="Player" relationship="TO_ONE">
+      <point x="-71.66666666666652" y="-15.0" />
+      <point x="2668.3333333333335" y="-500.0" />
+      <point x="2500.0" y="-500.0" />
+      <point x="2500.0" y="-560.0" />
+      <point x="2460.0" y="-560.0" />
+      <point x="2460.0" y="-720.0" />
+      <point x="2500.0" y="-720.0" />
+      <point x="2500.0" y="-1600.0" />
+      <point x="3080.0" y="-1600.0" />
+      <point x="-40.0" y="15.0" />
+    </edge>
+    <edge source="Board" target="Square" relationship="TO_ONE">
+      <point x="20.0" y="-15.0" />
+      <point x="3100.0" y="-1040.0" />
+      <point x="3040.0" y="-1040.0" />
+      <point x="3040.0" y="-1180.0" />
+      <point x="3129.8" y="-1180.0" />
+      <point x="-10.199999999999818" y="15.0" />
+    </edge>
+    <edge source="Rail" target="PropertyAPI" relationship="REALIZATION">
+      <point x="20.0" y="-15.0" />
+      <point x="2900.0" y="-2320.0" />
+      <point x="3100.0" y="-2320.0" />
+      <point x="3100.0" y="-2420.0" />
+      <point x="3017.3333333333335" y="-2420.0" />
+      <point x="37.333333333333485" y="15.0" />
+    </edge>
+    <edge source="BankProperty" target="PropertyAPI" relationship="REALIZATION">
+      <point x="60.0" y="-15.0" />
+      <point x="3220.0" y="-1200.0" />
+      <point x="3300.0" y="-1200.0" />
+      <point x="3300.0" y="-1640.0" />
+      <point x="3380.0" y="-1640.0" />
+      <point x="3380.0" y="-1900.0" />
+      <point x="3420.0" y="-1900.0" />
+      <point x="3420.0" y="-2320.0" />
+      <point x="3100.0" y="-2320.0" />
+      <point x="3100.0" y="-2420.0" />
+      <point x="3017.3333333333335" y="-2420.0" />
+      <point x="37.333333333333485" y="15.0" />
+    </edge>
+    <edge source="MonopolyView" target="MonopolyController" relationship="TO_ONE">
+      <point x="0.0" y="-15.0" />
+      <point x="2420.0" y="-280.0" />
+      <point x="2800.0" y="-280.0" />
+      <point x="60.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyController" target="BankProperty" relationship="DEPENDENCY">
+      <point x="71.66666666666652" y="-15.0" />
+      <point x="2811.6666666666665" y="-500.0" />
+      <point x="3460.0" y="-500.0" />
+      <point x="3460.0" y="-580.0" />
+      <point x="3380.0" y="-580.0" />
+      <point x="3380.0" y="-1000.0" />
+      <point x="3200.0" y="-1000.0" />
+      <point x="40.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyGUIView" target="Player" relationship="CREATE">
+      <point x="-67.66666666666666" y="-15.0" />
+      <point x="3272.3333333333335" y="-100.0" />
+      <point x="2340.0" y="-100.0" />
+      <point x="2340.0" y="-1520.0" />
+      <point x="2120.0" y="-1520.0" />
+      <point x="2120.0" y="-1620.0" />
+      <point x="3072.0" y="-1620.0" />
+      <point x="-48.0" y="15.0" />
+    </edge>
+    <edge source="Player" target="Square" relationship="TO_ONE">
+      <point x="48.0" y="15.0" />
+      <point x="3168.0" y="-1560.0" />
+      <point x="3200.0" y="-1560.0" />
+      <point x="3200.0" y="-1400.0" />
+      <point x="3174.2" y="-1400.0" />
+      <point x="34.19999999999982" y="-15.0" />
+    </edge>
+    <edge source="MonopolyController" target="Board" relationship="CREATE">
+      <point x="0.0" y="-15.0" />
+      <point x="2740.0" y="-560.0" />
+      <point x="2860.0" y="-560.0" />
+      <point x="2860.0" y="-660.0" />
+      <point x="3100.0" y="-660.0" />
+      <point x="20.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyGUIView" target="MonopolyController" relationship="TO_ONE">
+      <point x="0.0" y="-15.0" />
+      <point x="3340.0" y="-140.0" />
+      <point x="2840.0" y="-140.0" />
+      <point x="2840.0" y="-200.0" />
+      <point x="2800.0" y="-200.0" />
+      <point x="60.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyView" target="BankProperty" relationship="DEPENDENCY">
+      <point x="57.333333333333485" y="-15.0" />
+      <point x="2477.3333333333335" y="-120.0" />
+      <point x="3580.0" y="-120.0" />
+      <point x="3580.0" y="-220.0" />
+      <point x="3160.0" y="-220.0" />
+      <point x="3160.0" y="-1000.0" />
+      <point x="3200.0" y="-1000.0" />
+      <point x="40.0" y="15.0" />
+    </edge>
+    <edge source="PrivateProperty" target="Player" relationship="TO_ONE">
+      <point x="20.0" y="15.0" />
+      <point x="3200.0" y="-2340.0" />
+      <point x="3340.0" y="-2340.0" />
+      <point x="3340.0" y="-1980.0" />
+      <point x="3300.0" y="-1980.0" />
+      <point x="3300.0" y="-1740.0" />
+      <point x="3161.6000000000004" y="-1740.0" />
+      <point x="41.600000000000364" y="-15.0" />
+    </edge>
+    <edge source="Business" target="Player" relationship="DEPENDENCY">
+      <point x="0.0" y="15.0" />
+      <point x="3060.0" y="-2160.0" />
+      <point x="3020.0" y="-2160.0" />
+      <point x="3020.0" y="-1760.0" />
+      <point x="3075.2" y="-1760.0" />
+      <point x="-44.80000000000018" y="-15.0" />
+    </edge>
+    <edge source="MonopolyView" target="Rail" relationship="DEPENDENCY">
+      <point x="57.333333333333485" y="-15.0" />
+      <point x="2477.3333333333335" y="-120.0" />
+      <point x="3580.0" y="-120.0" />
+      <point x="3580.0" y="-220.0" />
+      <point x="3540.0" y="-220.0" />
+      <point x="3540.0" y="-1880.0" />
+      <point x="3420.0" y="-1880.0" />
+      <point x="3420.0" y="-2040.0" />
+      <point x="2907.6666666666665" y="-2040.0" />
+      <point x="27.666666666666515" y="15.0" />
+    </edge>
+    <edge source="Player" target="Business" relationship="DEPENDENCY">
+      <point x="20.800000000000182" y="-15.0" />
+      <point x="3140.8" y="-1760.0" />
+      <point x="3220.0" y="-1760.0" />
+      <point x="3220.0" y="-1840.0" />
+      <point x="3180.0" y="-1840.0" />
+      <point x="3180.0" y="-2020.0" />
+      <point x="3260.0" y="-2020.0" />
+      <point x="3260.0" y="-2220.0" />
+      <point x="3101.6666666666665" y="-2220.0" />
+      <point x="41.666666666666515" y="15.0" />
+    </edge>
+    <edge source="groovyjarjarcommonscli" target="groovyjarjarcommonscli" relationship="TO_ONE">
+      <point x="-155.0" y="-10.0" />
+      <point x="500.0" y="-30.0" />
+      <point x="500.0" y="280.0" />
+      <point x="1003.3333333333334" y="280.0" />
+      <point x="103.33333333333337" y="15.0" />
+    </edge>
+    <edge source="BankProperty" target="Player" relationship="DEPENDENCY">
+      <point x="-60.0" y="-15.0" />
+      <point x="3100.0" y="-1200.0" />
+      <point x="3040.0" y="-1200.0" />
+      <point x="3040.0" y="-1540.0" />
+      <point x="3120.0" y="-1540.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="Rail" target="Player" relationship="DEPENDENCY">
+      <point x="0.0" y="15.0" />
+      <point x="2880.0" y="-1880.0" />
+      <point x="2900.0" y="-1880.0" />
+      <point x="2900.0" y="-1840.0" />
+      <point x="3020.0" y="-1840.0" />
+      <point x="3020.0" y="-1760.0" />
+      <point x="3075.2" y="-1760.0" />
+      <point x="-44.80000000000018" y="-15.0" />
+    </edge>
+    <edge source="ColorGroup" target="PrivateProperty" relationship="DEPENDENCY">
+      <point x="20.0" y="-15.0" />
+      <point x="3180.0" y="-2300.0" />
+      <point x="3500.0" y="-2300.0" />
+      <point x="3500.0" y="-2440.0" />
+      <point x="3257.2" y="-2440.0" />
+      <point x="77.19999999999982" y="15.0" />
+    </edge>
+    <edge source="Player" target="Rail" relationship="DEPENDENCY">
+      <point x="20.800000000000182" y="-15.0" />
+      <point x="3140.8" y="-1760.0" />
+      <point x="3220.0" y="-1760.0" />
+      <point x="3220.0" y="-1840.0" />
+      <point x="3260.0" y="-1840.0" />
+      <point x="3260.0" y="-1880.0" />
+      <point x="3420.0" y="-1880.0" />
+      <point x="3420.0" y="-2040.0" />
+      <point x="2907.6666666666665" y="-2040.0" />
+      <point x="27.666666666666515" y="15.0" />
+    </edge>
+    <edge source="groovyjarjarantlr" target="groovyjarjarantlr" relationship="TO_ONE">
+      <point x="-125.0" y="7.5" />
+      <point x="40.0" y="-12.5" />
+      <point x="40.0" y="180.0" />
+      <point x="277.5" y="180.0" />
+      <point x="-62.5" y="15.0" />
+    </edge>
+    <edge source="MonopolyGUIView" target="Board" relationship="CREATE">
+      <point x="-67.66666666666666" y="-15.0" />
+      <point x="3272.3333333333335" y="-100.0" />
+      <point x="2340.0" y="-100.0" />
+      <point x="2340.0" y="-200.0" />
+      <point x="2380.0" y="-200.0" />
+      <point x="2380.0" y="-320.0" />
+      <point x="2980.0" y="-320.0" />
+      <point x="2980.0" y="-660.0" />
+      <point x="3100.0" y="-660.0" />
+      <point x="20.0" y="15.0" />
+    </edge>
+    <edge source="PropertyAPI" target="Player" relationship="DEPENDENCY">
+      <point x="-40.0" y="15.0" />
+      <point x="2940.0" y="-1840.0" />
+      <point x="3020.0" y="-1840.0" />
+      <point x="3020.0" y="-1760.0" />
+      <point x="3075.2" y="-1760.0" />
+      <point x="-44.80000000000018" y="-15.0" />
+    </edge>
+    <edge source="groovyjarjarpicocli" target="groovyjarjarpicocli" relationship="DEPENDENCY">
+      <point x="-134.0" y="-7.5" />
+      <point x="2540.0" y="-27.5" />
+      <point x="2540.0" y="220.0" />
+      <point x="2927.0" y="220.0" />
+      <point x="67.0" y="15.0" />
+    </edge>
+    <edge source="MonopolyView" target="Dice" relationship="DEPENDENCY">
+      <point x="57.333333333333485" y="-15.0" />
+      <point x="2477.3333333333335" y="-120.0" />
+      <point x="3580.0" y="-120.0" />
+      <point x="3580.0" y="-220.0" />
+      <point x="2920.0" y="-220.0" />
+      <point x="2920.0" y="-640.0" />
+      <point x="2769.6666666666665" y="-640.0" />
+      <point x="29.666666666666515" y="15.0" />
+    </edge>
+    <edge source="Business" target="PrivateProperty" relationship="GENERALIZATION">
+      <point x="-40.0" y="-15.0" />
+      <point x="3020.0" y="-2440.0" />
+      <point x="3098.8" y="-2440.0" />
+      <point x="-81.19999999999982" y="15.0" />
+    </edge>
+    <edge source="Board" target="Business" relationship="CREATE">
+      <point x="-27.0" y="-15.0" />
+      <point x="3053.0" y="-880.0" />
+      <point x="2960.0" y="-880.0" />
+      <point x="2960.0" y="-940.0" />
+      <point x="2860.0" y="-940.0" />
+      <point x="2860.0" y="-1340.0" />
+      <point x="2800.0" y="-1340.0" />
+      <point x="2800.0" y="-1540.0" />
+      <point x="2780.0" y="-1540.0" />
+      <point x="2780.0" y="-1900.0" />
+      <point x="2660.0" y="-1900.0" />
+      <point x="2660.0" y="-2180.0" />
+      <point x="3018.3333333333335" y="-2180.0" />
+      <point x="-41.666666666666515" y="15.0" />
+    </edge>
+    <edge source="MonopolyView" target="Player" relationship="CREATE">
+      <point x="-57.333333333333485" y="-15.0" />
+      <point x="2362.6666666666665" y="-80.0" />
+      <point x="2180.0" y="-80.0" />
+      <point x="2180.0" y="-200.0" />
+      <point x="2120.0" y="-200.0" />
+      <point x="2120.0" y="-1620.0" />
+      <point x="3072.0" y="-1620.0" />
+      <point x="-48.0" y="15.0" />
+    </edge>
+    <edge source="PrivateProperty" target="Square" relationship="GENERALIZATION">
+      <point x="48.59999999999991" y="15.0" />
+      <point x="3228.6" y="-2420.0" />
+      <point x="3380.0" y="-2420.0" />
+      <point x="3380.0" y="-1960.0" />
+      <point x="3340.0" y="-1960.0" />
+      <point x="3340.0" y="-1660.0" />
+      <point x="3260.0" y="-1660.0" />
+      <point x="3260.0" y="-1380.0" />
+      <point x="3188.3999999999996" y="-1380.0" />
+      <point x="48.399999999999636" y="-15.0" />
+    </edge>
+    <edge source="MonopolyGUIView" target="PrivateProperty" relationship="DEPENDENCY">
+      <point x="67.66666666666666" y="-15.0" />
+      <point x="3407.6666666666665" y="-80.0" />
+      <point x="3660.0" y="-80.0" />
+      <point x="3660.0" y="-220.0" />
+      <point x="3740.0" y="-220.0" />
+      <point x="3740.0" y="-2300.0" />
+      <point x="3500.0" y="-2300.0" />
+      <point x="3500.0" y="-2440.0" />
+      <point x="3257.2" y="-2440.0" />
+      <point x="77.19999999999982" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.4776253894820809" showDependencies="true" x="3323.021584033771" y="-1922.0169795364177" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
