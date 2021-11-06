@@ -51,4 +51,12 @@ public class Dice {
     public int[] getDice() {
         return dice;
     }
+
+    /**
+     * Getter of size array
+     * @return int
+     */
+    public int getSIZE() {
+        return SIZE;
+    }
 }
