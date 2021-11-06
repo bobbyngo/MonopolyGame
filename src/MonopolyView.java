@@ -79,6 +79,7 @@ public class MonopolyView {
                 case 1:
                     // Player rolls dice
                     int[] roll = controller.rollDie();
+                    currentPlayer.makeTurn();
                     // FIXME: init issue
                     System.out.println(String.format("%s has rolled a %d and %d", currentPlayer.getName(), roll[0], roll[1]));
                     if (controller.isSpeeding()) {
