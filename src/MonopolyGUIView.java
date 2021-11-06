@@ -5,6 +5,8 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -18,11 +20,18 @@ public class MonopolyGUIView extends JFrame{
     private final ArrayList<JLabel> playerLabels;
 
     private final JButton showStats;
-    private final JButton roll;
+    private final JButton rollBtn;
     private final JButton buy;
     private final JButton sell;
     private final JButton endTurn;
     private final JButton payTax;
+
+    //For dice roll
+    int[] roll;
+    private JPanel dicePanel;
+
+
+    private MonopolyController controller;
 
     public MonopolyGUIView(){
         board = new Board();
@@ -33,11 +42,16 @@ public class MonopolyGUIView extends JFrame{
         playerLabels = new ArrayList<>();
 
         showStats = new JButton();
-        roll = new JButton();
+        rollBtn = new JButton();
         buy = new JButton();
         sell = new JButton();
         endTurn = new JButton();
         payTax = new JButton();
+
+        ArrayList<Player> players = new ArrayList<>();
+        //For running the code, players array list cannot be empty
+        players.add(new Player("a", null));
+        controller = new MonopolyController(players);
     }
 
     private void SquaresLayout(){
@@ -116,6 +130,18 @@ public class MonopolyGUIView extends JFrame{
         }
     }
 
+    private void addRollBtn() {
+        rollBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                roll = controller.rollDie();
+                System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
+
+
+            }
+        });
+    }
+
     private void addButtonToBoard(){
         // Show Stats button
         c.gridx = 2;
@@ -131,12 +157,10 @@ public class MonopolyGUIView extends JFrame{
 
         // Roll Button
         c.gridx = 4;
-        gb.setConstraints(roll, c);
-        roll.setText("Roll Dice");
-        roll.setForeground(Color.RED);
-        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        roll.addActionListener(e->System.out.println("hello"));
-        mainPanel.add(roll);
+        gb.setConstraints(rollBtn, c);
+        rollBtn.setText("Roll Dice");
+        rollBtn.setForeground(Color.RED);
+        mainPanel.add(rollBtn);
 
         // Buy Button
         c.gridy = 3;
@@ -158,16 +182,17 @@ public class MonopolyGUIView extends JFrame{
     }
 
     public void displayGUI(){
-        SquaresLayout();
-        addSquareToBoard();
-        addButtonToBoard();
+        this.SquaresLayout();
+        this.addSquareToBoard();
+        this.addRollBtn();
+        this.addButtonToBoard();
 
-        add(mainPanel);
-        pack();
+        this.add(mainPanel);
+        this.pack();
 
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         MonopolyGUIView self = this;
-        addWindowListener(new WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
                 if (JOptionPane.showConfirmDialog(self, "Are you sure you want to quit?")
@@ -178,11 +203,12 @@ public class MonopolyGUIView extends JFrame{
             }
         });
 
-        self.setVisible(true);
+        this.setVisible(true);
     }
 
     public static void main(String[] args) {
         MonopolyGUIView view = new MonopolyGUIView();
         view.displayGUI();
     }
+
 }
