@@ -19,12 +19,20 @@ public class SellPlayerPropertyDialog extends JDialog {
         //list = new JList<>(player.getPropertyList().toArray(new PrivateProperty[0]));
         //propertyListModel = new PlayerPropertyListModel(controller);
 
-        setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout());
+
+        // Fixed the size dialog for you zak : )
+        this.setPreferredSize(new Dimension(250, 250));
+        pack();
+
+        // Bonus: Make the dialog in the middle
+        setLocationRelativeTo(null);
+
 
         JScrollPane scrollPane = new JScrollPane(list);
-        add(scrollPane, BorderLayout.CENTER);
+        this.add(scrollPane, BorderLayout.CENTER);
 
-        add(new JLabel(String.format("Sell %s's Properties. Double-click to sell.",
+        this.add(new JLabel(String.format("Sell %s's Properties. Double-click to sell.",
                 player.getName())), BorderLayout.PAGE_START);
 
         JPanel btnPanel = new JPanel();
@@ -41,6 +49,7 @@ public class SellPlayerPropertyDialog extends JDialog {
                 }
             }
         });
+
         btnPanel.add(sellBtn);
         btnPanel.add(closeBtn);
 

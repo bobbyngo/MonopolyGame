@@ -32,7 +32,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private final JButton endTurnBtn;
     private final JButton payTaxBtn;
 
-    private boolean feePaid;
+    private boolean feePaid = true;
 
     //For Roll Dice
     int[] roll;
@@ -184,6 +184,9 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }else{
             feePaid = true;
         }
+
+        // TODO: Dialog
+        // TODO: Prevent the player pay twice
     }
 
     private void handleEndTurnBtn() {
@@ -195,6 +198,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }else{
             feePaid = true;
         }
+
+        // TODO: Re enable the roll, check double current player, they cannot end without rolling dice
     }
 
     private void updatePlayerLocation() {
@@ -210,6 +215,13 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private void handleRollDiceBtn() throws IOException {
         // Calling the rollDie function
         roll = controller.rollDie();
+
+        //FIXME: This can be improved
+        if (controller.isSpeeding()) {
+            controller.sendCurrentPlayerToJail();
+        }
+        
+        rollBtn.setEnabled(false);
 
         // Update the new label when the button is clicked
         // Remove 2 labels if available
@@ -237,8 +249,19 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             }
         }
 
+        controller.moveCurrentPlayer();
+        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
+        // Get total value of the dice when player roll = variable
+        // moveTo(variable)
+
         mainPanel.validate();
         mainPanel.repaint();
+
+        controller.moveCurrentPlayer();
+
+
+
+
 
         // For debugging
         System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
@@ -316,6 +339,9 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         mainPanel.add(endTurnBtn);
     }
 
+    // TODO: PRISON
+    // TODO
+
     public void displayGUI(){
         this.SquaresLayout();
         this.addSquareToBoard();
@@ -324,6 +350,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
         this.add(mainPanel);
         this.pack();
+        // will make the GUI displays in the middle screen : )
+        this.setLocationRelativeTo(null);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         MonopolyGUIView self = this;

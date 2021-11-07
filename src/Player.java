@@ -37,29 +37,6 @@ public class Player implements RoleAPI {
         this.playerBalance = 1230;
     }
 
-    //                      ZAK BRO, I'M SORRY I DO NOT SURE IF THIS WORK
-
-    /**
-     * This method will take the roll's value and call the setCurrLocation of the player in the board
-     * @param numRolled
-     */
-    /*
-    public void moveTo(int numRolled) {
-        int newIndex = (currLocation.getIndex() + numRolled) % 38;
-        this.setCurrLocation(newIndex);
-    }
-     */
-
-    /**
-     * This method will set the new location of the player in the board
-     * @param newIndex
-     */
-    /*
-    private void setCurrLocation(int newIndex) {
-        this.currLocation.setIndex(newIndex);
-    }
-     */
-
 
     /**
      * This method will let the player buy PrivateProperty. If the Player can buy the property,

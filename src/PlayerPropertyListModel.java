@@ -7,6 +7,7 @@ public class PlayerPropertyListModel extends DefaultListModel<PrivateProperty> {
 
     public PlayerPropertyListModel(MonopolyController controller) {
         super();
+        this.controller = controller;
         ArrayList<PrivateProperty> properties = controller.getCurrentPlayer().getPropertyList();
         //add(properties);
 
