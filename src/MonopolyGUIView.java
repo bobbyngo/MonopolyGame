@@ -58,12 +58,13 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         this.buyBtn.addActionListener(this);
 
         sellBtn = new JButton();
+        sellBtn.addActionListener(this);
 
         this.endTurnBtn = new JButton();
         this.endTurnBtn.addActionListener(this);
 
         this.payTaxBtn = new JButton();
-        this.endTurnBtn.addActionListener(this);
+        this.payTaxBtn.addActionListener(this);
 
         // Dice Initialization
         this.rollBtn = new JButton();
@@ -280,9 +281,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         gb.setConstraints(sellBtn, c);
         sellBtn.setText("Sell Property");
         sellBtn.setForeground(Color.RED);
-        // content of the action listener will be replaced with a function in Monopoly Controller to display the current player stats
-        sellBtn.addActionListener(e->System.out.println("hello"));
-        sellBtn.addActionListener(this);
         mainPanel.add(sellBtn);
 
         // payTax Button
@@ -333,7 +331,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         view.displayGUI();
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -353,14 +350,28 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             System.out.println("Sell btn pressed!");
             SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(this, controller);
             sppd.setVisible(true);
+
+            textLabel.setText(controller.getCurrentPlayer().propertiesToString());
         }
 
         else if (e.getSource() == buyBtn) {
-            handleBuyPropertyBtn();
+            if(controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty){
+                if(!((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
+                    handleBuyPropertyBtn();
+                }else{
+                    JOptionPane.showMessageDialog(null, "This Property is already owned!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }else {
+                JOptionPane.showMessageDialog(null, "There is not a purchasable property!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
 
         else if (e.getSource() == payTaxBtn) {
-            handlePayTaxBtn();
+            if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty){
+                handlePayTaxBtn();
+            }else{
+                JOptionPane.showMessageDialog(null, "There is no tax to pay!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
         else if (e.getSource() == endTurnBtn) {
             handleEndTurnBtn();
