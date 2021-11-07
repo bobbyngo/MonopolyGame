@@ -9,6 +9,7 @@ public class SellPlayerPropertyDialog extends JDialog {
     private JList<PrivateProperty> list;
     private JButton closeBtn;
     private JButton sellBtn;
+
     public SellPlayerPropertyDialog(JFrame owner, MonopolyController controller) {
         super(owner, "Sell Player Property", true);
         this.controller = controller;
