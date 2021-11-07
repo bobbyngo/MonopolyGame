@@ -314,7 +314,7 @@ public class MonopolyController {
     /**
      * payFee is used for the current player to pay rent and tax
      *
-     * @return int
+     * @return int which indicates whether the transaction is successful or not, 1 means paid, 0 means not paid
      * @author Yuguo Liu 101142730
      */
     public int payFee(){

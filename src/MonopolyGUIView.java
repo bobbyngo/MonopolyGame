@@ -180,6 +180,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private void handlePayTaxBtn() {
         if(controller.payFee() == 0){
             JOptionPane.showMessageDialog(null, "You do not have enough balance to pay the rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+            feePaid = false;
         }else{
             feePaid = true;
         }
