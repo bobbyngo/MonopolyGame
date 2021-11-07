@@ -21,9 +21,11 @@ public class SellPlayerPropertyDialog extends JDialog {
 
         this.setLayout(new BorderLayout());
 
-        //this.setPreferredSize(new Dimension(250, 250));
+        // Fixed the size dialog for you zak : )
+        this.setPreferredSize(new Dimension(250, 250));
+        pack();
 
-        //Make the dialog in the middle
+        // Bonus: Make the dialog in the middle
         setLocationRelativeTo(null);
 
 
