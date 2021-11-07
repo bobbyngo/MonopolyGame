@@ -178,12 +178,22 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     }
 
     private void handlePayTaxBtn() {
-        controller.payFee();
+        if(controller.payFee() == 0){
+            JOptionPane.showMessageDialog(null, "You do not have enough balance to pay the rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            feePaid = true;
+        }
     }
 
     private void handleEndTurnBtn() {
         // if tax/rent is not paid, this step will not be reached
         controller.getNextPlayer();
+
+        if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
+            feePaid = false;
+        }else{
+            feePaid = true;
+        }
     }
 
     private void updatePlayerLocation() {
