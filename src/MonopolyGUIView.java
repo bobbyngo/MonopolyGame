@@ -81,6 +81,11 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         players.add(new Player("player2", new Square("GO", 0)));
         players.add(new Player("player3", new Square("GO", 0)));
         players.add(new Player("player4", new Square("GO", 0)));
+
+//        players.get(3).buyPrivateProperty(new PrivateProperty("Dusty Depot", 2,100));
+//        players.get(3).buyPrivateProperty(new PrivateProperty("South Rail", 3, 150));
+//        players.get(3).buyPrivateProperty(new PrivateProperty("Fatal Fields", 4,80));
+
         controller = new MonopolyController(players);
     }
 
@@ -174,19 +179,10 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     }
 
     private void handleBuyPropertyBtn() {
-        //TODO
-        // Disable btn when player's credit is not enough, not a private property and owns this property already
+        Square currentLocation = controller.getCurrentPlayer().getCurrLocation();
+        controller.purchaseProperty((PrivateProperty)currentLocation);
 
-        Player currentPlayer = controller.getCurrentPlayer();
-        Square currentLocation = currentPlayer.getCurrLocation();
-        //Disable the player's button if the player cannot afford the property
-
-        if (controller.currentPlayerIsOnOwnedProperty() || !(currentLocation instanceof PrivateProperty) || currentPlayer.getPlayerTotalAsset() < ((PrivateProperty)controller.getCurrentPlayer().getCurrLocation()).getPrice()) {
-            buyBtn.setEnabled(false);
-
-        } else {
-            controller.purchaseProperty((PrivateProperty)currentLocation);
-        }
+        JOptionPane.showMessageDialog(null, "Successfully buy the property", "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void handlePayTaxBtn() {
@@ -223,6 +219,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
      */
     private void handleRollDiceBtn() throws IOException {
         // Calling the rollDie function
+
         roll = controller.rollDie();
         controller.moveCurrentPlayer();
 
@@ -258,16 +255,18 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
 
         if (!controller.getDie().isDouble()) {
+            buyBtn.setEnabled(true);
             rollBtn.setEnabled(false);
         }
 
-        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
 
         mainPanel.validate();
         mainPanel.repaint();
 
         // For debugging
+        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
         System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
+        System.out.println(controller.getCurrentPlayer().propertiesToString());
     }
 
     private void addButtonToBoard(){
@@ -402,15 +401,16 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
 
         else if (e.getSource() == buyBtn) {
-            if(controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty){
-                if(!((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
+            if (controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty) {
+                if (!((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()) {
                     handleBuyPropertyBtn();
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "This Property is already owned!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
                 }
-            }else {
+            } else {
                 JOptionPane.showMessageDialog(null, "There is not a purchasable property!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             }
+            buyBtn.setEnabled(false);
         }
 
         else if (e.getSource() == payTaxBtn) {
