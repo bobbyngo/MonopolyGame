@@ -22,7 +22,10 @@ public class SellPlayerPropertyDialog extends JDialog {
         this.setLayout(new BorderLayout());
 
         //this.setPreferredSize(new Dimension(250, 250));
-        //JOptionPane.showMessageDialog(null, "There is not a purchasable property!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+
+        //Make the dialog in the middle
+        setLocationRelativeTo(null);
+
 
         JScrollPane scrollPane = new JScrollPane(list);
         this.add(scrollPane, BorderLayout.CENTER);

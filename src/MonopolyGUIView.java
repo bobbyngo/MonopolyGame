@@ -348,6 +348,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
         this.add(mainPanel);
         this.pack();
+        // will make the GUI displays in the middle screen : )
+        this.setLocationRelativeTo(null);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         MonopolyGUIView self = this;
