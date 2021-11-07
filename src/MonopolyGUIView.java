@@ -38,7 +38,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     int[] roll;
     private JLabel diceLabel1;
     private JLabel diceLabel2;
-    private ImageIcon dieFace;
 
 
     private MonopolyController controller;
@@ -86,7 +85,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     }
 
     private void SquaresLayout(){
-
         for(int i = 0; i < 38; i++){
             JPanel squarePanel = new JPanel(new BorderLayout());
             JPanel InfoPanel = new JPanel();
