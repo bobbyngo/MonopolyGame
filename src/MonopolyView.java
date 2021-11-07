@@ -453,9 +453,6 @@ public class MonopolyView {
 
     }
 
-
-
-
     public static void main(String[] args) {
 
         MonopolyView v = new MonopolyView();
