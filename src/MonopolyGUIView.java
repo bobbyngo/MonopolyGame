@@ -175,6 +175,18 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
     private void handleBuyPropertyBtn() {
         //TODO
+        // Disable btn when player's credit is not enough, not a private property and owns this property already
+
+        Player currentPlayer = controller.getCurrentPlayer();
+        Square currentLocation = currentPlayer.getCurrLocation();
+        //Disable the player's button if the player cannot afford the property
+
+        if (controller.currentPlayerIsOnOwnedProperty() || !(currentLocation instanceof PrivateProperty) || currentPlayer.getPlayerTotalAsset() < ((PrivateProperty)controller.getCurrentPlayer().getCurrLocation()).getPrice()) {
+            buyBtn.setEnabled(false);
+
+        } else {
+            controller.purchaseProperty((PrivateProperty)currentLocation);
+        }
     }
 
     private void handlePayTaxBtn() {
@@ -202,9 +214,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         // TODO: Re enable the roll, check double current player, they cannot end without rolling dice
     }
 
-    private void updatePlayerLocation() {
-        //TODO
-    }
 
     /**
      * Method handles roll dice button. It will delete the 2 labels next to the
@@ -215,13 +224,12 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private void handleRollDiceBtn() throws IOException {
         // Calling the rollDie function
         roll = controller.rollDie();
+        controller.moveCurrentPlayer();
 
         //FIXME: This can be improved
         if (controller.isSpeeding()) {
             controller.sendCurrentPlayerToJail();
         }
-        
-        rollBtn.setEnabled(false);
 
         // Update the new label when the button is clicked
         // Remove 2 labels if available
@@ -249,19 +257,14 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             }
         }
 
-        controller.moveCurrentPlayer();
+        if (!controller.getDie().isDouble()) {
+            rollBtn.setEnabled(false);
+        }
+
         System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
-        // Get total value of the dice when player roll = variable
-        // moveTo(variable)
 
         mainPanel.validate();
         mainPanel.repaint();
-
-        controller.moveCurrentPlayer();
-
-
-
-
 
         // For debugging
         System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));

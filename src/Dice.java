@@ -24,7 +24,7 @@ public class Dice {
     public void roll(){
         for (int i = 0; i < dice.length; i ++) {
             //Random value between 1 -> 6
-            dice[i] = rand.nextInt(6) + 1;
+            dice[i] = rand.nextInt(2) + 1;
         }
     }
 
