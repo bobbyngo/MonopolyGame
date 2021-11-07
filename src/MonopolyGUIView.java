@@ -32,6 +32,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private final JButton endTurnBtn;
     private final JButton payTaxBtn;
 
+    private boolean feePaid;
+
     //For Roll Dice
     int[] roll;
     private JLabel diceLabel1;
@@ -178,11 +180,12 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     }
 
     private void handlePayTaxBtn() {
-        //TODO
+        controller.payFee();
     }
 
     private void handleEndTurnBtn() {
-        //TODO
+        // if tax/rent is not paid, this step will not be reached
+        controller.getNextPlayer();
     }
 
     private void updatePlayerLocation() {
@@ -371,14 +374,20 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
 
         else if (e.getSource() == payTaxBtn) {
-            if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty){
-                handlePayTaxBtn();
+            if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
+                    handlePayTaxBtn();
             }else{
                 JOptionPane.showMessageDialog(null, "There is no tax to pay!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         else if (e.getSource() == endTurnBtn) {
-            handleEndTurnBtn();
+            if(feePaid) {
+                handleEndTurnBtn();
+            }else if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty){
+                JOptionPane.showMessageDialog(null, "You have not paid your tax yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "You have not paid your rent yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 }

@@ -312,6 +312,24 @@ public class MonopolyController {
     }
 
     /**
+     * payFee is used for the current player to pay rent and tax
+     *
+     * @return void
+     * @author Yuguo Liu 101142730
+     */
+    public void payFee(){
+        Square location = currentPlayer.getCurrLocation();
+        if(location instanceof Business){
+            ((Business) location).collectMoney(currentPlayer);
+        }else if(location instanceof Rail){
+            ((Rail) location).collectMoney(currentPlayer);
+        }else if(location instanceof BankProperty){
+            ((BankProperty) location).collectMoney(currentPlayer);
+            getBank().addMoney(((BankProperty) location).getTaxValue());
+        }
+    }
+
+    /**
      * Checks if currentPlayer is on
      * unowned property.
      * @return  boolean, current location is unowned
