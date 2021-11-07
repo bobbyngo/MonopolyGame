@@ -314,19 +314,36 @@ public class MonopolyController {
     /**
      * payFee is used for the current player to pay rent and tax
      *
-     * @return void
+     * @return int
      * @author Yuguo Liu 101142730
      */
-    public void payFee(){
+    public int payFee(){
         Square location = currentPlayer.getCurrLocation();
+
         if(location instanceof Business){
-            ((Business) location).collectMoney(currentPlayer);
+            if(currentPlayer.getPlayerBalance() < ((Business)currentPlayer.getCurrLocation()).getPrice()){
+                return 0;
+            }else{
+                ((Business) location).collectMoney(currentPlayer);
+                return 1;
+            }
         }else if(location instanceof Rail){
-            ((Rail) location).collectMoney(currentPlayer);
+            if(currentPlayer.getPlayerBalance() < ((Rail)currentPlayer.getCurrLocation()).getPrice()){
+                return 0;
+            }else{
+                ((Rail) location).collectMoney(currentPlayer);
+                return 1;
+            }
         }else if(location instanceof BankProperty){
-            ((BankProperty) location).collectMoney(currentPlayer);
-            getBank().addMoney(((BankProperty) location).getTaxValue());
+            if(currentPlayer.getPlayerBalance() < ((BankProperty)currentPlayer.getCurrLocation()).getTaxValue()){
+                return 0;
+            }else {
+                ((BankProperty) location).collectMoney(currentPlayer);
+                getBank().addMoney(((BankProperty) location).getTaxValue());
+                return 1;
+            }
         }
+        return 0;
     }
 
     /**
