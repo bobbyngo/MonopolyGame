@@ -206,6 +206,26 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         //TODO
     }
 
+//    private void moveTo(int steps) {
+//        String start;
+//        String end;
+//        int total = controller.getDie().getTotal();
+//        boolean passed_go;
+//        Player currentPlayer = controller.getCurrentPlayer();
+//
+//        start = currentPlayer.getCurrLocation().getName();
+//        passed_go = controller.moveCurrentPlayer();
+//        end = currentPlayer.getCurrLocation().getName();
+//        System.out.println(String.format("%s has moved forward %d steps from %s to %s",
+//                currentPlayer.getName(), total, start, end));
+//
+//        if (passed_go) {
+//            // Player passed GO
+//            System.out.println(String.format("%s has received %d$ for passing GO",
+//                    currentPlayer.getName(), controller.getGO_REWARD()));
+//        }
+//    }
+
     /**
      * Method handles roll dice button. It will delete the 2 labels next to the
      * Roll Dice button and update the 2 new die face images corresponding to the
@@ -248,6 +268,11 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
                 mainPanel.add(diceLabel2);
             }
         }
+
+        controller.moveCurrentPlayer();
+        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
+        // Get total value of the dice when player roll = variable
+        // moveTo(variable)
 
         mainPanel.validate();
         mainPanel.repaint();
