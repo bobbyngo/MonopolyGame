@@ -258,6 +258,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         textLabel.setPreferredSize(new Dimension(200,200));
         textLabel.setMaximumSize(new Dimension(200,200));
 
+        textLabel.setText(String.format(controller.getCurrentPlayer().getName() + " is on " + controller.getCurrentPlayer().getCurrLocation().getName()));
+
         textPanel.add(textLabel);
         mainPanel.add(textPanel);
 
@@ -392,12 +394,21 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         else if (e.getSource() == endTurnBtn) {
             if(feePaid) {
                 handleEndTurnBtn();
+                handleTextLabel();
             }else if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty){
                 JOptionPane.showMessageDialog(null, "You have not paid your tax yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(null, "You have not paid your rent yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             }
         }
+    }
+
+    private void handleTextLabel() {
+        textLabel.setText(String.format(controller.getCurrentPlayer().getName() + " is on " + controller.getCurrentPlayer().getCurrLocation().getName()));
+        textPanel.validate();
+        textPanel.repaint();
+        mainPanel.validate();
+        mainPanel.repaint();
     }
 }
 
