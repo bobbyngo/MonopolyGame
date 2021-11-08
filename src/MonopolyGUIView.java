@@ -223,7 +223,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
         if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
             feePaid = false;
-            endTurnBtn.setEnabled(false);
         }else{
             feePaid = true;
         }
