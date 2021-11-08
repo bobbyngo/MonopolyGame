@@ -1,6 +1,11 @@
-/*
- * Author: Patrick Liu
- * Student Number: 101142730
+/**
+ * Date: 2021 - August 11st
+ * Contributors:
+ * Ngo Huu Gia Bao 101163137
+ * Zakaria Ismail 101143497
+ * Yuguo Liu 101142730
+ * Gabriel Benni Kelley Evensen 101119814
+ *
  */
 
 import javax.imageio.ImageIO;
@@ -38,7 +43,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     int[] roll;
     private JLabel diceLabel1;
     private JLabel diceLabel2;
-
 
     private MonopolyController controller;
 
