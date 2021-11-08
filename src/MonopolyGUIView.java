@@ -255,11 +255,21 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         controller.moveCurrentPlayer();
         System.out.printf("NEW:\n\tPlayer: %s,\n\tLocation: %s%n", p, p.getCurrLocation());
 
+        if (controller.getDie().isDouble()) {
+            JOptionPane.showMessageDialog(this, String.format("%s has rolled a DOUBLE!", p.getName()));
+        }
         //FIXME: This can be improved
         if (controller.isSpeeding()) {
             controller.sendCurrentPlayerToJail();
             JOptionPane.showMessageDialog(this, String.format("%s has been caught SPEEDING!", p.getName()) +
                     "They have been sent to jail and their turn shall be skipped for 3 rounds.");
+            handleEndTurnBtn();
+            return;
+        }
+
+        if (controller.currentPlayerIsOnGoToJail()) {
+            controller.sendCurrentPlayerToJail();
+            JOptionPane.showMessageDialog(this, String.format("%s is on Go To Jail. Turn Ended.", p.getName()));
             handleEndTurnBtn();
             return;
         }
