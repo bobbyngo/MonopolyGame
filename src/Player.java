@@ -249,4 +249,17 @@ public class Player implements RoleAPI {
 
     public void removeProperty(PrivateProperty property) {
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", playerBalance=" + playerBalance +
+                ", inJail=" + inJail +
+                ", turnsInJail=" + turnsInJail +
+                ", turnsPlayed=" + turnsPlayed +
+                ", currLocation=" + currLocation +
+                ", propertyList=" + propertyList +
+                '}';
+    }
 }

@@ -77,4 +77,9 @@ public class Rail extends PrivateProperty implements PropertyAPI{
         this.getOwner().addMoney(this.getRentAmount());                            //Gives rent price to owner of property
     }
      */
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
