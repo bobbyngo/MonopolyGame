@@ -23,7 +23,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private final ArrayList<JPanel> squares;
     private final JPanel textPanel;
     private final JLabel textLabel;
-    private final ArrayList<JLabel> playerLabels;
 
     private final JButton showStatsBtn;
     private final JButton rollBtn;
@@ -51,7 +50,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         squares = new ArrayList<>();
         textPanel = new JPanel();
         textLabel = new JLabel();
-        playerLabels = new ArrayList<>();
 
         this.showStatsBtn = new JButton();
         this.showStatsBtn.addActionListener(this);
@@ -103,15 +101,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             squareLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             squareLabel.setForeground(Color.BLUE);
 
-            JLabel playerLabel = new JLabel();
-            playerLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            playerLabel.setForeground(Color.RED);
-
-            // This line is just for testing playerLabel
-            playerLabel.setText("player 1");
-
-            playerLabels.add(playerLabel);
-
             if(board.getSQUARE(i) instanceof PrivateProperty){
                 squareLabel.setText(String.format("<html> %s <br> Price: %s </html>", board.getSQUARE(i).getName(), (((PrivateProperty)board.getSQUARE(i)).getPrice())));
             }
@@ -122,7 +111,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             }
 
             InfoPanel.add(squareLabel);
-            playerPanel.add(playerLabel);
 
             squarePanel.add(InfoPanel, BorderLayout.PAGE_START);
             squarePanel.add(playerPanel, BorderLayout.PAGE_END);
@@ -234,6 +222,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         payTaxBtn.setEnabled(true);
         buyBtn.setEnabled(true);
         diceRolled = false;
+
+        textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
     }
 
 
@@ -253,6 +243,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         //rollBtn.setEnabled(false);
         diceRolled = true;
         controller.moveCurrentPlayer();
+        textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
         System.out.printf("NEW:\n\tPlayer: %s,\n\tLocation: %s%n", p, p.getCurrLocation());
 
         //FIXME: This can be improved
@@ -459,7 +450,11 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
         else if (e.getSource() == payTaxBtn) {
             if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
+                if(((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).getOwner().equals(controller.getCurrentPlayer())){
+                    JOptionPane.showMessageDialog(null, "You own this property, no rent to be paid!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+                }else {
                     handlePayTaxBtn();
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "There is no tax/rent to pay!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             }
