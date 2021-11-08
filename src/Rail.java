@@ -65,6 +65,8 @@ public class Rail extends PrivateProperty implements PropertyAPI{
 
     @Override
     public String toString() {
-        return super.toString();
+        return super.toString() +
+                " - Rent: $" +
+                this.getRentAmount();
     }
 }
