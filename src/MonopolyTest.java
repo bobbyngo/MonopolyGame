@@ -5,6 +5,18 @@ import static org.junit.Assert.*;
 
 /**
  * Testing class for monopoly
+ * To verify:
+ * - The Player steps on 'Go To Jail'
+ * - The Player steps on:
+ *      - owned PrivateProperty (Rail & Business)
+ *      - unowned PrivateProperty (Rail & Business)
+ *      - BankProperty
+ *      - Go To Jail
+ * - The Player passes the GO square
+ * - The Player moves k steps forward:
+ *      - w/ loop around back to 0
+ *      - w/o loop around
+ * - The Player steps on 'Free Parking Lot'
  */
 
 public class MonopolyTest{
