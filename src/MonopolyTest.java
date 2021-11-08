@@ -14,9 +14,6 @@ import static org.junit.Assert.*;
  *      - Go To Jail
  * - The Player passes the GO square
  * - The Player moves k steps forward:
- *      - w/ loop around back to 0
- *      - w/o loop around
- * - The Player steps on 'Free Parking Lot'
  */
 
 public class MonopolyTest{
@@ -134,5 +131,17 @@ public class MonopolyTest{
         controller.moveCurrentPlayer();
 
         assertEquals(newIndex, controller.getCurrentPlayer().getCurrLocation().getIndex());
+    }
+
+    @org.junit.Test
+    public void testPassingGo() {
+        Player p = controller.getCurrentPlayer();
+        p.setCurrLocation(new Business("Snobby Shores", 37, "pink", 120));
+        int currentBalance = p.getPlayerBalance();
+        System.out.println(p.getCurrLocation().getIndex());
+        controller.rollDie();
+        controller.moveCurrentPlayer();
+        System.out.println(p.getCurrLocation().getIndex());
+        assertEquals(currentBalance + 200, currentBalance);
     }
 }

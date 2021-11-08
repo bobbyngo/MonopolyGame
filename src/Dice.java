@@ -9,7 +9,7 @@ public class Dice {
     private final int NUM_DICE = 2;
     private int[] dice;
     private Random rand;
-    private static int NUM_SIDE = 1;
+    private static int NUM_SIDE = 6;
 
     /**
      * Constructor for Dice class
