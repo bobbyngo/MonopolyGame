@@ -144,4 +144,9 @@ public class MonopolyTest{
         System.out.println(p.getCurrLocation().getIndex());
         assertEquals(currentBalance + 200, currentBalance);
     }
+
+    @org.junit.Test
+    public void testGoToJailSquare() {
+
+    }
 }
