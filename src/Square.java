@@ -69,7 +69,7 @@ public class Square {
         return "Square{" +
                 "name='" + name + '\'' +
                 ", index=" + index +
-                ", playersCurrentlyOn=" + playersCurrentlyOn +
+                //", playersCurrentlyOn=" + playersCurrentlyOn +
                 '}';
     }
 }

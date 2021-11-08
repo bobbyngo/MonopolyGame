@@ -27,7 +27,8 @@ public class MonopolyController {
         this.board = new Board();
         this.bank = new Bank();
         this.die = new Dice();
-        this.currentPlayer = players.get(players.size()-1);
+        //this.currentPlayer = players.get(players.size()-1);
+        this.currentPlayer = players.get(0);
 
         for(Player p: this.players){
             p.setCurrLocation(board.getSQUARE(0));
@@ -311,8 +312,9 @@ public class MonopolyController {
      */
     public void sellProperty(int index) {
         PrivateProperty property = currentPlayer.getPropertyList().get(index);
-        currentPlayer.addMoney(property.getPrice());    // will prob need fix?
-        bank.addMoney(property.getPrice());
+        int cashEarned = (int)(property.getPrice() * 0.5);
+        currentPlayer.addMoney(cashEarned);    // will prob need fix: give half
+        bank.addMoney(property.getPrice() );
         currentPlayer.removeProperty(property);
 
     }
@@ -352,6 +354,11 @@ public class MonopolyController {
         return 0;
     }
 
+    /**
+     *
+     * This method will check if the player is bankrupt or not
+     * @return boolean
+     */
     public boolean isGameEnded() {
         int totalAsset = currentPlayer.getPlayerTotalAsset();
         Square currentLocation = currentPlayer.getCurrLocation();

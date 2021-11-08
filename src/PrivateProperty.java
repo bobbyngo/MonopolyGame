@@ -65,7 +65,7 @@ public class PrivateProperty extends Square{
     public String toString() {
         return "PrivateProperty{" +
                 "price=" + price +
-                ", owner=" + owner +
+                ", owner=" + ((owner != null) ? owner.getName() : "NULL") +
                 ", isOwned=" + isOwned +
                 "} " + super.toString();
     }
