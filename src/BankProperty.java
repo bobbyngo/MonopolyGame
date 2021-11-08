@@ -34,4 +34,10 @@ public class BankProperty extends Square implements PropertyAPI{
         return taxValue;
     }
 
+    @Override
+    public String toString() {
+        return "BankProperty{" +
+                "taxValue=" + taxValue +
+                "} " + super.toString();
+    }
 }

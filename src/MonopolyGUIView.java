@@ -85,6 +85,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         players.add(new Player("player4", new Square("GO", 0)));
 
         controller = new MonopolyController(players);
+
+        endTurnBtn.setEnabled(false);
     }
 
     /**
@@ -213,6 +215,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
 
         rollBtn.setEnabled(true);
+        endTurnBtn.setEnabled(false);
         //Player p = controller.getNextPlayer();
         Player p = controller.getCurrentPlayer();
         // FIXME: make contrroller function?
@@ -260,8 +263,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         // Added debug comments
         rollBtn.setEnabled(false);
         Player p = controller.getCurrentPlayer();
-        System.out.printf("INITIAL:\n\tPlayer: %s,\n\tLocation: %s%n", p, p.getCurrLocation());
-
+        System.out.println(String.format("INITIAL:\n\tPlayer: %s,\n\tLocation: %s\n", p, p.getCurrLocation()));
 
         roll = controller.rollDie();
         diceRolled = true;
@@ -282,7 +284,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
 
         textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
-        System.out.printf("NEW:\n\tPlayer: %s,\n\tLocation: %s%n", p, p.getCurrLocation());
+        System.out.println(String.format("NEW:\n\tPlayer: %s,\n\tLocation: %s", p, p.getCurrLocation()));
 
         if (controller.getDie().isDouble()) {
             JOptionPane.showMessageDialog(this, String.format("%s has rolled a DOUBLE!", p.getName()));
@@ -331,6 +333,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
 
         System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
+
+        endTurnBtn.setEnabled(true);
 
         mainPanel.validate();
         mainPanel.repaint();

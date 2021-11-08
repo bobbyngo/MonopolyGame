@@ -52,12 +52,67 @@ public class MonopolyTest{
 
     @org.junit.Test
     public void testSellBusiness(){
+        /*
+        1. Give current Player a Business
+            - assert that the Business is owned
+        2. Get the Player's current cash amount
+        3. Get the Business' value and divide by 2
+        4. Sell the Business
+        5. Assert that the player's cash amount is equal to:
+            current cash - business val / 2
+        6. Assert that the Business is not owned
+         */
+        /*
+        Player p = controller.getCurrentPlayer();
+        controller.purchaseProperty();
+        p.buyPrivateProperty();
+         */
+        // 1.
+        Player p = controller.getCurrentPlayer();
+        Business business = (Business) controller.getBoard().getSQUARE(15);
+        p.setCurrLocation(business);
+        controller.purchaseProperty(business);
+        //p.buyPrivateProperty(business);
+        assertEquals(p.getCurrLocation(), business);
+        assertTrue(business.isOwned());
+        assertEquals(p, business.getOwner());
 
+        // 2.
+        int startCash = p.getPlayerBalance();
+        // 3.
+        int sellPrice = (int)(business.getPrice() / 2);
+
+        // 4.
+        controller.sellProperty(business);
+        assertFalse(business.isOwned());
+        // 5.
+        int currCash = p.getPlayerBalance();
+        assertEquals(currCash, startCash + sellPrice);
     }
 
     @org.junit.Test
     public void testSellRail(){
+        // 1.
+        Player p = controller.getCurrentPlayer();
+        Rail rail = (Rail) controller.getBoard().getSQUARE(11);
+        p.setCurrLocation(rail);
+        controller.purchaseProperty(rail);
+        //p.buyPrivateProperty(rail);
+        assertEquals(p.getCurrLocation(), rail);
+        assertTrue(rail.isOwned());
+        assertEquals(p, rail.getOwner());
 
+        // 2.
+        int startCash = p.getPlayerBalance();
+        // 3.
+        int sellPrice = (int)(rail.getPrice() / 2);
+
+        // 4.
+        controller.sellProperty(rail);
+        assertFalse(rail.isOwned());
+        // 5.
+        int currCash = p.getPlayerBalance();
+        assertEquals(currCash, startCash + sellPrice);
     }
 
     @org.junit.Test
