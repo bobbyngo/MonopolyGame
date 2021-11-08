@@ -305,6 +305,10 @@ public class MonopolyController {
         return players.get(winnerIndex);
     }
 
+    /**
+     * This method will let the player sells the Property
+     * @param index
+     */
     public void sellProperty(int index) {
         PrivateProperty property = currentPlayer.getPropertyList().get(index);
         currentPlayer.addMoney(property.getPrice());    // will prob need fix?
@@ -348,17 +352,24 @@ public class MonopolyController {
         return 0;
     }
 
-    /**
-     * Checks if currentPlayer is on
-     * unowned property.
-     * @return  boolean, current location is unowned
-     */
-    /*
-    public boolean currentPlayerIsOnUnownedProperty() {
+    public boolean isGameEnded() {
+        int totalAsset = currentPlayer.getPlayerTotalAsset();
+        Square currentLocation = currentPlayer.getCurrLocation();
+        int fee = 0;
 
+        if (currentLocation instanceof BankProperty) {
+            fee = ((BankProperty) currentLocation).getTaxValue();
+        }
+        else if (currentLocation instanceof PrivateProperty) {
+            fee = ((PrivateProperty) currentLocation).getPrice();
+        }
+
+        if (totalAsset < fee) {
+            return true;
+        }
+
+        return false;
     }
-
-     */
 }
 
 
