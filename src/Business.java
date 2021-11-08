@@ -131,4 +131,13 @@ public class Business extends PrivateProperty implements PropertyAPI{
         this.getOwner().addMoney(this.getRentAmount());                                   //Gives rent price to owner of property
     }
     */
+
+    @Override
+    public String toString() {
+        return "Business{" +
+                "color='" + color + '\'' +
+                ", numHouse=" + numHouse +
+                ", numHotel=" + numHotel +
+                "} " + super.toString();
+    }
 }
