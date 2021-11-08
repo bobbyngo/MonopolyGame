@@ -232,6 +232,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
 
         rollBtn.setEnabled(true);
+        payTaxBtn.setEnabled(true);
+        buyBtn.setEnabled(true);
         diceRolled = false;
     }
 
@@ -374,7 +376,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         // payTax Button
         c.gridy = 5;
         gb.setConstraints(payTaxBtn, c);
-        payTaxBtn.setText("Pay Tax");
+        payTaxBtn.setText("Pay Tax/Rent");
         payTaxBtn.setForeground(Color.RED);
         mainPanel.add(payTaxBtn);
 
@@ -460,7 +462,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
                     handlePayTaxBtn();
             }else{
-                JOptionPane.showMessageDialog(null, "There is no tax to pay!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "There is no tax/rent to pay!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         else if (e.getSource() == endTurnBtn) {
