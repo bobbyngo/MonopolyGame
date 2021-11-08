@@ -48,7 +48,6 @@ public class Player implements RoleAPI {
             this.removeMoney(property.getPrice());
             this.addPropertyList(property);
             property.setOwner(this);
-            System.out.println("You have bought the property");
         } else {
             System.out.println("This property is owned");
         }
@@ -66,6 +65,13 @@ public class Player implements RoleAPI {
         }
     }
 
+    /**
+     * This method will remove Property to the Player's propertyList
+     * @param property
+     */
+    public void removeProperty(PrivateProperty property) {
+        this.propertyList.remove(property);
+    }
 
     /**
      * This method will call the isOwningASet of color in the ColorGroup Class
@@ -210,7 +216,10 @@ public class Player implements RoleAPI {
         return TotalAsset;
     }
 
-
+    /**
+     * Getter for turn in jail
+     * @return int
+     */
     public int getTurnsInJail() {
         return turnsInJail;
     }
@@ -231,6 +240,10 @@ public class Player implements RoleAPI {
         return false;
     }
 
+    /**
+     * This method will represent the property of the Player in String
+     * @return String
+     */
     public String propertiesToString(){
         String s = "";
         for (PrivateProperty pp : this.propertyList){
@@ -239,15 +252,32 @@ public class Player implements RoleAPI {
         return s;
     }
 
+    /**
+     * The method does the increment for player's turn
+     */
     public void makeTurn(){
         this.turnsPlayed++;
     }
 
+    /**
+     * Getter for turn
+     * @return int
+     */
     public int getTurn() {
     return this.turnsPlayed;
     }
 
 
-    public void removeProperty(PrivateProperty property) {
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", playerBalance=" + playerBalance +
+                ", inJail=" + inJail +
+                ", turnsInJail=" + turnsInJail +
+                ", turnsPlayed=" + turnsPlayed +
+                ", currLocation=" + currLocation +
+                ", propertyList=" + propertyList +
+                '}';
     }
 }

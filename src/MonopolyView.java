@@ -409,10 +409,6 @@ public class MonopolyView {
 
         return exitval;
 
-
-
-
-
     }
 
 
@@ -456,9 +452,6 @@ public class MonopolyView {
         }
 
     }
-
-
-
 
     public static void main(String[] args) {
 

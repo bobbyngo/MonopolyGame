@@ -64,4 +64,12 @@ public class Square {
         this.index = index;
     }
 
+    @Override
+    public String toString() {
+        return "Square{" +
+                "name='" + name + '\'' +
+                ", index=" + index +
+                ", playersCurrentlyOn=" + playersCurrentlyOn +
+                '}';
+    }
 }
