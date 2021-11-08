@@ -119,7 +119,7 @@ public class MonopolyTest{
         controller.getCurrentPlayer().setCurrLocation(new BankProperty("Electric Tax", 5, 200));
         controller.payFee();
 
-        assertEquals(currentBalance-200, controller.getCurrentPlayer().getPlayerBalance());
+        assertEquals(currentBalance - 200, controller.getCurrentPlayer().getPlayerBalance());
     }
 
     @org.junit.Test
@@ -138,11 +138,12 @@ public class MonopolyTest{
         Player p = controller.getCurrentPlayer();
         p.setCurrLocation(new Business("Snobby Shores", 37, "pink", 120));
         int currentBalance = p.getPlayerBalance();
-        System.out.println(p.getCurrLocation().getIndex());
+        
         controller.rollDie();
         controller.moveCurrentPlayer();
-        System.out.println(p.getCurrLocation().getIndex());
-        assertEquals(currentBalance + 200, currentBalance);
+        int afterPassingGoBalance = p.getPlayerBalance();
+
+        assertEquals(currentBalance + 200, afterPassingGoBalance);
     }
 
     @org.junit.Test
