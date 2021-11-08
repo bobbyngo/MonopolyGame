@@ -42,6 +42,9 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
     private MonopolyController controller;
 
+    /**
+     * Constructor for MonopolyGUIView class
+     */
     public MonopolyGUIView(){
         board = new Board();
         gb = new GridBagLayout();
@@ -81,13 +84,12 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         players.add(new Player("player3", new Square("GO", 0)));
         players.add(new Player("player4", new Square("GO", 0)));
 
-//        players.get(3).buyPrivateProperty(new PrivateProperty("Dusty Depot", 2,100));
-//        players.get(3).buyPrivateProperty(new PrivateProperty("South Rail", 3, 150));
-//        players.get(3).buyPrivateProperty(new PrivateProperty("Fatal Fields", 4,80));
-
         controller = new MonopolyController(players);
     }
 
+    /**
+     * This method will create a layout for each square like name, price
+     */
     private void SquaresLayout(){
         for(int i = 0; i < 38; i++){
             JPanel squarePanel = new JPanel(new BorderLayout());
@@ -119,6 +121,9 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
     }
 
+    /**
+     * This method adds the Square into the Board
+     */
     private void addSquareToBoard(){
         for(int i = 0; i < 10; i++){
             c.gridx = i;
@@ -153,6 +158,11 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
     }
 
+    /**
+     * This method will handle show player's information button, it will display
+     * the name of the player, balance, current location, owned properties
+     * @param e ActionListener
+     */
     private void handleShowStatsBtn(ActionEvent e) {
         int id = this.controller.getCurrentPlayer().getCurrLocation().getIndex();
         JOptionPane.showMessageDialog((Component) null,
@@ -167,6 +177,9 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
                         this.controller.getCurrentPlayer().getName() + "'s stats", 1);
     }
 
+    /**
+     * This function will handle the buy property method, it will call the purchaseProperty method from the MonopolyController
+     */
     private void handleBuyPropertyBtn() {
         Square currentLocation = controller.getCurrentPlayer().getCurrLocation();
         controller.purchaseProperty((PrivateProperty)currentLocation);
@@ -174,6 +187,10 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         JOptionPane.showMessageDialog(null, "Successfully buy the property", "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * This function will be executed when the player lands on Square that requires player to pay fees such as
+     * Bank Taxes, Rent
+     */
     private void handlePayTaxBtn() {
         if(controller.payFee() == 0){
             JOptionPane.showMessageDialog(null, "You do not have enough balance to pay the rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
@@ -186,6 +203,9 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
     }
 
+    /**
+     * This method will end the player's current turn and proceed to the next player's turn
+     */
     private void handleEndTurnBtn() {
         // if tax/rent is not paid, this step will not be reached
         if(!controller.getDie().isDouble()){
@@ -224,6 +244,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         diceRolled = false;
 
         textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
+
+
     }
 
 
@@ -239,17 +261,34 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         rollBtn.setEnabled(false);
         Player p = controller.getCurrentPlayer();
         System.out.printf("INITIAL:\n\tPlayer: %s,\n\tLocation: %s%n", p, p.getCurrLocation());
+
+
         roll = controller.rollDie();
-        //rollBtn.setEnabled(false);
         diceRolled = true;
         controller.moveCurrentPlayer();
+
+        // End Game functionality
+        if (controller.isGameEnded()) {
+            JOptionPane.showMessageDialog(this, String.format("%s cannot afford this fee.\n Bankrupt!", p.getName()) +
+                    "Game is Over");
+            Player winner = controller.determineWinner();
+            JOptionPane.showMessageDialog(this, String.format("%s is the winner with total value of $%d",
+                    winner.getName(), winner.getPlayerTotalAsset()));
+
+            //Exit the game
+            this.dispose();
+            System.exit(-1);
+        }
+
+
         textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
         System.out.printf("NEW:\n\tPlayer: %s,\n\tLocation: %s%n", p, p.getCurrLocation());
 
         if (controller.getDie().isDouble()) {
             JOptionPane.showMessageDialog(this, String.format("%s has rolled a DOUBLE!", p.getName()));
         }
-        //FIXME: This can be improved
+
+        // Check if the player rolls double three times
         if (controller.isSpeeding()) {
             controller.sendCurrentPlayerToJail();
             JOptionPane.showMessageDialog(this, String.format("%s has been caught SPEEDING!", p.getName()) +
@@ -272,7 +311,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
         // Stinky code but it works I will refactor later
         JLabel dieLabel = null;
-        for (int i = 0; i < controller.getDie().getSIZE(); i ++) {
+        for (int i = 0; i < controller.getDie().getNUM_DICE(); i ++) {
             InputStream in = getClass().getResourceAsStream(String.format("DiceImg/%d.png", roll[i]));
             BufferedImage image = ImageIO.read(in);
             Image resizeImage = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
@@ -291,14 +330,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             }
         }
 
-        /*
-        if (!controller.getDie().isDouble()) {
-            buyBtn.setEnabled(true);
-            rollBtn.setEnabled(false);
-        }
-
-         */
-
         System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
 
         mainPanel.validate();
@@ -310,6 +341,9 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         System.out.println(controller.getCurrentPlayer().propertiesToString());
     }
 
+    /**
+     * This method will handle the sell button
+     */
     private void handleSellBtn() {
         System.out.println("Sell btn pressed!");
         SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(this, controller);
@@ -318,8 +352,10 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         textLabel.setText(controller.getCurrentPlayer().propertiesToString());
     }
 
+    /**
+     * This method will add buttons, text box to the middle of the board
+     */
     private void addButtonToBoard(){
-
         // Text Panel
         c.gridx = 2;
         c.gridy = 4;
@@ -388,9 +424,9 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         mainPanel.add(endTurnBtn);
     }
 
-    // TODO: PRISON
-    // TODO
-
+    /**
+     * The method displays the GUI
+     */
     public void displayGUI(){
         this.SquaresLayout();
         this.addSquareToBoard();
@@ -421,11 +457,10 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        MonopolyGUIView view = new MonopolyGUIView();
-        view.displayGUI();
-    }
-
+    /**
+     * This method will check what button is pressed and calls its handle method
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -455,7 +490,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             } else {
                 JOptionPane.showMessageDialog(null, "There is not a purchasable property!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             }
-            buyBtn.setEnabled(false);
         }
 
         else if (e.getSource() == payTaxBtn) {
@@ -480,6 +514,11 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(null, "You have not paid your rent yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        MonopolyGUIView view = new MonopolyGUIView();
+        view.displayGUI();
     }
 }
 

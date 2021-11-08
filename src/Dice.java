@@ -6,15 +6,16 @@ public class Dice {
      * 101163137
      */
 
-    private final int SIZE = 2;
-    int[] dice;
-    Random rand;
+    private final int NUM_DICE = 2;
+    private int[] dice;
+    private Random rand;
+    private static int NUM_SIDE = 6;
 
     /**
      * Constructor for Dice class
      */
     public Dice() {
-        dice = new int[SIZE];
+        dice = new int[NUM_DICE];
         rand = new Random();
     }
 
@@ -23,8 +24,13 @@ public class Dice {
      */
     public void roll(){
         for (int i = 0; i < dice.length; i ++) {
+
+            //Before
             //Random value between 1 -> 6
-            dice[i] = rand.nextInt(6) + 1;
+            //dice[i] = rand.nextInt(6) + 1;
+
+            //side would be 6
+            dice[i] = rand.nextInt(NUM_SIDE) + 1;
         }
     }
 
@@ -56,7 +62,15 @@ public class Dice {
      * Getter of size array
      * @return int
      */
-    public int getSIZE() {
-        return SIZE;
+    public int getNUM_DICE() {
+        return NUM_DICE;
+    }
+
+    /**
+     * Setter for NUM_SIDE
+     * @param numSide
+     */
+    public static void setNumSide(int numSide) {
+        NUM_SIDE = numSide;
     }
 }

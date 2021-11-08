@@ -70,12 +70,12 @@ public class MonopolyTest{
         assertEquals(currentBalance-200, controller.getCurrentPlayer().getPlayerBalance());
     }
 
-    // Not sure if we have to hard code this
     @org.junit.Test
     public void testPlayerMoving(){
-
+        // This test will work only if the player starts at index 0 to move to the k value
         controller.rollDie();
         int newIndex = controller.getDie().getTotal();
+
         controller.moveCurrentPlayer();
 
         assertEquals(newIndex, controller.getCurrentPlayer().getCurrLocation().getIndex());
