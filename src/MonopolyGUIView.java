@@ -193,6 +193,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }else{
             JOptionPane.showMessageDialog(null, "You have successfully paid your rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             feePaid = true;
+            endTurnBtn.setEnabled(true);
             payTaxBtn.setEnabled(false);
         }
     }
@@ -203,8 +204,29 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             controller.getNextPlayer();
         }
 
+        rollBtn.setEnabled(true);
+        //Player p = controller.getNextPlayer();
+        Player p = controller.getCurrentPlayer();
+        // FIXME: make contrroller function?
+        JOptionPane.showMessageDialog(this, String.format("It is %s's turn.", p.getName()));
+        if (p.isInJail()) {
+            boolean hasServedTime = p.serveJailTime();
+            int turnsLeft = 3 - p.getTurnsInJail();
+            if (!hasServedTime) {
+                JOptionPane.showMessageDialog(this,
+                        String.format("Skipping %s's turn. Player is in Jail with %d turns remaining.", p.getName(), turnsLeft));
+                handleEndTurnBtn(); // call self
+                return;
+            } else {
+                JOptionPane.showMessageDialog(this, "%s's jail time has been served." +
+                        "They may play this turn.");
+            }
+        }
+
+
         if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
             feePaid = false;
+            endTurnBtn.setEnabled(false);
         }else{
             feePaid = true;
         }
@@ -222,15 +244,23 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
      */
     private void handleRollDiceBtn() throws IOException {
         // Calling the rollDie function
-
-        roll = controller.rollDie();
+        // Added debug comments
         rollBtn.setEnabled(false);
+        Player p = controller.getCurrentPlayer();
+        System.out.printf("INITIAL:\n\tPlayer: %s,\n\tLocation: %s%n", p, p.getCurrLocation());
+        roll = controller.rollDie();
+        //rollBtn.setEnabled(false);
         diceRolled = true;
         controller.moveCurrentPlayer();
+        System.out.printf("NEW:\n\tPlayer: %s,\n\tLocation: %s%n", p, p.getCurrLocation());
 
         //FIXME: This can be improved
         if (controller.isSpeeding()) {
             controller.sendCurrentPlayerToJail();
+            JOptionPane.showMessageDialog(this, String.format("%s has been caught SPEEDING!", p.getName()) +
+                    "They have been sent to jail and their turn shall be skipped for 3 rounds.");
+            handleEndTurnBtn();
+            return;
         }
 
         // Update the new label when the button is clicked
@@ -259,6 +289,16 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             }
         }
 
+        /*
+        if (!controller.getDie().isDouble()) {
+            buyBtn.setEnabled(true);
+            rollBtn.setEnabled(false);
+        }
+
+         */
+
+        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
+
         mainPanel.validate();
         mainPanel.repaint();
 
@@ -266,6 +306,14 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
         System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
         System.out.println(controller.getCurrentPlayer().propertiesToString());
+    }
+
+    private void handleSellBtn() {
+        System.out.println("Sell btn pressed!");
+        SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(this, controller);
+        sppd.setVisible(true);
+
+        textLabel.setText(controller.getCurrentPlayer().propertiesToString());
     }
 
     private void addButtonToBoard(){
@@ -392,11 +440,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
 
         else if (e.getSource() == sellBtn) {
-            System.out.println("Sell btn pressed!");
-            SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(this, controller);
-            sppd.setVisible(true);
-
-            textLabel.setText(controller.getCurrentPlayer().propertiesToString());
+            handleSellBtn();
         }
 
         else if (e.getSource() == buyBtn) {
