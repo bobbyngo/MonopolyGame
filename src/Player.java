@@ -276,8 +276,8 @@ public class Player implements RoleAPI {
                 ", inJail=" + inJail +
                 ", turnsInJail=" + turnsInJail +
                 ", turnsPlayed=" + turnsPlayed +
-                ", currLocation=" + currLocation +
-                ", propertyList=" + propertyList +
+                //", currLocation=" + currLocation +
+                //", propertyList=" + propertyList +
                 '}';
     }
 }

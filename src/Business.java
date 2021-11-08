@@ -117,12 +117,11 @@ public class Business extends PrivateProperty implements PropertyAPI{
         this.getOwner().addMoney(this.getRentAmount());
     }
 
+
     @Override
     public String toString() {
-        return "Business{" +
-                "color='" + color + '\'' +
-                ", numHouse=" + numHouse +
-                ", numHotel=" + numHotel +
-                "} " + super.toString();
+        return super.toString() +
+                " - Rent: $" +
+                this.getRentAmount();
     }
 }
