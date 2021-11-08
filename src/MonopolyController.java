@@ -183,7 +183,7 @@ public class MonopolyController {
      * @author  Zakaria Ismail, 101143497
      */
     public boolean isSpeeding() {
-        return consecutiveDoubles == 3;
+        return consecutiveDoubles >= 3;
     }
 
     /**
