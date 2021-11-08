@@ -33,6 +33,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private final JButton payTaxBtn;
 
     private boolean feePaid = true;
+    private boolean diceRolled = false;
 
     //For Roll Dice
     int[] roll;
@@ -190,18 +191,22 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             JOptionPane.showMessageDialog(null, "You do not have enough balance to pay the rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             feePaid = false;
         }else{
+            JOptionPane.showMessageDialog(null, "You have successfully paid your rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             feePaid = true;
             endTurnBtn.setEnabled(true);
+            payTaxBtn.setEnabled(false);
         }
-
-        // TODO: Dialog
-        // TODO: Prevent the player pay twice
     }
 
     private void handleEndTurnBtn() {
         // if tax/rent is not paid, this step will not be reached
+        if(!controller.getDie().isDouble()){
+            controller.getNextPlayer();
+        }
+
         rollBtn.setEnabled(true);
-        Player p = controller.getNextPlayer();
+        //Player p = controller.getNextPlayer();
+        Player p = controller.getCurrentPlayer();
         // FIXME: make contrroller function?
         if (p.isInJail()) {
             boolean hasServedTime = p.serveJailTime();
@@ -223,7 +228,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             feePaid = true;
         }
 
-        // TODO: Re enable the roll, check double current player, they cannot end without rolling dice
+        rollBtn.setEnabled(true);
+        diceRolled = false;
     }
 
 
@@ -240,6 +246,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         Player p = controller.getCurrentPlayer();
         System.out.printf("INITIAL:\n\tPlayer: %s,\n\tLocation: %s%n", p, p.getCurrLocation());
         roll = controller.rollDie();
+        //rollBtn.setEnabled(false);
+        diceRolled = true;
         controller.moveCurrentPlayer();
         System.out.printf("NEW:\n\tPlayer: %s,\n\tLocation: %s%n", p, p.getCurrLocation());
 
@@ -453,11 +461,13 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             }
         }
         else if (e.getSource() == endTurnBtn) {
-            if(feePaid) {
+            if(feePaid && diceRolled) {
                 handleEndTurnBtn();
+            }else if(!diceRolled){
+                JOptionPane.showMessageDialog(null, "You must roll the dice before ending the turn!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             }else if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty){
                 JOptionPane.showMessageDialog(null, "You have not paid your tax yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-            }else{
+            }else {
                 JOptionPane.showMessageDialog(null, "You have not paid your rent yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             }
         }
