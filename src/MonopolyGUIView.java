@@ -89,8 +89,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         players.add(new Player("player4", new Square("GO", 0)));
 
         controller = new MonopolyController(players);
-
-        endTurnBtn.setEnabled(false);
     }
 
     /**
@@ -204,7 +202,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }else{
             JOptionPane.showMessageDialog(null, "You have successfully paid your rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             feePaid = true;
-            endTurnBtn.setEnabled(true);
             payTaxBtn.setEnabled(false);
         }
     }
@@ -218,8 +215,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             controller.getNextPlayer();
         }
 
-        rollBtn.setEnabled(true);
-        endTurnBtn.setEnabled(false);
         //Player p = controller.getNextPlayer();
         Player p = controller.getCurrentPlayer();
         // FIXME: make contrroller function?
@@ -238,21 +233,12 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             }
         }
 
-
-        if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
-            feePaid = false;
-        }else{
-            feePaid = true;
-        }
-
         rollBtn.setEnabled(true);
         payTaxBtn.setEnabled(true);
         buyBtn.setEnabled(true);
         diceRolled = false;
 
         textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
-
-
     }
 
 
@@ -273,6 +259,14 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         diceRolled = true;
         controller.moveCurrentPlayer();
 
+        // check if rent or tax need to be paid
+        if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
+            System.out.println(String.format("Patrick added this for testing: %s, %s", controller.getCurrentPlayer().getCurrLocation(), controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()));
+            feePaid = false;
+        }else{
+            feePaid = true;
+        }
+
         // End Game functionality
         if (controller.isGameEnded()) {
             JOptionPane.showMessageDialog(this, String.format("%s cannot afford this fee.\n Bankrupt!", p.getName()) +
@@ -288,7 +282,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
 
         textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
-        System.out.println(String.format("NEW:\n\tPlayer: %s,\n\tLocation: %s", p, p.getCurrLocation()));
+        System.out.println(String.format("NEW:\n\tPlayer: %s,\n\tLocation: %s, \n\tFeePaid: %s", p, p.getCurrLocation(), feePaid));
 
         if (controller.getDie().isDouble()) {
             JOptionPane.showMessageDialog(this, String.format("%s has rolled a DOUBLE!", p.getName()));
@@ -502,7 +496,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
         else if (e.getSource() == payTaxBtn) {
             if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
-                if(((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).getOwner().equals(controller.getCurrentPlayer())){
+                if(controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).getOwner().equals(controller.getCurrentPlayer())){
                     JOptionPane.showMessageDialog(null, "You own this property, no rent to be paid!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
                 }else {
                     handlePayTaxBtn();
