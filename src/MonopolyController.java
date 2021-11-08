@@ -352,6 +352,11 @@ public class MonopolyController {
         return 0;
     }
 
+    /**
+     *
+     * This method will check if the player is bankrupt or not
+     * @return boolean
+     */
     public boolean isGameEnded() {
         int totalAsset = currentPlayer.getPlayerTotalAsset();
         Square currentLocation = currentPlayer.getCurrLocation();
