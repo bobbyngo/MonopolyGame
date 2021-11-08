@@ -208,6 +208,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         //Player p = controller.getNextPlayer();
         Player p = controller.getCurrentPlayer();
         // FIXME: make contrroller function?
+        JOptionPane.showMessageDialog(this, String.format("It is %s's turn.", p.getName()));
         if (p.isInJail()) {
             boolean hasServedTime = p.serveJailTime();
             int turnsLeft = 3 - p.getTurnsInJail();
@@ -221,6 +222,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
                         "They may play this turn.");
             }
         }
+
+
         if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
             feePaid = false;
             endTurnBtn.setEnabled(false);
