@@ -289,8 +289,12 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             System.exit(-1);
         }
 
+        if(controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
+            textLabel.setText(String.format("<html> %s's turn <br> Location: %s <br> Owner: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(), ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).getOwner().getName()));
+        }else{
+            textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
+        }
 
-        textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
         System.out.println(String.format("NEW:\n\tPlayer: %s,\n\tLocation: %s, \n\tFeePaid: %s", p, p.getCurrLocation(), feePaid));
 
         if (controller.getDie().isDouble()) {
@@ -360,8 +364,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         System.out.println("Sell btn pressed!");
         SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(this, controller);
         sppd.setVisible(true);
-
-        textLabel.setText(controller.getCurrentPlayer().propertiesToString());
     }
 
     /**
