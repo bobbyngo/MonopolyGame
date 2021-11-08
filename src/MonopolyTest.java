@@ -5,6 +5,18 @@ import static org.junit.Assert.*;
 
 /**
  * Testing class for monopoly
+ * To verify:
+ * - The Player steps on 'Go To Jail'
+ * - The Player steps on:
+ *      - owned PrivateProperty (Rail & Business)
+ *      - unowned PrivateProperty (Rail & Business)
+ *      - BankProperty
+ *      - Go To Jail
+ * - The Player passes the GO square
+ * - The Player moves k steps forward:
+ *      - w/ loop around back to 0
+ *      - w/o loop around
+ * - The Player steps on 'Free Parking Lot'
  */
 
 public class MonopolyTest{
@@ -58,12 +70,12 @@ public class MonopolyTest{
         assertEquals(currentBalance-200, controller.getCurrentPlayer().getPlayerBalance());
     }
 
-    // Not sure if we have to hard code this
     @org.junit.Test
     public void testPlayerMoving(){
-
+        // This test will work only if the player starts at index 0 to move to the k value
         controller.rollDie();
         int newIndex = controller.getDie().getTotal();
+
         controller.moveCurrentPlayer();
 
         assertEquals(newIndex, controller.getCurrentPlayer().getCurrLocation().getIndex());
