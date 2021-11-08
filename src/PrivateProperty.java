@@ -63,15 +63,6 @@ public class PrivateProperty extends Square{
 
     @Override
     public String toString() {
-        /*
-        return "PrivateProperty{" +
-                "price=" + price +
-                ", owner=" + ((owner != null) ? owner.getName() : "NULL") +
-                ", isOwned=" + isOwned +
-                "} " + super.toString();
-
-         */
-
         return this.getName() +
                 " - Sell Price: $" +
                 (int)(this.getPrice()/2);

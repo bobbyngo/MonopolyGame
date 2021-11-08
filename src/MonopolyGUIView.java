@@ -212,7 +212,16 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private void handleEndTurnBtn() {
         // if tax/rent is not paid, this step will not be reached
         if(!controller.getDie().isDouble()){
+            // not double
             controller.getNextPlayer();
+        } else {
+            // is double
+            if (controller.getCurrentPlayer().isInJail()) {
+                // is in jail
+                controller.getNextPlayer();
+            }
+
+
         }
 
         //Player p = controller.getNextPlayer();
@@ -293,6 +302,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             controller.sendCurrentPlayerToJail();
             JOptionPane.showMessageDialog(this, String.format("%s has been caught SPEEDING!", p.getName()) +
                     "They have been sent to jail and their turn shall be skipped for 3 rounds.");
+            feePaid = true;
             handleEndTurnBtn();
             return;
         }

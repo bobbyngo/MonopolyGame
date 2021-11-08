@@ -171,8 +171,8 @@ public class Player implements RoleAPI {
         this.currLocation = currLocation;
     }
 
-    public boolean getInJail() {
-        return this.inJail;
+    public void getInJail() {
+        this.inJail = true;
     }
 
 
