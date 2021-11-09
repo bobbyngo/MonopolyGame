@@ -72,6 +72,7 @@ public class Player implements RoleAPI {
      */
     public void removeProperty(PrivateProperty property) {
         this.propertyList.remove(property);
+        property.removeOwner();
     }
 
     /**
@@ -172,8 +173,8 @@ public class Player implements RoleAPI {
         this.currLocation = currLocation;
     }
 
-    public boolean getInJail() {
-        return this.inJail;
+    public void getInJail() {
+        this.inJail = true;
     }
 
 
@@ -277,8 +278,8 @@ public class Player implements RoleAPI {
                 ", inJail=" + inJail +
                 ", turnsInJail=" + turnsInJail +
                 ", turnsPlayed=" + turnsPlayed +
-                ", currLocation=" + currLocation +
-                ", propertyList=" + propertyList +
+                //", currLocation=" + currLocation +
+                //", propertyList=" + propertyList +
                 '}';
     }
 }

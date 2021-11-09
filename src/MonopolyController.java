@@ -183,7 +183,7 @@ public class MonopolyController {
      * @author  Zakaria Ismail, 101143497
      */
     public boolean isSpeeding() {
-        return consecutiveDoubles == 3;
+        return consecutiveDoubles >= 3;
     }
 
     /**
@@ -315,9 +315,8 @@ public class MonopolyController {
         PrivateProperty property = currentPlayer.getPropertyList().get(index);
         int cashEarned = (int)(property.getPrice() * 0.5);
         currentPlayer.addMoney(cashEarned);    // will prob need fix: give half
-        bank.addMoney(property.getPrice() );
+        bank.removeMoney(cashEarned);
         currentPlayer.removeProperty(property);
-
     }
 
     /**
