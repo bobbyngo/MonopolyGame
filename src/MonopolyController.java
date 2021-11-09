@@ -192,6 +192,7 @@ public class MonopolyController {
      */
     public void sendCurrentPlayerToJail() {
         currentPlayer.getInJail();
+        currentPlayer.setCurrLocation(board.getJail());
     }
 
     /**

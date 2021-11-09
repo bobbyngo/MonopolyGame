@@ -366,6 +366,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
     /**
      * This method will handle the sell button
+     * @author  Zakaria Ismail, 101143497
      */
     private void handleSellBtn() {
         System.out.println("Sell btn pressed!");

@@ -1,4 +1,5 @@
 import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import static org.junit.Assert.*;
@@ -17,6 +18,8 @@ import static org.junit.Assert.*;
  */
 
 public class MonopolyTest{
+
+    private static int NUM_PLAYERS;
     private MonopolyController controller;
     private int []roll;
     //Player p1 =new Player("player4", new Square("GO", 0));
@@ -29,7 +32,7 @@ public class MonopolyTest{
         players.add(new Player("player2", new Square("GO", 0)));
         players.add(new Player("player3", new Square("GO", 0)));
         players.add(new Player("player4", new Square("GO", 0)));
-
+        NUM_PLAYERS = players.size();
         controller = new MonopolyController(players);
     }
 
@@ -148,6 +151,43 @@ public class MonopolyTest{
 
     @org.junit.Test
     public void testGoToJailSquare() {
+        Player p = controller.getCurrentPlayer();
+        Square goToJail = controller.getBoard().getGoToJail();
+        p.setCurrLocation(goToJail);
+        assertEquals(p.getCurrLocation(), goToJail);
+        assertFalse(p.isInJail());
+
+        boolean onGoToJail = controller.currentPlayerIsOnGoToJail();
+        assertTrue(onGoToJail);
+
+        controller.sendCurrentPlayerToJail();
+        Square prison = controller.getBoard().getJail();
+        assertEquals(prison, p.getCurrLocation());
+    }
+
+    @Test
+    public void testServeJailTime() {
+        testGoToJailSquare();
+        Player prisonPlayer = controller.getCurrentPlayer();
+        Player currPlayer = controller.getCurrentPlayer();
+
+        for (int i=0; i<2; i++) {
+            for (int j=0; j < NUM_PLAYERS; j++) {
+                if (currPlayer.isInJail()) {
+                    currPlayer.serveJailTime();
+                }
+                currPlayer = controller.getNextPlayer();
+            }
+        }
+        assertEquals(prisonPlayer, controller.getCurrentPlayer());
+
+        assertTrue(prisonPlayer.isInJail());
+        boolean hasServedTime = prisonPlayer.serveJailTime();
+        assertTrue(hasServedTime);
+        assertFalse(prisonPlayer.isInJail());
+
+
 
     }
+
 }
