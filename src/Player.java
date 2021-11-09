@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 
 import java.util.HashMap;
@@ -244,17 +245,22 @@ public class Player implements RoleAPI {
     /**
      * This method will represent the property of the Player in String
      * @return String
+     *
+     * @author Gabriel Benni K. Evensen 101119814
      */
     public String propertiesToString(){
         String s = "";
         for (PrivateProperty pp : this.propertyList){
             s += ("Name:- " + pp.getName() + " / Price:- $" + pp.getPrice() + "\n");
         }
+        System.out.println(s);
         return s;
     }
 
     /**
      * The method does the increment for player's turn
+     *
+     * @author Gabriel Benni K. Evensen 101119814
      */
     public void makeTurn(){
         this.turnsPlayed++;

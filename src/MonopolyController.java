@@ -192,6 +192,7 @@ public class MonopolyController {
      */
     public void sendCurrentPlayerToJail() {
         currentPlayer.getInJail();
+        currentPlayer.setCurrLocation(board.getJail());
     }
 
     /**
@@ -207,6 +208,7 @@ public class MonopolyController {
         //currentPlayer.moveTo(die.getTotal());
         end_index = (start_index + die.getTotal()) % board.getLENGTH();
         currentPlayer.setCurrLocation(board.getSQUARE(end_index));
+
         //end_index = currentPlayer.getCurrLocation().getIndex();
 
         if (end_index < start_index) {
