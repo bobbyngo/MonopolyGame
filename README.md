@@ -2,7 +2,7 @@
 ```
 SYSC 3110 | Software Designing Project (SDK 17 working)
 ```
-# Board
+# GUI
 <div align-item="center"><img src="Images/GUI.PNG" height="100%" width="100%"></div>
 
 # Description:
