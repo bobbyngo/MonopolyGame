@@ -281,12 +281,18 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         Player p = controller.getCurrentPlayer();
         System.out.println(String.format("INITIAL:\n\tPlayer: %s,\n\tLocation: %s\n", p, p.getCurrLocation()));
 
+        Square oldloc = controller.getCurrentPlayer().getCurrLocation();
         playerLabels.get(controller.getCurrentPlayer().getCurrLocation().getIndex()).setText("");
 
         roll = controller.rollDie();
         diceRolled = true;
         controller.moveCurrentPlayer();
 
+        StringBuilder str = new StringBuilder();
+        for (Player playa : oldloc.getPlayersCurrentlyOn()) {
+            str.append("%s\n");
+        }
+        playerLabels.get(oldloc.getIndex()).setText(String.valueOf(str));
         playerLabels.get(controller.getCurrentPlayer().getCurrLocation().getIndex()).setText(controller.getCurrentPlayer().getName());
 
         // check if rent or tax need to be paid
