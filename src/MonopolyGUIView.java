@@ -57,6 +57,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         squares = new ArrayList<>();
         textPanel = new JPanel();
         textLabel = new JLabel();
+        this.setTitle("Monopoly Game");
 
         this.showStatsBtn = new JButton();
         this.showStatsBtn.addActionListener(this);

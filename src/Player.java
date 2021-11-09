@@ -71,6 +71,7 @@ public class Player implements RoleAPI {
      */
     public void removeProperty(PrivateProperty property) {
         this.propertyList.remove(property);
+        property.removeOwner();
     }
 
     /**
