@@ -73,3 +73,6 @@ Added files:
 * SellPlayerPropertyDialog.java:
   Class that is responsible for displaying a dialog box and process requests when the players wish to sell them owned properties
   
+# Known Issue
+
+Player label is updated whenever the player rolls the dice, however, if a player landed on a square that is already occupied, the previous player's label will be erased. This is only a visual issue and does not have any impact on the player's actual position in the system.
