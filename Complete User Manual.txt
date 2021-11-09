@@ -1,29 +1,17 @@
 complete user manual
 SYSC 3110 | Software Designing Project
 
-To play the game, run the MonopolyView.java file and follow the textual interface.
-
-The game will prompt you to enter the number of players that will be joining the game at the beginning.
+To play the game, run the MonopolyGUIView.java file and follow the follow the graphical user interface, the game in the current state has 4 player by default.
 
 The player will roll 2 dice to determine how many squares he/she will be advancing. If a double is rolled, an extra turn will be granted after the player completes the current turn. If the player rolls 3 doubles in a roll, he/she will be considered as “speeding” and moved to the “jail” Square.
 
-During the player’s turn, the following 2 choices will be always be offered:
-(1) Sell the Properties they have already bought
-(2) Display their status which includes: player’s name, play’s current balance, player’s total asset value, properties that they own
-(3) End turn
-
-The following choices will be offered to the players if they land on the following Square type:
-Private property square that is unowned by another player (Business or Rail):
-(1) Purchase
-
-Private property square that is owned by another player (Business or Rail):
-(1) Pay rent
-
-Bank Properties (Electric Tax, Insurance Tax, Luxury Tax, Water Tax):
-(1) Pay Tax
-
-Jail, Free Parking, Go:
-These 3 Square will not offer the player any additional options, the players are considered as visitors.
+During the player’s turn, the following 6 choices will be always be offered:
+(1) Show Stats: displays player's current location, assets and wallet value
+(2) Roll Dice: roll a pair and dice and advance according to the rolled value
+(3) Buy Property: purchase the property that the player landed on
+(4) Sell Property: sell any property that the player has previously purchase to the back for half of the value
+(5) Pay Tax/Rent: pay tax if the player landed on a tax square, OR pay rent if the player lands on a private property owned by another player
+(3) End Turn: If dice was rolled and all tax/rent were paid off, end turn allows the player to cycle to the next player
 
 Go to Jail:
 Players will not be able to select any options as soon as they land on this square, they will be moved to the “Jail” square and their next 2 turns will be suspended for which they can not move or perform any actions.
@@ -55,7 +43,7 @@ Rules regarding Buying/selling properties and rent price:
 --------------------------------------------------------------------------------------------------------------
 	
 	Bankruptcy happens when a player is unable to pay the rent when landing on another player's SQUARE
-	When this happens, the player is forced to sell all his assets in half of the price to the bank.
+	When this happens, the player is forced to sell his assets in half of the price to the bank.
 	Example:
 	Total assets value = $2000 + $300 * 4 + $1300 = $4500
 	Selling value = $4500 / 2 = $2250
