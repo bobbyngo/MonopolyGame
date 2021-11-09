@@ -89,6 +89,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         players.add(new Player("player4", new Square("GO", 0)));
 
         controller = new MonopolyController(players);
+
+        textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
     }
 
     /**
@@ -247,7 +249,11 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         buyBtn.setEnabled(true);
         diceRolled = false;
 
-        textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
+        if(controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
+            textLabel.setText(String.format("<html> %s's turn <br> Location: %s <br> Owner: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(), ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).getOwner().getName()));
+        }else{
+            textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
+        }
     }
 
 
