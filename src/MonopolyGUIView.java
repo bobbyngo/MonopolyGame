@@ -26,8 +26,10 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private final GridBagLayout gb;
     private final GridBagConstraints c;
     private final ArrayList<JPanel> squares;
+    private final ArrayList<JLabel> playerLabels;
     private final JPanel textPanel;
     private final JLabel textLabel;
+
 
     private final JButton showStatsBtn;
     private final JButton rollBtn;
@@ -57,6 +59,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         squares = new ArrayList<>();
         textPanel = new JPanel();
         textLabel = new JLabel();
+        playerLabels = new ArrayList<>();
         this.setTitle("Monopoly Game");
 
         this.showStatsBtn = new JButton();
@@ -110,6 +113,12 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             squareLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             squareLabel.setForeground(Color.BLUE);
 
+            JLabel playerLabel = new JLabel();
+            playerLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            playerLabel.setForeground(Color.RED);
+
+            playerLabels.add(playerLabel);
+
             if(board.getSQUARE(i) instanceof PrivateProperty){
                 squareLabel.setText(String.format("<html> %s <br> Price: %s </html>", board.getSQUARE(i).getName(), (((PrivateProperty)board.getSQUARE(i)).getPrice())));
             }
@@ -120,6 +129,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             }
 
             InfoPanel.add(squareLabel);
+            playerPanel.add(playerLabel);
 
             squarePanel.add(InfoPanel, BorderLayout.PAGE_START);
             squarePanel.add(playerPanel, BorderLayout.PAGE_END);
@@ -271,9 +281,13 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         Player p = controller.getCurrentPlayer();
         System.out.println(String.format("INITIAL:\n\tPlayer: %s,\n\tLocation: %s\n", p, p.getCurrLocation()));
 
+        playerLabels.get(controller.getCurrentPlayer().getCurrLocation().getIndex()).setText("");
+
         roll = controller.rollDie();
         diceRolled = true;
         controller.moveCurrentPlayer();
+
+        playerLabels.get(controller.getCurrentPlayer().getCurrLocation().getIndex()).setText(controller.getCurrentPlayer().getName());
 
         // check if rent or tax need to be paid
         if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
