@@ -62,14 +62,14 @@ Have an international version of the game in which players can have customized p
 The game can now be ran in a graphical user interface instead of being purely textual
 
 Added files:
-* DiceImg package
+* DiceImg package:
   Contains pictures used for displaying dice faces
-* MonopolyGUIView.java,
+* MonopolyGUIView.java:
   Class that is responsible for the overall appearance of the GUI 
-* MonopolyTest.java,
+* MonopolyTest.java:
   Contains various testing cases for methods in MonopolyController.java
-* PrivatePropertyListModel.java,
+* PrivatePropertyListModel.java:
   Used by class SellPlayerPropertyDialog.java
-* SellPlayerPropertyDialog.java,
+* SellPlayerPropertyDialog.java:
   Class that is responsible for displaying a dialog box and process requests when the players wish to sell them owned properties
   
