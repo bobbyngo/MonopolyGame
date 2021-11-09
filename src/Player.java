@@ -248,7 +248,7 @@ public class Player implements RoleAPI {
     public String propertiesToString(){
         String s = "";
         for (PrivateProperty pp : this.propertyList){
-            s.concat("Name:- " + pp.getName() + " / Price:- $" + pp.getPrice() + "\n");
+            s += ("Name:- " + pp.getName() + " / Price:- $" + pp.getPrice() + "\n");
         }
         return s;
     }
