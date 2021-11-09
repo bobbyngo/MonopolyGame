@@ -3,7 +3,7 @@
 SYSC 3110 | Software Designing Project (SDK 17 working)
 ```
 # Board
-<div align-item="center"><img src="Images/Board.png" height="100%" width="100%"></div>
+<div align-item="center"><img src="../Images/Board.png" height="100%" width="100%"></div>
 
 # Description:
 The Monopoly Game is implemented following the <strong>MVC</strong> pattern and written in <strong>Java</strong>
