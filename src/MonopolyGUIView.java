@@ -8,6 +8,8 @@
  *
  */
 
+import jdk.internal.icu.text.UnicodeSet;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +21,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MonopolyGUIView extends JFrame implements ActionListener{
     private Board board;
@@ -83,10 +86,21 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
         ArrayList<Player> players = new ArrayList<>();
         //For running the code, players array list cannot be empty
-        players.add(new Player("player1", new Square("GO", 0)));
-        players.add(new Player("player2", new Square("GO", 0)));
-        players.add(new Player("player3", new Square("GO", 0)));
-        players.add(new Player("player4", new Square("GO", 0)));
+        Player player1 = new Player("player1", new Square("GO", 0));
+        Player player2 = new Player("player2", new Square("GO", 0));
+        Player player3 = new Player("player3", new Square("GO", 0));
+        Player player4 = new Player("player4", new Square("GO", 0));
+
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        players.add(player4);
+
+        board.getSQUARE(0).addPlayersCurrentlyOn(player1);
+        board.getSQUARE(0).addPlayersCurrentlyOn(player2);
+        board.getSQUARE(0).addPlayersCurrentlyOn(player3);
+        board.getSQUARE(0).addPlayersCurrentlyOn(player4);
+
 
         controller = new MonopolyController(players);
 
@@ -98,9 +112,10 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
      */
     private void SquaresLayout(){
         for(int i = 0; i < 38; i++){
+
             JPanel squarePanel = new JPanel(new BorderLayout());
             JPanel InfoPanel = new JPanel();
-            JPanel playerPanel = new JPanel();
+            JPanel playerPanel = new JPanel(new GridLayout(controller.getPlayers().size(), 1));
 
             InfoPanel.setBorder(BorderFactory.createEmptyBorder());
             playerPanel.setBorder(BorderFactory.createEmptyBorder());
@@ -108,6 +123,11 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             JLabel squareLabel = new JLabel();
             squareLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             squareLabel.setForeground(Color.BLUE);
+
+            for (Player p : board.getSQUARE(i).getPlayersCurrentlyOn()){
+                JLabel pJLabel = new JLabel(p.getName());
+                playerPanel.add(pJLabel);
+            }
 
             if(board.getSQUARE(i) instanceof PrivateProperty){
                 squareLabel.setText(String.format("<html> %s <br> Price: %s </html>", board.getSQUARE(i).getName(), (((PrivateProperty)board.getSQUARE(i)).getPrice())));
@@ -256,6 +276,18 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     }
 
 
+    private void handlePlayerIconLocation() throws IOException{
+        //To access the panel of a square;
+        //put the index of the square into squares.get(index) and it will return JPanel
+        //Removing components of oldSquare
+        squares.clear();
+        SquaresLayout();
+        mainPanel.validate();
+        mainPanel.repaint();
+
+    }
+
+
     /**
      * Method handles roll dice button. It will delete the 2 labels next to the
      * Roll Dice button and update the 2 new die face images corresponding to the
@@ -267,11 +299,24 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         // Added debug comments
         rollBtn.setEnabled(false);
         Player p = controller.getCurrentPlayer();
+        Square pCL = controller.getCurrentPlayer().getCurrLocation();
+
+        //Removing player from oldtile Player Arraylist
+        board.getSQUARE(controller.getCurrentPlayer().getCurrLocation().getIndex()).removePlayersCurrentlyOn(controller.getCurrentPlayer());
+
         System.out.println(String.format("INITIAL:\n\tPlayer: %s,\n\tLocation: %s\n", p, p.getCurrLocation()));
 
         roll = controller.rollDie();
         diceRolled = true;
         controller.moveCurrentPlayer();
+
+        //Adding player to current tile Player Arraylist
+        board.getSQUARE(0).addPlayersCurrentlyOn(p);;
+
+        handlePlayerIconLocation();
+
+        mainPanel.validate();
+        mainPanel.repaint();
 
         // End Game functionality
         if (controller.isGameEnded()) {
@@ -339,6 +384,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
 
         endTurnBtn.setEnabled(true);
+
+
 
         mainPanel.validate();
         mainPanel.repaint();
@@ -431,6 +478,30 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         endTurnBtn.setForeground(Color.RED);
         mainPanel.add(endTurnBtn);
     }
+
+    /**
+     * Method for mapping components (JLabel primarily) for easy access
+     */
+//    private void createComponentMap() {
+//        componentMap = new HashMap<String,Component>();
+//        ArrayList<JPanel> components = squares;
+//        for (int i = 0; i < components.size(); i++) {
+//            componentMap.put(components.get(i).getName(), components.get(i));
+//        }
+//    }
+
+    /**
+     * Method to get component by name
+     * @param name
+     * @return
+     */
+//    public Component getComponentByName(String name) {
+//        if (componentMap.containsKey(name)) {
+//            return (Component) componentMap.get(name);
+//        }
+//        else return null;
+//    }
+
 
     /**
      * The method displays the GUI
