@@ -469,6 +469,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         this.addButtonToBoard();
 
         this.add(mainPanel);
+
+        this.setPreferredSize(new Dimension(2000, 2000));
         this.pack();
         // will make the GUI displays in the middle screen : )
         this.setLocationRelativeTo(null);
