@@ -75,10 +75,9 @@ Added files:
   
 # Known Issue
 
-Player label is updated whenever the player rolls the dice, however, if a player landed on a square that is already occupied, the previous player's label will be erased. This is only a visual issue and does not have any impact on the player's actual position in the system.
+* Player label is updated whenever the player rolls the dice, however, if a player landed on a square that is already occupied, the previous player's label will be erased. This is only a visual issue and does not have any impact on the player's actual position in the system.
 
-# Known Issues:
-When the prompt asks the player to enter an integer, entering an out of bound integer, a letter or any other symbols will cause the program to crash. Try Catch statements will be implemented later.
-If a player does not own any properties, entering invalid property index will cause the program to crash
-If programme is not in fullscreen then board may glitch
+* When the prompt asks the player to enter an integer, entering an out of bound integer, a letter or any other symbols will cause the program to crash. Try Catch statements will be implemented later.
+* If a player does not own any properties, entering invalid property index will cause the program to crash
+* If programme is not in fullscreen then board may glitch
 
