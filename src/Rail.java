@@ -22,9 +22,11 @@ public class Rail extends PrivateProperty implements PropertyAPI{
      */
     public int getOwnedRailNum(){
         int numRail = 0;
-        for(PrivateProperty p: this.getOwner().getPropertyList()){
-            if(p instanceof Rail){
-                numRail ++;
+        if(this.isOwned()){
+            for(PrivateProperty p: this.getOwner().getPropertyList()){
+                if(p instanceof Rail){
+                    numRail ++;
+                }
             }
         }
 
