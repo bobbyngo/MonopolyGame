@@ -55,3 +55,4 @@ Have an international version of the game in which players can have customized p
 # Known Issues:
 When the prompt asks the player to enter an integer, entering an out of bound integer, a letter or any other symbols will cause the program to crash. Try Catch statements will be implemented later.
 If a player does not own any properties, entering invalid property index will cause the program to crash
+If programme is not in fullscreen then board may glitch
