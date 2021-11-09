@@ -101,7 +101,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         board.getSQUARE(0).addPlayersCurrentlyOn(player3);
         board.getSQUARE(0).addPlayersCurrentlyOn(player4);
 
-
         controller = new MonopolyController(players);
 
         endTurnBtn.setEnabled(false);
@@ -144,6 +143,8 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             squarePanel.add(playerPanel, BorderLayout.PAGE_END);
 
             squares.add(squarePanel);
+            mainPanel.validate();
+            mainPanel.repaint();
         }
     }
 
@@ -302,7 +303,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         Square pCL = controller.getCurrentPlayer().getCurrLocation();
 
         //Removing player from oldtile Player Arraylist
-        board.getSQUARE(controller.getCurrentPlayer().getCurrLocation().getIndex()).removePlayersCurrentlyOn(controller.getCurrentPlayer());
+        board.getSQUARE(pCL.getIndex()).removePlayersCurrentlyOn(p);
 
         System.out.println(String.format("INITIAL:\n\tPlayer: %s,\n\tLocation: %s\n", p, p.getCurrLocation()));
 
@@ -311,7 +312,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         controller.moveCurrentPlayer();
 
         //Adding player to current tile Player Arraylist
-        board.getSQUARE(0).addPlayersCurrentlyOn(p);;
+        board.getSQUARE(1).addPlayersCurrentlyOn(p);;
 
         handlePlayerIconLocation();
 

@@ -38,7 +38,13 @@ public class Square {
      *
      * @author Gabriel Benni Kelley Evensen 101119814
      */
-    public void removePlayersCurrentlyOn(Player p){ this.playersCurrentlyOn.remove(this.playersCurrentlyOn.size() - 1); }
+    public void removePlayersCurrentlyOn(Player p) {
+        if (this.playersCurrentlyOn != null) {
+            this.playersCurrentlyOn.remove(this.playersCurrentlyOn.size() - 1);
+        } else {
+            System.out.println("No players currently on tile");
+        }
+    }
 
     /**
      * Getter for name
