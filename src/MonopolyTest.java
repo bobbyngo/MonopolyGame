@@ -21,6 +21,7 @@ public class MonopolyTest{
 
     private static int NUM_PLAYERS;
     private MonopolyController controller;
+    private MonopolyGUIView view;
     private int []roll;
     //Player p1 =new Player("player4", new Square("GO", 0));
 
@@ -33,7 +34,8 @@ public class MonopolyTest{
         players.add(new Player("player3", new Square("GO", 0)));
         players.add(new Player("player4", new Square("GO", 0)));
         NUM_PLAYERS = players.size();
-        controller = new MonopolyController(players);
+        view = new MonopolyGUIView();
+        controller = new MonopolyController(players, view);
     }
 
     @org.junit.Test

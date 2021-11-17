@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.concurrent.PriorityBlockingQueue;
 
@@ -6,7 +9,7 @@ import java.util.concurrent.PriorityBlockingQueue;
  *
  * The controller for the game of monopoly; handles the players, board, banks, DIE, and the current player
  */
-public class MonopolyController {
+public class MonopolyController implements ActionListener {
     private final int GO_REWARD = 200;
 
     private ArrayList<Player> players;
@@ -16,12 +19,15 @@ public class MonopolyController {
     private Player currentPlayer;
     private int consecutiveDoubles;
 
+    // MVC Example
+    private MonopolyGUIView view;
+
     /**
      * MonopolyController constructor
      *
      * @param players, an ArrayList of Player's that are in the game
      */
-    public MonopolyController(ArrayList<Player> players) {
+    public MonopolyController(ArrayList<Player> players, MonopolyGUIView view) {
 
         this.players = new ArrayList<>(players);
         this.board = new Board();
@@ -29,6 +35,9 @@ public class MonopolyController {
         this.die = new Dice();
         //this.currentPlayer = players.get(players.size()-1);
         this.currentPlayer = players.get(0);
+
+        // MVC example
+        this.view = view;
 
         for(Player p: this.players){
             p.setCurrLocation(board.getSQUARE(0));
@@ -377,6 +386,27 @@ public class MonopolyController {
         }
 
         return false;
+    }
+
+    // MVC Example
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == view.getBuyBtn()){
+            handleBuyBtn();
+        }
+    }
+
+    private void handleBuyBtn(){
+        if (getCurrentPlayer().getCurrLocation() instanceof PrivateProperty) {
+            if (!((PrivateProperty) getCurrentPlayer().getCurrLocation()).isOwned()) {
+                purchaseProperty((PrivateProperty)getCurrentPlayer().getCurrLocation());
+                view.handleUpdateView(1);
+            } else {
+                view.handleUpdateView(2);
+            }
+        } else {
+            view.handleUpdateView(3);
+        }
     }
 }
 
