@@ -478,7 +478,6 @@ public class MonopolyController implements ActionListener {
                     view.handleUpdateView(14, p);
                     // should not be doing this, feePaid weill be accessible directly from the controller class after handleRollDiceBtn() has been refactored
                     view.setFeePaid(true);
-                    view.getPayTaxBtn().setEnabled(false);
                 }
             }
         }else{
