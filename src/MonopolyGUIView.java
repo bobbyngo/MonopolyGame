@@ -81,7 +81,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         sellBtn.addActionListener(this);
 
         this.endTurnBtn = new JButton();
-        this.endTurnBtn.addActionListener(this);
+        this.endTurnBtn.addActionListener(controller);
 
         this.payTaxBtn = new JButton();
         this.payTaxBtn.addActionListener(this);
@@ -222,50 +222,50 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     /**
      * This method will end the player's current turn and proceed to the next player's turn
      */
-    private void handleEndTurnBtn() {
-        // if tax/rent is not paid, this step will not be reached
-        if(!controller.getDie().isDouble()){
-            // not double
-            controller.getNextPlayer();
-        } else {
-            // is double
-            if (controller.getCurrentPlayer().isInJail()) {
-                // is in jail
-                controller.getNextPlayer();
-            }
-
-
-        }
-
-        //Player p = controller.getNextPlayer();
-        Player p = controller.getCurrentPlayer();
-        // FIXME: make contrroller function?
-        JOptionPane.showMessageDialog(this, String.format("It is %s's turn.", p.getName()));
-        if (p.isInJail()) {
-            boolean hasServedTime = p.serveJailTime();
-            int turnsLeft = 3 - p.getTurnsInJail();
-            if (!hasServedTime) {
-                JOptionPane.showMessageDialog(this,
-                        String.format("Skipping %s's turn. Player is in Jail with %d turns remaining.", p.getName(), turnsLeft));
-                handleEndTurnBtn(); // call self
-                return;
-            } else {
-                JOptionPane.showMessageDialog(this, "%s's jail time has been served." +
-                        "They may play this turn.");
-            }
-        }
-
-        rollBtn.setEnabled(true);
-        payTaxBtn.setEnabled(true);
-        buyBtn.setEnabled(true);
-        diceRolled = false;
-
-        if(controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
-            textLabel.setText(String.format("<html> %s's turn <br> Location: %s <br> Owner: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(), ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).getOwner().getName()));
-        }else{
-            textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
-        }
-    }
+//    private void handleEndTurnBtn() {
+//        // if tax/rent is not paid, this step will not be reached
+//        if(!controller.getDie().isDouble()){
+//            // not double
+//            controller.getNextPlayer();
+//        } else {
+//            // is double
+//            if (controller.getCurrentPlayer().isInJail()) {
+//                // is in jail
+//                controller.getNextPlayer();
+//            }
+//
+//
+//        }
+//
+//        //Player p = controller.getNextPlayer();
+//        Player p = controller.getCurrentPlayer();
+//        // FIXME: make contrroller function?
+//        JOptionPane.showMessageDialog(this, String.format("It is %s's turn.", p.getName()));
+//        if (p.isInJail()) {
+//            boolean hasServedTime = p.serveJailTime();
+//            int turnsLeft = 3 - p.getTurnsInJail();
+//            if (!hasServedTime) {
+//                JOptionPane.showMessageDialog(this,
+//                        String.format("Skipping %s's turn. Player is in Jail with %d turns remaining.", p.getName(), turnsLeft));
+//                handleEndTurnBtn(); // call self
+//                return;
+//            } else {
+//                JOptionPane.showMessageDialog(this, "%s's jail time has been served." +
+//                        "They may play this turn.");
+//            }
+//        }
+//
+//        rollBtn.setEnabled(true);
+//        payTaxBtn.setEnabled(true);
+//        buyBtn.setEnabled(true);
+//        diceRolled = false;
+//
+//        if(controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
+//            textLabel.setText(String.format("<html> %s's turn <br> Location: %s <br> Owner: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(), ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).getOwner().getName()));
+//        }else{
+//            textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
+//        }
+//    }
 
 
     /**
@@ -334,14 +334,18 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             JOptionPane.showMessageDialog(this, String.format("%s has been caught SPEEDING!", p.getName()) +
                     "They have been sent to jail and their turn shall be skipped for 3 rounds.");
             feePaid = true;
-            handleEndTurnBtn();
+
+            // change handleEndTurnBtn() in the controller back to private after refactoring
+            controller.handleEndTurnBtn();
             return;
         }
 
         if (controller.currentPlayerIsOnGoToJail()) {
             controller.sendCurrentPlayerToJail();
             JOptionPane.showMessageDialog(this, String.format("%s is on Go To Jail. Turn Ended.", p.getName()));
-            handleEndTurnBtn();
+
+            // change handleEndTurnBtn() in the controller back to private after refactoring
+            controller.handleEndTurnBtn();
             return;
         }
 
@@ -546,17 +550,17 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(null, "There is no tax/rent to pay!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-        else if (e.getSource() == endTurnBtn) {
-            if(feePaid && diceRolled) {
-                handleEndTurnBtn();
-            }else if(!diceRolled){
-                JOptionPane.showMessageDialog(null, "You must roll the dice before ending the turn!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-            }else if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty){
-                JOptionPane.showMessageDialog(null, "You have not paid your tax yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-            }else {
-                JOptionPane.showMessageDialog(null, "You have not paid your rent yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
+//        else if (e.getSource() == endTurnBtn) {
+//            if(feePaid && diceRolled) {
+//                handleEndTurnBtn();
+//            }else if(!diceRolled){
+//                JOptionPane.showMessageDialog(null, "You must roll the dice before ending the turn!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+//            }else if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty){
+//                JOptionPane.showMessageDialog(null, "You have not paid your tax yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+//            }else {
+//                JOptionPane.showMessageDialog(null, "You have not paid your rent yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+//            }
+//        }
     }
 
     //MVC example
@@ -564,7 +568,33 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         return buyBtn;
     }
 
-    public void handleUpdateView(int dialogNum){
+    public JButton getEndTurnBtn(){
+        return endTurnBtn;
+    }
+
+    public JButton getRollBtn(){
+        return rollBtn;
+    }
+
+    public JButton getPayTaxBtn(){
+        return payTaxBtn;
+    }
+
+    // These 4 method should not be here, when handleRollDiceBtn is refactored into the controller, tha attribute "diceRolled" and "feePaid" should also be moved into the controller
+    public boolean getDiceRolled(){
+        return diceRolled;
+    }
+    public void setDiceRolled(boolean status){
+        diceRolled = status;
+    }
+    public boolean getFeePaid(){
+        return feePaid;
+    }
+    public void setFeePaid(boolean status){
+        feePaid = status;
+    }
+
+    public void handleUpdateView(int dialogNum, Player player){
         if(dialogNum == 1){
             JOptionPane.showMessageDialog(null, "Successfully buy the property", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -573,6 +603,33 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
         else if(dialogNum == 3){
             JOptionPane.showMessageDialog(null, "There is not a purchasable property!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(dialogNum == 4){
+            JOptionPane.showMessageDialog(null, String.format("It is %s's turn.", player.getName()));
+        }
+        else if(dialogNum == 5){
+            int turnsLeft = 3 - player.getTurnsInJail();
+            JOptionPane.showMessageDialog(null,
+                    String.format("Skipping %s's turn. Player is in Jail with %d turns remaining.", player.getName(), turnsLeft));
+        }
+        else if(dialogNum == 6){
+            JOptionPane.showMessageDialog(null, "%s's jail time has been served." +
+                    "They may play this turn.");
+        }
+        else if(dialogNum == 7){
+            textLabel.setText(String.format("<html> %s's turn <br> Location: %s <br> Owner: %s", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName()));
+        }
+        else if(dialogNum == 8){
+            textLabel.setText(String.format("<html> %s's turn <br> Location: %s", player.getName(), player.getCurrLocation().getName()));
+        }
+        else if(dialogNum == 9){
+            JOptionPane.showMessageDialog(null, "You must roll the dice before ending the turn!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(dialogNum == 10){
+            JOptionPane.showMessageDialog(null, "You have not paid your tax yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(dialogNum == 11){
+            JOptionPane.showMessageDialog(null, "You have not paid your rent yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
