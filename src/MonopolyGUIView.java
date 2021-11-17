@@ -84,7 +84,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         this.endTurnBtn.addActionListener(controller);
 
         this.payTaxBtn = new JButton();
-        this.payTaxBtn.addActionListener(this);
+        this.payTaxBtn.addActionListener(controller);
 
         // Dice Initialization
         this.rollBtn = new JButton();
@@ -539,17 +539,17 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 //            }
 //        }
 
-        else if (e.getSource() == payTaxBtn) {
-            if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
-                if(controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).getOwner().equals(controller.getCurrentPlayer())){
-                    JOptionPane.showMessageDialog(null, "You own this property, no rent to be paid!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-                }else {
-                    handlePayTaxBtn();
-                }
-            }else{
-                JOptionPane.showMessageDialog(null, "There is no tax/rent to pay!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
+//        else if (e.getSource() == payTaxBtn) {
+//            if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
+//                if(controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).getOwner().equals(controller.getCurrentPlayer())){
+//                    JOptionPane.showMessageDialog(null, "You own this property, no rent to be paid!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+//                }else {
+//                    handlePayTaxBtn();
+//                }
+//            }else{
+//                JOptionPane.showMessageDialog(null, "There is no tax/rent to pay!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+//            }
+//        }
 //        else if (e.getSource() == endTurnBtn) {
 //            if(feePaid && diceRolled) {
 //                handleEndTurnBtn();
@@ -630,6 +630,14 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         }
         else if(dialogNum == 11){
             JOptionPane.showMessageDialog(null, "You have not paid your rent yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 12) {
+            JOptionPane.showMessageDialog(null, "You own this property, no rent to be paid!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 13){
+            JOptionPane.showMessageDialog(null, "You do not have enough balance to pay the rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 14){
+            JOptionPane.showMessageDialog(null, "You have successfully paid your rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 15){
+            JOptionPane.showMessageDialog(null, "There is no tax/rent to pay!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
