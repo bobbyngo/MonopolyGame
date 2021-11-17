@@ -397,6 +397,9 @@ public class MonopolyController implements ActionListener {
         else if (e.getSource() == view.getEndTurnBtn()) {
             handleEndTurnBtn();
         }
+        else if(e.getSource() == view.getPayTaxBtn()){
+            handlePayTaxBtn();
+        }
     }
 
     private void handleBuyBtn(){
@@ -458,6 +461,28 @@ public class MonopolyController implements ActionListener {
             view.handleUpdateView(10, getCurrentPlayer());
         }else {
             view.handleUpdateView(11, getCurrentPlayer());
+        }
+    }
+
+    private void handlePayTaxBtn(){
+        Player p = getCurrentPlayer();
+        if(p.getCurrLocation() instanceof BankProperty || p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
+            if(p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).getOwner().equals(p)){
+                view.handleUpdateView(12, p);
+            }else {
+                if(payFee() == 0){
+                    view.handleUpdateView(13, p);
+                    // should not be doing this, feePaid weill be accessible directly from the controller class after handleRollDiceBtn() has been refactored
+                    view.setFeePaid(false);
+                }else{
+                    view.handleUpdateView(14, p);
+                    // should not be doing this, feePaid weill be accessible directly from the controller class after handleRollDiceBtn() has been refactored
+                    view.setFeePaid(true);
+                    view.getPayTaxBtn().setEnabled(false);
+                }
+            }
+        }else{
+            view.handleUpdateView(15, p);
         }
     }
 }
