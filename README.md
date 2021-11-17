@@ -2,8 +2,8 @@
 ```
 SYSC 3110 | Software Designing Project (SDK 17 working)
 ```
-# GUI
-<div align-item="center"><img src="Images/GUI.PNG" height="100%" width="100%"></div>
+# Board
+<div align-item="center"><img src="Images/Board.png" height="100%" width="100%"></div>
 
 # Description:
 The Monopoly Game is implemented following the <strong>MVC</strong> pattern and written in <strong>Java</strong>
@@ -56,6 +56,7 @@ Have the ability to add “AI” players into the game
 * Milestone 4:
 Be able to save/load game progresses,
 Have an international version of the game in which players can have customized property names, values and currencies
+
 
 # Changes From Previous Milestone
 
