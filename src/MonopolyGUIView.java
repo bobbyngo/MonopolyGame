@@ -60,13 +60,22 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         textPanel = new JPanel();
         textLabel = new JLabel();
         playerLabels = new ArrayList<>();
+
+        ArrayList<Player> players = new ArrayList<>();
+        //For running the code, players array list cannot be empty
+        players.add(new Player("player1", new Square("GO", 0)));
+        players.add(new Player("player2", new Square("GO", 0)));
+        players.add(new Player("player3", new Square("GO", 0)));
+        players.add(new Player("player4", new Square("GO", 0)));
+        controller = new MonopolyController(players, this);
         this.setTitle("Monopoly Game");
 
         this.showStatsBtn = new JButton();
         this.showStatsBtn.addActionListener(this);
 
+        //MVC Example
         this.buyBtn = new JButton();
-        this.buyBtn.addActionListener(this);
+        this.buyBtn.addActionListener(controller);
 
         sellBtn = new JButton();
         sellBtn.addActionListener(this);
@@ -84,15 +93,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         this.rollBtn.addActionListener(this);
         this.diceLabel1 = new JLabel();
         this.diceLabel2 = new JLabel();
-
-        ArrayList<Player> players = new ArrayList<>();
-        //For running the code, players array list cannot be empty
-        players.add(new Player("player1", new Square("GO", 0)));
-        players.add(new Player("player2", new Square("GO", 0)));
-        players.add(new Player("player3", new Square("GO", 0)));
-        players.add(new Player("player4", new Square("GO", 0)));
-
-        controller = new MonopolyController(players);
 
         textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
     }
@@ -197,12 +197,12 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     /**
      * This function will handle the buy property method, it will call the purchaseProperty method from the MonopolyController
      */
-    private void handleBuyPropertyBtn() {
-        Square currentLocation = controller.getCurrentPlayer().getCurrLocation();
-        controller.purchaseProperty((PrivateProperty)currentLocation);
-
-        JOptionPane.showMessageDialog(null, "Successfully buy the property", "Success", JOptionPane.INFORMATION_MESSAGE);
-    }
+//    private void handleBuyPropertyBtn() {
+//        Square currentLocation = controller.getCurrentPlayer().getCurrLocation();
+//        controller.purchaseProperty((PrivateProperty)currentLocation);
+//
+//        JOptionPane.showMessageDialog(null, "Successfully buy the property", "Success", JOptionPane.INFORMATION_MESSAGE);
+//    }
 
     /**
      * This function will be executed when the player lands on Square that requires player to pay fees such as
@@ -523,17 +523,17 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             handleSellBtn();
         }
 
-        else if (e.getSource() == buyBtn) {
-            if (controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty) {
-                if (!((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()) {
-                    handleBuyPropertyBtn();
-                } else {
-                    JOptionPane.showMessageDialog(null, "This Property is already owned!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "There is not a purchasable property!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
+//        else if (e.getSource() == buyBtn) {
+//            if (controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty) {
+//                if (!((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()) {
+//                    handleBuyPropertyBtn();
+//                } else {
+//                    JOptionPane.showMessageDialog(null, "This Property is already owned!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(null, "There is not a purchasable property!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+//            }
+//        }
 
         else if (e.getSource() == payTaxBtn) {
             if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
@@ -556,6 +556,23 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             }else {
                 JOptionPane.showMessageDialog(null, "You have not paid your rent yet!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
             }
+        }
+    }
+
+    //MVC example
+    public JButton getBuyBtn(){
+        return buyBtn;
+    }
+
+    public void handleUpdateView(int dialogNum){
+        if(dialogNum == 1){
+            JOptionPane.showMessageDialog(null, "Successfully buy the property", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(dialogNum == 2){
+            JOptionPane.showMessageDialog(null, "This Property is already owned!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(dialogNum == 3){
+            JOptionPane.showMessageDialog(null, "There is not a purchasable property!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
