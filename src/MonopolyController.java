@@ -394,18 +394,94 @@ public class MonopolyController implements ActionListener {
         if(e.getSource() == view.getBuyBtn()){
             handleBuyBtn();
         }
+        else if (e.getSource() == view.getEndTurnBtn()) {
+            handleEndTurnBtn();
+        }
+        else if(e.getSource() == view.getPayTaxBtn()){
+            handlePayTaxBtn();
+        }
     }
 
     private void handleBuyBtn(){
         if (getCurrentPlayer().getCurrLocation() instanceof PrivateProperty) {
             if (!((PrivateProperty) getCurrentPlayer().getCurrLocation()).isOwned()) {
                 purchaseProperty((PrivateProperty)getCurrentPlayer().getCurrLocation());
-                view.handleUpdateView(1);
+                view.handleUpdateView(1, getCurrentPlayer());
             } else {
-                view.handleUpdateView(2);
+                view.handleUpdateView(2, getCurrentPlayer());
             }
         } else {
-            view.handleUpdateView(3);
+            view.handleUpdateView(3, getCurrentPlayer());
+        }
+    }
+
+    // This method should be private, change back to private when handleRollDiceBtn() is refactored into the controller class
+    public void handleEndTurnBtn(){
+        if(view.getFeePaid() && view.getDiceRolled()) {
+            if(!getDie().isDouble()){
+                // not double
+                getNextPlayer();
+            } else {
+                // is double
+                if (getCurrentPlayer().isInJail()) {
+                    // is in jail
+                    getNextPlayer();
+                }
+            }
+
+            //Player p = controller.getNextPlayer();
+            Player p = getCurrentPlayer();
+
+            view.handleUpdateView(4, p);
+            if (p.isInJail()) {
+                boolean hasServedTime = p.serveJailTime();
+                if (!hasServedTime) {
+                    view.handleUpdateView(5, p);
+                    handleEndTurnBtn(); // call self
+                    return;
+                } else {
+                    view.handleUpdateView(6, p);
+                }
+            }
+
+            view.getRollBtn().setEnabled(true);
+            view.getPayTaxBtn().setEnabled(true);
+            view.getBuyBtn().setEnabled(true);
+            view.setDiceRolled(false);
+
+            if(getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) getCurrentPlayer().getCurrLocation()).isOwned()){
+                view.handleUpdateView(7, p);
+            }else{
+                view.handleUpdateView(8, p);
+            }
+
+        }else if(!view.getDiceRolled()){
+            view.handleUpdateView(9, getCurrentPlayer());
+        }else if(getCurrentPlayer().getCurrLocation() instanceof BankProperty){
+            view.handleUpdateView(10, getCurrentPlayer());
+        }else {
+            view.handleUpdateView(11, getCurrentPlayer());
+        }
+    }
+
+    private void handlePayTaxBtn(){
+        Player p = getCurrentPlayer();
+        if(p.getCurrLocation() instanceof BankProperty || p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
+            if(p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).getOwner().equals(p)){
+                view.handleUpdateView(12, p);
+            }else {
+                if(payFee() == 0){
+                    view.handleUpdateView(13, p);
+                    // should not be doing this, feePaid weill be accessible directly from the controller class after handleRollDiceBtn() has been refactored
+                    view.setFeePaid(false);
+                }else{
+                    view.handleUpdateView(14, p);
+                    // should not be doing this, feePaid weill be accessible directly from the controller class after handleRollDiceBtn() has been refactored
+                    view.setFeePaid(true);
+                }
+            }
+        }else{
+            view.handleUpdateView(15, p);
         }
     }
 }
