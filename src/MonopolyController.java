@@ -434,7 +434,7 @@ public class MonopolyController implements ActionListener {
 
     // This method should be private, change back to private when handleRollDiceBtn() is refactored into the controller class
     public void handleEndTurnBtn(){
-        if(view.getFeePaid() && view.getDiceRolled()) {
+        if(feePaid && diceRolled) {
             if(!getDie().isDouble()){
                 // not double
                 getNextPlayer();
@@ -464,7 +464,7 @@ public class MonopolyController implements ActionListener {
             view.getRollBtn().setEnabled(true);
             view.getPayTaxBtn().setEnabled(true);
             view.getBuyBtn().setEnabled(true);
-            view.setDiceRolled(false);
+            diceRolled = false;
 
             if(getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) getCurrentPlayer().getCurrLocation()).isOwned()){
                 view.handleUpdateView(7, p);
@@ -472,7 +472,7 @@ public class MonopolyController implements ActionListener {
                 view.handleUpdateView(8, p);
             }
 
-        }else if(!view.getDiceRolled()){
+        }else if(!diceRolled){
             view.handleUpdateView(9, getCurrentPlayer());
         }else if(getCurrentPlayer().getCurrLocation() instanceof BankProperty){
             view.handleUpdateView(10, getCurrentPlayer());
@@ -490,11 +490,11 @@ public class MonopolyController implements ActionListener {
                 if(payFee() == 0){
                     view.handleUpdateView(13, p);
                     // should not be doing this, feePaid weill be accessible directly from the controller class after handleRollDiceBtn() has been refactored
-                    view.setFeePaid(false);
+                    feePaid = false;
                 }else{
                     view.handleUpdateView(14, p);
                     // should not be doing this, feePaid weill be accessible directly from the controller class after handleRollDiceBtn() has been refactored
-                    view.setFeePaid(true);
+                    feePaid = true;
                 }
             }
         }else{

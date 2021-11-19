@@ -632,20 +632,6 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         return payTaxBtn;
     }
 
-    // These 4 method should not be here, when handleRollDiceBtn is refactored into the controller, tha attribute "diceRolled" and "feePaid" should also be moved into the controller
-    public boolean getDiceRolled(){
-        return diceRolled;
-    }
-    public void setDiceRolled(boolean status){
-        diceRolled = status;
-    }
-    public boolean getFeePaid(){
-        return feePaid;
-    }
-    public void setFeePaid(boolean status){
-        feePaid = status;
-    }
-
     public void handleUpdateView(int dialogNum, Player player){
         if(dialogNum == 1){
             JOptionPane.showMessageDialog(null, "Successfully buy the property", "Success", JOptionPane.INFORMATION_MESSAGE);
