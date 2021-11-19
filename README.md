@@ -2,7 +2,7 @@
 ```
 SYSC 3110 | Software Designing Project (SDK 17 working)
 ```
-# Board
+# Game.Board
 <div align-item="center"><img src="Images/Board.png" height="100%" width="100%"></div>
 
 # Description:
@@ -12,24 +12,24 @@ Monopoly is a multiplayer economics-themed board game. In the game, players roll
 
 # Files required to run this program:
 * DiceImg package
-* Bank.java,
-* BankProperty.java,
-* Board.java,
-* Business.java,
+* Game.Bank.java,
+* Game.BankProperty.java,
+* Game.Board.java,
+* Game.Business.java,
 * ColorGroup.java,
-* Dice.java,
-* MonopolyController.java,
-* MonopolyGUIView.java,
-* MonopolyTest.java,
+* Game.Dice.java,
+* Game.MonopolyController.java,
+* Game.MonopolyGUIView.java,
+* Tests.MonopolyControllerViewTest.java,
 * MonopolyView.java,
-* Player.java,
+* Game.Player.java,
 * PrivatePropertyListModel.java,
-* PrivateProperty.java,
-* PropertyAPI.java,
-* Rail.java,
-* RoleAPI.java,
-* SellPlayerPropertyDialog.java,
-* Square.java
+* Game.PrivateProperty.java,
+* Game.PropertyAPI.java,
+* Game.Rail.java,
+* Game.RoleAPI.java,
+* Game.SellPlayerPropertyDialog.java,
+* Game.Square.java
 
 # Usage:
 ```
@@ -65,18 +65,18 @@ The game can now be ran in a graphical user interface instead of being purely te
 Added files:
 * DiceImg package:
   Contains pictures used for displaying dice faces
-* MonopolyGUIView.java:
+* Game.MonopolyGUIView.java:
   Class that is responsible for the overall appearance of the GUI 
-* MonopolyTest.java:
-  Contains various testing cases for methods in MonopolyController.java
+* Tests.MonopolyControllerViewTest.java:
+  Contains various testing cases for methods in Game.MonopolyController.java
 * PrivatePropertyListModel.java:
-  Used by class SellPlayerPropertyDialog.java
-* SellPlayerPropertyDialog.java:
+  Used by class Game.SellPlayerPropertyDialog.java
+* Game.SellPlayerPropertyDialog.java:
   Class that is responsible for displaying a dialog box and process requests when the players wish to sell them owned properties
   
 # Known Issue
 
-* Player label is updated whenever the player rolls the dice, however, if a player landed on a square that is already occupied, the previous player's label will be erased. This is only a visual issue and does not have any impact on the player's actual position in the system.
+* Game.Player label is updated whenever the player rolls the dice, however, if a player landed on a square that is already occupied, the previous player's label will be erased. This is only a visual issue and does not have any impact on the player's actual position in the system.
 
 * When the prompt asks the player to enter an integer, entering an out of bound integer, a letter or any other symbols will cause the program to crash. Try Catch statements will be implemented later.
 * If a player does not own any properties, entering invalid property index will cause the program to crash
