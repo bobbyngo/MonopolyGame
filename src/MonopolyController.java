@@ -1,6 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.concurrent.PriorityBlockingQueue;
 
@@ -21,6 +26,10 @@ public class MonopolyController implements ActionListener {
 
     // MVC Example
     private MonopolyGUIView view;
+
+    int[] roll;
+    private boolean diceRolled = false;
+    private boolean feePaid = true;
 
     /**
      * MonopolyController constructor
@@ -400,6 +409,13 @@ public class MonopolyController implements ActionListener {
         else if(e.getSource() == view.getPayTaxBtn()){
             handlePayTaxBtn();
         }
+        else if (e.getSource() == view.getRollBtn()) {
+            try {
+                handleRollDiceBtn();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     private void handleBuyBtn(){
@@ -483,6 +499,127 @@ public class MonopolyController implements ActionListener {
         }else{
             view.handleUpdateView(15, p);
         }
+    }
+
+    private void handleSellBtn() {
+
+    }
+
+    private void handleRollDiceBtn() throws IOException {
+        // Calling the rollDie function
+        // Added debug comments
+        System.out.println("pressed");
+        view.getRollBtn().setEnabled(false);
+        Player p = getCurrentPlayer();
+        System.out.println(String.format("INITIAL:\n\tPlayer: %s,\n\tLocation: %s\n", p, p.getCurrLocation()));
+
+        Square oldloc = p.getCurrLocation();
+        view.getPlayerLabels().get(p.getCurrLocation().getIndex()).setText("");
+
+        roll = rollDie();
+        diceRolled = true;
+        moveCurrentPlayer();
+
+        StringBuilder str = new StringBuilder();
+        for (Player playa : oldloc.getPlayersCurrentlyOn()) {
+            str.append("%s\n");
+        }
+        view.getPlayerLabels().get(oldloc.getIndex()).setText(String.valueOf(str));
+        view.getPlayerLabels().get(p.getCurrLocation().getIndex()).setText(p.getName());
+
+        // check if rent or tax need to be paid
+        if(p.getCurrLocation() instanceof BankProperty || p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
+            System.out.println(String.format("Patrick added this for testing: %s, %s", p.getCurrLocation(), p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()));
+            feePaid = false;
+        }else{
+            feePaid = true;
+        }
+
+        // End Game functionality
+        if (isGameEnded()) {
+            JOptionPane.showMessageDialog(null, String.format("%s cannot afford this fee.\n Bankrupt!", p.getName()) +
+                    "Game is Over");
+            Player winner = determineWinner();
+            JOptionPane.showMessageDialog(null, String.format("%s is the winner with total value of $%d",
+                    winner.getName(), winner.getPlayerTotalAsset()));
+
+            //Exit the game
+            view.dispose();
+            System.exit(-1);
+        }
+
+        if(p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
+            view.getTextLabel().setText(String.format("<html> %s's turn <br> Location: %s <br> Owner: %s", p.getName(), p.getCurrLocation().getName(), ((PrivateProperty) p.getCurrLocation()).getOwner().getName()));
+        }else{
+            view.getTextLabel().setText(String.format("<html> %s's turn <br> Location: %s", p.getName(), p.getCurrLocation().getName()));
+        }
+
+        System.out.println(String.format("NEW:\n\tPlayer: %s,\n\tLocation: %s, \n\tFeePaid: %s", p, p.getCurrLocation(), feePaid));
+
+        if (getDie().isDouble()) {
+            JOptionPane.showMessageDialog(null, String.format("%s has rolled a DOUBLE!", p.getName()));
+        }
+
+        // Check if the player rolls double three times
+        if (isSpeeding()) {
+            sendCurrentPlayerToJail();
+            JOptionPane.showMessageDialog(null, String.format("%s has been caught SPEEDING!", p.getName()) +
+                    "They have been sent to jail and their turn shall be skipped for 3 rounds.");
+            feePaid = true;
+
+            // change handleEndTurnBtn() in the controller back to private after refactoring
+            handleEndTurnBtn();
+            return;
+        }
+
+        if (currentPlayerIsOnGoToJail()) {
+            sendCurrentPlayerToJail();
+            JOptionPane.showMessageDialog(null, String.format("%s is on Go To Jail. Turn Ended.", p.getName()));
+
+            // change handleEndTurnBtn() in the controller back to private after refactoring
+            handleEndTurnBtn();
+            return;
+        }
+
+        view.updateDiceFaces(roll[0], roll[1]);
+
+        // Update the new label when the button is clicked
+        // Remove 2 labels if available
+//        view.getMainPanel().remove(view.getDiceLabel1());
+//        view.getMainPanel().remove(view.getDiceLabel2());
+//
+//        // Stinky code but it works I will refactor later
+//        JLabel dieLabel = null;
+//        for (int i = 0; i < getDie().getNUM_DICE(); i ++) {
+//            InputStream in = getClass().getResourceAsStream(String.format("DiceImg/%d.png", roll[i]));
+//            BufferedImage image = ImageIO.read(in);
+//            Image resizeImage = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+//            dieLabel = new JLabel(new ImageIcon(resizeImage));
+//
+//            c.gridx = 5 + i;
+//            c.gridy = 2;
+//            if (i == 0) {
+//                diceLabel1 = dieLabel;
+//                gb.setConstraints(diceLabel1, c);
+//                mainPanel.add(diceLabel1);
+//            } else {
+//                diceLabel2 = dieLabel;
+//                gb.setConstraints(diceLabel2, c);
+//                mainPanel.add(diceLabel2);
+//            }
+//        }
+//
+//        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
+//
+//        endTurnBtn.setEnabled(true);
+//
+//        mainPanel.validate();
+//        mainPanel.repaint();
+//
+//        // For debugging
+//        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
+//        System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
+//        System.out.println(controller.getCurrentPlayer().propertiesToString());
     }
 }
 
