@@ -86,10 +86,12 @@ public class MonopolyController implements ActionListener {
             this.currentPlayer.buyPrivateProperty(property);                                            //This adds property and removes money for purchase
             this.bank.addMoney(property.getPrice());                                                    //This adds the money from the purchase to the bank
         }
-        else if (property instanceof Business && !this.currentPlayer.isOwningColorGroup()) {     //Else if the property is Business Property and the currentPlayer does not own a full set; they may buy it
+        //else if (property instanceof Business && !this.currentPlayer.isOwningColorGroup()) {     //Else if the property is Business Property and the currentPlayer does not own a full set; they may buy it
+        else if (property instanceof Business){
             this.currentPlayer.buyPrivateProperty(property);                                            //This adds property and removes money for purchase
             this.bank.addMoney(property.getPrice());
-        }else if (property instanceof Business && this.currentPlayer.isOwningColorGroup()) {            //The property type must be Business; if the currentPlayer owns the full colour set, then:-
+        }
+            // else if (property instanceof Business && this.currentPlayer.isOwningColorGroup()) {            //The property type must be Business; if the currentPlayer owns the full colour set, then:-
             Business businessProperty = (Business) property;                                            //Cast privateproperty type to Business for manipulation
 
             if (businessProperty.getNumHouse() < 4) {                                                   //If the Business Property has less than the maximum allowed houses, 5
@@ -103,7 +105,8 @@ public class MonopolyController implements ActionListener {
                 this.bank.addMoney((int) (100 + businessProperty.getPrice() * 0.6));                    //This adds the money from the purchase to the bank
             }
 
-        } else {
+        //}
+        else {
             System.err.println("You are unable to buy anything on this square");
         }
         //For buying property: Check if the class is Rail by: .instanceof(Rail)
