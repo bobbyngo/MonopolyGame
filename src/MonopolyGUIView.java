@@ -38,9 +38,7 @@ public class MonopolyGUIView extends JFrame {
     private final JButton sellBtn;
     private final JButton endTurnBtn;
     private final JButton payTaxBtn;
-
-    private boolean feePaid = true;
-    private boolean diceRolled = false;
+    
 
     //For Roll Dice
     int[] roll;
