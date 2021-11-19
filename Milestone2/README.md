@@ -2,7 +2,7 @@
 ```
 SYSC 3110 | Software Designing Project (SDK 17 working)
 ```
-# Board
+# Game.Board
 <div align-item="center"><img src="Images/Board.png" height="100%" width="100%"></div>
 
 # Description:
@@ -11,20 +11,20 @@ The Monopoly Game is implemented following the <strong>MVC</strong> pattern and 
 Monopoly is a multiplayer economics-themed board game. In the game, players roll two dice to move around the game board, buying and selling properties, and developing them with houses and hotels. Players collect rent from their opponents, with the goal being to drive them into bankruptcy. Players receive a stipend every time they pass "Go", and can end up in jail, from which they cannot move until 3 turns have passed.
 
 # Files required to run this program:
-* Bank.java,
-* BankProperty.java,
-* Board.java,
-* Business.java,
+* Game.Bank.java,
+* Game.BankProperty.java,
+* Game.Board.java,
+* Game.Business.java,
 * ColorGroup.java,
-* Dice.java,
-* MonopolyController.java,
+* Game.Dice.java,
+* Game.MonopolyController.java,
 * MonopolyView.java,
-* Player.java,
-* PrivateProperty.java,
-* PropertyAPI.java,
-* Rail.java,
-* RoleAPI.java,
-* Square.java
+* Game.Player.java,
+* Game.PrivateProperty.java,
+* Game.PropertyAPI.java,
+* Game.Rail.java,
+* Game.RoleAPI.java,
+* Game.Square.java
 
 # Usage:
 ```
