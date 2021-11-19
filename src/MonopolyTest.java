@@ -40,7 +40,7 @@ public class MonopolyTest{
 
     @org.junit.Test
     public void testBuyBusiness(){
-        controller.purchaseProperty(new Business("Anarchy Acres", 1, "red",50));
+        controller.purchaseProperty(new Business("Anarchy Acres", 1, 50));
         ArrayList<PrivateProperty> privatePropertyList = controller.getCurrentPlayer().getPropertyList();
         assertEquals(1, privatePropertyList.size());
     }
@@ -141,7 +141,7 @@ public class MonopolyTest{
     @org.junit.Test
     public void testPassingGo() {
         Player p = controller.getCurrentPlayer();
-        p.setCurrLocation(new Business("Snobby Shores", 37, "pink", 120));
+        p.setCurrLocation(new Business("Snobby Shores", 37, 120));
         int currentBalance = p.getPlayerBalance();
         
         controller.rollDie();

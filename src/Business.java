@@ -5,7 +5,6 @@
 
 public class Business extends PrivateProperty implements PropertyAPI{
 
-    private String color;
     private int numHouse;
     private int numHotel;
 
@@ -13,24 +12,15 @@ public class Business extends PrivateProperty implements PropertyAPI{
      * Constructor for Business class
      * @param name name of the Business
      * @param index index of the Business
-     * @param color color code of the housing line that this Business belongs to
      * @param price price of the Business
      */
-    public Business(String name, int index, String color, int price){
+    public Business(String name, int index, int price){
         super(name, index, price);
-        this.color = color;
         numHouse = 0;
         numHotel = 0;
         removeOwner();
     }
 
-    /**
-     * getColor get the color code of the housing line that this Business belongs to
-     * @return String
-     */
-    public String getColor() {
-        return color;
-    }
 
     /**
      * getNumHouses get the number of houses that has been bought on this Business SQUARE
