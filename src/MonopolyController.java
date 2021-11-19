@@ -525,7 +525,7 @@ public class MonopolyController implements ActionListener {
 
         // check if rent or tax need to be paid
         if(p.getCurrLocation() instanceof BankProperty || p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
-            System.out.println(String.format("Patrick added this for testing: %s, %s", p.getCurrLocation(), p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()));
+            //System.out.println(String.format("Patrick added this for testing: %s, %s", p.getCurrLocation(), p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()));
             feePaid = false;
         }else{
             feePaid = true;
