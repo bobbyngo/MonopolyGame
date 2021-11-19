@@ -509,24 +509,19 @@ public class MonopolyController implements ActionListener {
     private void handleRollDiceBtn() throws IOException {
         // Calling the rollDie function
         // Added debug comments
-        System.out.println("pressed");
-        view.getRollBtn().setEnabled(false);
+        //System.out.println("pressed");
         Player p = getCurrentPlayer();
-        System.out.println(String.format("INITIAL:\n\tPlayer: %s,\n\tLocation: %s\n", p, p.getCurrLocation()));
+        view.handleUpdateView(16, p);
+        //System.out.println(String.format("INITIAL:\n\tPlayer: %s,\n\tLocation: %s\n", p, p.getCurrLocation()));
 
         Square oldloc = p.getCurrLocation();
-        view.getPlayerLabels().get(p.getCurrLocation().getIndex()).setText("");
+        view.handleUpdateView(17, p);
 
         roll = rollDie();
         diceRolled = true;
         moveCurrentPlayer();
 
-        StringBuilder str = new StringBuilder();
-        for (Player playa : oldloc.getPlayersCurrentlyOn()) {
-            str.append("%s\n");
-        }
-        view.getPlayerLabels().get(oldloc.getIndex()).setText(String.valueOf(str));
-        view.getPlayerLabels().get(p.getCurrLocation().getIndex()).setText(p.getName());
+        view.handleUpdateView(18, p);
 
         // check if rent or tax need to be paid
         if(p.getCurrLocation() instanceof BankProperty || p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
@@ -538,34 +533,29 @@ public class MonopolyController implements ActionListener {
 
         // End Game functionality
         if (isGameEnded()) {
-            JOptionPane.showMessageDialog(null, String.format("%s cannot afford this fee.\n Bankrupt!", p.getName()) +
-                    "Game is Over");
-            Player winner = determineWinner();
-            JOptionPane.showMessageDialog(null, String.format("%s is the winner with total value of $%d",
-                    winner.getName(), winner.getPlayerTotalAsset()));
+            view.handleUpdateView(19, p);
 
-            //Exit the game
-            view.dispose();
+            p = determineWinner();
+            view.handleUpdateView(20, p);
             System.exit(-1);
         }
 
         if(p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
-            view.getTextLabel().setText(String.format("<html> %s's turn <br> Location: %s <br> Owner: %s", p.getName(), p.getCurrLocation().getName(), ((PrivateProperty) p.getCurrLocation()).getOwner().getName()));
+            view.handleUpdateView(21, p);
         }else{
-            view.getTextLabel().setText(String.format("<html> %s's turn <br> Location: %s", p.getName(), p.getCurrLocation().getName()));
+            view.handleUpdateView(22, p);
         }
 
-        System.out.println(String.format("NEW:\n\tPlayer: %s,\n\tLocation: %s, \n\tFeePaid: %s", p, p.getCurrLocation(), feePaid));
+        //System.out.println(String.format("NEW:\n\tPlayer: %s,\n\tLocation: %s, \n\tFeePaid: %s", p, p.getCurrLocation(), feePaid));
 
         if (getDie().isDouble()) {
-            JOptionPane.showMessageDialog(null, String.format("%s has rolled a DOUBLE!", p.getName()));
+            view.handleUpdateView(23, p);
         }
 
         // Check if the player rolls double three times
         if (isSpeeding()) {
             sendCurrentPlayerToJail();
-            JOptionPane.showMessageDialog(null, String.format("%s has been caught SPEEDING!", p.getName()) +
-                    "They have been sent to jail and their turn shall be skipped for 3 rounds.");
+            view.handleUpdateView(24, p);
             feePaid = true;
 
             // change handleEndTurnBtn() in the controller back to private after refactoring
@@ -575,14 +565,14 @@ public class MonopolyController implements ActionListener {
 
         if (currentPlayerIsOnGoToJail()) {
             sendCurrentPlayerToJail();
-            JOptionPane.showMessageDialog(null, String.format("%s is on Go To Jail. Turn Ended.", p.getName()));
+            view.handleUpdateView(25, p);
 
             // change handleEndTurnBtn() in the controller back to private after refactoring
             handleEndTurnBtn();
             return;
         }
 
-        view.updateDiceFaces(roll[0], roll[1]);
+        view.handleDiceViewUpdate(roll[0], roll[1]);
 
         // Update the new label when the button is clicked
         // Remove 2 labels if available

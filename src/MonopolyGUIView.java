@@ -389,7 +389,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 //        System.out.println(controller.getCurrentPlayer().propertiesToString());
     }
 
-    public void updateDiceFaces(int face1, int face2) throws IOException {
+    public void updateDiceFaces(int face1, int face2) {
 
         roll = new int[]{face1, face2};
 
@@ -401,21 +401,25 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         // Stinky code but it works I will refactor later
         JLabel dieLabel = null;
         for (int i = 0; i < controller.getDie().getNUM_DICE(); i ++) {
-            InputStream in = getClass().getResourceAsStream(String.format("DiceImg/%d.png", roll[i]));
-            BufferedImage image = ImageIO.read(in);
-            Image resizeImage = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-            dieLabel = new JLabel(new ImageIcon(resizeImage));
+            try {
+                InputStream in = getClass().getResourceAsStream(String.format("DiceImg/%d.png", roll[i]));
+                BufferedImage image = ImageIO.read(in);
+                Image resizeImage = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+                dieLabel = new JLabel(new ImageIcon(resizeImage));
 
-            c.gridx = 5 + i;
-            c.gridy = 2;
-            if (i == 0) {
-                diceLabel1 = dieLabel;
-                gb.setConstraints(diceLabel1, c);
-                mainPanel.add(diceLabel1);
-            } else {
-                diceLabel2 = dieLabel;
-                gb.setConstraints(diceLabel2, c);
-                mainPanel.add(diceLabel2);
+                c.gridx = 5 + i;
+                c.gridy = 2;
+                if (i == 0) {
+                    diceLabel1 = dieLabel;
+                    gb.setConstraints(diceLabel1, c);
+                    mainPanel.add(diceLabel1);
+                } else {
+                    diceLabel2 = dieLabel;
+                    gb.setConstraints(diceLabel2, c);
+                    mainPanel.add(diceLabel2);
+                }
+            }catch (Exception e){
+                System.out.println("Image related with dice face " + i + " not found");
             }
         }
 
@@ -677,7 +681,42 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             payTaxBtn.setEnabled(false);
         }else if(dialogNum == 15){
             JOptionPane.showMessageDialog(null, "There is no tax/rent to pay!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 16){
+            rollBtn.setEnabled(false);
+        }else if(dialogNum == 17){
+            playerLabels.get(player.getCurrLocation().getIndex()).setText("");
+        }else if(dialogNum == 18){
+
+            StringBuilder str = new StringBuilder();
+            for (Player playa : player.getCurrLocation().getPlayersCurrentlyOn()) {
+                str.append("%s\n");
+            }
+
+            playerLabels.get(player.getCurrLocation().getIndex()).setText(String.valueOf(str));
+            playerLabels.get(player.getCurrLocation().getIndex()).setText(player.getName());
+        }else if(dialogNum == 19){
+            JOptionPane.showMessageDialog(null, String.format("%s cannot afford this fee.\n Bankrupt!", player.getName()) +
+                    "Game is Over");
+        }else if(dialogNum == 20){
+            JOptionPane.showMessageDialog(null, String.format("%s is the winner with total value of $%d",
+                    player.getName(), player.getPlayerTotalAsset()));
+            this.dispose();
+        }else if(dialogNum == 21){
+            textLabel.setText(String.format("<html> %s's turn <br> Location: %s <br> Owner: %s", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName()));
+        }else if(dialogNum == 22){
+            textLabel.setText(String.format("<html> %s's turn <br> Location: %s", player.getName(), player.getCurrLocation().getName()));
+        }else if(dialogNum == 23){
+            JOptionPane.showMessageDialog(null, String.format("%s has rolled a DOUBLE!", player.getName()));
+        }else if(dialogNum == 24){
+            JOptionPane.showMessageDialog(null, String.format("%s has been caught SPEEDING!", player.getName()) +
+                    "They have been sent to jail and their turn shall be skipped for 3 rounds.");
+        }else if(dialogNum == 25){
+            JOptionPane.showMessageDialog(null, String.format("%s is on Go To Jail. Turn Ended.", player.getName()));
         }
+    }
+
+    public void handleDiceViewUpdate(int roll1, int roll2){
+        updateDiceFaces(roll1, roll2);
     }
 
     public static void main(String[] args) {
