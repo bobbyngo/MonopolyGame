@@ -559,13 +559,13 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
             handleShowStatsBtn(e);
         }
 
-        else if (e.getSource() == rollBtn) {
-            try {
-                handleRollDiceBtn();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
+//        else if (e.getSource() == rollBtn) {
+//            try {
+//                handleRollDiceBtn();
+//            } catch (IOException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
 
         else if (e.getSource() == sellBtn) {
             handleSellBtn();
