@@ -91,7 +91,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         this.rollBtn = new JButton();
 
         // Add rollBtn ActionListener to this class
-        this.rollBtn.addActionListener(this);
+        this.rollBtn.addActionListener(controller);
         this.diceLabel1 = new JLabel();
         this.diceLabel2 = new JLabel();
 
