@@ -1,13 +1,13 @@
 complete user manual
 SYSC 3110 | Software Designing Project
 
-To play the game, run the MonopolyGUIView.java file and follow the follow the graphical user interface, the game in the current state has 4 player by default.
+To play the game, run the Game.MonopolyGUIView.java file and follow the follow the graphical user interface, the game in the current state has 4 player by default.
 
-The player will roll 2 dice to determine how many squares he/she will be advancing. If a double is rolled, an extra turn will be granted after the player completes the current turn. If the player rolls 3 doubles in a roll, he/she will be considered as “speeding” and moved to the “jail” Square.
+The player will roll 2 dice to determine how many squares he/she will be advancing. If a double is rolled, an extra turn will be granted after the player completes the current turn. If the player rolls 3 doubles in a roll, he/she will be considered as “speeding” and moved to the “jail” Game.Square.
 
 During the player’s turn, the following 6 choices will be always be offered:
 (1) Show Stats: displays player's current location, assets and wallet value
-(2) Roll Dice: roll a pair and dice and advance according to the rolled value
+(2) Roll Game.Dice: roll a pair and dice and advance according to the rolled value
 (3) Buy Property: purchase the property that the player landed on
 (4) Sell Property: sell any property that the player has previously purchase to the back for half of the value
 (5) Pay Tax/Rent: pay tax if the player landed on a tax square, OR pay rent if the player lands on a private property owned by another player
@@ -19,7 +19,7 @@ Players will not be able to select any options as soon as they land on this squa
 Income:
 Players will be able to earn money in 2 ways:
 (1) Players receive a stipend every time they pass the "Go" square
-(2) When another player lands on your Property Square, you will receive their rent money based on a percentage of total asset value of the property
+(2) When another player lands on your Property Game.Square, you will receive their rent money based on a percentage of total asset value of the property
 
 Rules regarding Buying/selling properties and rent price:
 
@@ -36,8 +36,8 @@ Rules regarding Buying/selling properties and rent price:
 	Income = 5% * ($2000 + $300 * 4 + $1300) = $225
 
 	- Rails are Special SQURE that when landed on by another player, that player has to pay a percentage
-	equavelent to number of the Rail Square the owns by the land owner
-	Example: Price of the Rail SQUARE $1000 and the owner owns a total of 3 rail SQUAREs
+	equavelent to number of the Game.Rail Game.Square the owns by the land owner
+	Example: Price of the Game.Rail SQUARE $1000 and the owner owns a total of 3 rail SQUAREs
 	Income = 5% * 3 * $1000 = 150
 
 --------------------------------------------------------------------------------------------------------------
