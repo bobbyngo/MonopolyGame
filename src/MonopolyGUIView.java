@@ -209,16 +209,16 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
      * This function will be executed when the player lands on Square that requires player to pay fees such as
      * Bank Taxes, Rent
      */
-    private void handlePayTaxBtn() {
-        if(controller.payFee() == 0){
-            JOptionPane.showMessageDialog(null, "You do not have enough balance to pay the rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-            feePaid = false;
-        }else{
-            JOptionPane.showMessageDialog(null, "You have successfully paid your rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-            feePaid = true;
-            payTaxBtn.setEnabled(false);
-        }
-    }
+//    private void handlePayTaxBtn() {
+//        if(controller.payFee() == 0){
+//            JOptionPane.showMessageDialog(null, "You do not have enough balance to pay the rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+//            feePaid = false;
+//        }else{
+//            JOptionPane.showMessageDialog(null, "You have successfully paid your rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+//            feePaid = true;
+//            payTaxBtn.setEnabled(false);
+//        }
+//    }
 
     /**
      * This method will end the player's current turn and proceed to the next player's turn
