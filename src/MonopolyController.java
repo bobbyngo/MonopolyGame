@@ -409,6 +409,7 @@ public class MonopolyController implements ActionListener {
         else if(e.getSource() == view.getPayTaxBtn()){
             handlePayTaxBtn();
         }
+        //Small change
         else if (e.getSource() == view.getRollBtn()) {
             try {
                 handleRollDiceBtn();
