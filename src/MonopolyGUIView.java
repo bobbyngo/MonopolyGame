@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MonopolyGUIView extends JFrame implements ActionListener{
     private Board board;
@@ -277,77 +278,120 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     private void handleRollDiceBtn() throws IOException {
         // Calling the rollDie function
         // Added debug comments
-        rollBtn.setEnabled(false);
-        Player p = controller.getCurrentPlayer();
-        System.out.println(String.format("INITIAL:\n\tPlayer: %s,\n\tLocation: %s\n", p, p.getCurrLocation()));
+//        rollBtn.setEnabled(false);
+//        Player p = controller.getCurrentPlayer();
+//        System.out.println(String.format("INITIAL:\n\tPlayer: %s,\n\tLocation: %s\n", p, p.getCurrLocation()));
+//
+//        Square oldloc = controller.getCurrentPlayer().getCurrLocation();
+//        playerLabels.get(controller.getCurrentPlayer().getCurrLocation().getIndex()).setText("");
+//
+//        roll = controller.rollDie();
+//        diceRolled = true;
+//        controller.moveCurrentPlayer();
+//
+//        StringBuilder str = new StringBuilder();
+//        for (Player playa : oldloc.getPlayersCurrentlyOn()) {
+//            str.append("%s\n");
+//        }
+//        playerLabels.get(oldloc.getIndex()).setText(String.valueOf(str));
+//        playerLabels.get(controller.getCurrentPlayer().getCurrLocation().getIndex()).setText(controller.getCurrentPlayer().getName());
+//
+//        // check if rent or tax need to be paid
+//        if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
+//            System.out.println(String.format("Patrick added this for testing: %s, %s", controller.getCurrentPlayer().getCurrLocation(), controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()));
+//            feePaid = false;
+//        }else{
+//            feePaid = true;
+//        }
+//
+//        // End Game functionality
+//        if (controller.isGameEnded()) {
+//            JOptionPane.showMessageDialog(this, String.format("%s cannot afford this fee.\n Bankrupt!", p.getName()) +
+//                    "Game is Over");
+//            Player winner = controller.determineWinner();
+//            JOptionPane.showMessageDialog(this, String.format("%s is the winner with total value of $%d",
+//                    winner.getName(), winner.getPlayerTotalAsset()));
+//
+//            //Exit the game
+//            this.dispose();
+//            System.exit(-1);
+//        }
+//
+//        if(controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
+//            textLabel.setText(String.format("<html> %s's turn <br> Location: %s <br> Owner: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(), ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).getOwner().getName()));
+//        }else{
+//            textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
+//        }
+//
+//        System.out.println(String.format("NEW:\n\tPlayer: %s,\n\tLocation: %s, \n\tFeePaid: %s", p, p.getCurrLocation(), feePaid));
+//
+//        if (controller.getDie().isDouble()) {
+//            JOptionPane.showMessageDialog(this, String.format("%s has rolled a DOUBLE!", p.getName()));
+//        }
+//
+//        // Check if the player rolls double three times
+//        if (controller.isSpeeding()) {
+//            controller.sendCurrentPlayerToJail();
+//            JOptionPane.showMessageDialog(this, String.format("%s has been caught SPEEDING!", p.getName()) +
+//                    "They have been sent to jail and their turn shall be skipped for 3 rounds.");
+//            feePaid = true;
+//
+//            // change handleEndTurnBtn() in the controller back to private after refactoring
+//            controller.handleEndTurnBtn();
+//            return;
+//        }
+//
+//        if (controller.currentPlayerIsOnGoToJail()) {
+//            controller.sendCurrentPlayerToJail();
+//            JOptionPane.showMessageDialog(this, String.format("%s is on Go To Jail. Turn Ended.", p.getName()));
+//
+//            // change handleEndTurnBtn() in the controller back to private after refactoring
+//            controller.handleEndTurnBtn();
+//            return;
+//        }
 
-        Square oldloc = controller.getCurrentPlayer().getCurrLocation();
-        playerLabels.get(controller.getCurrentPlayer().getCurrLocation().getIndex()).setText("");
+        // Update the new label when the button is clicked
+        // Remove 2 labels if available
+//        mainPanel.remove(diceLabel1);
+//        mainPanel.remove(diceLabel2);
+//
+//        // Stinky code but it works I will refactor later
+//        JLabel dieLabel = null;
+//        for (int i = 0; i < controller.getDie().getNUM_DICE(); i ++) {
+//            InputStream in = getClass().getResourceAsStream(String.format("DiceImg/%d.png", roll[i]));
+//            BufferedImage image = ImageIO.read(in);
+//            Image resizeImage = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+//            dieLabel = new JLabel(new ImageIcon(resizeImage));
+//
+//            c.gridx = 5 + i;
+//            c.gridy = 2;
+//            if (i == 0) {
+//                diceLabel1 = dieLabel;
+//                gb.setConstraints(diceLabel1, c);
+//                mainPanel.add(diceLabel1);
+//            } else {
+//                diceLabel2 = dieLabel;
+//                gb.setConstraints(diceLabel2, c);
+//                mainPanel.add(diceLabel2);
+//            }
+//        }
+//
+//        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
+//
+//        endTurnBtn.setEnabled(true);
+//
+//        mainPanel.validate();
+//        mainPanel.repaint();
+//
+//        // For debugging
+//        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
+//        System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
+//        System.out.println(controller.getCurrentPlayer().propertiesToString());
+    }
 
-        roll = controller.rollDie();
-        diceRolled = true;
-        controller.moveCurrentPlayer();
+    public void updateDiceFaces(int face1, int face2) throws IOException {
 
-        StringBuilder str = new StringBuilder();
-        for (Player playa : oldloc.getPlayersCurrentlyOn()) {
-            str.append("%s\n");
-        }
-        playerLabels.get(oldloc.getIndex()).setText(String.valueOf(str));
-        playerLabels.get(controller.getCurrentPlayer().getCurrLocation().getIndex()).setText(controller.getCurrentPlayer().getName());
-
-        // check if rent or tax need to be paid
-        if(controller.getCurrentPlayer().getCurrLocation() instanceof BankProperty || controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
-            System.out.println(String.format("Patrick added this for testing: %s, %s", controller.getCurrentPlayer().getCurrLocation(), controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()));
-            feePaid = false;
-        }else{
-            feePaid = true;
-        }
-
-        // End Game functionality
-        if (controller.isGameEnded()) {
-            JOptionPane.showMessageDialog(this, String.format("%s cannot afford this fee.\n Bankrupt!", p.getName()) +
-                    "Game is Over");
-            Player winner = controller.determineWinner();
-            JOptionPane.showMessageDialog(this, String.format("%s is the winner with total value of $%d",
-                    winner.getName(), winner.getPlayerTotalAsset()));
-
-            //Exit the game
-            this.dispose();
-            System.exit(-1);
-        }
-
-        if(controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).isOwned()){
-            textLabel.setText(String.format("<html> %s's turn <br> Location: %s <br> Owner: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(), ((PrivateProperty) controller.getCurrentPlayer().getCurrLocation()).getOwner().getName()));
-        }else{
-            textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
-        }
-
-        System.out.println(String.format("NEW:\n\tPlayer: %s,\n\tLocation: %s, \n\tFeePaid: %s", p, p.getCurrLocation(), feePaid));
-
-        if (controller.getDie().isDouble()) {
-            JOptionPane.showMessageDialog(this, String.format("%s has rolled a DOUBLE!", p.getName()));
-        }
-
-        // Check if the player rolls double three times
-        if (controller.isSpeeding()) {
-            controller.sendCurrentPlayerToJail();
-            JOptionPane.showMessageDialog(this, String.format("%s has been caught SPEEDING!", p.getName()) +
-                    "They have been sent to jail and their turn shall be skipped for 3 rounds.");
-            feePaid = true;
-
-            // change handleEndTurnBtn() in the controller back to private after refactoring
-            controller.handleEndTurnBtn();
-            return;
-        }
-
-        if (controller.currentPlayerIsOnGoToJail()) {
-            controller.sendCurrentPlayerToJail();
-            JOptionPane.showMessageDialog(this, String.format("%s is on Go To Jail. Turn Ended.", p.getName()));
-
-            // change handleEndTurnBtn() in the controller back to private after refactoring
-            controller.handleEndTurnBtn();
-            return;
-        }
+        roll = new int[]{face1, face2};
 
         // Update the new label when the button is clicked
         // Remove 2 labels if available
@@ -563,6 +607,14 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 //        }
     }
 
+    public ArrayList<JLabel> getPlayerLabels() {
+        return playerLabels;
+    }
+
+    public JLabel getTextLabel (){
+        return textLabel;
+    }
+
     //MVC example
     public JButton getBuyBtn(){
         return buyBtn;
@@ -646,6 +698,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         MonopolyGUIView view = new MonopolyGUIView();
         view.displayGUI();
     }
+
 }
 
 
