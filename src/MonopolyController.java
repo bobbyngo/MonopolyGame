@@ -413,6 +413,7 @@ public class MonopolyController implements ActionListener {
         } else {
             view.handleUpdateView(3, getCurrentPlayer());
         }
+
     }
 
     // This method should be private, change back to private when handleRollDiceBtn() is refactored into the controller class
