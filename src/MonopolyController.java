@@ -417,6 +417,9 @@ public class MonopolyController implements ActionListener {
                 ex.printStackTrace();
             }
         }
+        else if(e.getSource() == view.getSellBtn()){
+            handleSellBtn();
+        }
     }
 
     private void handleBuyBtn(){
@@ -503,7 +506,8 @@ public class MonopolyController implements ActionListener {
     }
 
     private void handleSellBtn() {
-
+        SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(view, this);
+        view.handleSellWindowVisibility(sppd);
     }
 
     private void handleRollDiceBtn() throws IOException {
@@ -514,7 +518,6 @@ public class MonopolyController implements ActionListener {
         view.handleUpdateView(16, p);
         //System.out.println(String.format("INITIAL:\n\tPlayer: %s,\n\tLocation: %s\n", p, p.getCurrLocation()));
 
-        Square oldloc = p.getCurrLocation();
         view.handleUpdateView(17, p);
 
         roll = rollDie();

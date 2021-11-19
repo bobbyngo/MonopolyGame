@@ -79,7 +79,7 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
         this.buyBtn.addActionListener(controller);
 
         sellBtn = new JButton();
-        sellBtn.addActionListener(this);
+        sellBtn.addActionListener(controller);
 
         this.endTurnBtn = new JButton();
         this.endTurnBtn.addActionListener(controller);
@@ -439,11 +439,11 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
     /**
      * This method will handle the sell button
      */
-    private void handleSellBtn() {
-        System.out.println("Sell btn pressed!");
-        SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(this, controller);
-        sppd.setVisible(true);
-    }
+//    private void handleSellBtn() {
+//        System.out.println("Sell btn pressed!");
+//        SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(this, controller);
+//        sppd.setVisible(true);
+//    }
 
     /**
      * This method will add buttons, text box to the middle of the board
@@ -571,9 +571,9 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 //            }
 //        }
 
-        else if (e.getSource() == sellBtn) {
-            handleSellBtn();
-        }
+//        else if (e.getSource() == sellBtn) {
+//            handleSellBtn();
+//        }
 
 //        else if (e.getSource() == buyBtn) {
 //            if (controller.getCurrentPlayer().getCurrLocation() instanceof PrivateProperty) {
@@ -634,6 +634,10 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
     public JButton getPayTaxBtn(){
         return payTaxBtn;
+    }
+
+    public JButton getSellBtn(){
+        return sellBtn;
     }
 
     public void handleUpdateView(int dialogNum, Player player){
@@ -717,6 +721,10 @@ public class MonopolyGUIView extends JFrame implements ActionListener{
 
     public void handleDiceViewUpdate(int roll1, int roll2){
         updateDiceFaces(roll1, roll2);
+    }
+
+    public void handleSellWindowVisibility(SellPlayerPropertyDialog window){
+        window.setVisible(true);
     }
 
     public static void main(String[] args) {
