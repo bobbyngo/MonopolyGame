@@ -26,6 +26,8 @@ public class MonopolyController implements ActionListener {
 
     // MVC Example
     private MonopolyGUIView view;
+    private PlayerPropertyListModel playerPropertyListModel;
+    private SellPlayerPropertyDialog dialog;
 
     int[] roll;
     private boolean diceRolled = false;
@@ -427,6 +429,9 @@ public class MonopolyController implements ActionListener {
         else if(e.getSource() == view.getSellBtn()){
             handleSellBtn();
         }
+        else if(e.getSource() == dialog.getSellBtn()){
+            handleDialogSellBtn();
+        }
     }
 
     private void handleShowStatsBtn() {
@@ -598,6 +603,19 @@ public class MonopolyController implements ActionListener {
 
         view.handleDiceViewUpdate(roll[0], roll[1]);
 
+    }
+
+    public void retrieveSellPanelMoodle(SellPlayerPropertyDialog dialog, PlayerPropertyListModel playerPropertyListModel){
+        this.dialog = dialog;
+        this.playerPropertyListModel = playerPropertyListModel;
+    }
+
+    private void handleDialogSellBtn(){
+        int index = dialog.getList().getSelectedIndex();
+        if (index != -1) {
+            sellProperty(index);
+            playerPropertyListModel.removeProperty(index);
+        }
     }
 }
 

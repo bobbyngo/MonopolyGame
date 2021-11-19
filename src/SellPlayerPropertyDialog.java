@@ -15,9 +15,8 @@ public class SellPlayerPropertyDialog extends JDialog {
         this.controller = controller;
         Player player = controller.getCurrentPlayer();
         propertyListModel = new PlayerPropertyListModel(controller);
+        controller.retrieveSellPanelMoodle(this, propertyListModel);
         list = new JList<>(propertyListModel);
-        //list = new JList<>(player.getPropertyList().toArray(new PrivateProperty[0]));
-        //propertyListModel = new PlayerPropertyListModel(controller);
 
         this.setLayout(new BorderLayout());
 
@@ -40,20 +39,17 @@ public class SellPlayerPropertyDialog extends JDialog {
         closeBtn = new JButton("Close");
         sellBtn = new JButton("Sell");
         closeBtn.addActionListener(e->dispose());
-        sellBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int index = list.getSelectedIndex();
-                if (index != -1) {
-                    propertyListModel.removeProperty(index);
-                }
-            }
-        });
+        sellBtn.addActionListener(controller);
 
         btnPanel.add(sellBtn);
         btnPanel.add(closeBtn);
+    }
 
+    public JButton getSellBtn(){
+        return sellBtn;
+    }
 
-
+    public JList<PrivateProperty> getList(){
+        return list;
     }
 }
