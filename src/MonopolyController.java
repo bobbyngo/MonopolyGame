@@ -409,7 +409,11 @@ public class MonopolyController implements ActionListener {
         else if(e.getSource() == view.getPayTaxBtn()){
             handlePayTaxBtn();
         }
-        //Small change
+
+        else if (e.getSource() == view.getShowStatsBtn()) {
+            handleShowStatsBtn();
+        }
+
         else if (e.getSource() == view.getRollBtn()) {
             try {
                 handleRollDiceBtn();
@@ -420,6 +424,20 @@ public class MonopolyController implements ActionListener {
         else if(e.getSource() == view.getSellBtn()){
             handleSellBtn();
         }
+    }
+
+    private void handleShowStatsBtn() {
+        int id = getCurrentPlayer().getCurrLocation().getIndex();
+        JOptionPane.showMessageDialog((Component) null,
+                "<html><u>Character info</u>\n" +
+                        "\tCurrent location:- [id: " + id + "] " + getCurrentPlayer().getCurrLocation().getName() +
+                        "\n\tCurrent turn:- " + getCurrentPlayer().getTurn() +
+                        "\n\n<html><u>Asset info</u>\n\tProperties:- \n\t" +
+                        getCurrentPlayer().propertiesToString() +
+                        "\n\tLiquid value:- $" + getCurrentPlayer().getPlayerBalance() +
+                        "\n\tTotal value (property prices included):- $" +
+                        getCurrentPlayer().getPlayerTotalAsset(), "Player " +
+                        getCurrentPlayer().getName() + "'s stats", 1);
     }
 
     private void handleBuyBtn(){
@@ -577,43 +595,6 @@ public class MonopolyController implements ActionListener {
 
         view.handleDiceViewUpdate(roll[0], roll[1]);
 
-        // Update the new label when the button is clicked
-        // Remove 2 labels if available
-//        view.getMainPanel().remove(view.getDiceLabel1());
-//        view.getMainPanel().remove(view.getDiceLabel2());
-//
-//        // Stinky code but it works I will refactor later
-//        JLabel dieLabel = null;
-//        for (int i = 0; i < getDie().getNUM_DICE(); i ++) {
-//            InputStream in = getClass().getResourceAsStream(String.format("DiceImg/%d.png", roll[i]));
-//            BufferedImage image = ImageIO.read(in);
-//            Image resizeImage = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-//            dieLabel = new JLabel(new ImageIcon(resizeImage));
-//
-//            c.gridx = 5 + i;
-//            c.gridy = 2;
-//            if (i == 0) {
-//                diceLabel1 = dieLabel;
-//                gb.setConstraints(diceLabel1, c);
-//                mainPanel.add(diceLabel1);
-//            } else {
-//                diceLabel2 = dieLabel;
-//                gb.setConstraints(diceLabel2, c);
-//                mainPanel.add(diceLabel2);
-//            }
-//        }
-//
-//        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
-//
-//        endTurnBtn.setEnabled(true);
-//
-//        mainPanel.validate();
-//        mainPanel.repaint();
-//
-//        // For debugging
-//        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
-//        System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
-//        System.out.println(controller.getCurrentPlayer().propertiesToString());
     }
 }
 

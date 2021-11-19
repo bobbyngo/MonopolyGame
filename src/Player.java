@@ -75,14 +75,6 @@ public class Player implements RoleAPI {
         property.removeOwner();
     }
 
-    /**
-     * This method will call the isOwningASet of color in the ColorGroup Class
-     * @return boolean
-     */
-    public boolean isOwningColorGroup() {
-        ColorGroup colorGroup = new ColorGroup();
-        return colorGroup.isOwningASet(this.propertyList);
-    }
 
     public boolean isInJail() {
         return this.inJail;
