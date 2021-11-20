@@ -22,6 +22,7 @@ import java.util.Random;
 public class MonopolyGUIView extends JFrame {
     private Board board;
     private final JPanel mainPanel;
+    private final JPanel remotePanel;
     private final GridBagLayout gb;
     private final GridBagConstraints c;
     private final ArrayList<JPanel> squares;
@@ -53,6 +54,7 @@ public class MonopolyGUIView extends JFrame {
         board = new Board();
         gb = new GridBagLayout();
         mainPanel = new JPanel(gb);
+        remotePanel = new JPanel(gb);
         c = new GridBagConstraints();
         squares = new ArrayList<>();
         textPanel = new JPanel();
@@ -417,7 +419,7 @@ public class MonopolyGUIView extends JFrame {
             JOptionPane.showMessageDialog(null, "You do not have enough balance to pay the rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }else if(dialogNum == 14){
             JOptionPane.showMessageDialog(null, "You have successfully paid your rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-            // FIXME
+            rollBtn.setEnabled(true); //safety check such that the rollbtn is enabled if they pay their rent
             textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
             payTaxBtn.setEnabled(false);
         }else if(dialogNum == 15){
