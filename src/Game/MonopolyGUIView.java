@@ -63,8 +63,8 @@ public class MonopolyGUIView extends JFrame {
         //For running the code, players array list cannot be empty
         players.add(new AIPlayer("Player 1", new Square("GO", 0)));
         players.add(new AIPlayer("Player 2", new Square("GO", 0)));
-        players.add(new Player("Player 3", new Square("GO", 0)));
-        players.add(new Player("Player 4", new Square("GO", 0)));
+        players.add(new AIPlayer("Player 3", new Square("GO", 0)));
+        players.add(new AIPlayer("Player 4", new Square("GO", 0)));
         this.controller = new MonopolyController(players, this);
         this.setTitle("Monopoly Game");
 
@@ -425,15 +425,31 @@ public class MonopolyGUIView extends JFrame {
         }else if(dialogNum == 16){
             rollBtn.setEnabled(false);
         }else if(dialogNum == 17){
-            playerLabels.get(player.getCurrLocation().getIndex()).setText("");
-        }else if(dialogNum == 18){
+            //zak: modifying it so that instead of clearing the label, it keeps everyone BUT the input player
+            //playerLabels.get(player.getCurrLocation().getIndex()).setText("");
+            Square loc = player.getCurrLocation();
+            int index = loc.getIndex();
+            JLabel label = playerLabels.get(index);
+            label.setText("");
 
             StringBuilder str = new StringBuilder();
-            for (Player playa : player.getCurrLocation().getPlayersCurrentlyOn()) {
-                str.append("%s\n");
+            for (Player p : loc.getPlayersCurrentlyOn()) {
+                if (p != player) {
+                    str.append(p.getName()).append("\n");
+                }
             }
 
-            playerLabels.get(player.getCurrLocation().getIndex()).setText(String.valueOf(str));
+            label.setText(str.toString());
+        }else if(dialogNum == 18){
+            // updates square so that it includes everyone?
+            // zak: fixed up a bit
+            StringBuilder str = new StringBuilder();
+            for (Player playa : player.getCurrLocation().getPlayersCurrentlyOn()) {
+                str.append(playa.getName());
+            }
+            //playerLabels.get(player.getCurrLocation().getIndex()).setText(str.toString());
+            //playerLabels.get(player.getCurrLocation().getIndex()).setText(String.valueOf(str));
+            // Commented by zak
             playerLabels.get(player.getCurrLocation().getIndex()).setText(player.getName());
         }else if(dialogNum == 19){
             JOptionPane.showMessageDialog(null, String.format("%s cannot afford this fee.\n Bankrupt!", player.getName()) +
