@@ -146,6 +146,7 @@ public class MonopolyGUIView extends JFrame {
             mainPanel.add(squares.get(19 + i));
         }
 
+
         for(int i = 0; i < 10; i++) {
             c.gridx = 0;
             c.gridy = i + 1;
