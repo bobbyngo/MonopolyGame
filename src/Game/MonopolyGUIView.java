@@ -63,7 +63,7 @@ public class MonopolyGUIView extends JFrame {
         players.add(new AIPlayer("player2", new Square("GO", 0)));
         players.add(new Player("player3", new Square("GO", 0)));
         players.add(new Player("player4", new Square("GO", 0)));
-        controller = new MonopolyController(players, this);
+        this.controller = new MonopolyController(players, this);
         this.setTitle("Monopoly Game");
 
         this.showStatsBtn = new JButton();
@@ -90,7 +90,7 @@ public class MonopolyGUIView extends JFrame {
         this.diceLabel1 = new JLabel();
         this.diceLabel2 = new JLabel();
 
-        textLabel.setText(String.format("<html> %s's turn <br> Location: %s", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName()));
+        textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Asset Info</u>:-<br> Properties owned:<br> %s <br><br><u>Monetary Info</u>:-<br> Total asset value: $%d <br>Liquid value: $%d", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(), controller.getCurrentPlayer().propertiesToString(), controller.getCurrentPlayer().getPlayerTotalAsset(), controller.getCurrentPlayer().getPlayerBalance()));
     }
 
     /**
@@ -238,8 +238,8 @@ public class MonopolyGUIView extends JFrame {
         textLabel.setForeground(Color.RED);
 
         textLabel.setMinimumSize(new Dimension(200,200));
-        textLabel.setPreferredSize(new Dimension(200,200));
-        textLabel.setMaximumSize(new Dimension(200,200));
+        textLabel.setPreferredSize(new Dimension(200,300));
+        textLabel.setMaximumSize(new Dimension(200,1000));
 
         textPanel.add(textLabel);
         mainPanel.add(textPanel);
@@ -353,6 +353,7 @@ public class MonopolyGUIView extends JFrame {
     public JButton getSellBtn() {
         return sellBtn;
     }
+
     public JButton getShowStatsBtn() {
         return showStatsBtn;
 
@@ -361,6 +362,7 @@ public class MonopolyGUIView extends JFrame {
     public void handleUpdateView(int dialogNum, Player player){
         if(dialogNum == 1){
             JOptionPane.showMessageDialog(null, "Successfully buy the property", "Success", JOptionPane.INFORMATION_MESSAGE);
+            textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }
         else if(dialogNum == 2){
             JOptionPane.showMessageDialog(null, "This Property is already owned!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
@@ -374,17 +376,17 @@ public class MonopolyGUIView extends JFrame {
         else if(dialogNum == 5){
             int turnsLeft = 3 - player.getTurnsInJail();
             JOptionPane.showMessageDialog(null,
-                    String.format("Skipping %s's turn. Game.Player is in Jail with %d turns remaining.", player.getName(), turnsLeft));
+                    String.format("Skipping %s's turn, they are in Jail with %d turns remaining.", player.getName(), turnsLeft));
         }
         else if(dialogNum == 6){
             JOptionPane.showMessageDialog(null, "%s's jail time has been served." +
                     "They may play this turn.");
         }
         else if(dialogNum == 7){
-            textLabel.setText(String.format("<html> %s's turn <br> Location: %s <br> Owner: %s", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName()));
+            textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }
         else if(dialogNum == 8){
-            textLabel.setText(String.format("<html> %s's turn <br> Location: %s", player.getName(), player.getCurrLocation().getName()));
+            textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }
         else if(dialogNum == 9){
             JOptionPane.showMessageDialog(null, "You must roll the dice before ending the turn!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
@@ -400,6 +402,7 @@ public class MonopolyGUIView extends JFrame {
             JOptionPane.showMessageDialog(null, "You do not have enough balance to pay the rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }else if(dialogNum == 14){
             JOptionPane.showMessageDialog(null, "You have successfully paid your rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+            textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
             payTaxBtn.setEnabled(false);
         }else if(dialogNum == 15){
             JOptionPane.showMessageDialog(null, "There is no tax/rent to pay!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
@@ -424,14 +427,15 @@ public class MonopolyGUIView extends JFrame {
                     player.getName(), player.getPlayerTotalAsset()));
             this.dispose();
         }else if(dialogNum == 21){
-            textLabel.setText(String.format("<html> %s's turn <br> Location: %s <br> Owner: %s", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName()));
+            textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }else if(dialogNum == 22){
-            textLabel.setText(String.format("<html> %s's turn <br> Location: %s", player.getName(), player.getCurrLocation().getName()));
+            textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }else if(dialogNum == 23){
             JOptionPane.showMessageDialog(null, String.format("%s has rolled a DOUBLE!", player.getName()));
         }else if(dialogNum == 24){
             JOptionPane.showMessageDialog(null, String.format("%s has been caught SPEEDING!", player.getName()) +
                     "They have been sent to jail and their turn shall be skipped for 3 rounds.");
+            textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }else if(dialogNum == 25){
             JOptionPane.showMessageDialog(null, String.format("%s is on Go To Jail. Turn Ended.", player.getName()));
         }
