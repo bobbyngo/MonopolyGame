@@ -2,9 +2,7 @@ package Tests;
 
 import Game.*;
 import org.junit.Before;
-
 import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 public class PlayerTest {
