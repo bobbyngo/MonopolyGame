@@ -61,13 +61,36 @@ public class MonopolyGUIView extends JFrame {
         textLabel = new JLabel();
         playerLabels = new ArrayList<>();
 
+
+        JPanel infoPanel = new JPanel(new GridLayout(2,1));
+
+        JTextField nAIPlayers = new JTextField("# AI Players");
+        JTextField nHumanPlayers = new JTextField("# Human Players");
+
+        infoPanel.add(nAIPlayers);
+        infoPanel.add(nHumanPlayers);
+
         ArrayList<Player> players = new ArrayList<>();
-        //For running the code, players array list cannot be empty
-        players.add(new AIPlayer("Player 1", new Square("GO", 0)));
-        players.add(new AIPlayer("Player 2", new Square("GO", 0)));
-        players.add(new AIPlayer("Player 3", new Square("GO", 0)));
-        players.add(new AIPlayer("Player 4", new Square("GO", 0)));
+        int option = JOptionPane.showConfirmDialog(null, infoPanel, "Game setup",JOptionPane.OK_CANCEL_OPTION);
+        if(option == JOptionPane.OK_OPTION){
+            //adding AI players
+            for (int i = 0; i < Integer.parseInt(nAIPlayers.getText()); i++){
+                players.add(new AIPlayer("AI Player " + i, new Square("GO", 0)));
+            }
+            //adding human players
+            for (int i = 0; i < Integer.parseInt(nHumanPlayers.getText()); i++){
+                players.add(new Player("Player " + i, new Square("GO", 0)));
+            }
+
+        }else{
+            //start off with 4 AI players if not cancel option is selected
+            players.add(new AIPlayer("Player 1", new Square("GO", 0)));
+            players.add(new AIPlayer("Player 2", new Square("GO", 0)));
+            players.add(new AIPlayer("Player 3", new Square("GO", 0)));
+            players.add(new AIPlayer("Player 4", new Square("GO", 0)));
+        }
         this.controller = new MonopolyController(players, this);
+
         this.setTitle("Monopoly Game");
 
 //        this.showStatsBtn = new JButton();
