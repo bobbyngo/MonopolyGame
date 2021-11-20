@@ -418,9 +418,9 @@ public class MonopolyController implements ActionListener {
             handlePayTaxBtn();
         }
 
-        else if (e.getSource() == view.getShowStatsBtn()) {
-            handleShowStatsBtn();
-        }
+//        else if (e.getSource() == view.getShowStatsBtn()) {
+//            handleShowStatsBtn();
+//        }
 
         else if (e.getSource() == view.getRollBtn()) {
             try {
@@ -437,19 +437,19 @@ public class MonopolyController implements ActionListener {
         }
     }
 
-    private void handleShowStatsBtn() {
-        int id = getCurrentPlayer().getCurrLocation().getIndex();
-        JOptionPane.showMessageDialog((Component) null,
-                "<html><u>Character info</u>\n" +
-                        "\tCurrent location:- [id: " + id + "] " + getCurrentPlayer().getCurrLocation().getName() +
-                        "\n\tCurrent turn:- " + getCurrentPlayer().getTurn() +
-                        "\n\n<html><u>Asset info</u>\n\tProperties:- \n\t" +
-                        getCurrentPlayer().propertiesToString() +
-                        "\n\tLiquid value:- $" + getCurrentPlayer().getPlayerBalance() +
-                        "\n\tTotal value (property prices included):- $" +
-                        getCurrentPlayer().getPlayerTotalAsset(), "Game.Player " +
-                        getCurrentPlayer().getName() + "'s stats", 1);
-    }
+//    private void handleShowStatsBtn() {
+//        int id = getCurrentPlayer().getCurrLocation().getIndex();
+//        JOptionPane.showMessageDialog((Component) null,
+//                "<html><u>Character info</u>\n" +
+//                        "\tCurrent location:- [id: " + id + "] " + getCurrentPlayer().getCurrLocation().getName() +
+//                        "\n\tCurrent turn:- " + getCurrentPlayer().getTurn() +
+//                        "\n\n<html><u>Asset info</u>\n\tProperties:- \n\t" +
+//                        getCurrentPlayer().propertiesToString() +
+//                        "\n\tLiquid value:- $" + getCurrentPlayer().getPlayerBalance() +
+//                        "\n\tTotal value (property prices included):- $" +
+//                        getCurrentPlayer().getPlayerTotalAsset(), "Game.Player " +
+//                        getCurrentPlayer().getName() + "'s stats", 1);
+//    }
 
     private void handleBuyBtn(){
         if (getCurrentPlayer().getCurrLocation() instanceof PrivateProperty) {

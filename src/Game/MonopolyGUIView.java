@@ -29,7 +29,7 @@ public class MonopolyGUIView extends JFrame {
     private final JLabel textLabel;
 
 
-    private final JButton showStatsBtn;
+//    private final JButton showStatsBtn;
     private final JButton rollBtn;
     private final JButton buyBtn;
     private final JButton sellBtn;
@@ -66,8 +66,8 @@ public class MonopolyGUIView extends JFrame {
         this.controller = new MonopolyController(players, this);
         this.setTitle("Monopoly Game");
 
-        this.showStatsBtn = new JButton();
-        this.showStatsBtn.addActionListener(controller);
+//        this.showStatsBtn = new JButton();
+//        this.showStatsBtn.addActionListener(controller);
 
         //MVC Example
         this.buyBtn = new JButton();
@@ -249,10 +249,10 @@ public class MonopolyGUIView extends JFrame {
         c.gridwidth = 4;
         c.gridheight = 2;
 
-        gb.setConstraints(showStatsBtn, c);
-        showStatsBtn.setText("Show Stats");
-        showStatsBtn.setForeground(Color.RED);
-        mainPanel.add(showStatsBtn);
+//        gb.setConstraints(showStatsBtn, c);
+//        showStatsBtn.setText("Show Stats");
+//        showStatsBtn.setForeground(Color.RED);
+//        mainPanel.add(showStatsBtn);
 
         // Roll Button
         c.gridx = 3;
@@ -354,10 +354,10 @@ public class MonopolyGUIView extends JFrame {
         return sellBtn;
     }
 
-    public JButton getShowStatsBtn() {
-        return showStatsBtn;
-
-    }
+//    public JButton getShowStatsBtn() {
+//        return showStatsBtn;
+//
+//    }
 
     public void handleUpdateView(int dialogNum, Player player){
         if(dialogNum == 1){
