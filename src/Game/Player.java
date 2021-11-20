@@ -243,12 +243,12 @@ public class Player implements RoleAPI {
      * @author Gabriel Benni K. Evensen 101119814
      */
     public String propertiesToString(){
-        String s = "";
+        StringBuilder sb = new StringBuilder();
         for (PrivateProperty pp : this.propertyList){
-            s += ("Name:- " + pp.getName() + " / Price:- $" + pp.getPrice() + "\n");
+            sb.append("Name:- " + pp.getName() + " | Price:- $" + pp.getPrice() + "<br>");
         }
-        System.out.println(s);
-        return s;
+        System.out.println(sb.toString());
+        return sb.toString();
     }
 
     /**
