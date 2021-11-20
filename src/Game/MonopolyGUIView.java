@@ -370,6 +370,7 @@ public class MonopolyGUIView extends JFrame {
 //
 //    }
     public JButton getBuyHouseBtn(){
+        System.out.println("Reached!");
         return buyHouseBtn;
     }
 

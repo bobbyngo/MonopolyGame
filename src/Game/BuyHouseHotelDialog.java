@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class BuyHouseHotelDialog extends JDialog {
     private MonopolyController controller;
-    private PlayerPropertyListModel propertyListModel;
+    private PlayerPropertyListHouseModel propertyListModel;
     private JList<PrivateProperty> list;
     private JButton buyHouseBtn;
     private JButton buyHotelBtn;
@@ -14,7 +14,7 @@ public class BuyHouseHotelDialog extends JDialog {
         super(owner, "Buy Houses or Hotels", true);
         this.controller = controller;
         Player player = controller.getCurrentPlayer();
-        propertyListModel = new PlayerPropertyListModel(controller);
+        propertyListModel = new PlayerPropertyListHouseModel(controller);
         controller.retrieveBuyPanelModel(this, propertyListModel);
         list = new JList<>(propertyListModel);
 

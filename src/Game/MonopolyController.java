@@ -30,6 +30,7 @@ public class MonopolyController implements ActionListener {
     // MVC Example
     private MonopolyGUIView view;
     private PlayerPropertyListModel playerPropertyListModel;
+    private PlayerPropertyListHouseModel propertyListHouseModel;
     private SellPlayerPropertyDialog SellDialog;
     private BuyHouseHotelDialog BuyDialog;
 
@@ -66,7 +67,9 @@ public class MonopolyController implements ActionListener {
      * @param property, the rail property being sold
      */
     public void sellProperty(Rail property) {
-        this.currentPlayer.addMoney(property.sell());
+        int amount = property.sell();
+        this.currentPlayer.addMoney(amount);
+        bank.removeMoney(amount);
     }
 
     /**
@@ -76,7 +79,9 @@ public class MonopolyController implements ActionListener {
      * @param property, the business property being sold
      */
     public void sellProperty(Business property) {
-        this.currentPlayer.addMoney(property.sell());
+        int amount = property.sell();
+        this.currentPlayer.addMoney(amount);
+        bank.addMoney(amount);
     }
 
     /**
@@ -318,14 +323,14 @@ public class MonopolyController implements ActionListener {
      * This method will let the player sells the Property
      * @param index
      */
-    // TODO
-    // Cash earned amount is incorrect, must include house and hotel values on the property
-    // use getTotalAssetValue() in business to get the number
     public void sellProperty(int index) {
         PrivateProperty property = currentPlayer.getPropertyList().get(index);
-        int cashEarned = (int)(property.getPrice() * 0.5);
-        currentPlayer.addMoney(cashEarned);    // will prob need fix: give half
-        bank.removeMoney(cashEarned);
+        int cashEarned;
+        if(property instanceof Business){
+            sellProperty(((Business) property));
+        }else{
+            sellProperty(((Rail) property));
+        }
         currentPlayer.removeProperty(property);
     }
 
@@ -451,11 +456,11 @@ public class MonopolyController implements ActionListener {
         else if(e.getSource() == view.getSellBtn()){
             handleSellBtn();
         }
-        else if(e.getSource() == SellDialog.getSellBtn()){
-            handleDialogSellBtn();
-        }
         else if(e.getSource() == view.getBuyHouseBtn()){
             handleBuyHouseBtn();
+        }
+        else if(e.getSource() == SellDialog.getSellBtn()){
+            handleDialogSellBtn();
         }
         else if(e.getSource() == BuyDialog.getBuyHouseBtn()){
             handleDialogBuyHouseBtn();
@@ -672,9 +677,9 @@ public class MonopolyController implements ActionListener {
         view.handleBuyHouseWindowVisibility(bhhd);
     }
 
-    public void retrieveBuyPanelModel(BuyHouseHotelDialog dialog, PlayerPropertyListModel playerPropertyListModel){
+    public void retrieveBuyPanelModel(BuyHouseHotelDialog dialog, PlayerPropertyListHouseModel propertyListHouseModel){
         BuyDialog = dialog;
-        this.playerPropertyListModel = playerPropertyListModel;
+        this.propertyListHouseModel = propertyListHouseModel;
     }
 
     private void handleDialogBuyHouseBtn(){
