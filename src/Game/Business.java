@@ -65,6 +65,10 @@ public class Business extends PrivateProperty implements PropertyAPI, RentableAP
         numHotel ++;
     }
 
+    public void removeHotel(){
+        numHotel = 0;
+    }
+
     // Return the total value of the asset (SQUARE + all houses and hotel)
     /**
      * getTotalAssetValue returns the total value of this Game.Business,this includes the price of the square plus all the houses and hotel that were bought on it

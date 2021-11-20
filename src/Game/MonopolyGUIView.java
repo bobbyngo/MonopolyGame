@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MonopolyGUIView extends JFrame {
     private Board board;
@@ -35,7 +36,8 @@ public class MonopolyGUIView extends JFrame {
     private final JButton sellBtn;
     private final JButton endTurnBtn;
     private final JButton payTaxBtn;
-    
+    private final JButton buyHouseBtn;
+
 
     //For Roll Game.Dice
     int[] roll;
@@ -59,10 +61,10 @@ public class MonopolyGUIView extends JFrame {
 
         ArrayList<Player> players = new ArrayList<>();
         //For running the code, players array list cannot be empty
-        players.add(new AIPlayer("player1", new Square("GO", 0)));
-        players.add(new AIPlayer("player2", new Square("GO", 0)));
-        players.add(new Player("player3", new Square("GO", 0)));
-        players.add(new Player("player4", new Square("GO", 0)));
+        players.add(new AIPlayer("Player 1", new Square("GO", 0)));
+        players.add(new AIPlayer("Player 2", new Square("GO", 0)));
+        players.add(new AIPlayer("Player 3", new Square("GO", 0)));
+        players.add(new AIPlayer("Player 4", new Square("GO", 0)));
         this.controller = new MonopolyController(players, this);
         this.setTitle("Monopoly Game");
 
@@ -81,6 +83,9 @@ public class MonopolyGUIView extends JFrame {
 
         this.payTaxBtn = new JButton();
         this.payTaxBtn.addActionListener(controller);
+
+        this.buyHouseBtn = new JButton();
+        this.buyHouseBtn.addActionListener(controller);
 
         // Game.Dice Initialization
         this.rollBtn = new JButton();
@@ -289,8 +294,15 @@ public class MonopolyGUIView extends JFrame {
         payTaxBtn.setForeground(Color.RED);
         mainPanel.add(payTaxBtn);
 
-        // endTurn Button
+        //buyHouse Button
         c.gridy = 6;
+        gb.setConstraints(buyHouseBtn, c);
+        buyHouseBtn.setText("Buy House/Hotel");
+        buyHouseBtn.setForeground(Color.RED);
+        mainPanel.add(buyHouseBtn);
+
+        // endTurn Button
+        c.gridy = 7;
         gb.setConstraints(endTurnBtn, c);
         endTurnBtn.setText("End Turn");
         endTurnBtn.setForeground(Color.RED);
@@ -358,6 +370,9 @@ public class MonopolyGUIView extends JFrame {
 //        return showStatsBtn;
 //
 //    }
+    public JButton getBuyHouseBtn(){
+        return buyHouseBtn;
+    }
 
     public void handleUpdateView(int dialogNum, Player player){
         if(dialogNum == 1){
@@ -402,6 +417,7 @@ public class MonopolyGUIView extends JFrame {
             JOptionPane.showMessageDialog(null, "You do not have enough balance to pay the rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }else if(dialogNum == 14){
             JOptionPane.showMessageDialog(null, "You have successfully paid your rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+            // FIXME
             textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
             payTaxBtn.setEnabled(false);
         }else if(dialogNum == 15){
@@ -409,15 +425,31 @@ public class MonopolyGUIView extends JFrame {
         }else if(dialogNum == 16){
             rollBtn.setEnabled(false);
         }else if(dialogNum == 17){
-            playerLabels.get(player.getCurrLocation().getIndex()).setText("");
-        }else if(dialogNum == 18){
+            //zak: modifying it so that instead of clearing the label, it keeps everyone BUT the input player
+            //playerLabels.get(player.getCurrLocation().getIndex()).setText("");
+            Square loc = player.getCurrLocation();
+            int index = loc.getIndex();
+            JLabel label = playerLabels.get(index);
+            label.setText("");
 
             StringBuilder str = new StringBuilder();
-            for (Player playa : player.getCurrLocation().getPlayersCurrentlyOn()) {
-                str.append("%s\n");
+            for (Player p : loc.getPlayersCurrentlyOn()) {
+                if (p != player) {
+                    str.append(p.getName()).append("\n");
+                }
             }
 
-            playerLabels.get(player.getCurrLocation().getIndex()).setText(String.valueOf(str));
+            label.setText(str.toString());
+        }else if(dialogNum == 18){
+            // updates square so that it includes everyone?
+            // zak: fixed up a bit
+            StringBuilder str = new StringBuilder();
+            for (Player playa : player.getCurrLocation().getPlayersCurrentlyOn()) {
+                str.append(playa.getName());
+            }
+            //playerLabels.get(player.getCurrLocation().getIndex()).setText(str.toString());
+            //playerLabels.get(player.getCurrLocation().getIndex()).setText(String.valueOf(str));
+            // Commented by zak
             playerLabels.get(player.getCurrLocation().getIndex()).setText(player.getName());
         }else if(dialogNum == 19){
             JOptionPane.showMessageDialog(null, String.format("%s cannot afford this fee.\n Bankrupt!", player.getName()) +
@@ -438,6 +470,18 @@ public class MonopolyGUIView extends JFrame {
             textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }else if(dialogNum == 25){
             JOptionPane.showMessageDialog(null, String.format("%s is on Go To Jail. Turn Ended.", player.getName()));
+        }else if(dialogNum == 26){
+            JOptionPane.showMessageDialog(null, "Successfully bought a house on this property", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 27){
+            JOptionPane.showMessageDialog(null, "You already have 4 houses on this property, can not buy more!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 28){
+            JOptionPane.showMessageDialog(null, "You already have 1 hotel on this property, can not buy more!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 29){
+            JOptionPane.showMessageDialog(null, "Successfully bought a hotel on this property", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 30) {
+            JOptionPane.showMessageDialog(null, "You need have 4 houses on this property in order to buy a hotel, you currently do not meet this requirement", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 31){
+            JOptionPane.showMessageDialog(null, "You can not buy houses or hotels on a Rail property!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -446,6 +490,10 @@ public class MonopolyGUIView extends JFrame {
     }
 
     public void handleSellWindowVisibility(SellPlayerPropertyDialog window){
+        window.setVisible(true);
+    }
+
+    public void handleBuyHouseWindowVisibility(BuyHouseHotelDialog window){
         window.setVisible(true);
     }
 
