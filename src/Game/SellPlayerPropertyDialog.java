@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class SellPlayerPropertyDialog extends JDialog {
     private MonopolyController controller;
-    private PlayerPropertyListModel PropertyListHouseModel;
+    private PlayerPropertyListModel PropertyListModel;
     private JList<PrivateProperty> list;
     private JButton closeBtn;
     private JButton sellBtn;
@@ -13,9 +13,9 @@ public class SellPlayerPropertyDialog extends JDialog {
         super(owner, "Sell Player Property", true);
         this.controller = controller;
         Player player = controller.getCurrentPlayer();
-        PropertyListHouseModel = new PlayerPropertyListModel(controller);
-        controller.retrieveSellPanelModel(this, PropertyListHouseModel);
-        list = new JList<>(PropertyListHouseModel);
+        PropertyListModel = new PlayerPropertyListModel(controller);
+        controller.retrieveSellPanelModel(this, PropertyListModel);
+        list = new JList<>(PropertyListModel);
 
         this.setLayout(new BorderLayout());
 
