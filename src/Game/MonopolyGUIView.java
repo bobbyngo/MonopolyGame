@@ -59,8 +59,8 @@ public class MonopolyGUIView extends JFrame {
 
         ArrayList<Player> players = new ArrayList<>();
         //For running the code, players array list cannot be empty
-        players.add(new Player("player1", new Square("GO", 0)));
-        players.add(new Player("player2", new Square("GO", 0)));
+        players.add(new AIPlayer("player1", new Square("GO", 0)));
+        players.add(new AIPlayer("player2", new Square("GO", 0)));
         players.add(new Player("player3", new Square("GO", 0)));
         players.add(new Player("player4", new Square("GO", 0)));
         controller = new MonopolyController(players, this);

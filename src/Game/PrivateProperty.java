@@ -1,7 +1,5 @@
 package Game;
 
-import Game.Player;
-
 /**
  * Author: Patrick Liu
  * 101142730

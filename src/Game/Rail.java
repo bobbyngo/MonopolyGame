@@ -5,7 +5,7 @@ package Game;
  * 101142730
  */
 
-public class Rail extends PrivateProperty implements PropertyAPI {
+public class Rail extends PrivateProperty implements PropertyAPI, RentableAPI {
 
     /**
      * Constructor for Game.Rail class
@@ -42,7 +42,8 @@ public class Rail extends PrivateProperty implements PropertyAPI {
      *
      */
     public int sell(){
-        int sellPrice = (this.getPrice()/2);
+        //int sellPrice = (this.getPrice()/2);
+        int sellPrice = getSalePrice();
         removeOwner();
         return sellPrice;
     }
@@ -72,5 +73,10 @@ public class Rail extends PrivateProperty implements PropertyAPI {
         return super.toString() +
                 " - Rent: $" +
                 this.getRentAmount();
+    }
+
+    public int getSalePrice() {
+        // i may or may not be breaking things...
+        return getPrice()/2;
     }
 }

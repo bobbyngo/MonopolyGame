@@ -504,6 +504,14 @@ public class MonopolyController implements ActionListener {
                 view.handleUpdateView(8, p);
             }
 
+            if (currentPlayer instanceof AIPlayer) {
+                try {
+                    handleRollDiceBtn();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }else if(!diceRolled){
             view.handleUpdateView(9, getCurrentPlayer());
         }else if(getCurrentPlayer().getCurrLocation() instanceof BankProperty){
@@ -540,6 +548,7 @@ public class MonopolyController implements ActionListener {
     }
 
     private void handleRollDiceBtn() throws IOException {
+        // FIXME: WHERE IS THE EXCEPTION GETTING THROWN FROM?
         // Calling the rollDie function
         // Added debug comments
         //System.out.println("pressed");
@@ -605,6 +614,15 @@ public class MonopolyController implements ActionListener {
         }
 
         view.handleDiceViewUpdate(roll[0], roll[1]);
+
+        // If Player is AI, run autoplay() methods and then end turn?
+        if (currentPlayer instanceof AIPlayer) {
+            //  This doesn't feel right...
+            ((AIPlayer)currentPlayer).autoplay();   // we know that rent, tax, or purchase (or not) has been paid
+            feePaid = true;
+            //view.handleUpdateView();
+            handleEndTurnBtn();
+        }
 
     }
 

@@ -5,7 +5,7 @@ package Game;
  * 101142730
  */
 
-public class Business extends PrivateProperty implements PropertyAPI {
+public class Business extends PrivateProperty implements PropertyAPI, RentableAPI {
 
     private int numHouse;
     private int numHotel;
@@ -83,7 +83,8 @@ public class Business extends PrivateProperty implements PropertyAPI {
      * Note: This method is not used in the current version of the game and should NOT be called
      */
     public int sell(){
-        int sellPrice =  (int)((this.getPrice() + numHouse * (100 + this.getPrice() * 0.1) + numHotel * (100 + this.getPrice() * 0.6))/2);
+        //int sellPrice =  (int)((this.getPrice() + numHouse * (100 + this.getPrice() * 0.1) + numHotel * (100 + this.getPrice() * 0.6))/2);
+        int sellPrice = getSalePrice();
         removeOwner();
         numHouse = 0;
         numHotel = 0;
@@ -116,5 +117,11 @@ public class Business extends PrivateProperty implements PropertyAPI {
         return super.toString() +
                 " - Rent: $" +
                 this.getRentAmount();
+    }
+
+    public int getSalePrice() {
+        //return getTotalAssetValue();
+        int sellPrice =  (int)((this.getPrice() + numHouse * (100 + this.getPrice() * 0.1) + numHotel * (100 + this.getPrice() * 0.6))/2);
+        return sellPrice;
     }
 }
