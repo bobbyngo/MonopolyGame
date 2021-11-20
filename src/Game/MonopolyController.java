@@ -30,7 +30,8 @@ public class MonopolyController implements ActionListener {
     // MVC Example
     private MonopolyGUIView view;
     private PlayerPropertyListModel playerPropertyListModel;
-    private SellPlayerPropertyDialog dialog;
+    private SellPlayerPropertyDialog SellDialog;
+    private BuyHouseHotelDialog BuyDialog;
 
     int[] roll;
     private boolean diceRolled = false;
@@ -96,27 +97,6 @@ public class MonopolyController implements ActionListener {
             this.currentPlayer.buyPrivateProperty(property);                                            //This adds property and removes money for purchase
             this.bank.addMoney(property.getPrice());
         }
-            // else if (property instanceof Game.Business && this.currentPlayer.isOwningColorGroup()) {            //The property type must be Game.Business; if the currentPlayer owns the full colour set, then:-
-            Business businessProperty = (Business) property;                                            //Cast privateproperty type to Game.Business for manipulation
-
-            if (businessProperty.getNumHouse() < 4) {                                                   //If the Game.Business Property has less than the maximum allowed houses, 5
-                businessProperty.buyHouse();                                                            //Increments house count by one
-                this.currentPlayer.removeMoney((int) (100 + businessProperty.getPrice() * 0.1));        //Removes price of one house from currentPlayers purse
-                this.bank.addMoney((int) (100 + businessProperty.getPrice() * 0.1));
-            } else if (businessProperty.getNumHouse() == 4) {                                           //Else if the Game.Business Property has four houses, replace those four with a hotel, worth more than four houses
-                businessProperty.removeHouses();                                                        //Removes all houses from the current property
-                businessProperty.buyHotel();                                                            //Puts one hotel on the property
-                this.currentPlayer.removeMoney((int) (100 + businessProperty.getPrice() * 0.6));        //Removes price of one hotel from currentPlayers purse
-                this.bank.addMoney((int) (100 + businessProperty.getPrice() * 0.6));                    //This adds the money from the purchase to the bank
-            }
-
-        //}
-        else {
-            System.err.println("You are unable to buy anything on this square");
-        }
-        //For buying property: Check if the class is Game.Rail by: .instanceof(Game.Rail)
-        // If yes, we do not need to check the full set of color to buy rail
-        // I agree, if .instanceof(Game.Rail) works as intended then we do not need to use color code "white" for rail
     }
 
     /**
@@ -338,12 +318,51 @@ public class MonopolyController implements ActionListener {
      * This method will let the player sells the Property
      * @param index
      */
+    // TODO
+    // Cash earned amount is incorrect, must include house and hotel values on the property
+    // use getTotalAssetValue() in business to get the number
     public void sellProperty(int index) {
         PrivateProperty property = currentPlayer.getPropertyList().get(index);
         int cashEarned = (int)(property.getPrice() * 0.5);
         currentPlayer.addMoney(cashEarned);    // will prob need fix: give half
         bank.removeMoney(cashEarned);
         currentPlayer.removeProperty(property);
+    }
+
+    public void buyHouses(int index){
+        PrivateProperty property = currentPlayer.getPropertyList().get(index);
+        if(property instanceof Business){
+            if(((Business) property).getNumHouse() < 4){
+                ((Business) property).buyHouse();
+                currentPlayer.removeMoney((int)(100 + property.getPrice() * 0.1));
+                bank.addMoney((int)(100 + property.getPrice() * 0.1));
+                view.handleUpdateView(26, currentPlayer);
+            }
+            else {
+                view.handleUpdateView(27, currentPlayer);
+            }
+        }else{
+            view.handleUpdateView(31, currentPlayer);
+        }
+    }
+
+    public void buyHotels(int index){
+        PrivateProperty property = currentPlayer.getPropertyList().get(index);
+        if(property instanceof Business){
+            if(((Business) property).getNumHotel() == 1){
+                view.handleUpdateView(28, currentPlayer);
+            }
+            else if(((Business) property).getNumHouse() == 4){
+                ((Business) property).buyHotel();
+                currentPlayer.removeMoney((int)(100 + property.getPrice() * 0.6));
+                bank.addMoney((int)(100 + property.getPrice() * 0.6));
+                view.handleUpdateView(29, currentPlayer);
+            }else{
+                view.handleUpdateView(30, currentPlayer);
+            }
+        }else{
+            view.handleUpdateView(31, currentPlayer);
+        }
     }
 
     /**
@@ -432,8 +451,17 @@ public class MonopolyController implements ActionListener {
         else if(e.getSource() == view.getSellBtn()){
             handleSellBtn();
         }
-        else if(e.getSource() == dialog.getSellBtn()){
+        else if(e.getSource() == SellDialog.getSellBtn()){
             handleDialogSellBtn();
+        }
+        else if(e.getSource() == view.getBuyHouseBtn()){
+            handleBuyHouseBtn();
+        }
+        else if(e.getSource() == BuyDialog.getBuyHouseBtn()){
+            handleDialogBuyHouseBtn();
+        }
+        else if(e.getSource() == BuyDialog.getBuyHotelBtn()){
+            handleDialogBuyHotelBtn();
         }
     }
 
@@ -534,11 +562,6 @@ public class MonopolyController implements ActionListener {
         }
     }
 
-    private void handleSellBtn() {
-        SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(view, this);
-        view.handleSellWindowVisibility(sppd);
-    }
-
     private void handleRollDiceBtn() throws IOException {
         // Calling the rollDie function
         // Added debug comments
@@ -608,16 +631,45 @@ public class MonopolyController implements ActionListener {
 
     }
 
-    public void retrieveSellPanelMoodle(SellPlayerPropertyDialog dialog, PlayerPropertyListModel playerPropertyListModel){
-        this.dialog = dialog;
+    private void handleSellBtn() {
+        SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(view, this);
+        view.handleSellWindowVisibility(sppd);
+    }
+
+    public void retrieveSellPanelModel(SellPlayerPropertyDialog dialog, PlayerPropertyListModel playerPropertyListModel){
+        SellDialog = dialog;
         this.playerPropertyListModel = playerPropertyListModel;
     }
 
     private void handleDialogSellBtn(){
-        int index = dialog.getList().getSelectedIndex();
+        int index = SellDialog.getList().getSelectedIndex();
         if (index != -1) {
             sellProperty(index);
             playerPropertyListModel.removeProperty(index);
+        }
+    }
+
+    private void handleBuyHouseBtn(){
+        BuyHouseHotelDialog bhhd = new BuyHouseHotelDialog(view, this);
+        view.handleBuyHouseWindowVisibility(bhhd);
+    }
+
+    public void retrieveBuyPanelModel(BuyHouseHotelDialog dialog, PlayerPropertyListModel playerPropertyListModel){
+        BuyDialog = dialog;
+        this.playerPropertyListModel = playerPropertyListModel;
+    }
+
+    private void handleDialogBuyHouseBtn(){
+        int index = BuyDialog.getList().getSelectedIndex();
+        if (index != -1) {
+            buyHouses(index);
+        }
+    }
+
+    public void handleDialogBuyHotelBtn(){
+        int index = BuyDialog.getList().getSelectedIndex();
+        if (index != -1) {
+            buyHotels(index);
         }
     }
 }

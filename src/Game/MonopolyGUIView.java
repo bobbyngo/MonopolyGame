@@ -35,6 +35,7 @@ public class MonopolyGUIView extends JFrame {
     private final JButton sellBtn;
     private final JButton endTurnBtn;
     private final JButton payTaxBtn;
+    private final JButton buyHouseBtn;
     
 
     //For Roll Game.Dice
@@ -81,6 +82,9 @@ public class MonopolyGUIView extends JFrame {
 
         this.payTaxBtn = new JButton();
         this.payTaxBtn.addActionListener(controller);
+
+        this.buyHouseBtn = new JButton();
+        this.buyHouseBtn.addActionListener(controller);
 
         // Game.Dice Initialization
         this.rollBtn = new JButton();
@@ -288,8 +292,15 @@ public class MonopolyGUIView extends JFrame {
         payTaxBtn.setForeground(Color.RED);
         mainPanel.add(payTaxBtn);
 
-        // endTurn Button
+        //buyHouse Button
         c.gridy = 6;
+        gb.setConstraints(buyHouseBtn, c);
+        buyHouseBtn.setText("Buy House/Hotel");
+        buyHouseBtn.setForeground(Color.RED);
+        mainPanel.add(buyHouseBtn);
+
+        // endTurn Button
+        c.gridy = 7;
         gb.setConstraints(endTurnBtn, c);
         endTurnBtn.setText("End Turn");
         endTurnBtn.setForeground(Color.RED);
@@ -352,9 +363,13 @@ public class MonopolyGUIView extends JFrame {
     public JButton getSellBtn() {
         return sellBtn;
     }
+
     public JButton getShowStatsBtn() {
         return showStatsBtn;
+    }
 
+    public JButton getBuyHouseBtn(){
+        return buyHouseBtn;
     }
 
     public void handleUpdateView(int dialogNum, Player player){
@@ -433,6 +448,18 @@ public class MonopolyGUIView extends JFrame {
                     "They have been sent to jail and their turn shall be skipped for 3 rounds.");
         }else if(dialogNum == 25){
             JOptionPane.showMessageDialog(null, String.format("%s is on Go To Jail. Turn Ended.", player.getName()));
+        }else if(dialogNum == 26){
+            JOptionPane.showMessageDialog(null, "Successfully bought a house on this property", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 27){
+            JOptionPane.showMessageDialog(null, "You already have 4 houses on this property, can not buy more!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 28){
+            JOptionPane.showMessageDialog(null, "You already have 1 hotel on this property, can not buy more!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 29){
+            JOptionPane.showMessageDialog(null, "Successfully bought a hotel on this property", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 30) {
+            JOptionPane.showMessageDialog(null, "You need have 4 houses on this property in order to buy a hotel, you currently do not meet this requirement", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+        }else if(dialogNum == 31){
+            JOptionPane.showMessageDialog(null, "You can not buy houses or hotels on a Rail property!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -441,6 +468,10 @@ public class MonopolyGUIView extends JFrame {
     }
 
     public void handleSellWindowVisibility(SellPlayerPropertyDialog window){
+        window.setVisible(true);
+    }
+
+    public void handleBuyHouseWindowVisibility(BuyHouseHotelDialog window){
         window.setVisible(true);
     }
 

@@ -2,50 +2,55 @@ package Game;
 import javax.swing.*;
 import java.awt.*;
 
-public class SellPlayerPropertyDialog extends JDialog {
+public class BuyHouseHotelDialog extends JDialog {
     private MonopolyController controller;
     private PlayerPropertyListModel propertyListModel;
     private JList<PrivateProperty> list;
+    private JButton buyHouseBtn;
+    private JButton buyHotelBtn;
     private JButton closeBtn;
-    private JButton sellBtn;
 
-    public SellPlayerPropertyDialog(JFrame owner, MonopolyController controller) {
-        super(owner, "Sell Player Property", true);
+    public BuyHouseHotelDialog(JFrame owner, MonopolyController controller) {
+        super(owner, "Buy Houses or Hotels", true);
         this.controller = controller;
         Player player = controller.getCurrentPlayer();
         propertyListModel = new PlayerPropertyListModel(controller);
-        controller.retrieveSellPanelModel(this, propertyListModel);
+        controller.retrieveBuyPanelModel(this, propertyListModel);
         list = new JList<>(propertyListModel);
 
         this.setLayout(new BorderLayout());
 
-        // Fixed the size dialog for you zak : )
-        this.setPreferredSize(new Dimension(250, 250));
+        this.setPreferredSize(new Dimension(400, 250));
         pack();
 
-        // Bonus: Make the dialog in the middle
         setLocationRelativeTo(null);
-
 
         JScrollPane scrollPane = new JScrollPane(list);
         this.add(scrollPane, BorderLayout.CENTER);
 
-        this.add(new JLabel(String.format("Sell %s's Properties. Double-click to sell.",
+        this.add(new JLabel(String.format("%s is buying houses/hotel, double click to select",
                 player.getName())), BorderLayout.PAGE_START);
 
         JPanel btnPanel = new JPanel();
         add(btnPanel, BorderLayout.PAGE_END);
         closeBtn = new JButton("Close");
-        sellBtn = new JButton("Sell");
+        buyHouseBtn = new JButton("Buy House");
+        buyHotelBtn = new JButton("Buy Hotel");
         closeBtn.addActionListener(e->dispose());
-        sellBtn.addActionListener(controller);
+        buyHouseBtn.addActionListener(controller);
+        buyHotelBtn.addActionListener(controller);
 
-        btnPanel.add(sellBtn);
+        btnPanel.add(buyHouseBtn);
+        btnPanel.add(buyHotelBtn);
         btnPanel.add(closeBtn);
     }
 
-    public JButton getSellBtn(){
-        return sellBtn;
+    public JButton getBuyHouseBtn(){
+        return buyHouseBtn;
+    }
+
+    public JButton getBuyHotelBtn(){
+        return buyHotelBtn;
     }
 
     public JList<PrivateProperty> getList(){
