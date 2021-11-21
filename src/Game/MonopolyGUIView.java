@@ -122,7 +122,11 @@ public class MonopolyGUIView extends JFrame {
         this.diceLabel1 = new JLabel();
         this.diceLabel2 = new JLabel();
 
-        textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Asset Info</u>:-<br> Properties owned:<br> %s <br><br><u>Monetary Info</u>:-<br> Total asset value: $%d <br>Liquid value: $%d", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(), controller.getCurrentPlayer().propertiesToString(), controller.getCurrentPlayer().getPlayerTotalAsset(), controller.getCurrentPlayer().getPlayerBalance()));
+        textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Asset Info</u>:-<br> " +
+                        "Properties owned:<br> %s <br><br><u>Monetary Info</u>:-<br> Total asset value: $%d <br>Liquid value: $%d",
+                controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(),
+                controller.getCurrentPlayer().propertiesToString(), controller.getCurrentPlayer().getPlayerTotalAsset(),
+                controller.getCurrentPlayer().getPlayerBalance()));
 
         this.houseLabel = new JLabel();
         this.hotelLabel = new JLabel();
@@ -477,7 +481,7 @@ public class MonopolyGUIView extends JFrame {
             JOptionPane.showMessageDialog(null, "You do not have enough balance to pay the rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }else if(dialogNum == 14){
             JOptionPane.showMessageDialog(null, "You have successfully paid your rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-            rollBtn.setEnabled(true); //safety check such that the rollbtn is enabled if they pay their rent
+            //rollBtn.setEnabled(true); //safety check such that the rollbtn is enabled if they pay their rent
             textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
             payTaxBtn.setEnabled(false);
         }else if(dialogNum == 15){
