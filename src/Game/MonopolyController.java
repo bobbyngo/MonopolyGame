@@ -679,6 +679,7 @@ public class MonopolyController implements ActionListener {
         if (index != -1) {
             sellProperty(index);
             playerPropertyListModel.removeProperty(index);
+            updateDialogAfterSellOrBuy();
         }
     }
 
@@ -686,6 +687,7 @@ public class MonopolyController implements ActionListener {
         int index = BuyDialog.getList().getSelectedIndex();
         if (index != -1) {
             buyHouses(index);
+            updateDialogAfterSellOrBuy();
         }
     }
 
@@ -693,6 +695,16 @@ public class MonopolyController implements ActionListener {
         int index = BuyDialog.getList().getSelectedIndex();
         if (index != -1) {
             buyHotels(index);
+            updateDialogAfterSellOrBuy();
+        }
+    }
+
+    private void updateDialogAfterSellOrBuy() {
+        Player p = currentPlayer;
+        if(p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
+            view.handleUpdateView(21, p);
+        }else{
+            view.handleUpdateView(22, p);
         }
     }
 }

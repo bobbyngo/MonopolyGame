@@ -521,8 +521,10 @@ public class MonopolyGUIView extends JFrame {
                     player.getName(), player.getPlayerTotalAsset()));
             this.dispose();
         }else if(dialogNum == 21){
+            // land owned private property
             textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }else if(dialogNum == 22){
+            // land on anything else
             textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }else if(dialogNum == 23){
             JOptionPane.showMessageDialog(null, String.format("%s has rolled a DOUBLE!", player.getName()));
