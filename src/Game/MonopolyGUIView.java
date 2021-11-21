@@ -180,14 +180,6 @@ public class MonopolyGUIView extends JFrame {
             InfoPanel.setBorder(BorderFactory.createEmptyBorder());
             playerPanel.setBorder(BorderFactory.createEmptyBorder());
 
-            JPanel housePanel = new JPanel(new BorderLayout());
-            JLabel housePicPanel = new JLabel();
-            JLabel houseNumPanel = new JLabel();
-            JLabel hotelPicPanel = new JLabel();
-            housePanel.add(housePicPanel, BorderLayout.WEST);
-            housePanel.add(houseNumPanel, BorderLayout.SOUTH);
-            housePanel.add(hotelPicPanel, BorderLayout.EAST);
-
             JLabel squareLabel = new JLabel();
             squareLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             squareLabel.setForeground(Color.BLUE);
@@ -213,7 +205,6 @@ public class MonopolyGUIView extends JFrame {
             InfoPanel.add(squareLabel);
             playerPanel.add(playerLabel);
 
-            squarePanel.add(housePanel,BorderLayout.NORTH);
             squarePanel.add(InfoPanel, BorderLayout.CENTER);
             squarePanel.add(playerPanel, BorderLayout.SOUTH);
 
