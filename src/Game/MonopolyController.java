@@ -399,7 +399,7 @@ public class MonopolyController implements ActionListener {
             }else {
                 ((BankProperty) location).collectMoney(currentPlayer);
                 getBank().addMoney(((BankProperty) location).getTaxValue());
-                return 1;
+                return 2;
             }
         }
         return 0;
@@ -558,8 +558,11 @@ public class MonopolyController implements ActionListener {
                 if(payFee() == 0){
                     view.handleUpdateView(13, p);
                     feePaid = false;
-                }else{
+                }else if(payFee() == 1){
                     view.handleUpdateView(14, p);
+                    feePaid = true;
+                }else if(payFee() == 2){
+                    view.handleUpdateView(32, p);
                     feePaid = true;
                 }
             }
