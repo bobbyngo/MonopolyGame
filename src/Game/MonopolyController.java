@@ -557,6 +557,7 @@ public class MonopolyController implements ActionListener {
         if(p.getCurrLocation() instanceof BankProperty || p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
             if(p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).getOwner().equals(p)){
                 view.handleUpdateView(12, p);
+                feePaid = true;
             }else {
                 if(payFee() == 0){
                     view.handleUpdateView(13, p);
