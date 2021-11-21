@@ -529,7 +529,7 @@ public class MonopolyController implements ActionListener {
             }
 
             view.getRollBtn().setEnabled(true);
-            view.getPayTaxBtn().setEnabled(true);
+            view.getPayTaxBtn().setEnabled(false);
             view.getBuyBtn().setEnabled(true);
             diceRolled = false;
 
