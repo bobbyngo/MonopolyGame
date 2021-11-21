@@ -53,6 +53,10 @@ public class BuyHouseHotelDialog extends JDialog {
         return buyHotelBtn;
     }
 
+    public JButton getCloseBtn(){
+        return closeBtn;
+    }
+
     public JList<PrivateProperty> getList(){
         return list;
     }

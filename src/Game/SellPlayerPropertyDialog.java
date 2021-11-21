@@ -48,6 +48,10 @@ public class SellPlayerPropertyDialog extends JDialog {
         return sellBtn;
     }
 
+    public JButton getCloseBtn(){
+        return closeBtn;
+    }
+
     public JList<PrivateProperty> getList(){
         return list;
     }
