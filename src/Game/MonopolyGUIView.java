@@ -75,15 +75,14 @@ public class MonopolyGUIView extends JFrame {
         ArrayList<Player> players = new ArrayList<>();
         int option = JOptionPane.showConfirmDialog(null, infoPanel, "Game setup",JOptionPane.OK_CANCEL_OPTION);
         if(option == JOptionPane.OK_OPTION){
-            //adding AI players
-            for (int i = 0; i < Integer.parseInt(nAIPlayers.getText()); i++){
-                players.add(new AIPlayer("AI Player " + i + 1, new Square("GO", 0)));
-            }
             //adding human players
             for (int i = 0; i < Integer.parseInt(nHumanPlayers.getText()); i++){
                 players.add(new Player("Player " + i + 1, new Square("GO", 0)));
             }
-
+            //adding AI players
+            for (int i = 0; i < Integer.parseInt(nAIPlayers.getText()); i++) {
+                players.add(new AIPlayer("AI Player " + i + 1, new Square("GO", 0)));
+            }
         }else{
             //start off with 4 AI players if not cancel option is selected
             players.add(new AIPlayer("Player 1", new Square("GO", 0)));
