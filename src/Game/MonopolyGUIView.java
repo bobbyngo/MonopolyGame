@@ -192,9 +192,6 @@ public class MonopolyGUIView extends JFrame {
 
             if(board.getSQUARE(i) instanceof PrivateProperty){
                 squareLabel.setText(String.format("<html> %s <br> Price: %s </html>", board.getSQUARE(i).getName(), (((PrivateProperty)board.getSQUARE(i)).getPrice())));
-                if (board.getSQUARE(i) instanceof Business) {
-                    displayBusiness((Business) board.getSQUARE(i));
-                }
             }
             else if(board.getSQUARE(i) instanceof BankProperty){
                 squareLabel.setText(String.format("<html> %s <br> Tax: %s </html>", board.getSQUARE(i).getName(), (((BankProperty)board.getSQUARE(i)).getTaxValue())));
@@ -212,31 +209,6 @@ public class MonopolyGUIView extends JFrame {
         }
     }
 
-    private void displayBusiness(Business business) throws IOException {
-        if (business.isOwned()) {
-
-            JLabel label = null;
-            if (business.getNumHouse() > 0) {
-                InputStream in = getClass().getResourceAsStream("../Images/house.png");
-                BufferedImage image = ImageIO.read(in);
-                Image resizeImage = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-                label = new JLabel(new ImageIcon(resizeImage));
-                houseLabel = label;
-                mainPanel.add(houseLabel);
-            }
-
-            else if (business.getNumHotel() > 0) {
-                InputStream in = getClass().getResourceAsStream("../Images/hotel.png");
-                BufferedImage image = ImageIO.read(in);
-                Image resizeImage = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-                label = new JLabel(new ImageIcon(resizeImage));
-                hotelLabel = label;
-                mainPanel.add(hotelLabel);
-            }
-        }
-        mainPanel.validate();
-        mainPanel.repaint();
-    }
 
     /**
      * This method adds the Game.Square into the Game.Board
