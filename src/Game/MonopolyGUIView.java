@@ -17,10 +17,12 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MonopolyGUIView extends JFrame {
     private Board board;
     private final JPanel mainPanel;
+    private final JPanel remotePanel;
     private final GridBagLayout gb;
     private final GridBagConstraints c;
     private final ArrayList<JPanel> squares;
@@ -52,19 +54,43 @@ public class MonopolyGUIView extends JFrame {
         board = new Board();
         gb = new GridBagLayout();
         mainPanel = new JPanel(gb);
+        remotePanel = new JPanel(gb);
         c = new GridBagConstraints();
         squares = new ArrayList<>();
         textPanel = new JPanel();
         textLabel = new JLabel();
         playerLabels = new ArrayList<>();
 
+
+        JPanel infoPanel = new JPanel(new GridLayout(2,1));
+
+        JTextField nAIPlayers = new JTextField("# AI Players");
+        JTextField nHumanPlayers = new JTextField("# Human Players");
+
+        infoPanel.add(nAIPlayers);
+        infoPanel.add(nHumanPlayers);
+
         ArrayList<Player> players = new ArrayList<>();
-        //For running the code, players array list cannot be empty
-        players.add(new AIPlayer("player1", new Square("GO", 0)));
-        players.add(new AIPlayer("player2", new Square("GO", 0)));
-        players.add(new Player("player3", new Square("GO", 0)));
-        players.add(new Player("player4", new Square("GO", 0)));
+        int option = JOptionPane.showConfirmDialog(null, infoPanel, "Game setup",JOptionPane.OK_CANCEL_OPTION);
+        if(option == JOptionPane.OK_OPTION){
+            //adding AI players
+            for (int i = 0; i < Integer.parseInt(nAIPlayers.getText()); i++){
+                players.add(new AIPlayer("AI Player " + i, new Square("GO", 0)));
+            }
+            //adding human players
+            for (int i = 0; i < Integer.parseInt(nHumanPlayers.getText()); i++){
+                players.add(new Player("Player " + i, new Square("GO", 0)));
+            }
+
+        }else{
+            //start off with 4 AI players if not cancel option is selected
+            players.add(new AIPlayer("Player 1", new Square("GO", 0)));
+            players.add(new AIPlayer("Player 2", new Square("GO", 0)));
+            players.add(new AIPlayer("Player 3", new Square("GO", 0)));
+            players.add(new AIPlayer("Player 4", new Square("GO", 0)));
+        }
         this.controller = new MonopolyController(players, this);
+
         this.setTitle("Monopoly Game");
 
 //        this.showStatsBtn = new JButton();
@@ -416,7 +442,7 @@ public class MonopolyGUIView extends JFrame {
             JOptionPane.showMessageDialog(null, "You do not have enough balance to pay the rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }else if(dialogNum == 14){
             JOptionPane.showMessageDialog(null, "You have successfully paid your rent/tax!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
-            // FIXME
+            rollBtn.setEnabled(true); //safety check such that the rollbtn is enabled if they pay their rent
             textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
             payTaxBtn.setEnabled(false);
         }else if(dialogNum == 15){
@@ -424,15 +450,31 @@ public class MonopolyGUIView extends JFrame {
         }else if(dialogNum == 16){
             rollBtn.setEnabled(false);
         }else if(dialogNum == 17){
-            playerLabels.get(player.getCurrLocation().getIndex()).setText("");
-        }else if(dialogNum == 18){
+            //zak: modifying it so that instead of clearing the label, it keeps everyone BUT the input player
+            //playerLabels.get(player.getCurrLocation().getIndex()).setText("");
+            Square loc = player.getCurrLocation();
+            int index = loc.getIndex();
+            JLabel label = playerLabels.get(index);
+            label.setText("");
 
             StringBuilder str = new StringBuilder();
-            for (Player playa : player.getCurrLocation().getPlayersCurrentlyOn()) {
-                str.append("%s\n");
+            for (Player p : loc.getPlayersCurrentlyOn()) {
+                if (p != player) {
+                    str.append(p.getName()).append("\n");
+                }
             }
 
-            playerLabels.get(player.getCurrLocation().getIndex()).setText(String.valueOf(str));
+            label.setText(str.toString());
+        }else if(dialogNum == 18){
+            // updates square so that it includes everyone?
+            // zak: fixed up a bit
+            StringBuilder str = new StringBuilder();
+            for (Player playa : player.getCurrLocation().getPlayersCurrentlyOn()) {
+                str.append(playa.getName());
+            }
+            //playerLabels.get(player.getCurrLocation().getIndex()).setText(str.toString());
+            //playerLabels.get(player.getCurrLocation().getIndex()).setText(String.valueOf(str));
+            // Commented by zak
             playerLabels.get(player.getCurrLocation().getIndex()).setText(player.getName());
         }else if(dialogNum == 19){
             JOptionPane.showMessageDialog(null, String.format("%s cannot afford this fee.\n Bankrupt!", player.getName()) +

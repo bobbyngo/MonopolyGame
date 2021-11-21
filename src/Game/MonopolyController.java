@@ -621,8 +621,10 @@ public class MonopolyController implements ActionListener {
 
         // Check if the player rolls double three times
         if (isSpeeding()) {
+            view.handleUpdateView(17, p);   // clear label (should be "keep all but this player")
             sendCurrentPlayerToJail();
-            view.handleUpdateView(24, p);
+            view.handleUpdateView(18, p);   // update location label
+            view.handleUpdateView(24, p);   // dialog
             feePaid = true;
 
             // change handleEndTurnBtn() in the controller back to private after refactoring
@@ -631,8 +633,11 @@ public class MonopolyController implements ActionListener {
         }
 
         if (currentPlayerIsOnGoToJail()) {
+            // added by zak
+            view.handleUpdateView(17, p);   // clear label (should be "keep all but this player")
             sendCurrentPlayerToJail();
-            view.handleUpdateView(25, p);
+            view.handleUpdateView(18, p);   // update location label
+            view.handleUpdateView(25, p);   // dialog
 
             // change handleEndTurnBtn() in the controller back to private after refactoring
             handleEndTurnBtn();
