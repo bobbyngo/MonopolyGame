@@ -31,6 +31,7 @@ public class MonopolyController implements ActionListener {
     private MonopolyGUIView view;
     private PlayerPropertyListModel playerPropertyListModel;
     private PlayerPropertyListHouseModel playerPropertyListHouseModel;
+
     private SellPlayerPropertyDialog SellDialog;
     private BuyHouseHotelDialog BuyDialog;
 
@@ -54,6 +55,8 @@ public class MonopolyController implements ActionListener {
 
         // MVC example
         this.view = view;
+        SellDialog = new SellPlayerPropertyDialog(this.view, this);
+        BuyDialog = new BuyHouseHotelDialog(this.view, this);
 
         for(Player p: this.players){
             p.setCurrLocation(board.getSQUARE(0));
@@ -432,6 +435,7 @@ public class MonopolyController implements ActionListener {
     // MVC Example
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if(e.getSource() == view.getBuyBtn()){
             handleBuyBtn();
         }
@@ -449,7 +453,6 @@ public class MonopolyController implements ActionListener {
         else if (e.getSource() == view.getRollBtn()) {
 
                 handleRollDiceBtn();
-
 
         }
         else if(e.getSource() == view.getSellBtn()){
@@ -655,13 +658,13 @@ public class MonopolyController implements ActionListener {
     }
 
     private void handleSellBtn() {
-        SellPlayerPropertyDialog sppd = new SellPlayerPropertyDialog(view, this);
-        view.handleSellWindowVisibility(sppd);
+        SellDialog = new SellPlayerPropertyDialog(this.view, this);
+        view.handleSellWindowVisibility(SellDialog);
     }
 
     private void handleBuyHouseBtn(){
-        BuyHouseHotelDialog bhhd = new BuyHouseHotelDialog(view, this);
-        view.handleBuyHouseWindowVisibility(bhhd);
+        BuyDialog = new BuyHouseHotelDialog(this.view, this);
+        view.handleBuyHouseWindowVisibility(BuyDialog);
     }
 
     public void retrieveSellPanelModel(SellPlayerPropertyDialog dialog, PlayerPropertyListModel playerPropertyListModel){
