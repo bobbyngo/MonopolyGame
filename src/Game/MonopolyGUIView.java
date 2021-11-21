@@ -140,9 +140,10 @@ public class MonopolyGUIView extends JFrame {
                 .append(controller.getCurrentPlayer().getCurrLocation().getName())
                 .append("<br><br><u>Asset Info</u>:-<br> Properties owned:<br>")
                 .append(controller.getCurrentPlayer().propertiesToString())
+
                 .append("<br><br><u>Monetary Info</u>:-<br> Total asset value: $")
                 .append(controller.getCurrentPlayer().getPlayerTotalAsset())
-                .append("<br>Liquid value: $%d")
+                .append("<br>Liquid value: $")
                 .append(controller.getCurrentPlayer().getPlayerBalance());
 
         return stringBuilder.toString();
@@ -192,9 +193,6 @@ public class MonopolyGUIView extends JFrame {
 
             if(board.getSQUARE(i) instanceof PrivateProperty){
                 squareLabel.setText(String.format("<html> %s <br> Price: %s </html>", board.getSQUARE(i).getName(), (((PrivateProperty)board.getSQUARE(i)).getPrice())));
-                if (board.getSQUARE(i) instanceof Business) {
-                    displayBusiness((Business) board.getSQUARE(i));
-                }
             }
             else if(board.getSQUARE(i) instanceof BankProperty){
                 squareLabel.setText(String.format("<html> %s <br> Tax: %s </html>", board.getSQUARE(i).getName(), (((BankProperty)board.getSQUARE(i)).getTaxValue())));
@@ -212,31 +210,6 @@ public class MonopolyGUIView extends JFrame {
         }
     }
 
-    private void displayBusiness(Business business) throws IOException {
-        if (business.isOwned()) {
-
-            JLabel label = null;
-            if (business.getNumHouse() > 0) {
-                InputStream in = getClass().getResourceAsStream("../Images/house.png");
-                BufferedImage image = ImageIO.read(in);
-                Image resizeImage = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-                label = new JLabel(new ImageIcon(resizeImage));
-                houseLabel = label;
-                mainPanel.add(houseLabel);
-            }
-
-            else if (business.getNumHotel() > 0) {
-                InputStream in = getClass().getResourceAsStream("../Images/hotel.png");
-                BufferedImage image = ImageIO.read(in);
-                Image resizeImage = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-                label = new JLabel(new ImageIcon(resizeImage));
-                hotelLabel = label;
-                mainPanel.add(hotelLabel);
-            }
-        }
-        mainPanel.validate();
-        mainPanel.repaint();
-    }
 
     /**
      * This method adds the Game.Square into the Game.Board
@@ -501,7 +474,7 @@ public class MonopolyGUIView extends JFrame {
             textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }
         else if(dialogNum == 8){
-            textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
+            textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }
         else if(dialogNum == 9){
             JOptionPane.showMessageDialog(null, "You must roll the dice before ending the turn!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
@@ -572,12 +545,16 @@ public class MonopolyGUIView extends JFrame {
             JOptionPane.showMessageDialog(null, String.format("%s is on Go To Jail. Turn Ended.", player.getName()));
         }else if(dialogNum == 26){
             JOptionPane.showMessageDialog(null, "Successfully bought a house on this property", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+            textLabel.setText(displayPlayerInfo());
+
         }else if(dialogNum == 27){
             JOptionPane.showMessageDialog(null, "You already have 4 houses on this property, can not buy more!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }else if(dialogNum == 28){
             JOptionPane.showMessageDialog(null, "You already have 1 hotel on this property, can not buy more!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }else if(dialogNum == 29){
             JOptionPane.showMessageDialog(null, "Successfully bought a hotel on this property", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+            textLabel.setText(displayPlayerInfo());
+
         }else if(dialogNum == 30) {
             JOptionPane.showMessageDialog(null, "You need have 4 houses on this property in order to buy a hotel, you currently do not meet this requirement", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }else if(dialogNum == 31){
