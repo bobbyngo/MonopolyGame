@@ -129,11 +129,6 @@ public class MonopolyGUIView extends JFrame {
 
     private String displayPlayerInfo() {
         StringBuilder stringBuilder = new StringBuilder("");
-//        String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Asset Info</u>:-<br> " +
-//                        "Properties owned:<br> %s <br><br><u>Monetary Info</u>:-<br> Total asset value: $%d <br>Liquid value: $%d",
-//                controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(),
-//                controller.getCurrentPlayer().propertiesToString(), controller.getCurrentPlayer().getPlayerTotalAsset(),
-//                controller.getCurrentPlayer().getPlayerBalance());
         stringBuilder.append("<html><u>Player Info</u>:-<br>")
                 .append(controller.getCurrentPlayer().getName())
                 .append("'s turn <br> Location: ")
