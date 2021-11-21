@@ -447,11 +447,10 @@ public class MonopolyController implements ActionListener {
 //        }
 
         else if (e.getSource() == view.getRollBtn()) {
-            try {
+
                 handleRollDiceBtn();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+
+
         }
         else if(e.getSource() == view.getSellBtn()){
             handleSellBtn();
@@ -538,11 +537,7 @@ public class MonopolyController implements ActionListener {
             }
 
             if (currentPlayer instanceof AIPlayer) {
-                try {
                     handleRollDiceBtn();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
 
         }else if(!diceRolled){
@@ -573,8 +568,7 @@ public class MonopolyController implements ActionListener {
         }
     }
 
-    private void handleRollDiceBtn() throws IOException {
-        // FIXME: WHERE IS THE EXCEPTION GETTING THROWN FROM?
+    private void handleRollDiceBtn() {
         // Calling the rollDie function
         // Added debug comments
         //System.out.println("pressed");

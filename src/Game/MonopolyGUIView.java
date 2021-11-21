@@ -17,7 +17,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class MonopolyGUIView extends JFrame {
     private Board board;
@@ -44,6 +43,9 @@ public class MonopolyGUIView extends JFrame {
     int[] roll;
     private JLabel diceLabel1;
     private JLabel diceLabel2;
+
+    private JLabel houseLabel;
+    private JLabel hotelLabel;
 
     private MonopolyController controller;
 
@@ -121,12 +123,15 @@ public class MonopolyGUIView extends JFrame {
         this.diceLabel2 = new JLabel();
 
         textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Asset Info</u>:-<br> Properties owned:<br> %s <br><br><u>Monetary Info</u>:-<br> Total asset value: $%d <br>Liquid value: $%d", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(), controller.getCurrentPlayer().propertiesToString(), controller.getCurrentPlayer().getPlayerTotalAsset(), controller.getCurrentPlayer().getPlayerBalance()));
+
+        this.houseLabel = new JLabel();
+        this.hotelLabel = new JLabel();
     }
 
     /**
      * This method will create a layout for each square like name, price
      */
-    private void SquaresLayout(){
+    private void squaresLayout() throws IOException {
         for(int i = 0; i < 38; i++){
             JPanel squarePanel = new JPanel(new BorderLayout());
             JPanel InfoPanel = new JPanel();
@@ -147,6 +152,9 @@ public class MonopolyGUIView extends JFrame {
 
             if(board.getSQUARE(i) instanceof PrivateProperty){
                 squareLabel.setText(String.format("<html> %s <br> Price: %s </html>", board.getSQUARE(i).getName(), (((PrivateProperty)board.getSQUARE(i)).getPrice())));
+                if (board.getSQUARE(i) instanceof Business) {
+                    displayBusiness((Business) board.getSQUARE(i));
+                }
             }
             else if(board.getSQUARE(i) instanceof BankProperty){
                 squareLabel.setText(String.format("<html> %s <br> Tax: %s </html>", board.getSQUARE(i).getName(), (((BankProperty)board.getSQUARE(i)).getTaxValue())));
@@ -162,6 +170,32 @@ public class MonopolyGUIView extends JFrame {
 
             squares.add(squarePanel);
         }
+    }
+
+    private void displayBusiness(Business business) throws IOException {
+        if (business.isOwned()) {
+
+            JLabel label = null;
+            if (business.getNumHouse() > 0) {
+                InputStream in = getClass().getResourceAsStream("../Images/house.png");
+                BufferedImage image = ImageIO.read(in);
+                Image resizeImage = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+                label = new JLabel(new ImageIcon(resizeImage));
+                houseLabel = label;
+                mainPanel.add(houseLabel);
+            }
+
+            else if (business.getNumHotel() > 0) {
+                InputStream in = getClass().getResourceAsStream("../Images/hotel.png");
+                BufferedImage image = ImageIO.read(in);
+                Image resizeImage = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+                label = new JLabel(new ImageIcon(resizeImage));
+                hotelLabel = label;
+                mainPanel.add(hotelLabel);
+            }
+        }
+        mainPanel.validate();
+        mainPanel.repaint();
     }
 
     /**
@@ -236,6 +270,7 @@ public class MonopolyGUIView extends JFrame {
                     diceLabel2 = dieLabel;
                     gb.setConstraints(diceLabel2, c);
                     mainPanel.add(diceLabel2);
+
                 }
             }catch (Exception e){
                 System.out.println("Image related with dice face " + i + " not found");
@@ -337,8 +372,8 @@ public class MonopolyGUIView extends JFrame {
     /**
      * The method displays the GUI
      */
-    public void displayGUI(){
-        this.SquaresLayout();
+    public void displayGUI() throws IOException {
+        this.squaresLayout();
         this.addSquareToBoard();
 
         this.addButtonToBoard();
@@ -522,7 +557,7 @@ public class MonopolyGUIView extends JFrame {
         window.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         MonopolyGUIView view = new MonopolyGUIView();
         view.displayGUI();
     }
