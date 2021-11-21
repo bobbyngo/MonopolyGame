@@ -75,11 +75,11 @@ public class MonopolyGUIView extends JFrame {
         if(option == JOptionPane.OK_OPTION){
             //adding AI players
             for (int i = 0; i < Integer.parseInt(nAIPlayers.getText()); i++){
-                players.add(new AIPlayer("AI Player " + i, new Square("GO", 0)));
+                players.add(new AIPlayer("AI Player " + i + 1, new Square("GO", 0)));
             }
             //adding human players
             for (int i = 0; i < Integer.parseInt(nHumanPlayers.getText()); i++){
-                players.add(new Player("Player " + i, new Square("GO", 0)));
+                players.add(new Player("Player " + i + 1, new Square("GO", 0)));
             }
 
         }else{
