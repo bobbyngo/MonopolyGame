@@ -121,14 +121,51 @@ public class MonopolyGUIView extends JFrame {
         this.diceLabel1 = new JLabel();
         this.diceLabel2 = new JLabel();
 
-        textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Asset Info</u>:-<br> " +
-                        "Properties owned:<br> %s <br><br><u>Monetary Info</u>:-<br> Total asset value: $%d <br>Liquid value: $%d",
-                controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(),
-                controller.getCurrentPlayer().propertiesToString(), controller.getCurrentPlayer().getPlayerTotalAsset(),
-                controller.getCurrentPlayer().getPlayerBalance()));
+        textLabel.setText(displayPlayerInfo());
 
         this.houseLabel = new JLabel();
         this.hotelLabel = new JLabel();
+    }
+
+    private String displayPlayerInfo() {
+        StringBuilder stringBuilder = new StringBuilder("");
+//        String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Asset Info</u>:-<br> " +
+//                        "Properties owned:<br> %s <br><br><u>Monetary Info</u>:-<br> Total asset value: $%d <br>Liquid value: $%d",
+//                controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(),
+//                controller.getCurrentPlayer().propertiesToString(), controller.getCurrentPlayer().getPlayerTotalAsset(),
+//                controller.getCurrentPlayer().getPlayerBalance());
+        stringBuilder.append("<html><u>Player Info</u>:-<br>")
+                .append(controller.getCurrentPlayer().getName())
+                .append("'s turn <br> Location: ")
+                .append(controller.getCurrentPlayer().getCurrLocation().getName())
+                .append("<br><br><u>Asset Info</u>:-<br> Properties owned:<br>")
+                .append(controller.getCurrentPlayer().propertiesToString())
+                .append("<br><br><u>Monetary Info</u>:-<br> Total asset value: $")
+                .append(controller.getCurrentPlayer().getPlayerTotalAsset())
+                .append("<br>Liquid value: $%d")
+                .append(controller.getCurrentPlayer().getPlayerBalance());
+
+        return stringBuilder.toString();
+    }
+
+    private String displayHouseHotel() {
+        StringBuilder houseText = new StringBuilder("House: ");
+        StringBuilder hotelText = new StringBuilder("Hotel: ");
+        Player currentPlayer = controller.getCurrentPlayer();
+
+        for (PrivateProperty property : currentPlayer.getPropertyList()) {
+            if (((Business) property).getNumHouse() > 0) {
+                int numHouse = ((Business) property).getNumHouse();
+                houseText.append(numHouse);
+            } else if (((Business) property).getNumHotel() > 0) {
+                int numHotel = ((Business) property).getNumHouse();
+                hotelText.append(numHotel);
+            }
+        }
+        StringBuilder sb = new StringBuilder("");
+
+        sb.append(houseText).append("<br>").append(hotelText);
+        return sb.toString();
     }
 
     /**

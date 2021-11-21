@@ -245,7 +245,8 @@ public class Player implements RoleAPI {
     public String propertiesToString(){
         StringBuilder sb = new StringBuilder();
         for (PrivateProperty pp : this.propertyList){
-            sb.append("Name:- " + pp.getName() + " | Price:- $" + pp.getPrice() + "<br>");
+            sb.append("Name:- " + pp.getName() + " | Price:- $" + pp.getPrice());
+
         }
         System.out.println(sb.toString());
         return sb.toString();
