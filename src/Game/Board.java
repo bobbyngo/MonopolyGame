@@ -54,7 +54,7 @@ public class Board {
         aBoard[0] = go;
         aBoard[1] = new Business("Anarchy Acres", 1,50);
         aBoard[2] = new Business("Dusty Depot", 2, 100);
-        aBoard[3] = new Rail("South Game.Rail", 3, 150);
+        aBoard[3] = new Rail("South Rail", 3, 150);
         aBoard[4] = new Business("Fatal Fields", 4, 80);
         aBoard[5] = new BankProperty("Electric Tax", 5, 200);
         aBoard[6] = new Business("Flush Factory", 6, 60);
@@ -63,7 +63,7 @@ public class Board {
         aBoard[9] = jail;
 
         aBoard[10] = new Business("Happy Hamlet", 10, 80);
-        aBoard[11] = new Rail("West Game.Rail", 11,  150);
+        aBoard[11] = new Rail("West Rail", 11,  150);
         aBoard[12] = new Business("Haunted Hills", 12, 120);
         aBoard[13] = new Business("Junk Junction", 13, 220);
         aBoard[14] = new BankProperty("Internet Tax", 14, 20);
@@ -78,7 +78,7 @@ public class Board {
         aBoard[22] = new Business("Mega Mall", 22, 360);
         aBoard[23] = new BankProperty("Luxury Tax", 23, 280);
         aBoard[24] = new Business("Tilted Towers", 24, 250);
-        aBoard[25] = new Rail("North Game.Rail", 25,  150);
+        aBoard[25] = new Rail("North Rail", 25,  150);
         aBoard[26] = new Business("Paradise Palms", 26, 380);
         aBoard[27] = new Business("Salty Springs", 27, 400);
         aBoard[28] = goToJail;
@@ -90,7 +90,7 @@ public class Board {
         aBoard[33] = new BankProperty("Water Tax", 33, 90);
         aBoard[34] = new Business("Tomato Town", 34, 140);
         aBoard[35] = new Business("Lazy Links", 35, 240);
-        aBoard[36] = new Rail("East Game.Rail", 36, 150);
+        aBoard[36] = new Rail("East Rail", 36, 150);
         aBoard[37] = new Business("Snobby Shores", 37, 120);
 
     }

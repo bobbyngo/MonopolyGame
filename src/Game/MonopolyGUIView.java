@@ -122,7 +122,11 @@ public class MonopolyGUIView extends JFrame {
         this.diceLabel1 = new JLabel();
         this.diceLabel2 = new JLabel();
 
-        textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Asset Info</u>:-<br> Properties owned:<br> %s <br><br><u>Monetary Info</u>:-<br> Total asset value: $%d <br>Liquid value: $%d", controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(), controller.getCurrentPlayer().propertiesToString(), controller.getCurrentPlayer().getPlayerTotalAsset(), controller.getCurrentPlayer().getPlayerBalance()));
+        textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Asset Info</u>:-<br> " +
+                        "Properties owned:<br> %s <br><br><u>Monetary Info</u>:-<br> Total asset value: $%d <br>Liquid value: $%d",
+                controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(),
+                controller.getCurrentPlayer().propertiesToString(), controller.getCurrentPlayer().getPlayerTotalAsset(),
+                controller.getCurrentPlayer().getPlayerBalance()));
 
         this.houseLabel = new JLabel();
         this.hotelLabel = new JLabel();
