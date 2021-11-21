@@ -143,6 +143,9 @@ public class MonopolyGUIView extends JFrame {
             InfoPanel.setBorder(BorderFactory.createEmptyBorder());
             playerPanel.setBorder(BorderFactory.createEmptyBorder());
 
+            JPanel housePanel = new JPanel(new BorderLayout());
+            JLabel housePicPanel = new JLabel();
+
             JLabel squareLabel = new JLabel();
             squareLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             squareLabel.setForeground(Color.BLUE);
@@ -486,6 +489,7 @@ public class MonopolyGUIView extends JFrame {
             JOptionPane.showMessageDialog(null, "There is no tax/rent to pay!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }else if(dialogNum == 16){
             rollBtn.setEnabled(false);
+            payTaxBtn.setEnabled(true);
         }else if(dialogNum == 17){
             //zak: modifying it so that instead of clearing the label, it keeps everyone BUT the input player
             //playerLabels.get(player.getCurrLocation().getIndex()).setText("");
