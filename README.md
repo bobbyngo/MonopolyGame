@@ -2,8 +2,8 @@
 ```
 SYSC 3110 | Software Designing Project (SDK 17 working)
 ```
-# Game.Board
-<div align-item="center"><img src="Images/Board.png" height="100%" width="100%"></div>
+# GUI
+<div align-item="center"><img src="Images/GUI.PNG" height="100%" width="100%"></div>
 
 # Description:
 The Monopoly Game is implemented following the <strong>MVC</strong> pattern and written in <strong>Java</strong>
@@ -12,24 +12,24 @@ Monopoly is a multiplayer economics-themed board game. In the game, players roll
 
 # Files required to run this program:
 * DiceImg package
-* Game.Bank.java,
-* Game.BankProperty.java,
-* Game.Board.java,
-* Game.Business.java,
+* Bank.java,
+* BankProperty.java,
+* Board.java,
+* Business.java,
 * ColorGroup.java,
-* Game.Dice.java,
-* Game.MonopolyController.java,
-* Game.MonopolyGUIView.java,
-* Tests.MonopolyControllerViewTest.java,
+* Dice.java,
+* MonopolyController.java,
+* MonopolyGUIView.java,
+* MonopolyTest.java,
 * MonopolyView.java,
-* Game.Player.java,
+* Player.java,
 * PrivatePropertyListModel.java,
-* Game.PrivateProperty.java,
-* Game.PropertyAPI.java,
-* Game.Rail.java,
-* Game.RoleAPI.java,
-* Game.SellPlayerPropertyDialog.java,
-* Game.Square.java
+* PrivateProperty.java,
+* PropertyAPI.java,
+* Rail.java,
+* RoleAPI.java,
+* SellPlayerPropertyDialog.java,
+* Square.java
 
 # Usage:
 ```
@@ -57,28 +57,24 @@ Have the ability to add “AI” players into the game
 Be able to save/load game progresses,
 Have an international version of the game in which players can have customized property names, values and currencies
 
-
 # Changes From Previous Milestone
 
 The game can now be ran in a graphical user interface instead of being purely textual
 
 Added files:
-* DiceImg package:
-  Contains pictures used for displaying dice faces
-* Game.MonopolyGUIView.java:
-  Class that is responsible for the overall appearance of the GUI 
-* Tests.MonopolyControllerViewTest.java:
-  Contains various testing cases for methods in Game.MonopolyController.java
-* PrivatePropertyListModel.java:
-  Used by class Game.SellPlayerPropertyDialog.java
-* Game.SellPlayerPropertyDialog.java:
-  Class that is responsible for displaying a dialog box and process requests when the players wish to sell them owned properties
+* PlayerPropertyListModel.java and Buy House Hotel Dialog.java classes: Handle the buying houses and hotel functionality
+* RentableAPI.java: The interface class for Business.java and Rail.java
+* Refactor the code to the MVC pattern, the MonopolyController.java implements ActionListener
+* AIPlayer.java: Responsible for the AI player. The AI player will automatically roll the dice, buy peoperty(if possible), pay tax/ rent
+and end their turn. 
   
 # Known Issue
 
-* Game.Player label is updated whenever the player rolls the dice, however, if a player landed on a square that is already occupied, the previous player's label will be erased. This is only a visual issue and does not have any impact on the player's actual position in the system.
-
-* When the prompt asks the player to enter an integer, entering an out of bound integer, a letter or any other symbols will cause the program to crash. Try Catch statements will be implemented later.
+* Player label is updated whenever the player rolls the dice, however, if a player landed on a square 
+that is already occupied, the previous player's label will be erased. This is only a visual issue and 
+does not have any impact on the player's actual position in the system.
+* When the prompt asks the player to enter an integer, entering an out of bound integer, a letter or any other symbols will cause the program to crash. 
+Try Catch statements will be implemented later.
 * If a player does not own any properties, entering invalid property index will cause the program to crash
 * If programme is not in fullscreen then board may glitch
 
