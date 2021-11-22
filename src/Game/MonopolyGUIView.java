@@ -129,20 +129,16 @@ public class MonopolyGUIView extends JFrame {
 
     private String displayPlayerInfo() {
         StringBuilder stringBuilder = new StringBuilder("");
-//        String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Asset Info</u>:-<br> " +
-//                        "Properties owned:<br> %s <br><br><u>Monetary Info</u>:-<br> Total asset value: $%d <br>Liquid value: $%d",
-//                controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(),
-//                controller.getCurrentPlayer().propertiesToString(), controller.getCurrentPlayer().getPlayerTotalAsset(),
-//                controller.getCurrentPlayer().getPlayerBalance());
         stringBuilder.append("<html><u>Player Info</u>:-<br>")
                 .append(controller.getCurrentPlayer().getName())
                 .append("'s turn <br> Location: ")
                 .append(controller.getCurrentPlayer().getCurrLocation().getName())
                 .append("<br><br><u>Asset Info</u>:-<br> Properties owned:<br>")
                 .append(controller.getCurrentPlayer().propertiesToString())
+
                 .append("<br><br><u>Monetary Info</u>:-<br> Total asset value: $")
                 .append(controller.getCurrentPlayer().getPlayerTotalAsset())
-                .append("<br>Liquid value: $%d")
+                .append("<br>Liquid value: $")
                 .append(controller.getCurrentPlayer().getPlayerBalance());
 
         return stringBuilder.toString();
@@ -473,7 +469,7 @@ public class MonopolyGUIView extends JFrame {
             textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }
         else if(dialogNum == 8){
-            textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
+            textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }
         else if(dialogNum == 9){
             JOptionPane.showMessageDialog(null, "You must roll the dice before ending the turn!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
@@ -546,12 +542,16 @@ public class MonopolyGUIView extends JFrame {
             JOptionPane.showMessageDialog(null, String.format("%s is on Go To Jail. Turn Ended.", player.getName()));
         }else if(dialogNum == 26){
             JOptionPane.showMessageDialog(null, "Successfully bought a house on this property", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+            textLabel.setText(displayPlayerInfo());
+
         }else if(dialogNum == 27){
             JOptionPane.showMessageDialog(null, "You already have 4 houses on this property, can not buy more!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }else if(dialogNum == 28){
             JOptionPane.showMessageDialog(null, "You already have 1 hotel on this property, can not buy more!", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }else if(dialogNum == 29){
             JOptionPane.showMessageDialog(null, "Successfully bought a hotel on this property", "Alert!", JOptionPane.INFORMATION_MESSAGE);
+            textLabel.setText(displayPlayerInfo());
+
         }else if(dialogNum == 30) {
             JOptionPane.showMessageDialog(null, "You need have 4 houses on this property in order to buy a hotel, you currently do not meet this requirement", "Alert!", JOptionPane.INFORMATION_MESSAGE);
         }else if(dialogNum == 31){
