@@ -188,13 +188,10 @@ public class MonopolyGUIView extends JFrame {
             playerLabel.setForeground(Color.RED);
 
             labelList.add(squareLabel);
-
             playerLabels.add(playerLabel);
 
             if(board.getSQUARE(i) instanceof PrivateProperty){
                 squareLabel.setText(String.format("<html> %s <br> Price: %s </html>", board.getSQUARE(i).getName(), (((PrivateProperty)board.getSQUARE(i)).getPrice())));
-                // Update the ownership when the square is owned
-                updateSquare(i);
             }
             else if(board.getSQUARE(i) instanceof BankProperty){
                 squareLabel.setText(String.format("<html> %s <br> Tax: %s </html>", board.getSQUARE(i).getName(), (((BankProperty)board.getSQUARE(i)).getTaxValue())));
@@ -212,19 +209,11 @@ public class MonopolyGUIView extends JFrame {
         }
     }
 
-    public void updateSquare(int index) {
+    public void updateSquare(Square square) {
+        String playerName = ((PrivateProperty) square).getOwner().getName();
 
-        //for (JLabel label : labelList) {
-        System.out.println("Before");
-            if (((PrivateProperty) board.getSQUARE(index)).isOwned()) {
-                //System.out.println(((PrivateProperty) board.getSQUARE(i)).getOwner().getName());
-                String playerName = ((PrivateProperty) board.getSQUARE(index)).getOwner().getName();
-                System.out.println(playerName);
-                labelList.get(index).setText(String.format("<html>" +
-                        "Owned by %s" +
-                        "</html>", playerName));
-            }
-        //}
+        labelList.get(square.getIndex()).setText(String.format("<html> %s <br> Price: %s <br> Owned by %s </html>",
+                board.getSQUARE(square.getIndex()).getName(), (((PrivateProperty)board.getSQUARE(square.getIndex())).getPrice()), playerName));
     }
 
     /**

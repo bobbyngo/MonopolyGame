@@ -491,7 +491,7 @@ public class MonopolyController implements ActionListener {
             if (!((PrivateProperty) getCurrentPlayer().getCurrLocation()).isOwned()) {
                 purchaseProperty((PrivateProperty)getCurrentPlayer().getCurrLocation());
                 view.handleUpdateView(1, getCurrentPlayer());
-                view.updateSquare(getCurrentPlayer().getCurrLocation().getIndex());
+                view.updateSquare(getCurrentPlayer().getCurrLocation());
             } else {
                 view.handleUpdateView(2, getCurrentPlayer());
             }
