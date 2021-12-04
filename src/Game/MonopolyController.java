@@ -23,8 +23,8 @@ public class MonopolyController implements ActionListener {
     private MonopolyGUIView view;
     /**
      * Game.MonopolyController constructor
-     *
-     * @param players, an ArrayList of Game.Player's that are in the game
+     * @param model, MonopolyModel
+     * @param view, MonopolyView
      */
     public MonopolyController(MonopolyModel model, MonopolyGUIView view) {
         this.model = model;
