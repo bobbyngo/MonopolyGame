@@ -19,28 +19,16 @@ import java.util.ArrayList;
  */
 public class MonopolyController implements ActionListener {
 
+    private MonopolyModel model;
+    private MonopolyGUIView view;
     /**
      * Game.MonopolyController constructor
      *
      * @param players, an ArrayList of Game.Player's that are in the game
      */
-    public MonopolyController(ArrayList<Player> players, MonopolyGUIView view) {
-
-        this.players = new ArrayList<>(players);
-        this.board = new Board();
-        this.bank = new Bank();
-        this.die = new Dice();
-        //this.currentPlayer = players.get(players.size()-1);
-        this.currentPlayer = players.get(0);
-
-        // MVC example
+    public MonopolyController(MonopolyModel model, MonopolyGUIView view) {
+        this.model = model;
         this.view = view;
-        SellDialog = new SellPlayerPropertyDialog(this.view, this);
-        BuyDialog = new BuyHouseHotelDialog(this.view, this);
-
-        for(Player p: this.players){
-            p.setCurrLocation(board.getSQUARE(0));
-        }
     }
 
     // FIXME: LEAVE THIS ALONE
@@ -49,13 +37,13 @@ public class MonopolyController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == view.getBuyBtn()){
-            handleBuyBtn();
+            model.handleBuyBtn();
         }
         else if (e.getSource() == view.getEndTurnBtn()) {
-            handleEndTurnBtn();
+            model.handleEndTurnBtn();
         }
         else if(e.getSource() == view.getPayTaxBtn()){
-            handlePayTaxBtn();
+            model.handlePayTaxBtn();
         }
 
 //        else if (e.getSource() == view.getShowStatsBtn()) {
@@ -64,23 +52,23 @@ public class MonopolyController implements ActionListener {
 
         else if (e.getSource() == view.getRollBtn()) {
 
-                handleRollDiceBtn();
+                model.handleRollDiceBtn();
 
         }
         else if(e.getSource() == view.getSellBtn()){
-            handleSellBtn();
+            model.handleSellBtn();
         }
         else if(e.getSource() == view.getBuyHouseBtn()){
-            handleBuyHouseBtn();
+            model.handleBuyHouseBtn();
         }
-        else if(e.getSource() == BuyDialog.getBuyHouseBtn()){
-                handleDialogBuyHouseBtn();
+        else if(e.getSource() == model.getBuyDialog().getBuyHouseBtn()){
+                model.handleDialogBuyHouseBtn();
         }
-        else if(e.getSource() == BuyDialog.getBuyHotelBtn()){
-                handleDialogBuyHotelBtn();
+        else if(e.getSource() == model.getBuyDialog().getBuyHotelBtn()){
+                model.handleDialogBuyHotelBtn();
         }
-        else if (e.getSource() == SellDialog.getSellBtn()) {
-            handleDialogSellBtn();
+        else if (e.getSource() == model.getSellDialog().getSellBtn()) {
+            model.handleDialogSellBtn();
         }
     }
     // FIXME: END OF LEAVING ALONE

@@ -17,12 +17,14 @@ public class MonopolyModel {
     private PlayerPropertyListModel playerPropertyListModel;
     private PlayerPropertyListHouseModel playerPropertyListHouseModel;
 
-    private SellPlayerPropertyDialog SellDialog;
-    private BuyHouseHotelDialog BuyDialog;
+    private SellPlayerPropertyDialog sellDialog;
+    private BuyHouseHotelDialog buyDialog;
 
     int[] roll;
     private boolean diceRolled = false;
     private boolean feePaid = true;
+
+
 
     /**
      * Game.MonopolyController constructor
@@ -40,8 +42,8 @@ public class MonopolyModel {
 
         // MVC example
         this.view = view;
-        SellDialog = new SellPlayerPropertyDialog(this.view, this);
-        BuyDialog = new BuyHouseHotelDialog(this.view, this);
+        sellDialog = new SellPlayerPropertyDialog(this.view, this);
+        buyDialog = new BuyHouseHotelDialog(this.view, this);
 
         for(Player p: this.players){
             p.setCurrLocation(board.getSQUARE(0));
@@ -432,7 +434,7 @@ public class MonopolyModel {
 //                        getCurrentPlayer().getName() + "'s stats", 1);
 //    }
 
-    private void handleBuyBtn(){
+    public void handleBuyBtn(){
         if (getCurrentPlayer().getCurrLocation() instanceof PrivateProperty) {
             if (!((PrivateProperty) getCurrentPlayer().getCurrLocation()).isOwned()) {
                 purchaseProperty((PrivateProperty)getCurrentPlayer().getCurrLocation());
@@ -498,7 +500,7 @@ public class MonopolyModel {
         }
     }
 
-    private void handlePayTaxBtn(){
+    public void handlePayTaxBtn(){
         Player p = getCurrentPlayer();
         if(p.getCurrLocation() instanceof BankProperty || p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
             if(p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).getOwner().equals(p)){
@@ -521,7 +523,7 @@ public class MonopolyModel {
         }
     }
 
-    private void handleRollDiceBtn() {
+    public void handleRollDiceBtn() {
         // Calling the rollDie function
         // Added debug comments
         //System.out.println("pressed");
@@ -604,28 +606,28 @@ public class MonopolyModel {
 
     }
 
-    private void handleSellBtn() {
-        SellDialog = new SellPlayerPropertyDialog(this.view, this);
-        view.handleSellWindowVisibility(SellDialog);
+    public void handleSellBtn() {
+        sellDialog = new SellPlayerPropertyDialog(this.view, this);
+        view.handleSellWindowVisibility(sellDialog);
     }
 
-    private void handleBuyHouseBtn(){
-        BuyDialog = new BuyHouseHotelDialog(this.view, this);
-        view.handleBuyHouseWindowVisibility(BuyDialog);
+    public void handleBuyHouseBtn(){
+        buyDialog = new BuyHouseHotelDialog(this.view, this);
+        view.handleBuyHouseWindowVisibility(buyDialog);
     }
 
     public void retrieveSellPanelModel(SellPlayerPropertyDialog dialog, PlayerPropertyListModel playerPropertyListModel){
-        SellDialog = dialog;
+        sellDialog = dialog;
         this.playerPropertyListModel = playerPropertyListModel;
     }
 
     public void retrieveBuyPanelModel(BuyHouseHotelDialog dialog, PlayerPropertyListHouseModel playerPropertyListHouseModel){
-        BuyDialog = dialog;
+        buyDialog = dialog;
         this.playerPropertyListHouseModel = playerPropertyListHouseModel;
     }
 
-    private void handleDialogSellBtn(){
-        int index = SellDialog.getList().getSelectedIndex();
+    public void handleDialogSellBtn(){
+        int index = sellDialog.getList().getSelectedIndex();
         if (index != -1) {
             sellProperty(index);
             playerPropertyListModel.removeProperty(index);
@@ -633,16 +635,16 @@ public class MonopolyModel {
         }
     }
 
-    private void handleDialogBuyHouseBtn(){
-        int index = BuyDialog.getList().getSelectedIndex();
+    public void handleDialogBuyHouseBtn(){
+        int index = buyDialog.getList().getSelectedIndex();
         if (index != -1) {
             buyHouses(index);
             updateDialogAfterSellOrBuy();
         }
     }
 
-    private void handleDialogBuyHotelBtn(){
-        int index = BuyDialog.getList().getSelectedIndex();
+    public void handleDialogBuyHotelBtn(){
+        int index = buyDialog.getList().getSelectedIndex();
         if (index != -1) {
             buyHotels(index);
             updateDialogAfterSellOrBuy();
@@ -656,6 +658,14 @@ public class MonopolyModel {
         }else{
             view.handleUpdateView(22, p);
         }
+    }
+
+    public SellPlayerPropertyDialog getSellDialog() {
+        return sellDialog;
+    }
+
+    public BuyHouseHotelDialog getBuyDialog() {
+        return buyDialog;
     }
 }
 

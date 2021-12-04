@@ -48,6 +48,7 @@ public class MonopolyGUIView extends JFrame {
     private JLabel hotelLabel;
 
     private MonopolyController controller;
+    private MonopolyModel model;
 
     /**
      * Constructor for Game.MonopolyGUIView class
@@ -90,7 +91,9 @@ public class MonopolyGUIView extends JFrame {
             players.add(new AIPlayer("Player 3", new Square("GO", 0)));
             players.add(new AIPlayer("Player 4", new Square("GO", 0)));
         }
-        this.controller = new MonopolyController(players, this);
+        //this.controller = new MonopolyController(players, this);
+        this.model = new MonopolyModel(players, this);
+        this.controller = new MonopolyController(this.model, this);
 
         this.setTitle("Monopoly Game");
 
@@ -130,16 +133,16 @@ public class MonopolyGUIView extends JFrame {
     private String displayPlayerInfo() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append("<html><u>Player Info</u>:-<br>")
-                .append(controller.getCurrentPlayer().getName())
+                .append(model.getCurrentPlayer().getName())
                 .append("'s turn <br> Location: ")
-                .append(controller.getCurrentPlayer().getCurrLocation().getName())
+                .append(model.getCurrentPlayer().getCurrLocation().getName())
                 .append("<br><br><u>Asset Info</u>:-<br> Properties owned:<br>")
-                .append(controller.getCurrentPlayer().propertiesToString())
+                .append(model.getCurrentPlayer().propertiesToString())
 
                 .append("<br><br><u>Monetary Info</u>:-<br> Total asset value: $")
-                .append(controller.getCurrentPlayer().getPlayerTotalAsset())
+                .append(model.getCurrentPlayer().getPlayerTotalAsset())
                 .append("<br>Liquid value: $")
-                .append(controller.getCurrentPlayer().getPlayerBalance());
+                .append(model.getCurrentPlayer().getPlayerBalance());
 
         return stringBuilder.toString();
     }
@@ -147,7 +150,7 @@ public class MonopolyGUIView extends JFrame {
     private String displayHouseHotel() {
         StringBuilder houseText = new StringBuilder("House: ");
         StringBuilder hotelText = new StringBuilder("Hotel: ");
-        Player currentPlayer = controller.getCurrentPlayer();
+        Player currentPlayer = model.getCurrentPlayer();
 
         for (PrivateProperty property : currentPlayer.getPropertyList()) {
             if (((Business) property).getNumHouse() > 0) {
@@ -261,7 +264,7 @@ public class MonopolyGUIView extends JFrame {
 
         // Stinky code but it works I will refactor later
         JLabel dieLabel = null;
-        for (int i = 0; i < controller.getDie().getNUM_DICE(); i ++) {
+        for (int i = 0; i < model.getDie().getNUM_DICE(); i ++) {
             try {
                 InputStream in = getClass().getResourceAsStream(String.format("../DiceImg/%d.png", roll[i]));
                 BufferedImage image = ImageIO.read(in);
@@ -285,7 +288,7 @@ public class MonopolyGUIView extends JFrame {
             }
         }
 
-        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
+        System.out.println(model.getCurrentPlayer().getCurrLocation().getIndex());
 
         endTurnBtn.setEnabled(true);
 
@@ -293,9 +296,9 @@ public class MonopolyGUIView extends JFrame {
         mainPanel.repaint();
 
         // For debugging
-        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
+        System.out.println(model.getCurrentPlayer().getCurrLocation().getIndex());
         System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
-        System.out.println(controller.getCurrentPlayer().propertiesToString());
+        System.out.println(model.getCurrentPlayer().propertiesToString());
     }
 
     /**
