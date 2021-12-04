@@ -67,8 +67,8 @@ Rules regarding Buying/selling properties and rent price:
 
 Determine the Winner:
 The game ends when a player goes bankrupt, in this case, the winning is selected from the remaining players how has the highest asset value plus current balance.
-=======
-complete user manual
+
+Complete user manual
 SYSC 3110 | Software Designing Project
 
 To play the game, run the MonopolyView.java file and follow the textual interface.
@@ -136,4 +136,3 @@ Rules regarding Buying/selling properties and rent price:
 
 Determine the Winner:
 The game ends when a player goes bankrupt, in this case, the winning is selected from the remaining players how has the highest asset value plus current balance.
->>>>>>> development

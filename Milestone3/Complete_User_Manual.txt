@@ -1,0 +1,137 @@
+Complete user manual
+SYSC 3110 | Software Designing Project
+
+To play the game, run the MonopolyView.java file and follow the textual interface.
+
+The game will prompt you to enter the number of players that will be joining the game at the beginning.
+
+The player will roll 2 dice to determine how many squares he/she will be advancing. If a double is rolled, an extra turn will be granted after the player completes the current turn. If the player rolls 3 doubles in a roll, he/she will be considered as “speeding” and moved to the “jail” Game.Square.
+
+During the player’s turn, the following 2 choices will be always be offered:
+(1) Sell the Properties they have already bought
+(2) Display their status which includes: player’s name, play’s current balance, player’s total asset value, properties that they own
+(3) End turn
+
+The following choices will be offered to the players if they land on the following Game.Square type:
+Private property square that is unowned by another player (Game.Business or Game.Rail):
+(1) Purchase
+
+Private property square that is owned by another player (Game.Business or Game.Rail):
+(1) Pay rent
+
+Game.Bank Properties (Electric Tax, Insurance Tax, Luxury Tax, Water Tax):
+(1) Pay Tax
+
+Jail, Free Parking, Go:
+These 3 Game.Square will not offer the player any additional options, the players are considered as visitors.
+
+Go to Jail:
+Players will not be able to select any options as soon as they land on this square, they will be moved to the “Jail” square and their next 2 turns will be suspended for which they can not move or perform any actions.
+
+Income:
+Players will be able to earn money in 2 ways:
+(1) Players receive a stipend every time they pass the "Go" square
+(2) When another player lands on your Property Game.Square, you will receive their rent money based on a percentage of total asset value of the property
+
+Rules regarding Buying/selling properties and rent price:
+
+	- Buy houses, hotel would be fixed percentages of the initial cost of the property
+		Houses(Max 4): $100 + 10% of the SQUARE's price
+		Hotel(Max 1): $100 + 60% of the SQUARE's price
+
+	Example: the cost of the SQUARE is $2000
+		Cost of building a house = $100 + 10% * $2000 = $300
+		Cost of upgrading to a hotel = $100 + 60% * $2000 = $1300
+	
+	- Income is obtained when another player lands on your SQUARE:
+	Income is 5% of the total price (SQUARE + houses + hotel)
+	Income = 5% * ($2000 + $300 * 4 + $1300) = $225
+
+	- Rails are Special SQURE that when landed on by another player, that player has to pay a percentage
+	equavelent to number of the Game.Rail Game.Square the owns by the land owner
+	Example: Price of the Game.Rail SQUARE $1000 and the owner owns a total of 3 rail SQUAREs
+	Income = 5% * 3 * $1000 = 150
+
+--------------------------------------------------------------------------------------------------------------
+	
+	Bankruptcy happens when a player is unable to pay the rent when landing on another player's SQUARE
+	When this happens, the player is forced to sell all his assets in half of the price to the bank.
+	Example:
+	Total assets value = $2000 + $300 * 4 + $1300 = $4500
+	Selling value = $4500 / 2 = $2250
+	
+	In the case that the player does not own any property, the player is out of the game.
+
+---------------------------------------------------------------------------------------------------------------
+
+Determine the Winner:
+The game ends when a player goes bankrupt, in this case, the winning is selected from the remaining players how has the highest asset value plus current balance.
+
+Complete user manual
+SYSC 3110 | Software Designing Project
+
+To play the game, run the MonopolyView.java file and follow the textual interface.
+
+The game will prompt you to enter the number of players that will be joining the game at the beginning.
+
+The player will roll 2 dice to determine how many squares he/she will be advancing. If a double is rolled, an extra turn will be granted after the player completes the current turn. If the player rolls 3 doubles in a roll, he/she will be considered as “speeding” and moved to the “jail” Game.Square.
+
+During the player’s turn, the following 2 choices will be always be offered:
+(1) Sell the Properties they have already bought
+(2) Display their status which includes: player’s name, play’s current balance, player’s total asset value, properties that they own
+(3) End turn
+
+The following choices will be offered to the players if they land on the following Game.Square type:
+Private property square that is unowned by another player (Game.Business or Game.Rail):
+(1) Purchase
+
+Private property square that is owned by another player (Game.Business or Game.Rail):
+(1) Pay rent
+
+Game.Bank Properties (Electric Tax, Insurance Tax, Luxury Tax, Water Tax):
+(1) Pay Tax
+
+Jail, Free Parking, Go:
+These 3 Game.Square will not offer the player any additional options, the players are considered as visitors.
+
+Go to Jail:
+Players will not be able to select any options as soon as they land on this square, they will be moved to the “Jail” square and their next 2 turns will be suspended for which they can not move or perform any actions.
+
+Income:
+Players will be able to earn money in 2 ways:
+(1) Players receive a stipend every time they pass the "Go" square
+(2) When another player lands on your Property Game.Square, you will receive their rent money based on a percentage of total asset value of the property
+
+Rules regarding Buying/selling properties and rent price:
+
+	- Buy houses, hotel would be fixed percentages of the initial cost of the property
+		Houses(Max 4): $100 + 10% of the SQUARE's price
+		Hotel(Max 1): $100 + 60% of the SQUARE's price
+
+	Example: the cost of the SQUARE is $2000
+		Cost of building a house = $100 + 10% * $2000 = $300
+		Cost of upgrading to a hotel = $100 + 60% * $2000 = $1300
+	
+	- Income is obtained when another player lands on your SQUARE:
+	Income is 5% of the total price (SQUARE + houses + hotel)
+	Income = 5% * ($2000 + $300 * 4 + $1300) = $225
+
+	- Rails are Special SQURE that when landed on by another player, that player has to pay a percentage
+	equavelent to number of the Game.Rail Game.Square the owns by the land owner
+	Example: Price of the Game.Rail SQUARE $1000 and the owner owns a total of 3 rail SQUAREs
+	Income = 5% * 3 * $1000 = 150
+
+--------------------------------------------------------------------------------------------------------------
+	
+	Bankruptcy happens when a player is unable to pay the rent when landing on another player's SQUARE
+	When this happens, the player is forced to sell all his assets in half of the price to the bank.
+	Example:
+	Total assets value = $2000 + $300 * 4 + $1300 = $4500
+	Selling value = $4500 / 2 = $2250
+	
+	In the case that the player does not own any property, the player is out of the game.
+
+---------------------------------------------------------------------------------------------------------------
+
+Determine the Winner:
+The game ends when a player goes bankrupt, in this case, the winning is selected from the remaining players how has the highest asset value plus current balance.

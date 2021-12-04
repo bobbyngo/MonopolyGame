@@ -38,6 +38,8 @@ public class MonopolyGUIView extends JFrame {
     private final JButton payTaxBtn;
     private final JButton buyHouseBtn;
 
+    private ArrayList<JLabel> labelList;
+
 
     //For Roll Game.Dice
     int[] roll;
@@ -63,6 +65,7 @@ public class MonopolyGUIView extends JFrame {
         textLabel = new JLabel();
         playerLabels = new ArrayList<>();
 
+        labelList = new ArrayList<>();
 
         JPanel infoPanel = new JPanel(new GridLayout(2,1));
 
@@ -129,11 +132,6 @@ public class MonopolyGUIView extends JFrame {
 
     private String displayPlayerInfo() {
         StringBuilder stringBuilder = new StringBuilder("");
-//        String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Asset Info</u>:-<br> " +
-//                        "Properties owned:<br> %s <br><br><u>Monetary Info</u>:-<br> Total asset value: $%d <br>Liquid value: $%d",
-//                controller.getCurrentPlayer().getName(), controller.getCurrentPlayer().getCurrLocation().getName(),
-//                controller.getCurrentPlayer().propertiesToString(), controller.getCurrentPlayer().getPlayerTotalAsset(),
-//                controller.getCurrentPlayer().getPlayerBalance());
         stringBuilder.append("<html><u>Player Info</u>:-<br>")
                 .append(controller.getCurrentPlayer().getName())
                 .append("'s turn <br> Location: ")
@@ -189,10 +187,14 @@ public class MonopolyGUIView extends JFrame {
             playerLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             playerLabel.setForeground(Color.RED);
 
+            labelList.add(squareLabel);
+
             playerLabels.add(playerLabel);
 
             if(board.getSQUARE(i) instanceof PrivateProperty){
                 squareLabel.setText(String.format("<html> %s <br> Price: %s </html>", board.getSQUARE(i).getName(), (((PrivateProperty)board.getSQUARE(i)).getPrice())));
+                // Update the ownership when the square is owned
+                updateSquare(i);
             }
             else if(board.getSQUARE(i) instanceof BankProperty){
                 squareLabel.setText(String.format("<html> %s <br> Tax: %s </html>", board.getSQUARE(i).getName(), (((BankProperty)board.getSQUARE(i)).getTaxValue())));
@@ -210,6 +212,20 @@ public class MonopolyGUIView extends JFrame {
         }
     }
 
+    public void updateSquare(int index) {
+
+        //for (JLabel label : labelList) {
+        System.out.println("Before");
+            if (((PrivateProperty) board.getSQUARE(index)).isOwned()) {
+                //System.out.println(((PrivateProperty) board.getSQUARE(i)).getOwner().getName());
+                String playerName = ((PrivateProperty) board.getSQUARE(index)).getOwner().getName();
+                System.out.println(playerName);
+                labelList.get(index).setText(String.format("<html>" +
+                        "Owned by %s" +
+                        "</html>", playerName));
+            }
+        //}
+    }
 
     /**
      * This method adds the Game.Square into the Game.Board
