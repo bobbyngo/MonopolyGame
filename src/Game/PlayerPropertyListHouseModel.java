@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class PlayerPropertyListHouseModel extends DefaultListModel<PrivateProperty>{
-    MonopolyModel model;
+    private MonopolyModel model;
 
     public PlayerPropertyListHouseModel(MonopolyModel model) {
         super();
