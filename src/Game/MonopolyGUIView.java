@@ -47,6 +47,9 @@ public class MonopolyGUIView extends JFrame {
     private JLabel houseLabel;
     private JLabel hotelLabel;
 
+    private SellPlayerPropertyDialog sellDialog;
+    private BuyHouseHotelDialog buyDialog;
+
     private MonopolyController controller;
     private MonopolyModel model;
 
@@ -582,6 +585,73 @@ public class MonopolyGUIView extends JFrame {
         MonopolyGUIView view = new MonopolyGUIView();
         view.displayGUI();
     }
+
+
+    // FIXME: start of dialog changes
+    public void displaySellDialog() {
+        sellDialog = new SellPlayerPropertyDialog(this, this.model, this.controller);
+        handleSellWindowVisibility(sellDialog);
+    }
+
+    public void displayBuyHouseDialog(){
+        buyDialog = new BuyHouseHotelDialog(this, this.model, this.controller);
+        handleBuyHouseWindowVisibility(buyDialog);
+    }
+
+    /*
+    public void retrieveSellPanelModel(SellPlayerPropertyDialog dialog, PlayerPropertyListModel playerPropertyListModel){
+        sellDialog = dialog;
+        this.playerPropertyListModel = playerPropertyListModel;
+    }
+
+    public void retrieveBuyPanelModel(BuyHouseHotelDialog dialog, PlayerPropertyListHouseModel playerPropertyListHouseModel){
+        buyDialog = dialog;
+        this.playerPropertyListHouseModel = playerPropertyListHouseModel;
+    }
+
+    public void handleDialogSellBtn(){
+        int index = sellDialog.getList().getSelectedIndex();
+        if (index != -1) {
+            sellProperty(index);
+            playerPropertyListModel.removeProperty(index);
+            updateDialogAfterSellOrBuy();
+        }
+    }
+
+    public void handleDialogBuyHouseBtn(){
+        int index = buyDialog.getList().getSelectedIndex();
+        if (index != -1) {
+            buyHouses(index);
+            updateDialogAfterSellOrBuy();
+        }
+    }
+
+    public void handleDialogBuyHotelBtn(){
+        int index = buyDialog.getList().getSelectedIndex();
+        if (index != -1) {
+            buyHotels(index);
+            updateDialogAfterSellOrBuy();
+        }
+    }
+
+    private void updateDialogAfterSellOrBuy() {
+        Player p = currentPlayer;
+        if(p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
+            view.handleUpdateView(21, p);
+        }else{
+            view.handleUpdateView(22, p);
+        }
+    }
+    */
+
+    public SellPlayerPropertyDialog getSellDialog() {
+        return sellDialog;
+    }
+
+    public BuyHouseHotelDialog getBuyDialog() {
+        return buyDialog;
+    }
+    // FIXME: end of dialog stuff
 
 }
 

@@ -4,18 +4,19 @@ import java.awt.*;
 
 public class BuyHouseHotelDialog extends JDialog {
     private MonopolyController controller;
+    private MonopolyModel model;
     private PlayerPropertyListHouseModel propertyListModel;
     private JList<PrivateProperty> list;
     private JButton buyHouseBtn;
     private JButton buyHotelBtn;
     private JButton closeBtn;
 
-    public BuyHouseHotelDialog(JFrame owner, MonopolyController controller) {
+    public BuyHouseHotelDialog(JFrame owner, MonopolyModel model, MonopolyController controller) {
         super(owner, "Buy Houses or Hotels", true);
         this.controller = controller;
-        Player player = controller.getCurrentPlayer();
-        propertyListModel = new PlayerPropertyListHouseModel(controller);
-        controller.retrieveBuyPanelModel(this, propertyListModel);
+        Player player = model.getCurrentPlayer();
+        propertyListModel = new PlayerPropertyListHouseModel(model);
+        model.retrieveBuyPanelModel(this, propertyListModel);
         list = new JList<>(propertyListModel);
 
         this.setLayout(new BorderLayout());

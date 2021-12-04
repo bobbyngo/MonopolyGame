@@ -17,6 +17,17 @@ public class MonopolyModel {
     private PlayerPropertyListModel playerPropertyListModel;
     private PlayerPropertyListHouseModel playerPropertyListHouseModel;
 
+    /*
+    Objective:
+    - Move buyDialog and sellDialog to the view class
+
+
+    Questions:
+    - What do I do with playerPropertyListModel and playerPropertyListHouseModel?
+
+    Assumptions:
+    - WRONG: playerPropertyListMode and playerPropertyListHouseModel are useless. I will delete.
+     */
     private SellPlayerPropertyDialog sellDialog;
     private BuyHouseHotelDialog buyDialog;
 
@@ -42,8 +53,8 @@ public class MonopolyModel {
 
         // MVC example
         this.view = view;
-        sellDialog = new SellPlayerPropertyDialog(this.view, this);
-        buyDialog = new BuyHouseHotelDialog(this.view, this);
+        //sellDialog = new SellPlayerPropertyDialog(this.view, this);
+        //buyDialog = new BuyHouseHotelDialog(this.view, this);
 
         for(Player p: this.players){
             p.setCurrLocation(board.getSQUARE(0));
@@ -606,14 +617,17 @@ public class MonopolyModel {
 
     }
 
+    // FIXME: start of dialog changes
     public void handleSellBtn() {
-        sellDialog = new SellPlayerPropertyDialog(this.view, this);
-        view.handleSellWindowVisibility(sellDialog);
+        view.displaySellDialog();
+        //sellDialog = new SellPlayerPropertyDialog(this.view, this, );
+        //view.handleSellWindowVisibility(sellDialog);
     }
 
     public void handleBuyHouseBtn(){
-        buyDialog = new BuyHouseHotelDialog(this.view, this);
-        view.handleBuyHouseWindowVisibility(buyDialog);
+        view.displayBuyHouseDialog();
+        //buyDialog = new BuyHouseHotelDialog(this.view, this);
+        //view.handleBuyHouseWindowVisibility(buyDialog);
     }
 
     public void retrieveSellPanelModel(SellPlayerPropertyDialog dialog, PlayerPropertyListModel playerPropertyListModel){
@@ -667,6 +681,7 @@ public class MonopolyModel {
     public BuyHouseHotelDialog getBuyDialog() {
         return buyDialog;
     }
+    // FIXME: end of dialog stuff
 }
 
 

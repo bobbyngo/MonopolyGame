@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class PlayerPropertyListModel extends DefaultListModel<PrivateProperty> {
-    MonopolyController controller;
+    private MonopolyModel model;
 
-    public PlayerPropertyListModel(MonopolyController controller) {
+    public PlayerPropertyListModel(MonopolyModel model) {
         super();
-        this.controller = controller;
-        ArrayList<PrivateProperty> properties = controller.getCurrentPlayer().getPropertyList();
+        this.model= model;
+        ArrayList<PrivateProperty> properties = model.getCurrentPlayer().getPropertyList();
 
         for (PrivateProperty p : properties) {
             addElement(p);
