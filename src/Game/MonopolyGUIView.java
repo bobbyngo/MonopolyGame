@@ -38,6 +38,7 @@ public class MonopolyGUIView extends JFrame {
     private final JButton payTaxBtn;
     private final JButton buyHouseBtn;
 
+    private ArrayList<JLabel>labelList;
 
     //For Roll Game.Dice
     int[] roll;
@@ -67,6 +68,7 @@ public class MonopolyGUIView extends JFrame {
         textLabel = new JLabel();
         playerLabels = new ArrayList<>();
 
+        labelList = new ArrayList<>();
 
         JPanel infoPanel = new JPanel(new GridLayout(2,1));
 
@@ -173,7 +175,7 @@ public class MonopolyGUIView extends JFrame {
     /**
      * This method will create a layout for each square like name, price
      */
-    private void squaresLayout() throws IOException {
+    private void squaresLayout() {
         for(int i = 0; i < 38; i++){
             JPanel squarePanel = new JPanel(new BorderLayout());
             JPanel InfoPanel = new JPanel();
@@ -189,6 +191,8 @@ public class MonopolyGUIView extends JFrame {
             JLabel playerLabel = new JLabel();
             playerLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             playerLabel.setForeground(Color.RED);
+
+            labelList.add(squareLabel);
 
             playerLabels.add(playerLabel);
 
@@ -305,6 +309,18 @@ public class MonopolyGUIView extends JFrame {
     }
 
     /**
+     * This method will update the square when player owns that square
+     * @param square
+     */
+    public void updateSquare(Square square){
+        String playerName = ((PrivateProperty) square).getOwner().getName();
+        JLabel newLabel = labelList.get(square.getIndex());
+        newLabel.setText(String.format("<html> %s <br> Price: %s <br> Ownership: %s</html>",
+                square.getName(), ((PrivateProperty) square).getPrice(),
+                playerName));
+    }
+
+    /**
      * This method will add buttons, text box to the middle of the board
      */
     private void addButtonToBoard(){
@@ -417,6 +433,8 @@ public class MonopolyGUIView extends JFrame {
 
         this.setVisible(true);
     }
+
+
 
 
     //MVC example
