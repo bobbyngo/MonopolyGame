@@ -1,5 +1,11 @@
 package Game;
 
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.util.ArrayList;
 
 public class MonopolyModel {
@@ -679,6 +685,65 @@ public class MonopolyModel {
         this.buyDialog = buyDialog;
     }
     // FIXME: end of dialog stuff
+
+    /**
+     * Parses input xml file to re-name board squares
+     * @param filename
+     */
+    public void importInternationalVersion(String filename) {
+        SAXParser saxParser;
+        SAXParserFactory fact;
+
+        try {
+            fact = SAXParserFactory.newInstance();
+            saxParser = fact.newSAXParser();
+
+            DefaultHandler handler = new DefaultHandler() {
+                int i;
+                boolean bboard, bsquare, bproperty;
+
+                @Override
+                public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+                    //super.startElement(uri, localName, qName, attributes);
+                    System.out.printf("Start Element: %s\n", qName);
+                    if (qName.equalsIgnoreCase("Board")) bboard = true;
+                    if (qName.equalsIgnoreCase("Square")) bsquare = true;
+                    if (qName.equalsIgnoreCase("Property")) bproperty = true;
+                }
+
+                @Override
+                public void endElement(String uri, String localName, String qName) throws SAXException {
+                    //super.endElement(uri, localName, qName);
+                    System.out.printf("End Element: %s\n", qName);
+                    if (qName.equalsIgnoreCase("Board")) bboard = false;
+                    if (qName.equalsIgnoreCase("Square")) bsquare = false;
+                    if (qName.equalsIgnoreCase("Property")) bproperty = false;
+                }
+
+                @Override
+                public void characters(char[] ch, int start, int length) throws SAXException {
+                    //super.characters(ch, start, length);
+                    Square square = null;
+
+                    if (i < 38) {
+                        square = getBoard().getSQUARE(i);
+                    }
+                    if (bsquare) {
+                        // Update name
+                        System.out.println("Square: " + new String(ch, start, length));
+                    }
+
+                    if (bproperty) {
+                        // Update name and price (if applicable)
+                        System.out.println("Property: " + new String(ch, start, length));
+                    }
+                }
+            };
+            saxParser.parse(filename, handler);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 
