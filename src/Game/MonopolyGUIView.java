@@ -38,8 +38,7 @@ public class MonopolyGUIView extends JFrame {
     private final JButton payTaxBtn;
     private final JButton buyHouseBtn;
 
-    private ArrayList<JLabel> labelList;
-
+    private ArrayList<JLabel>labelList;
 
     //For Roll Game.Dice
     int[] roll;
@@ -49,7 +48,11 @@ public class MonopolyGUIView extends JFrame {
     private JLabel houseLabel;
     private JLabel hotelLabel;
 
+    private SellPlayerPropertyDialog sellDialog;
+    private BuyHouseHotelDialog buyDialog;
+
     private MonopolyController controller;
+    private MonopolyModel model;
 
     /**
      * Constructor for Game.MonopolyGUIView class
@@ -93,7 +96,9 @@ public class MonopolyGUIView extends JFrame {
             players.add(new AIPlayer("Player 3", new Square("GO", 0)));
             players.add(new AIPlayer("Player 4", new Square("GO", 0)));
         }
-        this.controller = new MonopolyController(players, this);
+        //this.controller = new MonopolyController(players, this);
+        this.model = new MonopolyModel(players, this);
+        this.controller = new MonopolyController(this.model, this);
 
         this.setTitle("Monopoly Game");
 
@@ -133,16 +138,16 @@ public class MonopolyGUIView extends JFrame {
     private String displayPlayerInfo() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append("<html><u>Player Info</u>:-<br>")
-                .append(controller.getCurrentPlayer().getName())
+                .append(model.getCurrentPlayer().getName())
                 .append("'s turn <br> Location: ")
-                .append(controller.getCurrentPlayer().getCurrLocation().getName())
+                .append(model.getCurrentPlayer().getCurrLocation().getName())
                 .append("<br><br><u>Asset Info</u>:-<br> Properties owned:<br>")
-                .append(controller.getCurrentPlayer().propertiesToString())
+                .append(model.getCurrentPlayer().propertiesToString())
 
                 .append("<br><br><u>Monetary Info</u>:-<br> Total asset value: $")
-                .append(controller.getCurrentPlayer().getPlayerTotalAsset())
+                .append(model.getCurrentPlayer().getPlayerTotalAsset())
                 .append("<br>Liquid value: $")
-                .append(controller.getCurrentPlayer().getPlayerBalance());
+                .append(model.getCurrentPlayer().getPlayerBalance());
 
         return stringBuilder.toString();
     }
@@ -150,7 +155,7 @@ public class MonopolyGUIView extends JFrame {
     private String displayHouseHotel() {
         StringBuilder houseText = new StringBuilder("House: ");
         StringBuilder hotelText = new StringBuilder("Hotel: ");
-        Player currentPlayer = controller.getCurrentPlayer();
+        Player currentPlayer = model.getCurrentPlayer();
 
         for (PrivateProperty property : currentPlayer.getPropertyList()) {
             if (((Business) property).getNumHouse() > 0) {
@@ -170,7 +175,7 @@ public class MonopolyGUIView extends JFrame {
     /**
      * This method will create a layout for each square like name, price
      */
-    private void squaresLayout() throws IOException {
+    private void squaresLayout() {
         for(int i = 0; i < 38; i++){
             JPanel squarePanel = new JPanel(new BorderLayout());
             JPanel InfoPanel = new JPanel();
@@ -188,6 +193,7 @@ public class MonopolyGUIView extends JFrame {
             playerLabel.setForeground(Color.RED);
 
             labelList.add(squareLabel);
+
             playerLabels.add(playerLabel);
 
             if(board.getSQUARE(i) instanceof PrivateProperty){
@@ -209,12 +215,6 @@ public class MonopolyGUIView extends JFrame {
         }
     }
 
-    public void updateSquare(Square square) {
-        String playerName = ((PrivateProperty) square).getOwner().getName();
-
-        labelList.get(square.getIndex()).setText(String.format("<html> %s <br> Price: %s <br> Owned by %s </html>",
-                board.getSQUARE(square.getIndex()).getName(), (((PrivateProperty)board.getSQUARE(square.getIndex())).getPrice()), playerName));
-    }
 
     /**
      * This method adds the Game.Square into the Game.Board
@@ -271,7 +271,7 @@ public class MonopolyGUIView extends JFrame {
 
         // Stinky code but it works I will refactor later
         JLabel dieLabel = null;
-        for (int i = 0; i < controller.getDie().getNUM_DICE(); i ++) {
+        for (int i = 0; i < model.getDie().getNUM_DICE(); i ++) {
             try {
                 InputStream in = getClass().getResourceAsStream(String.format("../DiceImg/%d.png", roll[i]));
                 BufferedImage image = ImageIO.read(in);
@@ -295,7 +295,7 @@ public class MonopolyGUIView extends JFrame {
             }
         }
 
-        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
+        System.out.println(model.getCurrentPlayer().getCurrLocation().getIndex());
 
         endTurnBtn.setEnabled(true);
 
@@ -303,9 +303,21 @@ public class MonopolyGUIView extends JFrame {
         mainPanel.repaint();
 
         // For debugging
-        System.out.println(controller.getCurrentPlayer().getCurrLocation().getIndex());
+        System.out.println(model.getCurrentPlayer().getCurrLocation().getIndex());
         System.out.println(String.format("die 1: %d, die 2: %d", roll[0], roll[1]));
-        System.out.println(controller.getCurrentPlayer().propertiesToString());
+        System.out.println(model.getCurrentPlayer().propertiesToString());
+    }
+
+    /**
+     * This method will update the square when player owns that square
+     * @param square
+     */
+    public void updateSquare(Square square){
+        String playerName = ((PrivateProperty) square).getOwner().getName();
+        JLabel newLabel = labelList.get(square.getIndex());
+        newLabel.setText(String.format("<html> %s <br> Price: %s <br> Ownership: %s</html>",
+                square.getName(), ((PrivateProperty) square).getPrice(),
+                playerName));
     }
 
     /**
@@ -537,8 +549,10 @@ public class MonopolyGUIView extends JFrame {
                     player.getName(), player.getPlayerTotalAsset()));
             this.dispose();
         }else if(dialogNum == 21){
+            // land owned private property
             textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }else if(dialogNum == 22){
+            // land on anything else
             textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
         }else if(dialogNum == 23){
             JOptionPane.showMessageDialog(null, String.format("%s has rolled a DOUBLE!", player.getName()));
@@ -587,6 +601,73 @@ public class MonopolyGUIView extends JFrame {
         MonopolyGUIView view = new MonopolyGUIView();
         view.displayGUI();
     }
+
+
+    // FIXME: start of dialog changes
+    public void displaySellDialog() {
+        sellDialog = new SellPlayerPropertyDialog(this, this.model, this.controller);
+        handleSellWindowVisibility(sellDialog);
+    }
+
+    public void displayBuyHouseDialog(){
+        buyDialog = new BuyHouseHotelDialog(this, this.model, this.controller);
+        handleBuyHouseWindowVisibility(buyDialog);
+    }
+
+    /*
+    public void retrieveSellPanelModel(SellPlayerPropertyDialog dialog, PlayerPropertyListModel playerPropertyListModel){
+        sellDialog = dialog;
+        this.playerPropertyListModel = playerPropertyListModel;
+    }
+
+    public void retrieveBuyPanelModel(BuyHouseHotelDialog dialog, PlayerPropertyListHouseModel playerPropertyListHouseModel){
+        buyDialog = dialog;
+        this.playerPropertyListHouseModel = playerPropertyListHouseModel;
+    }
+
+    public void handleDialogSellBtn(){
+        int index = sellDialog.getList().getSelectedIndex();
+        if (index != -1) {
+            sellProperty(index);
+            playerPropertyListModel.removeProperty(index);
+            updateDialogAfterSellOrBuy();
+        }
+    }
+
+    public void handleDialogBuyHouseBtn(){
+        int index = buyDialog.getList().getSelectedIndex();
+        if (index != -1) {
+            buyHouses(index);
+            updateDialogAfterSellOrBuy();
+        }
+    }
+
+    public void handleDialogBuyHotelBtn(){
+        int index = buyDialog.getList().getSelectedIndex();
+        if (index != -1) {
+            buyHotels(index);
+            updateDialogAfterSellOrBuy();
+        }
+    }
+
+    private void updateDialogAfterSellOrBuy() {
+        Player p = currentPlayer;
+        if(p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
+            view.handleUpdateView(21, p);
+        }else{
+            view.handleUpdateView(22, p);
+        }
+    }
+    */
+
+    public SellPlayerPropertyDialog getSellDialog() {
+        return sellDialog;
+    }
+
+    public BuyHouseHotelDialog getBuyDialog() {
+        return buyDialog;
+    }
+    // FIXME: end of dialog stuff
 
 }
 
