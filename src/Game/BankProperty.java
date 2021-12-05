@@ -38,8 +38,14 @@ public class BankProperty extends Square implements PropertyAPI {
 
     @Override
     public String toString() {
-        return "Game.BankProperty{" +
-                "taxValue=" + taxValue +
-                "} " + super.toString();
+
+        //Format name-index-taxValue
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(getName()).append("-")
+                .append(getIndex()).append("-")
+                .append(taxValue);
+
+        return sb.toString();
     }
 }
