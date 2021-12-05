@@ -435,8 +435,6 @@ public class MonopolyGUIView extends JFrame {
     }
 
 
-
-
     //MVC example
     public JButton getBuyBtn(){
         return buyBtn;

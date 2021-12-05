@@ -21,7 +21,6 @@ public class MonopolyModel {
     Objective:
     - Move buyDialog and sellDialog to the view class
 
-
     Questions:
     - What do I do with playerPropertyListModel and playerPropertyListHouseModel?
 
@@ -450,6 +449,7 @@ public class MonopolyModel {
             if (!((PrivateProperty) getCurrentPlayer().getCurrLocation()).isOwned()) {
                 purchaseProperty((PrivateProperty)getCurrentPlayer().getCurrLocation());
                 view.handleUpdateView(1, getCurrentPlayer());
+                //update label
                 view.updateSquare(getCurrentPlayer().getCurrLocation());
             } else {
                 view.handleUpdateView(2, getCurrentPlayer());
