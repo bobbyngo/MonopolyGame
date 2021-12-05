@@ -70,6 +70,12 @@ public class MonopolyController implements ActionListener {
         else if (model.getSellDialog() != null && e.getSource() == model.getSellDialog().getSellBtn()) {
             model.handleDialogSellBtn();
         }
+        else if (e.getSource() == view.getImportInternationalItem()) {
+            String filename = JOptionPane.showInputDialog(view, "Import xml file for international names import:");
+            if (filename != null) {
+                model.importInternationalVersion(filename);
+            }
+        }
     }
     // FIXME: END OF LEAVING ALONE
 

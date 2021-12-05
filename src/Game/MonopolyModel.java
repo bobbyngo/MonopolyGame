@@ -724,18 +724,42 @@ public class MonopolyModel {
                 public void characters(char[] ch, int start, int length) throws SAXException {
                     //super.characters(ch, start, length);
                     Square square = null;
-
+                    String rawdata = new String(ch, start, length);
+                    String[] data;
                     if (i < 38) {
                         square = getBoard().getSQUARE(i);
-                    }
-                    if (bsquare) {
-                        // Update name
-                        System.out.println("Square: " + new String(ch, start, length));
-                    }
 
-                    if (bproperty) {
-                        // Update name and price (if applicable)
-                        System.out.println("Property: " + new String(ch, start, length));
+                        if (bsquare) {
+                            // Update name
+                            System.out.println("Square: " + rawdata);
+                            data = rawdata.split("-");
+                            if (data.length == 1) {
+                                square.setName(data[0]);
+                                view.updateSquare(square);
+                            } else {
+                                System.out.println("Invalid format");
+                            }
+                            i += 1;
+                        }
+
+                        if (bproperty) {
+                            // Update name and price (if applicable)
+                            System.out.println("Property: " + rawdata);
+                            data = rawdata.split("-");
+                            if (data.length == 2 && (square instanceof PrivateProperty ||
+                                    square instanceof BankProperty)) {
+                                square.setName(data[0]);
+                                if (square instanceof PrivateProperty) {
+                                    ((PrivateProperty)square).setPrice(Integer.parseInt(data[1]));
+                                } else {
+                                    ((BankProperty)square).setTax(Integer.parseInt(data[1]));
+                                }
+                            } else {
+                                System.out.println("Invalid format");
+                            }
+                            i += 1;
+                        }
+                        view.updateSquare(square);
                     }
                 }
             };

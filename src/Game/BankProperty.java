@@ -78,4 +78,8 @@ public class BankProperty extends Square implements PropertyAPI {
 
         return new BankProperty(list[0], Integer.parseInt(list[1]), Integer.parseInt(list[2]));
     }
+
+    public void setTax(int tax) {
+        this.taxValue = tax;
+    }
 }

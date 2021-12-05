@@ -9,6 +9,8 @@ public class Square {
     private int index;
     private ArrayList<Player> playersCurrentlyOn;
 
+
+
     /**
      * Constructor for Game.Square class
      * @param name
@@ -91,4 +93,9 @@ public class Square {
         sb.append("</Square>\n");
         return sb.toString();
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

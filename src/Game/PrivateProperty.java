@@ -68,6 +68,10 @@ public class PrivateProperty extends Square {
         return price;
     }
 
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public boolean getIsOwned() {
         return this.isOwned;
     }

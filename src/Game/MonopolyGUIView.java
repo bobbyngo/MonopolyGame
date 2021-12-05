@@ -347,17 +347,27 @@ public class MonopolyGUIView extends JFrame {
      */
     public void updateSquare(Square square){
         //String playerName = ((PrivateProperty) square).getOwner().getName();
-        Player owner = ((PrivateProperty) square).getOwner();
         JLabel newLabel = labelList.get(square.getIndex());
+        if (square instanceof PrivateProperty) {
+            Player owner = ((PrivateProperty) square).getOwner();
 
-        if (owner != null) {
-            String playerName = owner.getName();
-            newLabel.setText(String.format("<html> %s <br> Price: %s <br> Ownership: %s</html>",
-                    square.getName(), ((PrivateProperty) square).getPrice(),
-                    playerName));
+
+            // FIXME: Does this work for BankProperties or Square as well?
+            if (owner != null) {
+                String playerName = owner.getName();
+                newLabel.setText(String.format("<html> %s <br> Price: %s <br> Ownership: %s</html>",
+                        square.getName(), ((PrivateProperty) square).getPrice(),
+                        playerName));
+            } else {
+                newLabel.setText(String.format("<html> %s <br> Price: %s</html>",
+                        square.getName(), ((PrivateProperty) square).getPrice()));
+            }
+        } else if (square instanceof BankProperty) {
+            newLabel.setText(String.format("<html> %s <br> Tax: %s</html>",
+                    square.getName(),((BankProperty) square).getTaxValue()));
         } else {
-            newLabel.setText(String.format("<html> %s <br> Price: %s</html>",
-                    square.getName(), ((PrivateProperty) square).getPrice()));
+            newLabel.setText(String.format("<html> %s</html>",
+                    square.getName()));
         }
     }
 
@@ -712,6 +722,9 @@ public class MonopolyGUIView extends JFrame {
     }
     // FIXME: end of dialog stuff
 
+    public JMenuItem getImportInternationalItem() {
+        return importInternationalItem;
+    }
 }
 
 
