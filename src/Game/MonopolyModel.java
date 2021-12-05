@@ -611,6 +611,7 @@ public class MonopolyModel {
         if (currentPlayer instanceof AIPlayer) {
             //  This doesn't feel right...
             ((AIPlayer)currentPlayer).autoplay();   // we know that rent, tax, or purchase (or not) has been paid
+            view.updateSquare(currentPlayer.getCurrLocation());
             feePaid = true;
             //view.handleUpdateView();
             handleEndTurnBtn();

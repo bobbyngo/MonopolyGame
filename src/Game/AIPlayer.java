@@ -47,6 +47,7 @@ public class AIPlayer extends Player {
                 int price = pp.getPrice();
                 if (getPlayerBalance() >= price) {
                     buyPrivateProperty(pp);
+
                 }
             }
 

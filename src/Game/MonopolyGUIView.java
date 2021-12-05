@@ -313,11 +313,19 @@ public class MonopolyGUIView extends JFrame {
      * @param square
      */
     public void updateSquare(Square square){
-        String playerName = ((PrivateProperty) square).getOwner().getName();
+        //String playerName = ((PrivateProperty) square).getOwner().getName();
+        Player owner = ((PrivateProperty) square).getOwner();
         JLabel newLabel = labelList.get(square.getIndex());
-        newLabel.setText(String.format("<html> %s <br> Price: %s <br> Ownership: %s</html>",
-                square.getName(), ((PrivateProperty) square).getPrice(),
-                playerName));
+
+        if (owner != null) {
+            String playerName = owner.getName();
+            newLabel.setText(String.format("<html> %s <br> Price: %s <br> Ownership: %s</html>",
+                    square.getName(), ((PrivateProperty) square).getPrice(),
+                    playerName));
+        } else {
+            newLabel.setText(String.format("<html> %s <br> Price: %s</html>",
+                    square.getName(), ((PrivateProperty) square).getPrice()));
+        }
     }
 
     /**
