@@ -622,6 +622,7 @@ public class MonopolyModel {
     // FIXME: start of dialog changes
     public void handleSellBtn() {
         view.displaySellDialog();
+        view.updateSquare(getCurrentPlayer().getCurrLocation());
         //sellDialog = new SellPlayerPropertyDialog(this.view, this, );
         //view.handleSellWindowVisibility(sellDialog);
     }
