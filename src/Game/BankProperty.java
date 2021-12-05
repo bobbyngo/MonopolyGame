@@ -1,5 +1,7 @@
 package Game;
 
+import java.util.Objects;
+
 public class BankProperty extends Square implements PropertyAPI {
     /**
      * Author: Ngo Huu Gia Bao
@@ -37,6 +39,19 @@ public class BankProperty extends Square implements PropertyAPI {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BankProperty that = (BankProperty) o;
+        return taxValue == that.taxValue;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(taxValue);
+    }
+
+    @Override
     public String toString() {
 
         //Format name-index-taxValue
@@ -46,6 +61,15 @@ public class BankProperty extends Square implements PropertyAPI {
                 .append(getIndex()).append("-")
                 .append(taxValue);
 
+        return sb.toString();
+    }
+
+    @Override
+    public String toXML() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<BankProperty>");
+        sb.append(this);
+        sb.append("</BankProperty>");
         return sb.toString();
     }
 }

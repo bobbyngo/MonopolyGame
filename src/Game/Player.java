@@ -330,9 +330,9 @@ public class Player implements RoleAPI {
         return sb.toString();
     }
 
-    public static Player readFile(String aString) {
-        String[] list = aString.split("\\-");
-
-        return new Player(list[0], list[1], list[2], list[3], list[4]);
-    }
+//    public static Player readFile(String aString) {
+//        String[] list = aString.split("\\-");
+//
+//        return new Player(list[0], list[1], list[2], list[3], list[4]);
+//    }
 }
