@@ -61,13 +61,13 @@ public class MonopolyController implements ActionListener {
         else if(e.getSource() == view.getBuyHouseBtn()){
             model.handleBuyHouseBtn();
         }
-        else if(e.getSource() == model.getBuyDialog().getBuyHouseBtn()){
+        else if(model.getBuyDialog() != null && e.getSource() == model.getBuyDialog().getBuyHouseBtn()){
                 model.handleDialogBuyHouseBtn();
         }
-        else if(e.getSource() == model.getBuyDialog().getBuyHotelBtn()){
+        else if(model.getBuyDialog() != null && e.getSource() == model.getBuyDialog().getBuyHotelBtn()){
                 model.handleDialogBuyHotelBtn();
         }
-        else if (e.getSource() == model.getSellDialog().getSellBtn()) {
+        else if (model.getSellDialog() != null && e.getSource() == model.getSellDialog().getSellBtn()) {
             model.handleDialogSellBtn();
         }
     }

@@ -614,11 +614,13 @@ public class MonopolyGUIView extends JFrame {
     // FIXME: start of dialog changes
     public void displaySellDialog() {
         sellDialog = new SellPlayerPropertyDialog(this, this.model, this.controller);
+        model.setSellDialog(sellDialog);
         handleSellWindowVisibility(sellDialog);
     }
 
     public void displayBuyHouseDialog(){
         buyDialog = new BuyHouseHotelDialog(this, this.model, this.controller);
+        model.setBuyHouseHotelDialog(buyDialog);
         handleBuyHouseWindowVisibility(buyDialog);
     }
 

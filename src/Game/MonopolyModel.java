@@ -66,23 +66,12 @@ public class MonopolyModel {
      *
      * @param property, the rail property being sold
      */
-    public void sellProperty(Rail property) {
+    public void sellProperty(RentableAPI property) {
         int amount = property.sell();
         this.currentPlayer.addMoney(amount);
         bank.removeMoney(amount);
     }
 
-    /**
-     * Method to sell the current business property and returns half the worth of the property to the seller.
-     * Method overloading used as both Game.Rail and Game.Business are polymorphs when selling (b/c business may have houses/hotels)
-     *
-     * @param property, the business property being sold
-     */
-    public void sellProperty(Business property) {
-        int amount = property.sell();
-        this.currentPlayer.addMoney(amount);
-        bank.addMoney(amount);
-    }
 
     /**
      * Method to purchase the current Game.PrivateProperty, or a house/hotel for the current Game.Business property (cast from the Game.PrivateProperty).
@@ -326,11 +315,9 @@ public class MonopolyModel {
     public void sellProperty(int index) {
         PrivateProperty property = currentPlayer.getPropertyList().get(index);
         int cashEarned;
-        if(property instanceof Business){
-            sellProperty(((Business) property));
-        }else{
-            sellProperty(((Rail) property));
-        }
+
+        sellProperty((RentableAPI) property);
+        view.updateSquare(property);
         currentPlayer.removeProperty(property);
     }
 
@@ -682,6 +669,14 @@ public class MonopolyModel {
 
     public BuyHouseHotelDialog getBuyDialog() {
         return buyDialog;
+    }
+
+    public void setSellDialog(SellPlayerPropertyDialog sellDialog) {
+        this.sellDialog = sellDialog;
+    }
+
+    public void setBuyHouseHotelDialog(BuyHouseHotelDialog buyDialog) {
+        this.buyDialog = buyDialog;
     }
     // FIXME: end of dialog stuff
 }

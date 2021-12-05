@@ -76,10 +76,19 @@ public class Square {
 
     @Override
     public String toString() {
-        return "Game.Square{" +
-                "name='" + name + '\'' +
-                ", index=" + index +
-                //", playersCurrentlyOn=" + playersCurrentlyOn +
-                '}';
+        //Format Square toString: name-index
+        StringBuilder sb = new StringBuilder();
+        sb.append(name).append("-")
+                .append(index).append("-");
+        return sb.toString();
+    }
+
+    public String toXML(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("<Square>");
+        //toString
+        sb.append(this);
+        sb.append("</Square>\n");
+        return sb.toString();
     }
 }
