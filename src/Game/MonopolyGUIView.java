@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class MonopolyGUIView extends JFrame {
     private Board board;
+    private JPanel headerPanel;
     private final JPanel mainPanel;
     private final JPanel remotePanel;
     private final GridBagLayout gb;
@@ -54,12 +55,21 @@ public class MonopolyGUIView extends JFrame {
     private MonopolyController controller;
     private MonopolyModel model;
 
+    //Menu Bar
+    private JMenuBar menuBar;
+    private JMenu fileMenu;
+
+    private JMenuItem saveItem;
+    private JMenuItem loadItem;
+    private JMenuItem importInternationalItem;
+
     /**
      * Constructor for Game.MonopolyGUIView class
      */
     public MonopolyGUIView(){
         board = new Board();
         gb = new GridBagLayout();
+        headerPanel = new JPanel(new FlowLayout());
         mainPanel = new JPanel(gb);
         remotePanel = new JPanel(gb);
         c = new GridBagConstraints();
@@ -133,6 +143,30 @@ public class MonopolyGUIView extends JFrame {
 
         this.houseLabel = new JLabel();
         this.hotelLabel = new JLabel();
+
+        // Menu Part
+        this.menuBar = new JMenuBar();
+        this.fileMenu = new JMenu("File");
+
+        // Save Menu Item
+        this.saveItem = new JMenuItem("Save");
+        this.saveItem.addActionListener(controller);
+        this.fileMenu.add(saveItem);
+
+        // Load Menu Item
+        this.loadItem = new JMenuItem("Load");
+        this.loadItem.addActionListener(controller);
+        this.fileMenu.add(loadItem);
+
+        // Import International Menu Item
+        this.importInternationalItem = new JMenuItem("Import International Version");
+        this.importInternationalItem.addActionListener(controller);
+        this.fileMenu.add(importInternationalItem);
+
+        this.headerPanel.add(menuBar);
+        this.headerPanel.setBackground(new Color(166, 223, 242));
+        this.add(headerPanel, BorderLayout.NORTH);
+
     }
 
     private String displayPlayerInfo() {
