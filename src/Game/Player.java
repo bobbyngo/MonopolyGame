@@ -322,6 +322,26 @@ public class Player implements RoleAPI {
         return sb.toString();
     }
 
+    public String propertyListToString() {
+
+        // Format: squareIndex#squareIndex
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < propertyList.size(); i ++) {
+
+            // last index, don't append the #
+            if (i == propertyList.size() -1){
+                sb.append(propertyList.get(i).getIndex());
+            }
+
+            else {
+                sb.append(propertyList.get(i).getIndex()).append("#");
+            }
+        }
+
+        return sb.toString();
+    }
+
     public String toXML() {
         StringBuilder sb = new StringBuilder();
         sb.append("<Player>");
