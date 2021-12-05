@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class Player implements RoleAPI {
@@ -275,20 +276,6 @@ public class Player implements RoleAPI {
     return this.turnsPlayed;
     }
 
-
-    @Override
-    public String toString() {
-        return "Game.Player{" +
-                "name='" + name + '\'' +
-                ", playerBalance=" + playerBalance +
-                ", inJail=" + inJail +
-                ", turnsInJail=" + turnsInJail +
-                ", turnsPlayed=" + turnsPlayed +
-                //", currLocation=" + currLocation +
-                //", propertyList=" + propertyList +
-                '}';
-    }
-
     public static class PlayerPropertyListModel extends DefaultListModel<PrivateProperty> {
         MonopolyModel model;
 
@@ -306,4 +293,66 @@ public class Player implements RoleAPI {
             removeElementAt(index);
         }
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return playerBalance == player.playerBalance && inJail == player.inJail && turnsInJail == player.turnsInJail && turnsPlayed == player.turnsPlayed && Objects.equals(name, player.name) && Objects.equals(currLocation, player.currLocation) && Objects.equals(playerWallet, player.playerWallet) && Objects.equals(propertyList, player.propertyList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, playerBalance, inJail, turnsInJail, turnsPlayed, currLocation, playerWallet, propertyList);
+    }
+
+    @Override
+    public String toString() {
+        // The format is name-playerBalance-inJail-turnsInJail-turnsPlayed
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(name).append("-").
+                append(playerBalance).append("-")
+                .append(inJail).append("-")
+                .append(turnsPlayed).append("-")
+                .append(turnsPlayed).append("-");
+
+        return sb.toString();
+    }
+
+    public String propertyListToString() {
+
+        // Format: squareIndex#squareIndex
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < propertyList.size(); i ++) {
+
+            // last index, don't append the #
+            if (i == propertyList.size() -1){
+                sb.append(propertyList.get(i).getIndex());
+            }
+
+            else {
+                sb.append(propertyList.get(i).getIndex()).append("#");
+            }
+        }
+
+        return sb.toString();
+    }
+
+    public String toXML() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<Player>");
+        sb.append(this);
+        sb.append("</Player>");
+        return sb.toString();
+    }
+
+//    public static Player readFile(String aString) {
+//        String[] list = aString.split("\\-");
+//
+//        return new Player(list[0], list[1], list[2], list[3], list[4]);
+//    }
 }

@@ -1,5 +1,7 @@
 package Game;
 
+import java.util.Objects;
+
 /**
  * Author: Patrick Liu
  * 101142730
@@ -115,17 +117,50 @@ public class Business extends PrivateProperty implements PropertyAPI, RentableAP
         this.getOwner().addMoney(this.getRentAmount());
     }
 
-
-    @Override
-    public String toString() {
-        return super.toString() +
-                " - Rent: $" +
-                this.getRentAmount();
-    }
-
     public int getSalePrice() {
         //return getTotalAssetValue();
         int sellPrice =  (int)((this.getPrice() + numHouse * (100 + this.getPrice() * 0.1) + numHotel * (100 + this.getPrice() * 0.6))/2);
         return sellPrice;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Business business = (Business) o;
+        return numHouse == business.numHouse && numHotel == business.numHotel;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), numHouse, numHotel);
+    }
+
+    @Override
+    public String toString() {
+
+        //Format name-index-price-isOwned-ownerName-numHouse-numHotel
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(getName()).append("-").
+                append(getIndex()).append("-")
+                .append(getPrice()).append("-")
+                .append(getIsOwned()).append("-")
+                .append(getOwner().getName()).append("-")
+                .append(numHouse).append("-")
+                .append(numHotel);
+
+        return sb.toString();
+    }
+
+
+    public String toXML() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<Business>");
+        sb.append(this);
+        sb.append("</Business>\n");
+        return sb.toString();
+    }
+
 }

@@ -66,4 +66,19 @@ public class AIPlayer extends Player {
             addMoney(((RentableAPI)removed).getSalePrice());
         }
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public String toXML() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<AIPlayer>");
+        //Using parent toString
+        sb.append(this);
+        sb.append("</AIPlayer>");
+        return sb.toString();
+    }
 }

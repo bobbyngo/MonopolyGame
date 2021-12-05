@@ -68,15 +68,20 @@ public class Rail extends PrivateProperty implements PropertyAPI, RentableAPI {
         this.getOwner().addMoney(this.getRentAmount());
     }
 
-    @Override
-    public String toString() {
-        return super.toString() +
-                " - Rent: $" +
-                this.getRentAmount();
-    }
 
     public int getSalePrice() {
         // i may or may not be breaking things...
         return getPrice()/2;
+    }
+
+
+
+    public String toXML() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<Rail>");
+        //use PrivateProperty toString
+        sb.append(this);
+        sb.append("</Rail>\n");
+        return sb.toString();
     }
 }

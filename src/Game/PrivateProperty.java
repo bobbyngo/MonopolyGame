@@ -1,5 +1,8 @@
 package Game;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 /**
  * Author: Patrick Liu
  * 101142730
@@ -9,6 +12,7 @@ public class PrivateProperty extends Square {
     private int price;
     private Player owner;
     private boolean isOwned;
+    private ArrayList<PrivateProperty> propertyList;
 
     /**
      * Constructor for Game.PrivateProperty class
@@ -21,6 +25,7 @@ public class PrivateProperty extends Square {
         isOwned = false;
         this.price = price;
         owner = null;
+        this.propertyList = new ArrayList<>();
     }
 
     /**
@@ -55,6 +60,10 @@ public class PrivateProperty extends Square {
         return price;
     }
 
+    public boolean getIsOwned() {
+        return this.isOwned;
+    }
+
     /**
      * getIsOwned is used to determine whether a property has an owner or not
      * @return boolean
@@ -65,8 +74,47 @@ public class PrivateProperty extends Square {
 
     @Override
     public String toString() {
-        return this.getName() +
-                " - Sell Price: $" +
-                (int)(this.getPrice()/2);
+
+        //Format name-index-price-isOwned-owner
+        // owner will have problem maybe? I set owner name
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(getName()).append("-")
+                .append(getIndex()).append("-")
+                .append(getPrice()).append("-")
+                .append(isOwned).append("-")
+                .append(owner.getName());
+
+        return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PrivateProperty property = (PrivateProperty) o;
+        return price == property.price && isOwned == property.isOwned && Objects.equals(owner, property.owner);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(price, owner, isOwned);
+    }
+
+    public void addPrivateProperty(PrivateProperty pp) {
+        propertyList.add(pp);
+    }
+
+
+    // Do we need toXML for PP?
+//    public String toXML() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("<PrivateProperty>");
+//        for (){
+//
+//        }
+//        sb.append("</PrivateProperty>");
+//        return sb.toString();
+//    }
 }
