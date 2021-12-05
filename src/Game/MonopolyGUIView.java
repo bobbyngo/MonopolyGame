@@ -163,10 +163,9 @@ public class MonopolyGUIView extends JFrame {
         this.importInternationalItem.addActionListener(controller);
         this.fileMenu.add(importInternationalItem);
 
+        this.menuBar.add(fileMenu);
         this.headerPanel.add(menuBar);
         this.headerPanel.setBackground(new Color(166, 223, 242));
-        this.add(headerPanel, BorderLayout.NORTH);
-
     }
 
     private String displayPlayerInfo() {
@@ -449,7 +448,7 @@ public class MonopolyGUIView extends JFrame {
         this.addSquareToBoard();
 
         this.addButtonToBoard();
-
+        this.add(headerPanel, BorderLayout.NORTH);
         this.add(mainPanel);
 
         this.setPreferredSize(new Dimension(2000, 2000));
