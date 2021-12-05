@@ -72,4 +72,10 @@ public class BankProperty extends Square implements PropertyAPI {
         sb.append("</BankProperty>");
         return sb.toString();
     }
+
+    public BankProperty readFile(String aString) {
+        String[] list = aString.split("\\-");
+
+        return new BankProperty(list[0], Integer.parseInt(list[1]), Integer.parseInt(list[2]));
+    }
 }
