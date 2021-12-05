@@ -3,9 +3,7 @@ package Tests;
 import Game.Business;
 import Game.Player;
 import Game.PrivateProperty;
-import Game.Square;
 import org.junit.Before;
-import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class PrivatePropertyTest {
@@ -17,11 +15,21 @@ public class PrivatePropertyTest {
         privateProperty = new Business("Anarchy Acres", 1,50);
     }
 
+    @org.junit.Test
     public void testRemoveOwner(){
-
+        Player player = new Player("Player 1", new PrivateProperty("Anarchy Acres", 1,50));
+        privateProperty.setOwner(player);
+        privateProperty.removeOwner();
+        assertFalse(privateProperty.isOwned());
     }
-    
+
+
+    @org.junit.Test
     public void testSetOwner(){
+        Player player = new Player("Player 1", new PrivateProperty("Anarchy Acres", 1,50));
+
+        privateProperty.setOwner(player);
+        assertTrue(privateProperty.isOwned());
 
     }
 }
