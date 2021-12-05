@@ -75,7 +75,6 @@ public class Rail extends PrivateProperty implements PropertyAPI, RentableAPI {
     }
 
 
-
     public String toXML() {
         StringBuilder sb = new StringBuilder();
         sb.append("<Rail>");

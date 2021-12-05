@@ -41,6 +41,19 @@ public class Player implements RoleAPI {
         this.playerBalance = 1230;
     }
 
+    public Player(String name, int playerBalance, boolean inJail, int turnsInJail, int turnsPlayed, Square currLocation) {
+        this.name = name;
+
+        this.turnsInJail = turnsInJail;
+        this.turnsPlayed = turnsPlayed;
+        //this.playerWallet = new HashMap<>();
+
+        this.inJail = inJail;
+        this.currLocation = currLocation;
+        this.propertyList = new ArrayList<>();
+        this.playerBalance = playerBalance;
+    }
+
 
     /**
      * This method will let the player buy Game.PrivateProperty. If the Game.Player can buy the property,
