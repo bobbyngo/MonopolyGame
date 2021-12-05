@@ -162,8 +162,9 @@ public class MonopolyGUIView extends JFrame {
         this.importInternationalItem = new JMenuItem("Import International Version");
         this.importInternationalItem.addActionListener(controller);
         this.fileMenu.add(importInternationalItem);
+        menuBar.add(fileMenu);
 
-        this.headerPanel.add(menuBar);
+        this.headerPanel.add(this.menuBar);
         this.headerPanel.setBackground(new Color(166, 223, 242));
         this.add(headerPanel, BorderLayout.NORTH);
 
