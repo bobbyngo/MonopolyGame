@@ -679,52 +679,6 @@ public class MonopolyGUIView extends JFrame {
         handleBuyHouseWindowVisibility(buyDialog);
     }
 
-    /*
-    public void retrieveSellPanelModel(SellPlayerPropertyDialog dialog, PlayerPropertyListModel playerPropertyListModel){
-        sellDialog = dialog;
-        this.playerPropertyListModel = playerPropertyListModel;
-    }
-
-    public void retrieveBuyPanelModel(BuyHouseHotelDialog dialog, PlayerPropertyListHouseModel playerPropertyListHouseModel){
-        buyDialog = dialog;
-        this.playerPropertyListHouseModel = playerPropertyListHouseModel;
-    }
-
-    public void handleDialogSellBtn(){
-        int index = sellDialog.getList().getSelectedIndex();
-        if (index != -1) {
-            sellProperty(index);
-            playerPropertyListModel.removeProperty(index);
-            updateDialogAfterSellOrBuy();
-        }
-    }
-
-    public void handleDialogBuyHouseBtn(){
-        int index = buyDialog.getList().getSelectedIndex();
-        if (index != -1) {
-            buyHouses(index);
-            updateDialogAfterSellOrBuy();
-        }
-    }
-
-    public void handleDialogBuyHotelBtn(){
-        int index = buyDialog.getList().getSelectedIndex();
-        if (index != -1) {
-            buyHotels(index);
-            updateDialogAfterSellOrBuy();
-        }
-    }
-
-    private void updateDialogAfterSellOrBuy() {
-        Player p = currentPlayer;
-        if(p.getCurrLocation() instanceof PrivateProperty && ((PrivateProperty) p.getCurrLocation()).isOwned()){
-            view.handleUpdateView(21, p);
-        }else{
-            view.handleUpdateView(22, p);
-        }
-    }
-    */
-
     public SellPlayerPropertyDialog getSellDialog() {
         return sellDialog;
     }
