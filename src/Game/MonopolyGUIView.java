@@ -547,8 +547,8 @@ public class MonopolyGUIView extends JFrame {
                     String.format("Skipping %s's turn, they are in Jail with %d turns remaining.", player.getName(), turnsLeft));
         }
         else if(dialogNum == 6){
-            JOptionPane.showMessageDialog(null, "%s's jail time has been served." +
-                    "They may play this turn.");
+            JOptionPane.showMessageDialog(null, String.format("%s's jail time has been served." +
+                    "They may play this turn.", player.getTurnsInJail()));
         }
         else if(dialogNum == 7){
             textLabel.setText(String.format("<html><u>Player Info</u>:-<br> %s's turn <br> Location: %s <br> Owner: %s <br><br><u>Property Info</u>:-<br> Properties owned:<br> %s <br><br>Monetary Info:-<br> Total asset value: $%d <br>Liquid value: $%d", player.getName(), player.getCurrLocation().getName(), ((PrivateProperty) player.getCurrLocation()).getOwner().getName(), player.propertiesToString(), player.getPlayerTotalAsset(), player.getPlayerBalance()));
