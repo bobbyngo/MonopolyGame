@@ -863,15 +863,7 @@ public class MonopolyModel {
                 public void endElement(String uri, String localName, String qName) {
                     System.out.println("End Element: " + qName);
 
-                    // Reset everything to false
-
-//                    boolPlayer = false;
-//                    boolAIPlayer = false;
-//                    boolBusiness = false;
-//                    boolRail = false;
-//                    boolBankProperty = false;
-//                    boolCurPlayer = false;
-//                    boolConsecutiveDouble = false;
+                    // Reset to false
 
                     if (qName.equalsIgnoreCase("Player")) boolPlayer = false;;
                     if (qName.equalsIgnoreCase("AIPlayer")) boolAIPlayer = false;
