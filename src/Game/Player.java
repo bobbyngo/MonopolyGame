@@ -366,13 +366,13 @@ public class Player implements RoleAPI {
     }
 
     public static Player readFile(String aString, Board board) {
-        // The format is name-playerBalance-inJail-turnsInJail-turnsPlayed-currLoc-
-        // propertyList
+        // The format is name-playerBalance-inJail-turnsInJail-turnsPlayed-currLocation
+
         String[] list = aString.split("\\-");
         Square location = board.getSQUARE(Integer.parseInt(list[5]));
         Player newPlayer = new Player(list[0], Integer.parseInt(list[1]), Boolean.parseBoolean(list[2]),
                 Integer.parseInt(list[3]), Integer.parseInt(list[4]),location);
-
+        // propertyList
         String[] propertyIndex = list[6].split("\\#");
         for (String index : propertyIndex) {
             int i = Integer.parseInt(index);
