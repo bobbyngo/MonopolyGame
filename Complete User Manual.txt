@@ -62,6 +62,10 @@ How to import an international version of the game with unique name and prices?
 In order to set the squares with your desired name and prices, you can import an XML file using the ingame function.
 From the top of the game user interface, click on "File" then select "Import International Version" option from the drop down menu.
 After inputting the the file name through the dialog box, the interface will be updated to your desired results.
+Non-property squares use the "square" xml tag and store the name, whereas property squares use the "property" tag
+and store the name and price. There is a template xml file named "internationalTemplate.xml". Substitute the fields
+inside of the tags with your desired names and prices, if applicable. DO NOT MODIFY THE XML TAGS OR CHANGE THE ORDERING
+OR USE IMPROPER INPUTS FOR THE TAGS.
 The format of the XML must strictly follow this format:
 <board>
     <square>name</square>
