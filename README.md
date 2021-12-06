@@ -67,7 +67,7 @@ Added files:
 * Game.MonopolyModel.java: Class which contains all the game data and methods to alter/manipulate them
 
 Removed file:
-Game.MonopolyView.java: Class previously used for textual based game play, with the implementation of the GUI, this class is no longer required
+* Game.MonopolyView.java: Class previously used for textual based game play, with the implementation of the GUI, this class is no longer required
   
 # Known Issue
 * Game.Player label is updated whenever the player rolls the dice, however, if a player landed on a square that is already occupied, the previous player's label will be erased. This is only a visual issue and does not have any impact on the player's actual position in the system.
