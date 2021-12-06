@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class BuyHouseHotelDialog extends JDialog {
     private MonopolyController controller;
-    private MonopolyModel model;
+    //private MonopolyModel model;
     private PlayerPropertyListHouseModel propertyListModel;
     private JList<PrivateProperty> list;
     private JButton buyHouseBtn;
@@ -52,10 +52,6 @@ public class BuyHouseHotelDialog extends JDialog {
 
     public JButton getBuyHotelBtn(){
         return buyHotelBtn;
-    }
-
-    public JButton getCloseBtn(){
-        return closeBtn;
     }
 
     public JList<PrivateProperty> getList(){

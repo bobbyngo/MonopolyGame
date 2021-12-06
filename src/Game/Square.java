@@ -94,6 +94,13 @@ public class Square {
         return sb.toString();
     }
 
+    public static Square readFile(String aString) {
+        //Format Square toString: name-index
+        String[] list = aString.split("\\-");
+
+        return new Square(list[0], Integer.parseInt(list[1]));
+    }
+
     public void setName(String name) {
         this.name = name;
     }

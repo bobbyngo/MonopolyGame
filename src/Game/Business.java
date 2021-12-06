@@ -25,7 +25,11 @@ public class Business extends PrivateProperty implements PropertyAPI, RentableAP
         removeOwner();
     }
 
-
+    public Business(String name, int index, int price, boolean isOwned, int numHouse, int numHotel){
+        super(name, index, price, isOwned);
+        this.numHouse = numHouse;
+        this.numHotel = numHotel;
+    }
 
     /**
      * getNumHouses get the number of houses that has been bought on this Game.Business SQUARE
@@ -51,13 +55,6 @@ public class Business extends PrivateProperty implements PropertyAPI, RentableAP
         numHouse ++;
     }
 
-    /**
-     * @author Gabriel Benni Kelley Evensen 101119814
-     * Method to remove houses from Game.Business square (when replacing for hotels only)
-     */
-    public void removeHouses(){
-        numHouse = 0;
-    }
 
     // Plz use getNumHouse() to check if the player has 4 houses already build on this SQUARE
     /**
@@ -66,10 +63,7 @@ public class Business extends PrivateProperty implements PropertyAPI, RentableAP
     public void buyHotel(){
         numHotel ++;
     }
-
-    public void removeHotel(){
-        numHotel = 0;
-    }
+    
 
     // Return the total value of the asset (SQUARE + all houses and hotel)
     /**
@@ -160,6 +154,15 @@ public class Business extends PrivateProperty implements PropertyAPI, RentableAP
         sb.append(this);
         sb.append("</Business>\n");
         return sb.toString();
+    }
+
+
+    public static Business readFile(String aString) {
+        //Format name-index-price-isOwned-numHouse-numHotel
+        String[] list = aString.split("\\-");
+
+        return new Business(list[0], Integer.parseInt(list[1]), Integer.parseInt(list[2])
+                , Boolean.parseBoolean(list[3]), Integer.parseInt(list[4]), Integer.parseInt(list[5]));
     }
 
 }

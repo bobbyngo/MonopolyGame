@@ -74,7 +74,7 @@ public class Player implements RoleAPI {
      * This method will add the Property to the Game.Player's propertyList
      * @param property
      */
-    private void addPropertyList(PrivateProperty property) {
+    public void addPropertyList(PrivateProperty property) {
         if (!propertyList.contains(property)) {
             this.propertyList.add(property);
         } else {

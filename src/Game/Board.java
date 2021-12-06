@@ -113,4 +113,9 @@ public class Board {
         xml.append("</Board>\n");
         return xml.toString();
     }
+    
+
+    public void setaBoard(Square square, int index) {
+        this.aBoard[index] = square;
+    }
 }

@@ -77,9 +77,15 @@ public class MonopolyController implements ActionListener {
             }
         }
         else if (e.getSource() == view.getSaveItem()) {
-            String filename = JOptionPane.showInputDialog(view, "Import xml filename for game save: ");
+            String filename = JOptionPane.showInputDialog(view, "Name the xml filename for game save: \n Ex: game1.xml");
             if (filename != null) {
                 model.saveGameData(filename);
+            }
+        }
+        else if (e.getSource() == view.getLoadItem()){
+            String filename = JOptionPane.showInputDialog(view, "Load xml filename to resume the game:\n Ex: game1.xml");
+            if (filename != null) {
+                model.loadGameData(filename);
             }
         }
     }

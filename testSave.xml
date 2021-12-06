@@ -1,6 +1,6 @@
 <Model>
 <Board>
-<Square>GO-0-</Square>
+<Square>Go-0</Square>
 
 <Business>Anarchy Acres-1-50-false-0-0</Business>
 
@@ -17,7 +17,7 @@
 
 <Business>Greasy Grove-8-200-true-0-0</Business>
 
-<Square>Prison-9-</Square>
+<Square>Prison-9</Square>
 
 <Business>Happy Hamlet-10-80-true-0-0</Business>
 
@@ -35,7 +35,7 @@
 <Business>Lonely Lodge-17-50-false-0-0</Business>
 
 <BankProperty>Insurance Tax-18-140</BankProperty>
-<Square>Free Parking Lot-19-</Square>
+<Square>Free Parking Lot-19</Square>
 
 <Business>Loot Lake-20-200-false-0-0</Business>
 
@@ -52,7 +52,7 @@
 
 <Business>Salty Springs-27-400-false-0-0</Business>
 
-<Square>Go To Jail-28-</Square>
+<Square>Go To Jail-28</Square>
 
 <BankProperty>Health Tax-29-250</BankProperty>
 <Business>Moisty Mire-30-110-false-0-0</Business>

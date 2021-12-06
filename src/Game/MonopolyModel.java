@@ -805,6 +805,185 @@ public class MonopolyModel {
         writer.println("</Model>");
         writer.close();
     }
+
+    public void loadGameData(String filename) {
+
+        SAXParserFactory fact;
+        SAXParser saxParser;
+
+        // Reset game to a clean state
+        // 1. Eradicate all players
+        // 2. Clear player labels
+        // 2. Replace current game squares w/ new ones
+        //  (thus eliminating remaining property ownerships and house/hotels)
+        // 3. Add loaded players and set their corresponding states, such as:
+        //  - jail statuses
+        //  - ownership statuses
+        players.clear();
+        view.clearPlayerLabels();
+
+        try {
+            fact = SAXParserFactory.newInstance();
+            saxParser = fact.newSAXParser();
+
+            DefaultHandler handle = new DefaultHandler(){
+                boolean boolPlayer = false, boolBusiness = false, boolRail = false, boolBankProperty = false,
+                boolAIPlayer = false, boolCurPlayer = false, boolConsecutiveDouble = false, boolBoard = false,
+                boolSquare = false, boolPlayers = false;
+
+                public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+                    System.out.println("Start Element: " + qName);
+
+                    switch (qName) {
+                        case "Player":
+                            boolPlayer = true;
+                            break;
+
+                        case "AIPlayer":
+                            boolAIPlayer = true;
+                            break;
+
+                        case "Business":
+                            boolBusiness = true;
+                            break;
+
+                        case "Rail":
+                            boolRail = true;
+                            break;
+
+                        case "BankProperty":
+                            boolBankProperty = true;
+                            break;
+
+                        case "currentPlayer":
+                            boolCurPlayer = true;
+                            break;
+
+                        case "consecutiveDouble":
+                            boolConsecutiveDouble = true;
+                            break;
+
+                        case "Board":
+                            boolBoard = true;
+                            break;
+
+                        case "Square":
+                            boolSquare = true;
+                            break;
+
+                        case "Players":
+                            boolPlayers = true;
+                            break;
+                    }
+                }
+
+                public void endElement(String uri, String localName, String qName) {
+                    System.out.println("End Element: " + qName);
+
+                    // Reset everything to false
+
+//                    boolPlayer = false;
+//                    boolAIPlayer = false;
+//                    boolBusiness = false;
+//                    boolRail = false;
+//                    boolBankProperty = false;
+//                    boolCurPlayer = false;
+//                    boolConsecutiveDouble = false;
+
+                    if (qName.equalsIgnoreCase("Player")) boolPlayer = false;;
+                    if (qName.equalsIgnoreCase("AIPlayer")) boolAIPlayer = false;
+                    if (qName.equalsIgnoreCase("Business")) boolBusiness = false;
+                    if (qName.equalsIgnoreCase("Rail")) boolRail = false;
+                    if (qName.equalsIgnoreCase("BankProperty")) boolBankProperty = false;
+                    if (qName.equalsIgnoreCase("currentPlayer")) boolCurPlayer = false;
+                    if (qName.equalsIgnoreCase("consecutiveDouble")) boolConsecutiveDouble = false;
+                    if (qName.equalsIgnoreCase("Board")) boolBoard = false;
+                    if (qName.equalsIgnoreCase("Square")) boolSquare = false;
+                    if (qName.equalsIgnoreCase("Players")) boolPlayers = false;
+                }
+
+                // Creating a counter
+                int i = 0;
+
+                public void characters(char[] ch, int start, int length) throws SAXException{
+
+                    String s = new String(ch, start, length);
+                    System.out.println(s);
+
+                 // Starting board first
+                    Square newSquare = null;
+                    if (i < 38 && boolBoard) {
+                        if (boolBusiness) {
+                            newSquare = Business.readFile(s);
+
+                        }
+                        else if (boolRail) {
+                            newSquare = Rail.readFile(s);
+
+                        }
+                        else if (boolBankProperty) {
+                            newSquare = BankProperty.readFile(s);
+
+                        }
+                        else if (boolSquare) {
+                            newSquare = Square.readFile(s);
+
+                        }
+
+                        // Set the square and i
+                        assert newSquare != null;
+                        if (newSquare != null) {
+                            board.setaBoard(newSquare, i);
+                            //view.clearPlayerLabels();
+                            view.updateSquare(newSquare);
+
+                            i++;
+                        }
+
+
+                    }
+                    //i++;
+                    // The tag is Player
+                    if (boolPlayers) {
+
+                        if (boolPlayer) {
+                            Player player = Player.readFile(s, board);
+                            players.add(player);
+                            view.setPlayerLabels(player);
+
+                            for (Square sq : player.getPropertyList()) {
+                                view.updateSquare(sq);
+                            }
+
+                        }
+                        else if (boolAIPlayer) {
+                            AIPlayer aiPlayer = AIPlayer.readFile(s, board);
+                            players.add(aiPlayer);
+                            view.setPlayerLabels(aiPlayer);
+
+                            for (Square sq: aiPlayer.getPropertyList()) {
+                                view.updateSquare(sq);
+                            }
+                        }
+                    }
+
+                    if (boolCurPlayer) {
+                        currentPlayer = players.get(Integer.parseInt(s));
+                    }
+
+                    if (boolConsecutiveDouble) {
+                        consecutiveDoubles = Integer.parseInt(s);
+                    }
+
+                }
+            };
+            saxParser.parse(filename, handle);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 

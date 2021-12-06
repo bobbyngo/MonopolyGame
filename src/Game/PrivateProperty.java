@@ -12,7 +12,6 @@ public class PrivateProperty extends Square {
     private int price;
     private Player owner;
     private boolean isOwned;
-    //private ArrayList<PrivateProperty> propertyList;
 
     /**
      * Constructor for Game.PrivateProperty class
@@ -25,7 +24,6 @@ public class PrivateProperty extends Square {
         isOwned = false;
         this.price = price;
         owner = null;
-        //this.propertyList = new ArrayList<>();
     }
 
     public PrivateProperty(String name, int index, int price, boolean isOwned){
@@ -33,7 +31,6 @@ public class PrivateProperty extends Square {
         this.price = price;
         this.isOwned = isOwned;
         this.owner = null;
-        //this.propertyList = new ArrayList<>();
     }
 
     /**
@@ -99,21 +96,6 @@ public class PrivateProperty extends Square {
         return Objects.hash(price, owner, isOwned);
     }
 
-    public void addPrivateProperty(PrivateProperty pp) {
-        //propertyList.add(pp);
-    }
-
-
-    // Do we need toXML for PP?
-//    public String toXML() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("<PrivateProperty>");
-//        for (){
-//
-//        }
-//        sb.append("</PrivateProperty>");
-//        return sb.toString();
-//    }
 
     //TODO: Careful the player attribute
     @Override
@@ -132,7 +114,7 @@ public class PrivateProperty extends Square {
         return sb.toString();
     }
 
-    public PrivateProperty readFile(String aString) {
+    public static PrivateProperty readFile(String aString) {
         //Format name-index-price-isOwned
         String[] list = aString.split("\\-");
 
