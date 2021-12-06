@@ -71,7 +71,7 @@ public class MonopolyController implements ActionListener {
             model.handleDialogSellBtn();
         }
         else if (e.getSource() == view.getImportInternationalItem()) {
-            String filename = JOptionPane.showInputDialog(view, "Import xml file for international names import:\n Ex: international.xml");
+            String filename = JOptionPane.showInputDialog(view, "Import xml file for international names import:\n Ex: internationalTemplate.xml");
             if (filename != null) {
                 model.importInternationalVersion(filename);
             }
