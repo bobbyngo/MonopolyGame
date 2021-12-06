@@ -1,10 +1,12 @@
-<board>
+<?xml version="1.0"?>
+<Monopoly>
+    <Board>
     <square>Allez y</square>
     <square>Collines courbees</square>
-    <square>Rue du connard</square>
+    <property>Rue du connard-8500</property>
     <property>Tabarnak-500</property>
     <property>Vive le FLQ-1000</property>
-    <property>Allez y-24</property>
+    <square>Allez y</square>
     <square>Collines courbees</square>
     <square>Rue du connard</square>
     <square>Allez y</square>
@@ -31,4 +33,5 @@
     <square>Allez y</square>
     <square>Collines courbees</square>
     <square>Rue du connard</square>
-</board>
+    </Board>
+</Monopoly>
