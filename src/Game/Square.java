@@ -81,7 +81,7 @@ public class Square {
         //Format Square toString: name-index
         StringBuilder sb = new StringBuilder();
         sb.append(name).append("-")
-                .append(index).append("-");
+                .append(index);
         return sb.toString();
     }
 
