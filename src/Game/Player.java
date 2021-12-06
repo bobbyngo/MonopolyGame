@@ -323,14 +323,16 @@ public class Player implements RoleAPI {
 
     @Override
     public String toString() {
-        // The format is name-playerBalance-inJail-turnsInJail-turnsPlayed
+        // The format is name-playerBalance-inJail-turnsInJail-turnsPlayed-currLoc-propertyList
 
         StringBuilder sb = new StringBuilder();
         sb.append(name).append("-").
                 append(playerBalance).append("-")
                 .append(inJail).append("-")
+                .append(turnsInJail).append("-")
                 .append(turnsPlayed).append("-")
-                .append(turnsPlayed).append("-");
+                .append(currLocation.getIndex()).append("-")
+                .append(propertyListToString());
 
         return sb.toString();
     }
@@ -363,9 +365,21 @@ public class Player implements RoleAPI {
         return sb.toString();
     }
 
-//    public static Player readFile(String aString) {
-//        String[] list = aString.split("\\-");
-//
-//        return new Player(list[0], list[1], list[2], list[3], list[4]);
-//    }
+    public static Player readFile(String aString, Board board) {
+        // The format is name-playerBalance-inJail-turnsInJail-turnsPlayed-currLoc-
+        // propertyList
+        String[] list = aString.split("\\-");
+        Square location = board.getSQUARE(Integer.parseInt(list[5]));
+        Player newPlayer = new Player(list[0], Integer.parseInt(list[1]), Boolean.parseBoolean(list[2]),
+                Integer.parseInt(list[3]), Integer.parseInt(list[4]),location);
+
+        String[] propertyIndex = list[6].split("\\#");
+        for (String index : propertyIndex) {
+            int i = Integer.parseInt(index);
+            Square property = board.getSQUARE(i);
+            newPlayer.addPropertyList((PrivateProperty) property);
+        }
+        //return new Player(list[0], list[1], list[2], list[3], list[4]);
+        return newPlayer;
+    }
 }

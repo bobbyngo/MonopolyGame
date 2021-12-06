@@ -119,7 +119,7 @@ public class PrivateProperty extends Square {
     @Override
     public String toString() {
 
-        //Format name-index-price-isOwned-owner
+        //Format name-index-price-isOwned
         // owner will have problem maybe? I set owner name
 
         StringBuilder sb = new StringBuilder();
@@ -127,8 +127,7 @@ public class PrivateProperty extends Square {
         sb.append(getName()).append("-")
                 .append(getIndex()).append("-")
                 .append(getPrice()).append("-")
-                .append(isOwned).append("-")
-                .append(owner.getName());
+                .append(isOwned);
 
         return sb.toString();
     }
