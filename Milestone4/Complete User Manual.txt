@@ -1,0 +1,85 @@
+complete user manual
+SYSC 3110 | Software Designing Project
+
+To play the game, run the Game.MonopolyGUIView.java file and follow the follow the graphical user interface, the game in the current state has 4 player by default.
+
+The player will roll 2 dice to determine how many squares he/she will be advancing. If a double is rolled, an extra turn will be granted after the player completes the current turn. If the player rolls 3 doubles in a roll, he/she will be considered as “speeding” and moved to the “jail” Game.Square.
+
+During the player’s turn, the following 6 choices will be always be offered:
+(1) Show Stats: displays player's current location, assets and wallet value
+(2) Roll Game.Dice: roll a pair and dice and advance according to the rolled value
+(3) Buy Property: purchase the property that the player landed on
+(4) Buy House/ Hotel: The player does not need to own a set to buy a house. However, they need 4 houses to upgrade to hotel
+(5) Sell Property: sell any property that the player has previously purchase to the back for half of the value
+(6) Pay Tax/Rent: pay tax if the player landed on a tax square, OR pay rent if the player lands on a private property owned by another player
+(7) End Turn: If dice was rolled and all tax/rent were paid off, end turn allows the player to cycle to the next player
+
+Go to Jail:
+Players will not be able to select any options as soon as they land on this square, they will be moved to the “Jail” square and their next 2 turns will be suspended for which they can not move or perform any actions.
+
+Income:
+Players will be able to earn money in 2 ways:
+(1) Players receive a stipend every time they pass the "Go" square
+(2) When another player lands on your Property Game.Square, you will receive their rent money based on a percentage of total asset value of the property
+
+Rules regarding Buying/selling properties and rent price:
+
+	- Buy houses, hotel would be fixed percentages of the initial cost of the property
+		Houses(Max 4): $100 + 10% of the SQUARE's price
+		Hotel(Max 1): $100 + 60% of the SQUARE's price
+
+	Example: the cost of the SQUARE is $2000
+		Cost of building a house = $100 + 10% * $2000 = $300
+		Cost of upgrading to a hotel = $100 + 60% * $2000 = $1300
+	
+	- Income is obtained when another player lands on your SQUARE:
+	Income is 5% of the total price (SQUARE + houses + hotel)
+	Income = 5% * ($2000 + $300 * 4 + $1300) = $225
+
+	- Rails are Special SQURE that when landed on by another player, that player has to pay a percentage
+	equavelent to number of the Game.Rail Game.Square the owns by the land owner
+	Example: Price of the Game.Rail SQUARE $1000 and the owner owns a total of 3 rail SQUAREs
+	Income = 5% * 3 * $1000 = 150
+
+--------------------------------------------------------------------------------------------------------------
+	
+	Bankruptcy happens when a player is unable to pay the rent when landing on another player's SQUARE
+	When this happens, the player is forced to sell his assets in half of the price to the bank.
+	Example:
+	Total assets value = $2000 + $300 * 4 + $1300 = $4500
+	Selling value = $4500 / 2 = $2250
+	
+	In the case that the player does not own any property, the player is out of the game.
+
+---------------------------------------------------------------------------------------------------------------
+
+Determine the Winner:
+The game ends when a player goes bankrupt, in this case, the winning is selected from the remaining players how has the highest asset value plus current balance.
+
+---------------------------------------------------------------------------------------------------------------
+
+How to import an international version of the game with unique name and prices?
+In order to set the squares with your desired name and prices, you can import an XML file using the ingame function.
+From the top of the game user interface, click on "File" then select "Import International Version" option from the drop down menu.
+After inputting the the file name through the dialog box, the interface will be updated to your desired results.
+The format of the XML must strictly follow this format:
+<board>
+    <square>name</square>
+    <property>name-price</property>
+</board>
+
+---------------------------------------------------------------------------------------------------------------
+
+How to save the current game progress?
+To save the current game progress and resume playing later, you can use the ingame function.
+From the top of the game user interface, click on "File" then select "Save" option from the drop down menu.
+Enter the file name through the dialog box, an xml file will be created this way which contains all the information regarding the game progress.
+
+---------------------------------------------------------------------------------------------------------------
+
+How to load game progress?
+To load a game progress and resume playing, you can use the ingame function.
+From the top of the game user interface, click on "File" then select "Load" option from the drop down menu.
+Enter the file name through the dialog box, the program will import the xml file and resume your previous game progress.
+Note: The "Load" functionality will overwrite the current board state, so if you want to keep playing the current game sometimes later, make sure to
+use the "Save" functionality before "Load".

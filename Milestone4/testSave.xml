@@ -1,0 +1,82 @@
+<Model>
+<Board>
+<Square>Go-0</Square>
+
+<Business>Anarchy Acres-1-50-false-0-0</Business>
+
+<Business>Dusty Depot-2-100-false-0-0</Business>
+
+<Rail>South Rail-3-150-false</Rail>
+
+<Business>Fatal Fields-4-80-false-0-0</Business>
+
+<BankProperty>Electric Tax-5-200</BankProperty>
+<Business>Flush Factory-6-60-false-0-0</Business>
+
+<Business>Frosty Flights-7-110-false-0-0</Business>
+
+<Business>Greasy Grove-8-200-true-0-0</Business>
+
+<Square>Prison-9</Square>
+
+<Business>Happy Hamlet-10-80-true-0-0</Business>
+
+<Rail>West Rail-11-150-false</Rail>
+
+<Business>Haunted Hills-12-120-false-0-0</Business>
+
+<Business>Junk Junction-13-220-false-0-0</Business>
+
+<BankProperty>Internet Tax-14-20</BankProperty>
+<Business>Lazy Lagoon-15-80-false-0-0</Business>
+
+<Business>Leaky Lake-16-60-true-0-0</Business>
+
+<Business>Lonely Lodge-17-50-false-0-0</Business>
+
+<BankProperty>Insurance Tax-18-140</BankProperty>
+<Square>Free Parking Lot-19</Square>
+
+<Business>Loot Lake-20-200-false-0-0</Business>
+
+<Business>Lucky Landing-21-300-false-0-0</Business>
+
+<Business>Mega Mall-22-360-false-0-0</Business>
+
+<BankProperty>Luxury Tax-23-280</BankProperty>
+<Business>Tilted Towers-24-250-false-0-0</Business>
+
+<Rail>North Rail-25-150-false</Rail>
+
+<Business>Paradise Palms-26-380-false-0-0</Business>
+
+<Business>Salty Springs-27-400-false-0-0</Business>
+
+<Square>Go To Jail-28</Square>
+
+<BankProperty>Health Tax-29-250</BankProperty>
+<Business>Moisty Mire-30-110-false-0-0</Business>
+
+<Business>Polar Peak-31-80-false-0-0</Business>
+
+<Business>Shifty Shafts-32-150-false-0-0</Business>
+
+<BankProperty>Water Tax-33-90</BankProperty>
+<Business>Tomato Town-34-140-false-0-0</Business>
+
+<Business>Lazy Links-35-240-false-0-0</Business>
+
+<Rail>East Rail-36-150-false</Rail>
+
+<Business>Snobby Shores-37-120-false-0-0</Business>
+
+</Board>
+
+<Players>
+<Player>Player 01-1090-false-0-0-16-10#16</Player>
+<AIPlayer>AI Player 01-1030-false-0-0-8-8</AIPlayer>
+</Players>
+
+<currentPlayer>0</currentPlayer>
+<consecutiveDoubles>1</consecutiveDoubles>
+</Model>
