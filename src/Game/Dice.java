@@ -68,11 +68,4 @@ public class Dice {
         return NUM_DICE;
     }
 
-    /**
-     * Setter for NUM_SIDE
-     * @param numSide
-     */
-    public static void setNumSide(int numSide) {
-        NUM_SIDE = numSide;
-    }
 }

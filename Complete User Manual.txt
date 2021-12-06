@@ -54,3 +54,31 @@ Rules regarding Buying/selling properties and rent price:
 
 Determine the Winner:
 The game ends when a player goes bankrupt, in this case, the winning is selected from the remaining players how has the highest asset value plus current balance.
+
+---------------------------------------------------------------------------------------------------------------
+
+How to import an international version of the game with unique name and prices?
+In order to set the squares with your desired name and prices, you can import an XML file using the ingame function.
+From the top of the game user interface, click on "File" then select "Import International Version" option from the drop down menu.
+After inputting the the file name through the dialog box, the interface will be updated to your desired results.
+The format of the XML must strictly follow this format:
+<board>
+    <square>name</square>
+    <property>name-price</property>
+</board>
+
+---------------------------------------------------------------------------------------------------------------
+
+How to save the current game progress?
+To save the current game progress and resume playing later, you can use the ingame function.
+From the top of the game user interface, click on "File" then select "Save" option from the drop down menu.
+Enter the file name through the dialog box, an xml file will be created this way which contains all the information regarding the game progress.
+
+---------------------------------------------------------------------------------------------------------------
+
+How to load game progress?
+To load a game progress and resume playing, you can use the ingame function.
+From the top of the game user interface, click on "File" then select "Load" option from the drop down menu.
+Enter the file name through the dialog box, the program will import the xml file and resume your previous game progress.
+Note: The "Load" functionality will overwrite the current board state, so if you want to keep playing the current game sometimes later, make sure to
+use the "Save" functionality before "Load".
