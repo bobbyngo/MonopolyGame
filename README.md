@@ -14,7 +14,7 @@ The Monopoly Game is implemented following the <strong>MVC</strong> pattern and 
 <br>
 Monopoly is a multiplayer economics-themed board game. In the game, players roll two dice to move around the game board, buying and selling properties, and developing them with houses and hotels. Players collect rent from their opponents, with the goal being to drive them into bankruptcy. Players receive a stipend every time they pass "Go", and can end up in jail, from which they cannot move until 3 turns have passed.
 
-The Game have more functionality such as customize the name of the Square, it can also be saved or load by the user with the XML format
+File Menu: The Game have more functionality such as customize the name of the Square, it can also be saved or load by the user with the XML format
 
 # Files required to run this program:
 
