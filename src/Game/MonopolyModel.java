@@ -6,6 +6,10 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class MonopolyModel {
@@ -767,6 +771,39 @@ public class MonopolyModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String playerListToXML() {
+        StringBuilder xml = new StringBuilder();
+        xml.append("<Players>\n");
+        for (Player p : players) {
+            xml.append(p.toXML()).append("\n");
+        }
+        xml.append("</Players>\n");
+        return xml.toString();
+    }
+
+    public void saveGameData(String filename) {
+        PrintWriter writer = null;
+        FileWriter fw;
+        try {
+            fw = new FileWriter(filename, false);
+            writer = new PrintWriter(fw);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        assert writer != null;
+        writer.println("<Model>");
+
+        writer.println(board.toXML());
+        writer.println(playerListToXML());
+
+        writer.printf("<currentPlayer>%d</currentPlayer>\n", players.indexOf(currentPlayer));
+        writer.printf("<consecutiveDoubles>%d</consecutiveDoubles>\n", consecutiveDoubles);
+        writer.println("</Model>");
+        writer.close();
     }
 }
 

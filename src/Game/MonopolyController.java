@@ -19,8 +19,8 @@ import java.util.ArrayList;
  */
 public class MonopolyController implements ActionListener {
 
-    private MonopolyModel model;
-    private MonopolyGUIView view;
+    private final MonopolyModel model;
+    private final MonopolyGUIView view;
     /**
      * Game.MonopolyController constructor
      * @param model, MonopolyModel
@@ -35,7 +35,7 @@ public class MonopolyController implements ActionListener {
     // MVC Example
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        System.out.println("Action performed");
         if(e.getSource() == view.getBuyBtn()){
             model.handleBuyBtn();
         }
@@ -74,6 +74,12 @@ public class MonopolyController implements ActionListener {
             String filename = JOptionPane.showInputDialog(view, "Import xml file for international names import:");
             if (filename != null) {
                 model.importInternationalVersion(filename);
+            }
+        }
+        else if (e.getSource() == view.getSaveItem()) {
+            String filename = JOptionPane.showInputDialog(view, "Import xml filename for game save: ");
+            if (filename != null) {
+                model.saveGameData(filename);
             }
         }
     }

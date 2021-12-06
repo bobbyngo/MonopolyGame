@@ -103,4 +103,14 @@ public class Board {
     public Square getSQUARE(int index){
         return aBoard[index];
     }
+
+    public String toXML() {
+        StringBuilder xml = new StringBuilder();
+        xml.append("<Board>\n");
+        for (Square sq : aBoard) {
+            xml.append(sq.toXML()).append("\n");
+        }
+        xml.append("</Board>\n");
+        return xml.toString();
+    }
 }

@@ -140,14 +140,13 @@ public class Business extends PrivateProperty implements PropertyAPI, RentableAP
     @Override
     public String toString() {
 
-        //Format name-index-price-isOwned-ownerName-numHouse-numHotel
+        //Format name-index-price-isOwned-numHouse-numHotel
 
         StringBuilder sb = new StringBuilder();
         sb.append(getName()).append("-").
                 append(getIndex()).append("-")
                 .append(getPrice()).append("-")
                 .append(getIsOwned()).append("-")
-                .append(getOwner().getName()).append("-")
                 .append(numHouse).append("-")
                 .append(numHotel);
 

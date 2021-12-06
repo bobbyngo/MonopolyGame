@@ -727,6 +727,10 @@ public class MonopolyGUIView extends JFrame {
     public JMenuItem getImportInternationalItem() {
         return importInternationalItem;
     }
+
+    public JMenuItem getSaveItem() {
+        return saveItem;
+    }
 }
 
 
