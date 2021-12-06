@@ -9,9 +9,10 @@ During the player’s turn, the following 6 choices will be always be offered:
 (1) Show Stats: displays player's current location, assets and wallet value
 (2) Roll Game.Dice: roll a pair and dice and advance according to the rolled value
 (3) Buy Property: purchase the property that the player landed on
-(4) Sell Property: sell any property that the player has previously purchase to the back for half of the value
-(5) Pay Tax/Rent: pay tax if the player landed on a tax square, OR pay rent if the player lands on a private property owned by another player
-(3) End Turn: If dice was rolled and all tax/rent were paid off, end turn allows the player to cycle to the next player
+(4) Buy House/ Hotel: The player does not need to own a set to buy a house. However, they need 4 houses to upgrade to hotel
+(5) Sell Property: sell any property that the player has previously purchase to the back for half of the value
+(6) Pay Tax/Rent: pay tax if the player landed on a tax square, OR pay rent if the player lands on a private property owned by another player
+(7) End Turn: If dice was rolled and all tax/rent were paid off, end turn allows the player to cycle to the next player
 
 Go to Jail:
 Players will not be able to select any options as soon as they land on this square, they will be moved to the “Jail” square and their next 2 turns will be suspended for which they can not move or perform any actions.
