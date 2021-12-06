@@ -133,9 +133,6 @@ public class MonopolyModel {
      */
     public Bank getBank(){ return this.bank; }
 
-    public void showStats(){
-
-    }
     /**
      * Mutator method for
      * @param bank; the bank to be assigned
@@ -426,20 +423,6 @@ public class MonopolyModel {
         return false;
     }
 
-
-//    private void handleShowStatsBtn() {
-//        int id = getCurrentPlayer().getCurrLocation().getIndex();
-//        JOptionPane.showMessageDialog((Component) null,
-//                "<html><u>Character info</u>\n" +
-//                        "\tCurrent location:- [id: " + id + "] " + getCurrentPlayer().getCurrLocation().getName() +
-//                        "\n\tCurrent turn:- " + getCurrentPlayer().getTurn() +
-//                        "\n\n<html><u>Asset info</u>\n\tProperties:- \n\t" +
-//                        getCurrentPlayer().propertiesToString() +
-//                        "\n\tLiquid value:- $" + getCurrentPlayer().getPlayerBalance() +
-//                        "\n\tTotal value (property prices included):- $" +
-//                        getCurrentPlayer().getPlayerTotalAsset(), "Game.Player " +
-//                        getCurrentPlayer().getName() + "'s stats", 1);
-//    }
 
     public void handleBuyBtn(){
         if (getCurrentPlayer().getCurrLocation() instanceof PrivateProperty) {
