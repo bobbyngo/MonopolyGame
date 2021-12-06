@@ -373,6 +373,16 @@ public class MonopolyGUIView extends JFrame {
         }
     }
 
+    public void clearPlayerLabels(){
+        for(JLabel playerLabel : playerLabels) {
+            playerLabel.setText("");
+        }
+    }
+
+    public void setPlayerLabels(Player player){
+        playerLabels.get(player.getCurrLocation().getIndex()).setText(player.getName());
+    }
+
     /**
      * This method will add buttons, text box to the middle of the board
      */
@@ -730,6 +740,10 @@ public class MonopolyGUIView extends JFrame {
 
     public JMenuItem getSaveItem() {
         return saveItem;
+    }
+
+    public JMenuItem getLoadItem() {
+        return loadItem;
     }
 }
 

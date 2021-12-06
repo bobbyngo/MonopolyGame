@@ -32,4 +32,5 @@ public class PrivatePropertyTest {
         assertTrue(privateProperty.isOwned());
 
     }
+
 }

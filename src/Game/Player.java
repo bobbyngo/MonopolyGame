@@ -74,7 +74,7 @@ public class Player implements RoleAPI {
      * This method will add the Property to the Game.Player's propertyList
      * @param property
      */
-    private void addPropertyList(PrivateProperty property) {
+    public void addPropertyList(PrivateProperty property) {
         if (!propertyList.contains(property)) {
             this.propertyList.add(property);
         } else {
@@ -378,6 +378,7 @@ public class Player implements RoleAPI {
             int i = Integer.parseInt(index);
             Square property = board.getSQUARE(i);
             newPlayer.addPropertyList((PrivateProperty) property);
+            ((PrivateProperty)property).setOwner(newPlayer);
         }
         //return new Player(list[0], list[1], list[2], list[3], list[4]);
         return newPlayer;
